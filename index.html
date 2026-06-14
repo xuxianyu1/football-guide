@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ 五大联赛足球俱乐部图鉴</title>
+<style>
+/* ========== CSS Variables & Reset ========== */
+:root {
+  --bg-primary: #0a0e17;
+  --bg-secondary: #111827;
+  --bg-card: #1a2235;
+  --bg-card-hover: #1f2a40;
+  --text-primary: #f0f2f5;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --border-color: #2d3748;
+  --epl-color: #3d195b;
+  --epl-accent: #e90052;
+  --laliga-color: #ee8707;
+  --laliga-accent: #ff6b00;
+  --seriea-color: #024494;
+  --seriea-accent: #009246;
+  --bundesliga-color: #d20515;
+  --bundesliga-accent: #8b0000;
+  --ligue1-color: #091c3e;
+  --ligue1-accent: #1a5fbc;
+  --transition-speed: 0.35s;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========== Page Transitions ========== */
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+  min-height: 100vh;
+}
+.page.active {
+  display: block;
+}
+.page.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: #3a4560; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4a5580; }
+
+/* ========== Home Page ========== */
+.home-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(135deg, #0a0e17 0%, #1a1a3e 50%, #0a0e17 100%);
+  position: relative;
+  overflow: hidden;
+}
+.home-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(233,0,82,0.06) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(26,95,188,0.06) 0%, transparent 50%);
+  animation: bgPulse 8s ease-in-out infinite alternate;
+}
+@keyframes bgPulse {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.1) rotate(3deg); }
+}
+.home-title {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 50%, #c7d2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.home-subtitle {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  color: var(--text-secondary);
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== League Grid ========== */
+.league-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.league-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+}
+.league-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.league-card-accent {
+  height: 6px;
+  width: 100%;
+}
+.league-card-body {
+  padding: 28px;
+}
+.league-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.league-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.league-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.league-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.league-card-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.08);
+  color: var(--text-primary);
+}
+.league-card-arrow {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.3s;
+}
+.league-card:hover .league-card-arrow {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(4px);
+}
+
+/* ========== League Detail Page ========== */
+.league-detail-header {
+  padding: 50px 24px 40px;
+  text-align: center;
+  position: relative;
+}
+.league-detail-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+.league-back-btn {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.league-back-btn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-2px);
+}
+.league-detail-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+}
+.league-detail-sub {
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+.club-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 36px auto;
+  padding: 0 24px;
+}
+
+.club-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.club-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.club-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  border-color: rgba(255,255,255,0.1);
+}
+.club-card:hover::before {
+  opacity: 1;
+}
+.club-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.club-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  color: #fff;
+  position: relative;
+}
+.club-card-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.club-card-nickname {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.club-card-year {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  background: rgba(255,255,255,0.06);
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.more-coming {
+  text-align: center;
+  padding: 32px 24px 60px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ========== Club Detail Page ========== */
+.club-detail-header {
+  padding: 40px 24px 30px;
+  text-align: center;
+  position: relative;
+}
+.club-detail-back {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.club-detail-back:hover {
+  background: rgba(255,255,255,0.15);
+}
+.club-detail-badge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 20px;
+  color: #fff;
+}
+.club-detail-name {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800;
+}
+.club-detail-meta {
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.club-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 24px 80px;
+}
+
+/* ========== Markdown Rendered Content ========== */
+.md h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 40px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border-color);
+}
+.md h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 30px 0 12px;
+  color: #e0e7ff;
+}
+.md h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 24px 0 10px;
+  color: #c7d2fe;
+}
+.md p {
+  margin: 10px 0;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+.md strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+.md em {
+  color: #a5b4fc;
+  font-style: italic;
+}
+.md ul, .md ol {
+  margin: 10px 0;
+  padding-left: 24px;
+}
+.md li {
+  margin: 6px 0;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.md blockquote {
+  border-left: 3px solid #4f46e5;
+  padding: 10px 16px;
+  margin: 14px 0;
+  background: rgba(79,70,229,0.08);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.md table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+.md th {
+  background: var(--bg-card);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+  color: #e0e7ff;
+}
+.md td {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: var(--text-primary);
+}
+.md tr:hover td {
+  background: rgba(255,255,255,0.02);
+}
+.md code {
+  background: rgba(255,255,255,0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.md pre {
+  background: #0d1117;
+  padding: 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin: 14px 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  border: 1px solid var(--border-color);
+}
+.md pre code {
+  background: none;
+  padding: 0;
+}
+.md hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 28px 0;
+}
+.md a {
+  color: #818cf8;
+  text-decoration: none;
+}
+.md a:hover {
+  text-decoration: underline;
+}
+
+/* ========== Player Cards ========== */
+.player-section {
+  margin: 32px 0;
+}
+.player-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-color);
+}
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+.player-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.25s;
+}
+.player-card:hover {
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+.player-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.player-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.player-pos {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.player-years {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.player-stat {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.82rem;
+  color: #fbbf24;
+}
+
+/* ========== Footer ========== */
+.page-footer {
+  text-align: center;
+  padding: 30px 24px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 640px) {
+  .home-header { padding: 40px 16px 28px; }
+  .league-grid { padding: 0 16px; gap: 16px; }
+  .club-grid { padding: 0 16px; gap: 14px; }
+  .club-content { padding: 16px 16px 60px; }
+  .league-back-btn, .club-detail-back { left: 12px; top: 12px; padding: 6px 12px; font-size: 0.82rem; }
+  .league-detail-header { padding: 40px 16px 30px; }
+  .club-detail-header { padding: 36px 16px 24px; }
+  .player-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== Animations ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  animation: fadeInUp 0.5s ease forwards;
+}
+.delay-1 { animation-delay: 0.1s; opacity: 0; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; }
+.delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+/* ========== CSS Crests ========== */
+.crest {
+  width: 52px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.crest-large {
+  width: 80px;
+  height: 92px;
+}
+.crest-inner {
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 0%, 95% 15%, 95% 70%, 50% 100%, 5% 70%, 5% 15%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.crest-letter {
+  font-weight: 900;
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  line-height: 1;
+}
+.crest-large .crest-letter {
+  font-size: 24px;
+}
+.crest-sub {
+  font-size: 8px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.crest-large .crest-sub {
+  font-size: 11px;
+}
+/* Stripe effect for certain crests */
+.crest-stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.crest-stripes-bar {
+  position: absolute;
+  top: 0;
+  width: 14.28%;
+  height: 100%;
+}
+.crest-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+}
+.crest-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.crest-large .crest-img {
+  border-radius: 12px;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active">
+  <header class="home-header">
+    <h1 class="home-title">⚽ 五大联赛足球俱乐部图鉴</h1>
+    <p class="home-subtitle">每日更新，带你深入了解欧洲足球</p>
+  </header>
+  <main>
+    <div class="league-grid" id="league-grid"></div>
+  </main>
+  <footer class="page-footer">
+    五大联赛足球俱乐部图鉴 · 数据每日更新 · 共收录 <span id="total-clubs">0</span> 支俱乐部
+  </footer>
+</div>
+
+<!-- ==================== LEAGUE DETAIL PAGE ==================== -->
+<div id="page-league" class="page">
+  <header class="league-detail-header">
+    <button class="league-back-btn" onclick="navigateTo('home')">← 首页</button>
+    <h1 id="league-title" class="league-detail-title"></h1>
+    <p id="league-sub" class="league-detail-sub"></p>
+  </header>
+  <main>
+    <div class="club-grid" id="club-grid"></div>
+    <div class="more-coming">✨ 更多俱乐部即将到来...</div>
+  </main>
+</div>
+
+<!-- ==================== CLUB DETAIL PAGE ==================== -->
+<div id="page-club" class="page">
+  <header class="club-detail-header">
+    <button class="club-detail-back" onclick="goBackToLeague()">← 返回联赛</button>
+    <div id="club-badge" class="club-detail-badge"></div>
+    <h1 id="club-title" class="club-detail-name"></h1>
+    <p id="club-meta" class="club-detail-meta"></p>
+  </header>
+  <main>
+    <div class="club-content">
+      <div id="club-players" class="player-section"></div>
+      <div id="club-body" class="md"></div>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <button class="league-back-btn" onclick="goBackToLeague()" style="position:static;margin:0 auto;display:inline-flex;">← 返回联赛</button>
+  </footer>
+</div>
+
+<script>
+// ====================================================================
+// DATA SOURCE - 更新数据只需修改此对象
+// ====================================================================
+const DATA = {
+  leagues: {
+    epl: {
+      id: 'epl',
+      name: '英超',
+      fullName: '英格兰足球超级联赛',
+      color: '#e90052',
+      bgColor: '#3d195b',
+      logoText: 'EPL',
+      clubs: ['manutd','arsenal','liverpool','chelsea']
+    },
+    laliga: {
+      id: 'laliga',
+      name: '西甲',
+      fullName: '西班牙足球甲级联赛',
+      color: '#ff6b00',
+      bgColor: '#ee8707',
+      logoText: 'LIGA',
+      clubs: ['realmadrid','barcelona','atletico']
+    },
+    seriea: {
+      id: 'seriea',
+      name: '意甲',
+      fullName: '意大利足球甲级联赛',
+      color: '#009246',
+      bgColor: '#024494',
+      logoText: 'SERIE A',
+      clubs: ['acmilan','juventus','intermilan']
+    },
+    bundesliga: {
+      id: 'bundesliga',
+      name: '德甲',
+      fullName: '德国足球甲级联赛',
+      color: '#d20515',
+      bgColor: '#8b0000',
+      logoText: 'BULI',
+      clubs: ['bayern','dortmund','leverkusen']
+    },
+    ligue1: {
+      id: 'ligue1',
+      name: '法甲',
+      fullName: '法国足球甲级联赛',
+      color: '#1a5fbc',
+      bgColor: '#091c3e',
+      logoText: 'L1',
+      clubs: ['psg','marseille']
+    }
+  },
+  clubs: {
+    manutd: {
+      id: 'manutd',
+      name: '曼联',
+      fullName: '曼彻斯特联足球俱乐部',
+      englishName: 'Manchester United',
+      nickname: '红魔 (The Red Devils)',
+      founded: 1878,
+      league: 'epl',
+      colors: ['#da291c','#ffe500'],
+      crestLetter: 'M',
+      crestSub: 'U',
+      crestType: 'solid',
+      crestBg: '#da291c',
+      logo: 'https://s.coze.cn/image/WfsbDx-BW8U/',
+      players: [
+        {name:'大卫·贝克汉姆',pos:'右中场',years:'1992-2003',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'394场 85球 152助攻'},
+        {name:'瑞恩·吉格斯',pos:'左边锋',years:'1990-2014',emoji:'🏴󠁧󠁢󠁷󠁬󠁳󠁿',stat:'963场 168球'},
+        {name:'罗伊·基恩',pos:'后腰/队长',years:'1993-2005',emoji:'🇮🇪',stat:'480场 51球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×3（1968、1999、2008）
+- **英超冠军** ×13
+- **足总杯冠军** ×13
+- **三冠王**：1998-99赛季（英超+足总杯+欧冠）
+
+## 🔥 巅峰时刻：92班与三冠王（1998-99）
+
+1992年，曼联青年队夺得足总杯青年赛冠军。那群十几岁的孩子不会想到，他们将改变英格兰足球的历史——贝克汉姆、吉格斯、斯科尔斯、加里·内维尔、菲尔·内维尔、尼基·巴特，后来他们被称为"92班"（Class of '92）。
+
+**三冠王赛季主力阵容（1998-99）：**
+
+> 门将：舒梅切尔（丹麦传奇，咆哮的维京人）
+> 右后卫：加里·内维尔 | 中后卫：斯塔姆搭档约翰森 | 左后卫：丹尼斯·欧文
+> 右前卫：大卫·贝克汉姆（圆月弯刀） | 中场：尼基·巴特搭档布鲁姆奎斯特 | 左前卫：瑞恩·吉格斯（追风少年）
+> 前锋：安迪·科尔搭档德怀特·约克（黑风双煞）
+
+替补席上坐着谢林汉姆和索尔斯克亚——记住这两个名字，后面他们会改写历史。
+
+## 📉 低谷时刻：弗格森退休后的深渊（2013-至今）
+
+2013年5月，弗格森退休，曼联从此坠入深渊。莫耶斯、范加尔、穆里尼奥、索尔斯克亚、滕哈格……换了一个又一个主帅，始终找不到方向。曾经的英超霸主，变成了利物浦和曼城的背景板。
+
+92班的精神似乎已经随风而逝。不过2024-25赛季，阿莫林上任后似乎看到了些许曙光——但红魔的复兴之路，依然漫长。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1999欧冠决赛：曼联 2-1 拜仁慕尼黑（诺坎普奇迹）**
+
+1999年5月26日，巴塞罗那诺坎普球场。拜仁第6分钟巴斯勒任意球破门，此后88分钟里曼联始终落后。
+
+**伤停补时3分钟，曼联改写历史**：
+- 90+1' 贝克汉姆角球→混战→**谢林汉姆**转身破门扳平！
+- 90+3' 贝克汉姆角球→谢林汉姆头球摆渡→**索尔斯克亚**脚尖垫射绝杀！
+
+欧足联主席约翰森已经起身准备给拜仁颁奖——结果他走出看台时看到的是"输球的在跳舞，赢球的在痛哭"。
+
+弗格森赛后只说了一句话：**"Football, bloody hell!"**
+
+**2. 1999足总杯半决赛重赛：曼联 2-1 阿森纳**
+
+吉格斯加时赛连过四人打入制胜球，脱掉球衣狂奔庆祝的画面成为英超经典。`
+    },
+    arsenal: {
+      id: 'arsenal',
+      name: '阿森纳',
+      fullName: '阿森纳足球俱乐部',
+      englishName: 'Arsenal FC',
+      nickname: '枪手 (The Gunners)、兵工厂',
+      founded: 1886,
+      league: 'epl',
+      colors: ['#ef0107','#fff'],
+      crestLetter: 'A',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#ef0107',
+      logo: 'https://s.coze.cn/image/FGmKP7n5mGE/',
+      players: [
+        {name:'蒂埃里·亨利',pos:'中锋/左边锋',years:'1999-2007',emoji:'🇫🇷',stat:'377场 228球'},
+        {name:'丹尼斯·博格坎普',pos:'前锋/影锋',years:'1995-2006',emoji:'🇳🇱',stat:'423场 112球'},
+        {name:'帕特里克·维埃拉',pos:'防守型中场',years:'1996-2005',emoji:'🇫🇷',stat:'406场 50球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英超冠军**：13座（历史第二，仅次于曼联）
+- **足总杯冠军**：14座（**历史第一！**）
+- **欧冠最佳成绩**：亚军（2006年）
+- **欧洲优胜者杯冠军**：1座（1994年）
+
+## 🔥 巅峰时刻：无敌之师（2003-2004）
+
+这是英格兰顶级联赛131年历史上，唯一一支以不败战绩夺冠的球队！温格打造的华丽之师，将技术流足球演绎到了极致。他们的49场不败纪录，至今仍是英格兰顶级联赛的历史之最。
+
+**无敌之师阵容（4-4-2）：**
+
+> 门将：莱曼
+> 后卫：劳伦、坎贝尔、图雷、阿什利·科尔
+> 中场：永贝里、吉尔伯托、维埃拉(C)、皮雷
+> 前锋：博格坎普、亨利
+
+## 📉 低谷时刻
+
+2006年搬离海布里，为新球场背负巨额债务，开始了"卖队长还债"的艰难岁月。从2005年到2024年，阿森纳在联赛中一冠难求，13年无冠。
+
+**2025-26赛季**，阿尔特塔终于带领枪手重返英超之巅！22年的等待，终于画上句号。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2004年5月15日 | 阿森纳2-1莱斯特城**
+
+亨利打进赛季第30球，2-1逆转取胜！整个英格兰顶级联赛131年历史上，只有阿森纳完成了38场不败夺冠的神迹！
+
+**2. 2026年5月 | 阿森纳夺得英超冠军 🏆**
+
+22年的等待！从2004年的"无敌之师"到2026年的新冠军，阿森纳终于重返巅峰！`
+    },
+    liverpool: {
+      id: 'liverpool',
+      name: '利物浦',
+      fullName: '利物浦足球俱乐部',
+      englishName: 'Liverpool FC',
+      nickname: '红军 (The Reds)',
+      founded: 1892,
+      league: 'epl',
+      colors: ['#c8102e','#00b2a9'],
+      crestLetter: 'L',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#c8102e',
+      logo: 'https://s.coze.cn/image/zzp7qfM5znU/',
+      players: [
+        {name:'穆罕默德·萨拉赫',pos:'右边锋',years:'2017至今',emoji:'🇪🇬',stat:'443场 257球 123助攻'},
+        {name:'史蒂文·杰拉德',pos:'中场',years:'1998-2015',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'710场 186球'},
+        {name:'范迪克',pos:'中后卫',years:'2018至今',emoji:'🇳🇱',stat:'防线核心'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英格兰顶级联赛冠军** ×20（追平曼联并列英格兰第一！）
+- **欧冠冠军** ×6（1977、1978、1981、1984、2005、2019）——全英第一！
+- **足总杯** ×8
+- **联赛杯** ×10
+
+> 🔥 1983-84赛季同时拿下联赛+联赛杯+欧冠三冠王！2000-01赛季拿下"五冠王"！
+
+## 🔥 巅峰时刻：克洛普时代（2015-2024）
+
+当2015年10月那个留着胡茬的德国人走进安菲尔德时，利物浦已经25年没有拿过联赛冠军了。没人能想到，这个被球迷叫做"渣叔"的男人，会把红军带上一个连香克利和佩斯利都会竖起大拇指的巅峰。
+
+**2018-19赛季欧冠冠军 & 2019-20赛季英超冠军（99分夺冠，30年联赛首冠）**
+
+## 📉 低谷时刻：2013-14赛季滑倒噩梦
+
+2013-14赛季，杰拉德、苏亚雷斯、斯特林、斯图里奇组成的进攻线大杀四方。4月27日——主场对阵切尔西，杰拉德在中圈附近接球时脚底打滑，登巴巴断球单刀破门。利物浦0-2落败，争冠主动权拱手让出。那个赛季，利物浦最终以2分之差屈居亚军，杰拉德一生与英超冠军无缘。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2005年欧冠决赛：伊斯坦布尔奇迹 ⭐⭐⭐⭐⭐**
+
+上半场0-3落后！马尔蒂尼52秒闪击，克雷斯波梅开二度。下半场6分钟内杰拉德头球、斯米切尔远射、阿隆索补射点球——3-3！点球大战中杜德克用"面条腿"干扰米兰球员，扑出皮尔洛和舍甫琴科的点球，红军完成了足球史上最不可思议的逆转！
+
+**2. 2019年欧冠半决赛：安菲尔德奇迹 ⭐⭐⭐⭐⭐**
+
+首回合0-3惨败，次回合萨拉赫和菲尔米诺双双缺阵——全世界都认为巴萨稳了。但奥里吉开场7分钟破门，替补维纳尔杜姆54分钟和56分钟连进两球！第79分钟，阿诺德那个"天才角球"——他假装走开又突然快开，奥里吉无人盯防推射入网——4-0！
+
+**3. 2020年英超提前7轮夺冠：30年等待终结**
+
+从1990年到2020年，整整30年！99分的赛季积分、提前7轮夺冠——"You'll Never Walk Alone"终于有了最完美的注脚。`
+    },
+    realmadrid: {
+      id: 'realmadrid',
+      name: '皇家马德里',
+      fullName: '皇家马德里足球俱乐部',
+      englishName: 'Real Madrid',
+      nickname: '白衣军团、银河战舰、Los Blancos',
+      founded: 1902,
+      league: 'laliga',
+      colors: ['#fff','#febe10'],
+      crestLetter: 'R',
+      crestSub: 'M',
+      crestType: 'crown',
+      crestBg: '#fff',
+      logo: 'https://s.coze.cn/image/HKss1goo31w/',
+      players: [
+        {name:'齐达内',pos:'前腰',years:'2001-2006',emoji:'🇫🇷',stat:'227场 49球'},
+        {name:'菲戈',pos:'右边锋',years:'2000-2005',emoji:'🇵🇹',stat:'245场 56球'},
+        {name:'罗伯特·卡洛斯',pos:'左后卫',years:'1996-2007',emoji:'🇧🇷',stat:'527场 69球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×15（1956-1960五连冠、1966、1998、2000、2002、2014、2016-2018三连冠、2022、2024）
+- **西甲冠军** ×36
+- **国王杯冠军** ×20
+- **世俱杯冠军** ×8
+
+## 🔥 巅峰时刻：银河战舰一期（2000-2003）
+
+2000年夏天，弗洛伦蒂诺竞选皇马主席时承诺"把菲戈带到伯纳乌"，没人相信。但他赢了，菲戈真的来了。从此，一个疯狂的时代拉开了序幕——每年签一位巨星，皇马用金钱和野心打造了足球史上最豪华的阵容。
+
+**主力阵容（2001-02赛季欧冠夺冠）：**
+
+> 门将：卡西利亚斯（20岁的少年天才）
+> 后卫：萨尔加多 | 耶罗(队长) 搭档卡兰卡 | 罗伯特·卡洛斯
+> 后腰：埃尔格拉 + 马克莱莱
+> 中场：菲戈 | 齐达内 | 劳尔（伯纳乌的王子）
+> 前锋：莫伦特斯
+
+**2002年欧冠决赛，那记天外飞仙：** 卡洛斯左路传中，球速极快且有些飘，齐达内站在禁区弧顶，左脚凌空一抽，皮球像子弹一样钻入死角。**这可能是欧冠决赛历史上最伟大的一粒进球。**
+
+## 📉 低谷时刻：银河战舰的崩塌（2003-2006）
+
+2003年夏天，弗洛伦蒂诺做出了两个灾难性决定：**不续约功勋主帅博斯克和老队长耶罗**。铁腰马克莱莱因为加薪被拒，被卖到了切尔西。弗洛伦蒂诺说："我们不会想念他，他不会头球，传球不超过三米。"
+
+马克莱莱走后，皇马的攻防体系彻底失衡。2003-04赛季到2005-06赛季，皇马连续三年颗粒无收。2006年2月，弗洛伦蒂诺辞职，银河战舰一期正式谢幕。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2002欧冠决赛：皇马 2-1 勒沃库森**
+
+齐达内的天外飞仙。20岁的卡西利亚斯替补登场做出神扑，赛后他哭着说"我以为我的赛季已经结束了"。
+
+**2. 2002欧冠半决赛：皇马 vs 巴萨**
+
+首回合诺坎普2-0，次回合伯纳乌1-1，银河战舰在诺坎普赢球，让整个加泰罗尼亚沉默。`
+    },
+    barcelona: {
+      id: 'barcelona',
+      name: '巴塞罗那',
+      fullName: '巴塞罗那足球俱乐部',
+      englishName: 'FC Barcelona',
+      nickname: '巴萨、红蓝军团 (Barça)',
+      founded: 1899,
+      league: 'laliga',
+      colors: ['#a50044','#004d98'],
+      crestLetter: 'F',
+      crestSub: 'C',
+      crestType: 'stripes',
+      crestBg: '#a50044',
+      logo: 'https://s.coze.cn/image/twQfEyqrU1A/',
+      stripes: ['#a50044','#004d98'],
+      players: [
+        {name:'莱昂内尔·梅西',pos:'右边锋/前腰',years:'2004-2021',emoji:'🇦🇷',stat:'778场 672球 269助攻'},
+        {name:'路易斯·苏亚雷斯',pos:'中锋',years:'2014-2020',emoji:'🇺🇾',stat:'283场 198球 82助攻'},
+        {name:'内马尔',pos:'左边锋',years:'2013-2017',emoji:'🇧🇷',stat:'186场 105球 80助攻'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×5（1992、2006、2009、2011、2015）
+- **西甲冠军** ×28
+- **国王杯冠军** ×31（历史第一）
+- **六冠王**：2009年（史上唯一）
+
+## 🔥 巅峰时刻：梦三王朝与MSN时代
+
+**瓜迪奥拉时代（2008-2012）：传控足球的巅峰**
+
+2008年，38岁的瓜迪奥拉成为巴萨主教练。2008-09赛季成为西班牙足球史上第一支"三冠王"球队，2009年完成"六冠王"伟业——史上唯一。
+
+**梦三队核心：** 梅西、哈维、伊涅斯塔、布斯克茨、皮克、普约尔
+
+**MSN时代（2014-2017）：史上最强三叉戟？**
+
+梅西+内马尔+苏亚雷斯，2014-15赛季再次完成"三冠王"。2015-16赛季三人总计打进131球，史上最强火力。
+
+## 📉 低谷时刻
+
+**1. 慕尼黑之夜（2020年8月14日）：2-8不敌拜仁**
+
+上半场就1-4落后，全场2-8。这是巴萨连续第三年在欧冠淘汰赛中遭遇惨案。
+
+**2. 财务危机：从"不差钱"到"卖血求生"**
+
+2021年梅西自由身离队，薪资空间严重超标，被迫出售未来25%的电视转播权。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 诺坎普奇迹（2017年3月8日）：6-1巴黎圣日耳曼**
+
+首回合0-4，最后7分钟连进3球，第95分钟罗伯托完成绝杀！内马尔独造4球。
+
+**2. 伯纳乌6-2大屠杀（2009年5月2日）**
+
+巴萨在皇马主场踢出了最完美的传控足球，普约尔举起6根手指的画面成为国家德比史上永恒经典。`
+    },
+    acmilan: {
+      id: 'acmilan',
+      name: 'AC米兰',
+      fullName: 'AC米兰足球俱乐部',
+      englishName: 'AC Milan',
+      nickname: '红黑军团 (Rossoneri)',
+      founded: 1899,
+      league: 'seriea',
+      colors: ['#fb090b','#000'],
+      crestLetter: 'A',
+      crestSub: 'C',
+      crestType: 'stripes',
+      crestBg: '#fb090b',
+      logo: 'https://s.coze.cn/image/x9fpZpgITPY/',
+      stripes: ['#fb090b','#000'],
+      players: [
+        {name:'范巴斯滕',pos:'中锋',years:'1987-1995',emoji:'🇳🇱',stat:'201场 125球 49助攻'},
+        {name:'古利特',pos:'攻击中场',years:'1987-1993',emoji:'🇳🇱',stat:'171场 56球 40助攻'},
+        {name:'里杰卡尔德',pos:'后腰',years:'1988-1993',emoji:'🇳🇱',stat:'201场 26球 25助攻'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×7（1963、1969、1989、1990、1994、2003、2007）
+- **意甲冠军** ×19
+- **意大利杯冠军** ×5
+- **丰田杯/世俱杯冠军** ×4
+
+## 🔥 巅峰时刻：荷兰三剑客时代（1987-1993）
+
+1986年2月，大富豪贝卢斯科尼买下了负债累累的AC米兰。1987年7月的一个早晨，伴随着瓦格纳的《女武神的骑行》，三架直升机从天而降——范巴斯滕、古利特、里杰卡尔德，三剑客齐聚，新时代拉开了帷幕。
+
+**三剑客齐聚阵容（1988-89赛季欧冠夺冠）：**
+
+> 门将：加利
+> 后卫：塔索蒂 | 科斯塔库塔 搭档 巴雷西 | 马尔蒂尼
+> 中场：安切洛蒂 + 多纳多尼 + 里杰卡尔德（黑天鹅）
+> 前锋：范巴斯滕（乌德勒支天鹅）搭档古利特（辫帅）
+
+## 📉 低谷时刻：2012年后的漫长沉沦
+
+2012年之后，随着核心球员离去、贝卢斯科尼投资收缩，AC米兰从意甲霸主沦落为中游球队。2021-22赛季，皮奥利率队时隔11年重夺意甲冠军，但复兴之路依然曲折。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1989欧冠半决赛：AC米兰 5-0 皇家马德里**
+
+三剑客各进一球，5-0横扫欧洲霸主！三名荷兰人完美配合，这是"荷兰三剑客"这个称号真正被全世界铭记的一刻。
+
+**2. 1989欧冠决赛：AC米兰 4-0 布加勒斯特星**
+
+古利特和范巴斯滕双双梅开二度。98000名观众中80000是米兰球迷！
+
+**3. 58场联赛不败（1991-1993）**
+
+从1991年5月到1993年3月，米兰在意甲连续58场不败！巅峰巴斯滕31场25球。`
+    },
+    juventus: {
+      id: 'juventus',
+      name: '尤文图斯',
+      fullName: '尤文图斯足球俱乐部',
+      englishName: 'Juventus FC',
+      nickname: '老妇人、斑马军团 (La Vecchia Signora)',
+      founded: 1897,
+      league: 'seriea',
+      colors: ['#fff','#000'],
+      crestLetter: 'J',
+      crestSub: '',
+      crestType: 'stripes',
+      crestBg: '#fff',
+      logo: 'https://s.coze.cn/image/OeuSyekfsYU/',
+      stripes: ['#fff','#000'],
+      crestTextDark: true,
+      players: [
+        {name:'布冯',pos:'门将',years:'2001-2018,2019-2021',emoji:'🇮🇹',stat:'656场 300+零封'},
+        {name:'C罗',pos:'左边锋/中锋',years:'2018-2021',emoji:'🇵🇹',stat:'134场 101球 22助攻'},
+        {name:'皮尔洛',pos:'组织后腰',years:'2012-2017',emoji:'🇮🇹',stat:'227场 14球 35助攻'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲冠军** ×36（夺得意甲冠军次数最多的球队）
+- **欧冠冠军** ×2（1984-85、1995-96）
+- **欧洲联盟杯冠军** ×3
+- **历史上第一支完成欧洲三大杯"大满贯"的俱乐部**
+- **2011-12至2019-20赛季完成意甲九连冠**
+
+## 🔥 巅峰时刻：意甲九连冠时代
+
+2006年电话门事件后，尤文图斯被强制降入意乙。从废墟中崛起，2011-2020年完成意甲九连冠，创造了亚平宁足球史无前例的纪录。
+
+**九连冠核心：** 布冯、基耶利尼、博努奇、巴尔扎利（BBC防线）+ 皮尔洛 + 比达尔 + 博格巴 + 迪巴拉 + C罗
+
+## 📉 低谷时刻：电话门事件
+
+2006年，尤文图斯被强制降入意乙联赛，2004-05和2005-06赛季冠军被取消。布冯选择留守，放弃皇马、曼联等豪门的邀请。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1997年欧冠决赛：多特蒙德3-1尤文图斯**
+
+20岁的里肯刚替补上场16秒就用一记绝妙吊射攻破佩鲁齐的大门，锁定胜局。
+
+**2. 2018年欧冠1/4决赛：皇马1-3尤文（总比分4-3皇马晋级）**
+
+曼朱基奇开场76秒破门，上半场头球梅开二度。补时最后时刻C罗点球绝杀，布冯因激烈抗议被红牌罚下！`
+    },
+    intermilan: {
+      id: 'intermilan',
+      name: '国际米兰',
+      fullName: '国际米兰足球俱乐部',
+      englishName: 'FC Internazionale Milano',
+      nickname: '蓝黑军团 (Nerazzurri)、大国际',
+      founded: 1908,
+      league: 'seriea',
+      colors: ['#0068a8','#000'],
+      crestLetter: 'I',
+      crestSub: 'M',
+      crestType: 'stripes',
+      crestBg: '#0068a8',
+      logo: 'https://s.coze.cn/image/DuAUa8QoKjY/',
+      stripes: ['#0068a8','#000'],
+      players: [
+        {name:'迭戈·米利托',pos:'前锋',years:'2009-2014',emoji:'🇦🇷',stat:'52场 30球 8助攻（三冠王赛季）'},
+        {name:'韦斯利·斯内德',pos:'前腰',years:'2009-2013',emoji:'🇳🇱',stat:'欧冠淘汰赛7场5球2助攻'},
+        {name:'哈维尔·萨内蒂',pos:'右后卫/中场',years:'1995-2014',emoji:'🇦🇷',stat:'858场 队史出场王'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲冠军** ×21（2024年获得第20座，胸前绣上第二颗星！）
+- **欧冠冠军** ×3（1964、1965、2010）
+- **意大利杯** ×10
+- **意大利唯一的三冠王**（2009-10赛季）！
+- **唯一从未降级的意甲球队**！
+
+## 🔥 巅峰时刻：穆里尼奥三冠王（2009-10赛季）
+
+这是国际米兰45年来最辉煌的时刻，也是意大利足球史上最伟大的赛季！
+
+**2010年欧冠决赛阵容：** 塞萨尔、麦孔、卢西奥、萨穆埃尔、齐沃、萨内蒂、坎比亚索、斯内德、埃托奥、潘德夫、米利托
+
+**"四球定三冠"：** 米利托在意大利杯决赛制胜球、意甲收官战夺冠进球、欧冠决赛梅开二度！
+
+## 📉 低谷时刻：90年代的"黑洞"时期
+
+拥有罗纳尔多、博格坎普、克林斯曼等巨星，两次打破世界转会费纪录——却整整十年拿不到一座意甲冠军！十年间换了11位主教练，6.7亿欧元打了水漂。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2010年欧冠半决赛：国米3-1宇宙巴萨**
+
+面对当时被称为"宇宙队"的巴萨，穆里尼奥的防守反击被演绎到了极致。斯内德任意球扳平，麦孔反超，米利托1射2传！梅西被彻底冻结。
+
+**2. 2010年欧冠决赛：2-0拜仁，三冠王封神**
+
+米利托梅开二度，国米成为意大利史上第一支三冠王。赛后穆里尼奥走向范加尔握手——狂人也有温情的一面。`
+    },
+    bayern: {
+      id: 'bayern',
+      name: '拜仁慕尼黑',
+      fullName: '拜仁慕尼黑足球俱乐部',
+      englishName: 'FC Bayern München',
+      nickname: '南部之星 (Die Bayern)、FC Hollywood',
+      founded: 1900,
+      league: 'bundesliga',
+      colors: ['#dc052d','#fff'],
+      crestLetter: 'B',
+      crestSub: 'M',
+      crestType: 'solid',
+      crestBg: '#dc052d',
+      logo: 'https://s.coze.cn/image/l-XLV2dqZLs/',
+      players: [
+        {name:'阿尔扬·罗本',pos:'边锋',years:'2009-2019',emoji:'🇳🇱',stat:'309场 144球'},
+        {name:'罗伯特·莱万多夫斯基',pos:'中锋',years:'2014-2022',emoji:'🇵🇱',stat:'375场 344球'},
+        {name:'曼努埃尔·诺伊尔',pos:'门将',years:'2011至今',emoji:'🇩🇪',stat:'598场 门卫开创者'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲冠军** ×33（断档式历史第一）
+- **德甲连冠纪录**：11连冠（2013-2023）
+- **欧冠冠军** ×6（1974-1976三连冠、2001、2013、2020）
+- **2012-2013三冠王**
+- **2019-2020赛季六冠王**
+
+## 🔥 巅峰时刻
+
+**2012-2013赛季：三冠王的荣耀**
+
+2012年欧冠决赛主场丢冠后，海因克斯带队卷土重来。2013年温布利决赛，第89分钟，里贝里脚后跟妙传，**罗本绝杀！** 拜仁2-1多特蒙德！
+
+**2019-2020赛季：赛季全胜，征服欧洲！**
+
+弗里克带领下，拜仁欧冠11战全胜，轰入43球，场均近4球！第59分钟，基米希精妙挑传，科曼后点头球破门弑旧主！
+
+## 📉 低谷时刻
+
+**1979-1980赛季：破产边缘**
+
+背负700万德国马克债务，联赛排名第12。37岁的赫内斯被任命为经理，出售球员还债。贝肯鲍尔回归后带队夺得德甲三连冠，重新崛起。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2013年5月25日 | 欧冠决赛 | 拜仁2-1多特蒙德**
+
+罗本第89分钟绝杀！一传一射，十年救赎。
+
+**2. 2020年8月23日 | 欧冠决赛 | 拜仁1-0巴黎**
+
+赛季11战全胜！科曼弑旧主，诺伊尔神扑内马尔。
+
+**3. 莱万9分钟5球**
+
+对阵沃尔夫斯堡，替补出场9分钟内打进5球，这一神迹至今无人能破。`
+    },
+    dortmund: {
+      id: 'dortmund',
+      name: '多特蒙德',
+      fullName: '多特蒙德足球俱乐部',
+      englishName: 'Borussia Dortmund',
+      nickname: '大黄蜂、黄黑军团 (BVB)',
+      founded: 1909,
+      league: 'bundesliga',
+      colors: ['#fde100','#000'],
+      crestLetter: 'B',
+      crestSub: 'VB',
+      crestType: 'solid',
+      crestBg: '#fde100',
+      logo: 'https://s.coze.cn/image/D69AzADG7zY/',
+      crestTextDark: true,
+      players: [
+        {name:'罗伯特·莱万多夫斯基',pos:'中锋',years:'2010-2014',emoji:'🇵🇱',stat:'187场 103球 42助攻'},
+        {name:'马尔科·罗伊斯',pos:'边锋/前腰',years:'2012-2024',emoji:'🇩🇪',stat:'429场 170球 131助攻'},
+        {name:'马里奥·格策',pos:'前腰',years:'2009-2013,2019-2020',emoji:'🇩🇪',stat:'118场 31球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲冠军** ×8
+- **欧冠冠军** ×1（1996-97）
+- **欧洲优胜者杯冠军** ×1（1965-66）
+- **南看台"黄墙"**：世界最大的站立看台，可容纳约25,000人
+
+## 🔥 巅峰时刻：克洛普的青春风暴
+
+2005年，多特蒙德一度濒临破产，债务高达1.18亿欧元。2008年，克洛普成为主教练，用"重金属摇滚"风格改变了德国足球。
+
+**2011-12赛季**：创造德甲历史最高积分纪录（81分），队史首个"双冠王"。
+
+**2012-13赛季**：杀入欧冠决赛，莱万多夫斯基半决赛对皇马上演**大四喜**！
+
+## 📉 低谷时刻
+
+2005年债务高达1.18亿欧元险些破产。1972年首次降入德乙，1978年再次降级。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2013年欧冠半决赛：莱万的大四喜**
+
+多特蒙德4-1皇家马德里！莱万多夫斯基四脚射门四个进球，成为历史上首位在欧冠半决赛完成大四喜的球员。克洛普赛后跪地庆祝。
+
+**2. 2012年德国杯决赛：多特5-2拜仁**
+
+莱万多夫斯基上演帽子戏法，香川真司1球2助攻，正式宣告多特蒙德成为能与拜仁抗衡的德国豪门。`
+    },
+    psg: {
+      id: 'psg',
+      name: '巴黎圣日耳曼',
+      fullName: '巴黎圣日耳曼足球俱乐部',
+      englishName: 'Paris Saint-Germain',
+      nickname: 'PSG、大巴黎',
+      founded: 1970,
+      league: 'ligue1',
+      colors: ['#004170','#e30613'],
+      crestLetter: 'P',
+      crestSub: 'SG',
+      crestType: 'solid',
+      crestBg: '#004170',
+      logo: 'https://s.coze.cn/image/G2iYE6xMaAM/',
+      players: [
+        {name:'基利安·姆巴佩',pos:'前锋',years:'2018-2024',emoji:'🇫🇷',stat:'306场 255球 队史射手王'},
+        {name:'内马尔',pos:'左边锋',years:'2017-2023',emoji:'🇧🇷',stat:'173场 118球'},
+        {name:'兹拉坦·伊布拉希莫维奇',pos:'中锋',years:'2012-2016',emoji:'🇸🇪',stat:'180场 156球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×12+
+- **法国杯冠军** ×14+
+- **欧冠冠军** ×2（2025年5-0击败国际米兰、2026年点球4-3击败阿森纳卫冕成功！）
+- **欧联杯冠军** ×1（1996年）
+
+## 🔥 巅峰时刻
+
+**"四亿妄为"时代（2017-2024）**
+
+2017年夏天，巴黎以2.22亿欧元签下内马尔，又以1.8亿欧元签下姆巴佩，"四亿妄为"震惊世界足坛。
+
+**2025-2026年：体系足球的胜利**
+
+经历了"四亿妄为"的失败后，巴黎开始打造体系足球。恩里克上任后，巴黎连夺两座欧冠冠军！姆巴佩2024年自由身离队加盟皇马后，巴黎反而用体系足球连夺两座欧冠。
+
+## 📉 低谷时刻
+
+**2019年3月6日：欧冠惨遭曼联大逆转**
+
+首回合客场2-0击败曼联，次回合主场1-3惨遭逆转。补时第94分钟，拉什福德点球绝杀！
+
+**2016-17赛季：诺坎普惨案**
+
+首回合4-0大胜巴萨，次回合被6-1逆转！
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2026年欧冠决赛：巴黎1-1阿森纳（点球4-3）🏆**
+
+巴黎卫冕成功！克瓦拉茨赫利亚造点球，登贝莱点球扳平。点球大战阿森纳加布里埃尔罚丢最后一球。
+
+**2. 2017年3月8日：巴塞罗那6-1巴黎**
+
+首回合4-0大胜巴萨，次回合被史诗级逆转。内马尔第88分钟任意球+91分钟点球+95分钟助攻绝杀——讽刺的是，他后来成了巴黎的球员。`
+    },
+    marseille: {
+      id: 'marseille',
+      name: '马赛',
+      fullName: '马赛奥林匹克',
+      englishName: 'Olympique de Marseille',
+      nickname: 'OM、蓝白军团 (Les Phocéens)',
+      founded: 1899,
+      league: 'ligue1',
+      colors: ['#2faee0','#fff'],
+      crestLetter: 'O',
+      crestSub: 'M',
+      crestType: 'solid',
+      crestBg: '#2faee0',
+      logo: 'https://s.coze.cn/image/vRHRG2zkt50/',
+      players: [
+        {name:'让-皮埃尔·帕潘',pos:'前锋',years:'1986-1992',emoji:'🇫🇷',stat:'181球 队史最佳射手'},
+        {name:'迪迪埃·德罗巴',pos:'前锋',years:'2003-2004',emoji:'🇨🇮',stat:'29球（单赛季）'},
+        {name:'德尚',pos:'中场',years:'90年代',emoji:'🇫🇷',stat:'中场统帅'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×9
+- **欧冠冠军** ×1（1993）——**唯一赢得欧冠的法国球队！**
+- **法国杯** ×10
+- **格言**：Droit au but（直奔球门）
+
+> "À jamais les premiers"（永远是第一）——1993年5月26日，法国足球站在了欧洲之巅，至今无人能复制这一壮举！
+
+## 🔥 巅峰时刻：1992-93赛季——从欧洲之巅到深渊
+
+1993年5月26日，慕尼黑奥林匹克球场，马赛1-0击败拥有马尔蒂尼、范巴斯滕、里杰卡尔德的AC米兰！中卫巴西尔·博利角球头球攻入全场唯一进球——法国足球最伟大的夜晚！
+
+**帕潘时代（1986-1992）：** 连续5年法甲金靴，1991年金球奖——唯一在法国俱乐部效力期间获此殊荣的球员。他的凌空抽射被称为"Papinades"。
+
+## 📉 低谷时刻：VA-OM假球丑闻与降级
+
+欧冠决赛前一周，马赛总经理向瓦朗西安球员行贿。丑闻曝光后：
+- 马赛被剥夺1992-93赛季法甲冠军
+- 强制降入法乙
+- 主席塔皮被判入狱8个月
+
+从欧洲之巅到降入乙级，只用了几个月。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1993年欧冠决赛：1-0 AC米兰——法国的永恒之夜**
+
+博利44分钟头球破门！巴特兹的神勇扑救，德尚的中场绞杀，让AC米兰全场无力回天。
+
+**2. 2004年联盟杯：德罗巴的欧洲巡演**
+
+德罗巴让利物浦和纽卡斯尔吃尽苦头，凭借一己之力带队杀入决赛。仅一年就从330万镑身价飙升至2450万镑——穆里尼奥说："先生，掏钱，别说话。"`
+    },
+    chelsea: {
+      id: 'chelsea',
+      name: '切尔西',
+      fullName: '切尔西足球俱乐部',
+      englishName: 'Chelsea FC',
+      nickname: '蓝军 (The Blues)',
+      founded: 1905,
+      league: 'epl',
+      colors: ['#034694','#ffffff'],
+      crestLetter: 'C',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#034694',
+      logo: 'https://s.coze.cn/image/eA2skFoeZJ8/',
+      players: [
+        {name:'弗兰克·兰帕德',pos:'中前卫',years:'2001-2014',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'648场 211球 队史射手王'},
+        {name:'迪迪埃·德罗巴',pos:'中锋',years:'2004-2012/2014-2015',emoji:'🇨🇮',stat:'381场 164球 两次英超金靴'},
+        {name:'约翰·特里',pos:'中后卫/队长',years:'1998-2017',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'717场 铁血队长'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×2（2012、2021）
+- **欧联杯** ×2（2013、2019）
+- **欧协联** ×1（2025）
+- **欧洲优胜者杯** ×2（1971、1998）
+- **欧洲超级杯** ×2（1998、2021）
+- **世俱杯** ×2（2021、2025）
+- **英超冠军** ×6（1955、2005、2006、2010、2015、2017）
+- **足总杯** ×8 | **联赛杯** ×5
+
+🏆 **欧战全满贯**：切尔西是全欧唯一包揽欧冠、欧联、欧协联、欧洲超级杯、欧洲优胜者杯五大欧战冠军的俱乐部！
+
+## 🔥 巅峰时刻
+
+### 穆里尼奥一期的铁血蓝军（2004-2007）
+2004年，"特别的一个"驾临斯坦福桥。穆氏切尔西2004-05赛季仅丢15球（英超纪录），提前夺冠。
+
+**主力阵容**：门将切赫，后防线费雷拉、特里、卡瓦略、加拉，双后腰马克莱莱搭档兰帕德，两翼达夫和罗本，前锋德罗巴——精密的战争机器。
+
+### 2021年欧冠冠军——图赫尔的蓝色奇迹
+图赫尔接手仅4个月就征服欧洲！3-4-2-1阵型让切尔西变成欧洲最坚固的堡垒。坎特淘汰赛场场MVP，哈弗茨决赛制胜球1-0曼城。
+
+## 📉 低谷时刻：2015-16赛季 卫冕冠军的坠落
+穆里尼奥与队医伊娃的冲突引爆更衣室，前16轮仅15分接近降级区。卫冕冠军最终排名第10——英超历史最惨滑坡之一。孔蒂次年上任改打3-4-3，豪取13连胜重夺冠军完成涅槃。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2012欧冠决赛：切尔西 1-1（点球4-3）拜仁慕尼黑**
+在拜仁主场安联球场被压制88分钟，德罗巴第88分钟头球绝平！加时赛切赫扑出罗本点球，点球大战德罗巴致胜——从2008年决赛染红的罪人到2012年的一锤定音，最完美的救赎。
+
+**2. 2021欧冠决赛：切尔西 1-0 曼城**
+芒特直塞，哈弗茨过掉埃德森推射空门——个人欧冠处子球价值连城。坎特全场MVP，瓜迪奥拉无腰阵被瓦解。
+
+**3. 2012欧冠半决赛次回合：切尔西 2-3 巴萨（总比分3-2晋级）**
+10人应战0-2落后，拉米雷斯吊射扳回一城，补时托雷斯单刀锁定晋级——5000万先生在最关键时刻站了出来！`
+    },
+    atletico: {
+      id: 'atletico',
+      name: '马德里竞技',
+      fullName: '马德里竞技俱乐部',
+      englishName: 'Atlético de Madrid',
+      nickname: '床单军团 (Los Colchoneros)',
+      founded: 1903,
+      league: 'laliga',
+      colors: ['#cb3524','#fff','#1a4b8c'],
+      crestLetter: 'A',
+      crestSub: 'M',
+      crestType: 'stripes',
+      stripes: ['#cb3524','#fff'],
+      crestBg: '#cb3524',
+      logo: 'https://s.coze.cn/image/-ESaxzVRI6Y/',
+      crestTextDark: true,
+      players: [
+        {name:'安托万·格列兹曼',pos:'前锋/二前锋',years:'2014-2019/2021至今',emoji:'🇫🇷',stat:'300+场 144球 队史第四射手'},
+        {name:'迭戈·科斯塔',pos:'中锋',years:'2010-2014/2018-2020',emoji:'🇪🇸',stat:'2013-14赛季36球 人形坦克'},
+        {name:'迭戈·戈丁',pos:'中后卫',years:'2010-2019',emoji:'🇺🇾',stat:'铁血防线核心'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **西甲联赛** ×11（最近：2020/21）
+- **国王杯** ×10
+- **欧联杯** ×3（2010、2012、2018）
+- **欧洲优胜者杯** ×1（1962）
+- **欧洲超级杯** ×3
+
+🏆 西班牙足坛第三极，11次西甲排名第三。西蒙尼时代两次杀入欧冠决赛、两夺欧联杯。
+
+## 🔥 巅峰时刻
+
+### 2013-14赛季——铁血军团加冕西甲
+预算仅为皇马巴萨零头，铜墙铁壁的防守+摧枯拉朽的反击！最后一轮做客诺坎普，戈丁头球扳平巴萨1-1，时隔18年重夺西甲！
+
+**主力阵容**：门将库尔图瓦，后防胡安弗兰、戈丁、米兰达、费利佩，中场加比（队长）、蒂亚戈、科克、劳尔·加西亚，前锋迭戈·科斯塔搭档比利亚——加比和蒂亚戈像两头饥饿的狼撕咬对手，戈丁是不可逾越的高墙。
+
+### 欧联杯三冠王（2010、2012、2018）
+三次参加欧联杯三次夺冠，决赛全胜！"欧联杯之王"！
+
+## 📉 低谷时刻：2000年 降级的深渊
+1999-2000赛季西甲排名倒数第三惨遭降级！11次西甲冠军的豪门沦落到踢西乙，还陷入财务危机濒临破产。在乙级挣扎两赛季，2002年才重返西甲。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2014欧冠决赛：马竞 1-4（加时）皇马**
+戈丁36分钟破门领先到93分钟！拉莫斯92分48秒头球绝平——天堂坠入地狱。迭戈·科斯塔开场9分钟伤退，加时赛体能崩盘。最残酷的决赛之一。
+
+**2. 2016欧冠决赛：马竞 1-1（点球3-5）皇马**
+格列兹曼点球击中横梁！如果进了历史可能改写。连续两次欧冠决赛输给同城死敌。
+
+**3. 2014西甲末轮：巴萨 1-1 马竞**
+做客诺坎普，戈丁角球头球扳平！这粒进球打破巴萨皇马9年垄断，西蒙尼被球员抛向天空——马竞永恒的经典画面。`
+    },
+    leverkusen: {
+      id: 'leverkusen',
+      name: '勒沃库森',
+      fullName: '拜耳04勒沃库森',
+      englishName: 'Bayer 04 Leverkusen',
+      nickname: '药厂 (Die Werkself)',
+      founded: 1904,
+      league: 'bundesliga',
+      colors: ['#e32221','#000000'],
+      crestLetter: 'B',
+      crestSub: '04',
+      crestType: 'solid',
+      crestBg: '#e32221',
+      logo: 'https://s.coze.cn/image/gXiag_yiuNU/',
+      players: [
+        {name:'弗洛里安·维尔茨',pos:'攻击型中场',years:'2020-2025',emoji:'🇩🇪',stat:'2023-24赛季 18球20助攻'},
+        {name:'格拉尼特·扎卡',pos:'防守型中场',years:'2023-2025',emoji:'🇨🇭',stat:'从红牌机器到中场大师'},
+        {name:'亚历杭德罗·格里马尔多',pos:'左翼卫',years:'2023至今',emoji:'🇪🇸',stat:'2023-24赛季 10球13助攻'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲联赛** ×1（2023/24）——历史首个不败赛季！
+- **德国杯** ×2（1993、2024）
+- **德国超级杯** ×1（2024）
+- **欧洲联盟杯** ×1（1988）
+
+🏆 2023-24赛季：28胜6平不败夺冠，90分创队史纪录，各项赛事51场不败创欧洲纪录！120年终圆梦！
+
+## 🔥 巅峰时刻：2023-24赛季——120年等待，不败封王
+
+阿隆索接手时球队排在德甲第17名！一年半后创造人类足球史上最不可思议的赛季——28胜6平不败夺冠，51场不败欧洲纪录。28球在80分钟后打进，18球在90分钟后——真正的"绝杀之王"。
+
+**主力阵容（3-4-2-1）**：门将赫拉德茨基，三中卫塔普索巴、塔、因卡皮耶，翼卫弗林蓬和格里马尔多，双后腰扎卡搭档安德里希，前场维尔茨和霍夫曼，中锋博尼费斯——精密的瑞士钟表。
+
+## 📉 低谷时刻：2001-02赛季 "Neverkusen" 三亚王
+三条战线全部杀入决赛，全部输掉！德甲末轮丢冠、德国杯2-4沙尔克、欧冠1-2皇马。齐达内"天外飞仙"的背景板就是勒沃库森。巴拉克一年四个亚军，足坛最悲情的男人。"Neverkusen"（永不赢的库森）的外号贴了22年，直到阿隆索出现。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2024年4月14日 德甲：勒沃库森 5-0 不莱梅**
+120年等待的终点！维尔茨替补15分钟帽子戏法，第三球打进后球迷冲入球场。5-0提前5轮登顶、赛季不败——德甲最浪漫的夺冠夜。
+
+**2. 2002欧冠决赛：勒沃库森 1-2 皇马**
+"天外飞仙"诞生之夜！卡洛斯传中，齐达内不停球左脚凌空抽射钻入死角——足球史上最经典进球，将勒沃库森钉在三亚王十字架上。
+
+**3. 2024德国杯决赛：勒沃库森 1-0 凯泽斯劳滕**
+扎卡远射制胜！从阿森纳"红牌机器"到勒沃库森双冠王功臣——最精彩的蜕变。队史首次双冠王！`
+    }
+  }
+};
+
+// ====================================================================
+// NAVIGATION
+// ====================================================================
+let currentLeague = null;
+let currentClub = null;
+
+function navigateTo(page, data) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('visible');
+    setTimeout(() => p.classList.remove('active'), 350);
+  });
+
+  setTimeout(() => {
+    const target = document.getElementById('page-' + page);
+    target.classList.add('active');
+
+    if (page === 'home') renderHome();
+    else if (page === 'league') renderLeague(data);
+    else if (page === 'club') renderClub(data);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        target.classList.add('visible');
+      });
+    });
+    window.scrollTo(0, 0);
+  }, 360);
+}
+
+function goBackToLeague() {
+  if (currentLeague) navigateTo('league', currentLeague);
+}
+
+// ====================================================================
+// RENDER HOME
+// ====================================================================
+function renderHome() {
+  const grid = document.getElementById('league-grid');
+  grid.innerHTML = '';
+  let totalClubs = 0;
+
+  const leagueOrder = ['epl','laliga','seriea','bundesliga','ligue1'];
+  leagueOrder.forEach((lid, idx) => {
+    const league = DATA.leagues[lid];
+    totalClubs += league.clubs.length;
+
+    const card = document.createElement('div');
+    card.className = `league-card animate-in delay-${idx + 1}`;
+    card.onclick = () => {
+      currentLeague = lid;
+      navigateTo('league', lid);
+    };
+    card.innerHTML = `
+      <div class="league-card-accent" style="background:linear-gradient(90deg,${league.color},${league.bgColor})"></div>
+      <div class="league-card-body">
+        <div class="league-card-header">
+          <div class="league-logo" style="background:linear-gradient(135deg,${league.color},${league.bgColor})">${league.logoText}</div>
+          <div>
+            <div class="league-card-title">${league.name}</div>
+            <div class="league-card-subtitle">${league.fullName}</div>
+          </div>
+        </div>
+        <div class="league-card-count">⚽ 已介绍 ${league.clubs.length} 支球队</div>
+      </div>
+      <div class="league-card-arrow">→</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('total-clubs').textContent = totalClubs;
+}
+
+// ====================================================================
+// RENDER LEAGUE DETAIL
+// ====================================================================
+function renderLeague(leagueId) {
+  const league = DATA.leagues[leagueId];
+  document.getElementById('league-title').textContent = league.fullName;
+  document.getElementById('league-title').style.color = league.color;
+  document.getElementById('league-sub').textContent = `已介绍 ${league.clubs.length} 支俱乐部`;
+
+  const grid = document.getElementById('club-grid');
+  grid.innerHTML = '';
+
+  league.clubs.forEach((cid, idx) => {
+    const club = DATA.clubs[cid];
+    const card = document.createElement('div');
+    card.className = `club-card animate-in delay-${idx + 1}`;
+    card.style.cssText = `--club-color:${club.colors[0]}`;
+    card.querySelector?.('.club-card::before')?.style;
+    card.onclick = () => {
+      currentClub = cid;
+      navigateTo('club', cid);
+    };
+    card.innerHTML = `
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${club.colors[0]};opacity:0;transition:opacity 0.3s;" class="club-top-bar"></div>
+      <div class="club-card-top">
+        <div class="club-badge">${buildCrestHTML(club, false)}</div>
+        <div>
+          <div class="club-card-name">${club.name}</div>
+          <div class="club-card-nickname">${club.nickname}</div>
+        </div>
+      </div>
+      <div class="club-card-year">成立于 ${club.founded} 年</div>
+    `;
+    card.addEventListener('mouseenter', () => {
+      card.querySelector('.club-top-bar').style.opacity = '1';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.querySelector('.club-top-bar').style.opacity = '0';
+    });
+    grid.appendChild(card);
+  });
+}
+
+// ====================================================================
+// BUILD CSS CREST HTML
+// ====================================================================
+function buildCrestHTML(club, large) {
+  const sizeClass = large ? 'crest-large' : '';
+  const letterColor = club.crestTextDark ? '#000' : '#fff';
+  const subColor = club.crestTextDark ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.8)';
+
+  // 如果有真实图片logo，使用图片
+  if (club.logo) {
+    return `<div class="crest ${sizeClass}">
+      <div class="crest-inner crest-logo-container" style="background:transparent;border:none;">
+        <img src="${club.logo}" alt="${club.name}" class="crest-img" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'crest-letter\\'>${club.crestLetter}</span>'">
+      </div>
+    </div>`;
+  }
+
+  if (club.crestType === 'stripes' && club.stripes) {
+    let bars = '';
+    for (let i = 0; i < 7; i++) {
+      const color = i % 2 === 0 ? club.stripes[0] : club.stripes[1];
+      bars += `<div class="crest-stripes-bar" style="left:${i*14.28}%;background:${color}"></div>`;
+    }
+    return `<div class="crest ${sizeClass}">
+      <div class="crest-inner" style="background:${club.stripes[0]}">
+        <div class="crest-stripes">${bars}</div>
+        <span class="crest-letter" style="color:${letterColor};position:relative;z-index:2">${club.crestLetter}</span>
+        ${club.crestSub ? `<span class="crest-sub" style="color:${subColor};position:relative;z-index:2">${club.crestSub}</span>` : ''}
+      </div>
+    </div>`;
+  }
+
+  if (club.crestType === 'crown') {
+    return `<div class="crest ${sizeClass}">
+      <div class="crest-inner" style="background:linear-gradient(180deg,#FFD700 0%,#FFD700 22%,${club.crestBg} 22%)">
+        <span style="position:relative;z-index:2;font-size:${large?'18':'12'}px;color:#FFD700;">♛</span>
+        <span class="crest-letter" style="color:${letterColor};position:relative;z-index:2;margin-top:-2px">${club.crestLetter}</span>
+        ${club.crestSub ? `<span class="crest-sub" style="color:${subColor};position:relative;z-index:2">${club.crestSub}</span>` : ''}
+      </div>
+    </div>`;
+  }
+
+  // Solid
+  return `<div class="crest ${sizeClass}">
+    <div class="crest-inner" style="background:${club.crestBg}">
+      <span class="crest-letter" style="color:${letterColor}">${club.crestLetter}</span>
+      ${club.crestSub ? `<span class="crest-sub" style="color:${subColor}">${club.crestSub}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+// ====================================================================
+// RENDER CLUB DETAIL
+// ====================================================================
+function renderClub(clubId) {
+  const club = DATA.clubs[clubId];
+  const league = DATA.leagues[club.league];
+
+  document.getElementById('club-badge').innerHTML = buildCrestHTML(club, true);
+  document.getElementById('club-badge').style.background = 'none';
+  document.getElementById('club-badge').style.width = 'auto';
+  document.getElementById('club-badge').style.height = 'auto';
+  document.getElementById('club-badge').style.borderRadius = '0';
+  document.getElementById('club-title').textContent = club.fullName;
+  document.getElementById('club-title').style.color = club.colors[0];
+  document.getElementById('club-meta').textContent = `${league.name} · ${club.nickname} · 成立于 ${club.founded} 年`;
+
+  // Render players
+  const playersDiv = document.getElementById('club-players');
+  playersDiv.innerHTML = `
+    <div class="player-section-title">⭐ 历史性球员</div>
+    <div class="player-grid">
+      ${club.players.map(p => `
+        <div class="player-card">
+          <div class="player-avatar" style="background:linear-gradient(135deg,${club.colors[0]},${club.colors[1] || club.colors[0]})">${p.emoji}</div>
+          <div class="player-name">${p.name}</div>
+          <div class="player-pos">${p.pos}</div>
+          <div class="player-years">${p.years}</div>
+          <div class="player-stat">${p.stat}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  // Render markdown content
+  document.getElementById('club-body').innerHTML = parseMD(club.content);
+}
+
+// ====================================================================
+// SIMPLE MARKDOWN PARSER
+// ====================================================================
+function parseMD(text) {
+  let html = text;
+
+  // Code blocks (pre)
+  html = html.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${escHTML(code.trim())}</code></pre>`);
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Headers
+  html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+
+  // Horizontal rules
+  html = html.replace(/^---+$/gm, '<hr>');
+
+  // Bold & Italic
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Blockquotes
+  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  // Merge consecutive blockquotes
+  html = html.replace(/<\/blockquote>\n<blockquote>/g, '<br>');
+
+  // Tables
+  html = html.replace(/(\|.+\|)\n(\|[-| :]+\|)\n((?:\|.+\|\n?)*)/g, (_, header, sep, body) => {
+    const headers = header.split('|').filter(c => c.trim()).map(c => `<th>${c.trim()}</th>`).join('');
+    const rows = body.trim().split('\n').map(row => {
+      const cells = row.split('|').filter(c => c.trim()).map(c => `<td>${c.trim()}</td>`).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    return `<table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table>`;
+  });
+
+  // Unordered lists
+  html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+  // Paragraphs: wrap lines that aren't already wrapped
+  html = html.split('\n\n').map(block => {
+    block = block.trim();
+    if (!block) return '';
+    if (block.startsWith('<')) return block;
+    return `<p>${block}</p>`;
+  }).join('\n');
+
+  // Fix line breaks within paragraphs
+  html = html.replace(/\n(?!<)/g, '<br>');
+
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+  return html;
+}
+
+function escHTML(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ====================================================================
+// INIT
+// ====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const homePage = document.getElementById('page-home');
+  homePage.classList.add('active');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      homePage.classList.add('visible');
+    });
+  });
+  renderHome();
+});
+</script>
+</body>
+</html>
