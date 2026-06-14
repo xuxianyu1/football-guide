@@ -276,16 +276,13 @@ body {
   margin-bottom: 14px;
 }
 .club-badge {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
+  width: auto;
+  height: auto;
+  border-radius: 0;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
-  font-size: 14px;
-  color: #fff;
   position: relative;
 }
 .club-card-name {
@@ -345,16 +342,13 @@ body {
   background: rgba(255,255,255,0.15);
 }
 .club-detail-badge {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: auto;
+  height: auto;
+  border-radius: 0;
   margin: 0 auto 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
-  font-size: 20px;
-  color: #fff;
 }
 .club-detail-name {
   font-size: clamp(1.5rem, 4vw, 2.2rem);
@@ -633,20 +627,25 @@ body {
   width: 14.28%;
   height: 100%;
 }
-.crest-logo-container {
+.crest-logo-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 !important;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+  flex-shrink: 0;
 }
-.crest-img {
-  width: 100%;
-  height: 100%;
+.crest-large .crest-logo-circle {
+  width: 76px;
+  height: 76px;
+}
+.crest-logo-img {
+  width: 80%;
+  height: 80%;
   object-fit: contain;
-  border-radius: 50%;
-}
-.crest-large .crest-img {
-  border-radius: 12px;
 }
 </style>
 </head>
@@ -728,7 +727,7 @@ const DATA = {
       fullName: '意大利足球甲级联赛',
       color: '#009246',
       bgColor: '#024494',
-      logoText: 'SERIE A',
+      logoText: 'SA',
       clubs: ['acmilan','juventus','intermilan']
     },
     bundesliga: {
@@ -764,7 +763,7 @@ const DATA = {
       crestSub: 'U',
       crestType: 'solid',
       crestBg: '#da291c',
-      logo: 'https://s.coze.cn/image/WfsbDx-BW8U/',
+      logo: 'https://s.coze.cn/image/GcvE2A49uSA/',
       players: [
         {name:'大卫·贝克汉姆',pos:'右中场',years:'1992-2003',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'394场 85球 152助攻'},
         {name:'瑞恩·吉格斯',pos:'左边锋',years:'1990-2014',emoji:'🏴󠁧󠁢󠁷󠁬󠁳󠁿',stat:'963场 168球'},
@@ -827,7 +826,7 @@ const DATA = {
       crestSub: 'FC',
       crestType: 'solid',
       crestBg: '#ef0107',
-      logo: 'https://s.coze.cn/image/FGmKP7n5mGE/',
+      logo: 'https://s.coze.cn/image/8z1hnVYKT4w/',
       players: [
         {name:'蒂埃里·亨利',pos:'中锋/左边锋',years:'1999-2007',emoji:'🇫🇷',stat:'377场 228球'},
         {name:'丹尼斯·博格坎普',pos:'前锋/影锋',years:'1995-2006',emoji:'🇳🇱',stat:'423场 112球'},
@@ -880,7 +879,7 @@ const DATA = {
       crestSub: 'FC',
       crestType: 'solid',
       crestBg: '#c8102e',
-      logo: 'https://s.coze.cn/image/zzp7qfM5znU/',
+      logo: 'https://s.coze.cn/image/HuxSAf0SkeY/',
       players: [
         {name:'穆罕默德·萨拉赫',pos:'右边锋',years:'2017至今',emoji:'🇪🇬',stat:'443场 257球 123助攻'},
         {name:'史蒂文·杰拉德',pos:'中场',years:'1998-2015',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'710场 186球'},
@@ -932,7 +931,7 @@ const DATA = {
       crestSub: 'M',
       crestType: 'crown',
       crestBg: '#fff',
-      logo: 'https://s.coze.cn/image/HKss1goo31w/',
+      logo: 'https://s.coze.cn/image/6Boi65U0pTE/',
       players: [
         {name:'齐达内',pos:'前腰',years:'2001-2006',emoji:'🇫🇷',stat:'227场 49球'},
         {name:'菲戈',pos:'右边锋',years:'2000-2005',emoji:'🇵🇹',stat:'245场 56球'},
@@ -988,7 +987,7 @@ const DATA = {
       crestSub: 'C',
       crestType: 'stripes',
       crestBg: '#a50044',
-      logo: 'https://s.coze.cn/image/twQfEyqrU1A/',
+      logo: 'https://s.coze.cn/image/9G2tuEWQSSY/',
       stripes: ['#a50044','#004d98'],
       players: [
         {name:'莱昂内尔·梅西',pos:'右边锋/前腰',years:'2004-2021',emoji:'🇦🇷',stat:'778场 672球 269助攻'},
@@ -1047,7 +1046,7 @@ const DATA = {
       crestSub: 'C',
       crestType: 'stripes',
       crestBg: '#fb090b',
-      logo: 'https://s.coze.cn/image/x9fpZpgITPY/',
+      logo: 'https://s.coze.cn/image/Yuh7UizeLA8/',
       stripes: ['#fb090b','#000'],
       players: [
         {name:'范巴斯滕',pos:'中锋',years:'1987-1995',emoji:'🇳🇱',stat:'201场 125球 49助攻'},
@@ -1103,7 +1102,7 @@ const DATA = {
       crestSub: '',
       crestType: 'stripes',
       crestBg: '#fff',
-      logo: 'https://s.coze.cn/image/OeuSyekfsYU/',
+      logo: 'https://s.coze.cn/image/eL0YAKwhOvQ/',
       stripes: ['#fff','#000'],
       crestTextDark: true,
       players: [
@@ -1152,7 +1151,7 @@ const DATA = {
       crestSub: 'M',
       crestType: 'stripes',
       crestBg: '#0068a8',
-      logo: 'https://s.coze.cn/image/DuAUa8QoKjY/',
+      logo: 'https://s.coze.cn/image/mjeBfOOjolU/',
       stripes: ['#0068a8','#000'],
       players: [
         {name:'迭戈·米利托',pos:'前锋',years:'2009-2014',emoji:'🇦🇷',stat:'52场 30球 8助攻（三冠王赛季）'},
@@ -1202,7 +1201,7 @@ const DATA = {
       crestSub: 'M',
       crestType: 'solid',
       crestBg: '#dc052d',
-      logo: 'https://s.coze.cn/image/l-XLV2dqZLs/',
+      logo: 'https://s.coze.cn/image/W_skNgzmxBU/',
       players: [
         {name:'阿尔扬·罗本',pos:'边锋',years:'2009-2019',emoji:'🇳🇱',stat:'309场 144球'},
         {name:'罗伯特·莱万多夫斯基',pos:'中锋',years:'2014-2022',emoji:'🇵🇱',stat:'375场 344球'},
@@ -1259,7 +1258,7 @@ const DATA = {
       crestSub: 'VB',
       crestType: 'solid',
       crestBg: '#fde100',
-      logo: 'https://s.coze.cn/image/D69AzADG7zY/',
+      logo: 'https://s.coze.cn/image/0xAdQB5QgHU/',
       crestTextDark: true,
       players: [
         {name:'罗伯特·莱万多夫斯基',pos:'中锋',years:'2010-2014',emoji:'🇵🇱',stat:'187场 103球 42助攻'},
@@ -1308,7 +1307,7 @@ const DATA = {
       crestSub: 'SG',
       crestType: 'solid',
       crestBg: '#004170',
-      logo: 'https://s.coze.cn/image/G2iYE6xMaAM/',
+      logo: 'https://s.coze.cn/image/6xGnrecJ9xM/',
       players: [
         {name:'基利安·姆巴佩',pos:'前锋',years:'2018-2024',emoji:'🇫🇷',stat:'306场 255球 队史射手王'},
         {name:'内马尔',pos:'左边锋',years:'2017-2023',emoji:'🇧🇷',stat:'173场 118球'},
@@ -1364,7 +1363,7 @@ const DATA = {
       crestSub: 'M',
       crestType: 'solid',
       crestBg: '#2faee0',
-      logo: 'https://s.coze.cn/image/vRHRG2zkt50/',
+      logo: 'https://s.coze.cn/image/xF-YgHpuAhw/',
       players: [
         {name:'让-皮埃尔·帕潘',pos:'前锋',years:'1986-1992',emoji:'🇫🇷',stat:'181球 队史最佳射手'},
         {name:'迪迪埃·德罗巴',pos:'前锋',years:'2003-2004',emoji:'🇨🇮',stat:'29球（单赛季）'},
@@ -1417,7 +1416,7 @@ const DATA = {
       crestSub: 'FC',
       crestType: 'solid',
       crestBg: '#034694',
-      logo: 'https://s.coze.cn/image/eA2skFoeZJ8/',
+      logo: 'https://s.coze.cn/image/hUCc4bzXMLM/',
       players: [
         {name:'弗兰克·兰帕德',pos:'中前卫',years:'2001-2014',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'648场 211球 队史射手王'},
         {name:'迪迪埃·德罗巴',pos:'中锋',years:'2004-2012/2014-2015',emoji:'🇨🇮',stat:'381场 164球 两次英超金靴'},
@@ -1474,7 +1473,7 @@ const DATA = {
       crestType: 'stripes',
       stripes: ['#cb3524','#fff'],
       crestBg: '#cb3524',
-      logo: 'https://s.coze.cn/image/-ESaxzVRI6Y/',
+      logo: 'https://s.coze.cn/image/Oq7eXr7eDoY/',
       crestTextDark: true,
       players: [
         {name:'安托万·格列兹曼',pos:'前锋/二前锋',years:'2014-2019/2021至今',emoji:'🇫🇷',stat:'300+场 144球 队史第四射手'},
@@ -1528,7 +1527,7 @@ const DATA = {
       crestSub: '04',
       crestType: 'solid',
       crestBg: '#e32221',
-      logo: 'https://s.coze.cn/image/gXiag_yiuNU/',
+      logo: 'https://s.coze.cn/image/19l8u2AM6oM/',
       players: [
         {name:'弗洛里安·维尔茨',pos:'攻击型中场',years:'2020-2025',emoji:'🇩🇪',stat:'2023-24赛季 18球20助攻'},
         {name:'格拉尼特·扎卡',pos:'防守型中场',years:'2023-2025',emoji:'🇨🇭',stat:'从红牌机器到中场大师'},
@@ -1690,11 +1689,11 @@ function buildCrestHTML(club, large) {
   const letterColor = club.crestTextDark ? '#000' : '#fff';
   const subColor = club.crestTextDark ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.8)';
 
-  // 如果有真实图片logo，使用图片
+  // 如果有真实图片logo，使用圆形容器
   if (club.logo) {
-    return `<div class="crest ${sizeClass}">
-      <div class="crest-inner crest-logo-container" style="background:transparent;border:none;">
-        <img src="${club.logo}" alt="${club.name}" class="crest-img" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'crest-letter\\'>${club.crestLetter}</span>'">
+    return `<div class="crest ${sizeClass}" style="width:auto;height:auto;">
+      <div class="crest-logo-circle">
+        <img src="${club.logo}" alt="${club.name}" class="crest-logo-img" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'crest-letter\\'>${club.crestLetter}</span>'">
       </div>
     </div>`;
   }
@@ -1741,10 +1740,6 @@ function renderClub(clubId) {
   const league = DATA.leagues[club.league];
 
   document.getElementById('club-badge').innerHTML = buildCrestHTML(club, true);
-  document.getElementById('club-badge').style.background = 'none';
-  document.getElementById('club-badge').style.width = 'auto';
-  document.getElementById('club-badge').style.height = 'auto';
-  document.getElementById('club-badge').style.borderRadius = '0';
   document.getElementById('club-title').textContent = club.fullName;
   document.getElementById('club-title').style.color = club.colors[0];
   document.getElementById('club-meta').textContent = `${league.name} · ${club.nickname} · 成立于 ${club.founded} 年`;
