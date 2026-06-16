@@ -865,7 +865,7 @@ function navDate(dir) {
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   // Load data dynamically — dataUrl will be injected when generating the page link
-  const dataUrl = 'football_data.js';
+  const dataUrl = 'football_data.js?v=' + Date.now();
   if (dataUrl && dataUrl !== '__DATA_URL__') {
     loadDataAndRender(dataUrl);
   } else {
