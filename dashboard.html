@@ -356,10 +356,70 @@ body::after{
 .match-card:nth-child(4){animation-delay:.26s}
 .match-card:nth-child(5){animation-delay:.33s}
 .match-card:nth-child(6){animation-delay:.40s}
+
+/* ========== Top Navigation Bar ========== */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10,14,23,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 48px;
+  gap: 6px;
+}
+.top-nav a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.top-nav a:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.top-nav a.active {
+  background: rgba(96,165,250,0.15);
+  color: #60a5fa;
+}
+.top-nav .nav-icon {
+  font-size: 1rem;
+}
+.top-nav .nav-brand {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+body {
+  padding-top: 48px;
+}
 </style>
 </head>
 <body>
-<div style="background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06);padding:10px 20px;font-size:14px;"><a href="index.html" style="color:#60a5fa;text-decoration:none;">← 返回首页</a> &nbsp;|&nbsp; <a href="clubs.html" style="color:#888;text-decoration:none;">🏟️ 俱乐部图鉴</a></div>
+
+<!-- ==================== TOP NAV ==================== -->
+<nav class="top-nav">
+  <span class="nav-brand">⚽ 鱼宝足球站</span>
+  <a href="index.html"><span class="nav-icon">🏠</span>首页</a>
+  <a href="dashboard.html" class="active"><span class="nav-icon">📊</span>赛事预测</a>
+  <a href="clubs.html"><span class="nav-icon">🏟️</span>俱乐部图鉴</a>
+</nav>
 <div class="container">
   <div class="header">
     <div class="header-left">
@@ -418,7 +478,7 @@ function loadDataAndRender(dataUrl) {
 }
 
 // ===== STATE =====
-let currentDateKey = "20260614";
+let currentDateKey = "";
 let currentFilter = "all"; // "all" | "pending" | "done"
 let dateKeys = [];
 
@@ -805,7 +865,7 @@ function navDate(dir) {
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   // Load data dynamically — dataUrl will be injected when generating the page link
-  const dataUrl = 'football_data.js';
+  const dataUrl = 'football_data.js?v=' + Date.now();
   if (dataUrl && dataUrl !== '__DATA_URL__') {
     loadDataAndRender(dataUrl);
   } else {

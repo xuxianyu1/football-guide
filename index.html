@@ -15,6 +15,56 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding-top: 48px;
+    }
+    /* ========== Top Navigation Bar ========== */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10,14,23,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      height: 48px;
+      gap: 6px;
+    }
+    .top-nav a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .top-nav a:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .top-nav a.active {
+      background: rgba(96,165,250,0.15);
+      color: #60a5fa;
+    }
+    .top-nav .nav-icon {
+      font-size: 1rem;
+    }
+    .top-nav .nav-brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .container { text-align: center; padding: 40px 20px; }
     .logo { font-size: 64px; margin-bottom: 16px; }
@@ -50,6 +100,12 @@
   </style>
 </head>
 <body>
+  <nav class="top-nav">
+    <span class="nav-brand">⚽ 鱼宝足球站</span>
+    <a href="index.html" class="active"><span class="nav-icon">🏠</span>首页</a>
+    <a href="dashboard.html"><span class="nav-icon">📊</span>赛事预测</a>
+    <a href="clubs.html"><span class="nav-icon">🏟️</span>俱乐部图鉴</a>
+  </nav>
   <div class="container">
     <div class="logo">⚽</div>
     <h1>鱼宝足球站</h1>
