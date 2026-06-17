@@ -739,7 +739,7 @@ function renderRisk(m, score, level) {
   const tags = [];
   parts.forEach(p => {
     const kv = p.split('=');
-    if(kv.length===2) {
+    if(kv.length===2 && kv[0]!=='各项得分明细') {
       const c = kv[1].includes('强')?'green':kv[1].includes('无欲')?'amber':'cyan';
       tags.push({l:kv[0],v:kv[1],c});
     }
@@ -759,7 +759,7 @@ function renderRisk(m, score, level) {
         </div>
       </div>
       <div class="risk-tags">${tags.map(t=>`<span class="risk-tag ${t.c}">${t.l}: ${t.v}</span>`).join('')}</div>
-      ${detail?`<div class="risk-detail-line">得分明细: ${detail}</div>`:''}
+      ${detail?`<div class="risk-detail-line">各项得分明细: ${detail}</div>`:''}
     </div>
   </div>`;
 }
