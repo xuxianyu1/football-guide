@@ -921,7 +921,7 @@ function renderList(positionId) {
 }
 
 // ==================== BUILD SVG MARKET VALUE CHART ====================
-function buildMVChart(marketValue, position) {
+function buildMVChart(marketValue, position, transfers) {
   if (!marketValue || marketValue.length < 2) return '<p style="color:var(--text-muted);text-align:center;padding:20px;">数据不足</p>';
 
   const values = marketValue.map(v => v.valueNum);
@@ -929,8 +929,8 @@ function buildMVChart(marketValue, position) {
   const minVal = Math.min(...values);
   const range = maxVal - minVal || 1;
 
-  const W = 700, H = 260;
-  const padL = 55, padR = 20, padT = 20, padB = 40;
+  const W = 780, H = 320;
+  const padL = 55, padR = 30, padT = 30, padB = 70;
   const chartW = W - padL - padR;
   const chartH = H - padT - padB;
 
@@ -943,14 +943,28 @@ function buildMVChart(marketValue, position) {
   };
   const c = colors[position] || colors.forward;
 
+  // Build year range from market value data
+  const years = marketValue.map(v => parseInt(v.year));
+  const minYear = Math.min(...years);
+  const maxYear = Math.max(...years);
+  const yearRange = maxYear - minYear || 1;
+
+  // Map a year to x position (continuous scale)
+  function yearToX(year) {
+    return padL + ((parseInt(year) - minYear) / yearRange) * chartW;
+  }
+
   // Points
-  const n = marketValue.length;
-  const stepX = chartW / (n - 1);
-  const points = marketValue.map((mv, i) => {
-    const x = padL + i * stepX;
+  const points = marketValue.map(mv => {
+    const x = yearToX(mv.year);
     const y = padT + chartH - ((mv.valueNum - minVal) / range) * chartH * 0.85 - chartH * 0.05;
     return { x, y, ...mv };
   });
+
+  // Sort points by x for proper path
+  points.sort((a, b) => a.x - b.x);
+
+  const n = points.length;
 
   // SVG path
   const linePath = points.map((p, i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
@@ -962,17 +976,17 @@ function buildMVChart(marketValue, position) {
   for (let i = 0; i <= yTicks; i++) {
     const val = minVal + (range * i / yTicks);
     const y = padT + chartH - (i / yTicks) * chartH * 0.85 - chartH * 0.05;
-    yAxisHtml += `<text x="${padL - 8}" y="${y + 4}" text-anchor="end" fill="#6b7280" font-size="11">${Math.round(val)}</text>`;
+    yAxisHtml += `<text x="${padL - 8}" y="${y + 4}" text-anchor="end" fill="#6b7280" font-size="11">${Math.round(val)}M</text>`;
     yAxisHtml += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#2d3748" stroke-width="0.5" stroke-dasharray="4,4"/>`;
   }
 
-  // X-axis labels
+  // X-axis labels (from market value data points)
   let xAxisHtml = '';
   points.forEach(p => {
-    xAxisHtml += `<text x="${p.x}" y="${padT + chartH + 20}" text-anchor="middle" fill="#6b7280" font-size="11">${p.year}</text>`;
+    xAxisHtml += `<text x="${p.x}" y="${padT + chartH + 18}" text-anchor="middle" fill="#6b7280" font-size="11">${p.year}</text>`;
   });
 
-  // Dots and hover areas
+  // Dots and value labels on data points
   let dotsHtml = '';
   points.forEach((p, i) => {
     dotsHtml += `
@@ -982,8 +996,50 @@ function buildMVChart(marketValue, position) {
     `;
   });
 
+  // Transfer event markers on the chart
+  let transferHtml = '';
+  if (transfers && transfers.length > 0) {
+    transfers.forEach((t, idx) => {
+      const tYear = parseInt(t.year);
+      if (tYear < minYear || tYear > maxYear) return;
+
+      const tx = yearToX(t.year);
+
+      // Dashed vertical line at transfer year
+      transferHtml += `<line x1="${tx}" y1="${padT}" x2="${tx}" y2="${padT + chartH}" stroke="#f87171" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>`;
+
+      // Transfer marker dot on x-axis
+      transferHtml += `<circle cx="${tx}" cy="${padT + chartH}" r="4" fill="#f87171" stroke="#0a0e17" stroke-width="1.5"/>`;
+
+      // Transfer label below x-axis (alternating above/below to avoid overlap)
+      const isEven = idx % 2 === 0;
+      const labelY = padT + chartH + (isEven ? 48 : 62);
+
+      // Arrow icon
+      transferHtml += `<text x="${tx}" y="${labelY - 14}" text-anchor="middle" fill="#f87171" font-size="12">🔄</text>`;
+
+      // Club names: from → to (truncate if too long)
+      const fromName = t.from.length > 8 ? t.from.substring(0, 7) + '…' : t.from;
+      const toName = t.to.length > 8 ? t.to.substring(0, 7) + '…' : t.to;
+      const label = `${fromName}→${toName}`;
+      transferHtml += `<text x="${tx}" y="${labelY}" text-anchor="middle" fill="#f87171" font-size="9" font-weight="600">${label}</text>`;
+
+      // Fee
+      const feeY = labelY + 13;
+      const feeText = t.fee.length > 10 ? t.fee.substring(0, 9) + '…' : t.fee;
+      transferHtml += `<text x="${tx}" y="${feeY}" text-anchor="middle" fill="#9ca3af" font-size="8">${feeText}</text>`;
+
+      // Club logos if available
+      if (t.fromLogo) {
+        const logoY = labelY + 24;
+        transferHtml += `<image x="${tx - 22}" y="${feeY}" width="14" height="14" href="${t.fromLogo}" preserveAspectRatio="xMidYMid meet"/>`;
+        transferHtml += `<image x="${tx + 8}" y="${feeY}" width="14" height="14" href="${t.toLogo}" preserveAspectRatio="xMidYMid meet"/>`;
+      }
+    });
+  }
+
   return `
-    <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+    <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;" xmlns:xlink="http://www.w3.org/1999/xlink">
       <defs>
         <linearGradient id="mvGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="${c.fill1}"/>
@@ -999,6 +1055,7 @@ function buildMVChart(marketValue, position) {
       <path d="${areaPath}" fill="url(#mvGrad)"/>
       <path d="${linePath}" fill="none" stroke="${c.line}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
       ${dotsHtml}
+      ${transferHtml}
     </svg>
   `;
 }
@@ -1083,7 +1140,7 @@ function renderDetail(playerId) {
   `;
 
   // Market value SVG chart
-  document.getElementById('mv-chart-container').innerHTML = buildMVChart(p.marketValue, p.position);
+  document.getElementById('mv-chart-container').innerHTML = buildMVChart(p.marketValue, p.position, p.transfers);
 
   // Show/hide sections
   document.getElementById('section-market-value').style.display =
