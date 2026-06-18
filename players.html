@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⭐ 五大联赛球星图鉴</title>
+<style>
+/* ========== CSS Variables & Reset ========== */
+:root {
+  --bg-primary: #0a0e17;
+  --bg-secondary: #111827;
+  --bg-card: #1a2235;
+  --bg-card-hover: #1f2a40;
+  --text-primary: #f0f2f5;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --border-color: #2d3748;
+  --transition-speed: 0.35s;
+  --accent-blue: #60a5fa;
+  --accent-blue-dim: rgba(96,165,250,0.15);
+  --accent-green: #34d399;
+  --accent-green-dim: rgba(52,211,153,0.15);
+  --accent-amber: #fbbf24;
+  --accent-amber-dim: rgba(251,191,36,0.15);
+  --accent-purple: #a78bfa;
+  --accent-purple-dim: rgba(167,139,250,0.15);
+  --accent-red: #f87171;
+  --accent-red-dim: rgba(248,113,113,0.15);
+  --accent-cyan: #22d3ee;
+  --accent-cyan-dim: rgba(34,211,238,0.15);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-top: 48px;
+}
+
+/* ========== Page Transitions ========== */
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+  min-height: calc(100vh - 48px);
+}
+.page.active { display: block; }
+.page.visible { opacity: 1; transform: translateY(0); }
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: #3a4560; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4a5580; }
+
+/* ========== Top Navigation Bar ========== */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(10,14,23,0.92); backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; padding: 0 20px; height: 48px; gap: 6px;
+  overflow-x: auto;
+}
+.top-nav a {
+  color: #9ca3af; text-decoration: none; font-size: 0.85rem;
+  padding: 8px 14px; border-radius: 8px; transition: all 0.2s ease;
+  white-space: nowrap; display: flex; align-items: center; gap: 5px;
+}
+.top-nav a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.top-nav a.active { background: rgba(96,165,250,0.15); color: #60a5fa; }
+.top-nav .nav-icon { font-size: 1rem; }
+.top-nav .nav-brand {
+  font-weight: 700; font-size: 0.95rem; color: #fff;
+  margin-right: 8px; display: flex; align-items: center; gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ========== Home Page ========== */
+.home-header {
+  text-align: center; padding: 60px 20px 40px;
+  background: linear-gradient(135deg, #0a0e17 0%, #1a1a3e 50%, #0a0e17 100%);
+  position: relative; overflow: hidden;
+}
+.home-header::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(96,165,250,0.06) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(167,139,250,0.06) 0%, transparent 50%);
+  animation: bgPulse 8s ease-in-out infinite alternate;
+}
+@keyframes bgPulse {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.1) rotate(3deg); }
+}
+.home-title {
+  font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; position: relative; z-index: 1;
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 50%, #c7d2fe 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.home-subtitle {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem); color: var(--text-secondary);
+  margin-top: 12px; position: relative; z-index: 1;
+}
+
+/* Position Grid */
+.position-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px; padding: 32px 24px; max-width: 1200px; margin: 0 auto;
+}
+.position-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 16px; padding: 28px 24px; cursor: pointer;
+  transition: all var(--transition-speed) ease; position: relative; overflow: hidden;
+}
+.position-card:hover {
+  background: var(--bg-card-hover); border-color: rgba(255,255,255,0.12);
+  transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+.position-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 16px 16px 0 0; opacity: 0; transition: opacity var(--transition-speed);
+}
+.position-card:hover::after { opacity: 1; }
+.position-card[data-pos="forward"]::after { background: linear-gradient(90deg, var(--accent-amber), var(--accent-red)); }
+.position-card[data-pos="midfielder"]::after { background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); }
+.position-card[data-pos="defender"]::after { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
+.position-card[data-pos="goalkeeper"]::after { background: linear-gradient(90deg, var(--accent-amber), var(--accent-green)); }
+
+.position-emoji { font-size: 2.8rem; margin-bottom: 14px; }
+.position-name { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.position-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px; }
+.position-count {
+  font-size: 0.8rem; color: var(--text-secondary);
+  background: rgba(255,255,255,0.05); display: inline-block;
+  padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border-color);
+}
+
+/* Footer */
+.page-footer {
+  text-align: center; padding: 28px 20px; color: var(--text-muted);
+  font-size: 0.85rem; border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+}
+
+/* ========== Position List Page ========== */
+.list-header {
+  padding: 40px 24px 20px; max-width: 1200px; margin: 0 auto;
+}
+.back-btn {
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border-color);
+  color: var(--text-secondary); padding: 8px 18px; border-radius: 10px;
+  cursor: pointer; font-size: 0.9rem; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px;
+}
+.back-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); border-color: rgba(255,255,255,0.15); }
+.list-title {
+  font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800;
+  display: flex; align-items: center; gap: 12px;
+}
+.list-title .emoji { font-size: 1.6em; }
+
+/* Player Grid */
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px; padding: 12px 24px 40px; max-width: 1200px; margin: 0 auto;
+}
+.player-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 14px; padding: 22px 20px; cursor: pointer;
+  transition: all var(--transition-speed) ease; position: relative; overflow: hidden;
+}
+.player-card:hover {
+  background: var(--bg-card-hover); border-color: rgba(255,255,255,0.12);
+  transform: translateY(-3px); box-shadow: 0 10px 36px rgba(0,0,0,0.35);
+}
+.player-card-top {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 14px;
+}
+.player-avatar {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card-hover));
+  border: 2px solid var(--border-color); display: flex; align-items: center;
+  justify-content: center; font-size: 1.6rem; flex-shrink: 0;
+  overflow: hidden;
+}
+.player-avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+.player-card-info { min-width: 0; }
+.player-card-name {
+  font-size: 1.15rem; font-weight: 700; color: var(--text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: flex; align-items: center; gap: 6px;
+}
+.player-card-flag { font-size: 1.1rem; }
+.player-card-eng {
+  font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.player-card-club {
+  font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;
+  display: flex; align-items: center; gap: 4px;
+}
+.player-card-club .current-badge {
+  background: var(--accent-green-dim); color: var(--accent-green);
+  padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; font-weight: 600;
+}
+.player-card-tags {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;
+}
+.player-tag {
+  font-size: 0.72rem; padding: 3px 10px; border-radius: 6px;
+  border: 1px solid var(--border-color); background: rgba(255,255,255,0.03);
+  color: var(--text-secondary); white-space: nowrap;
+}
+.player-tag.gold {
+  background: var(--accent-amber-dim); color: var(--accent-amber);
+  border-color: rgba(251,191,36,0.25);
+}
+.player-tag.blue {
+  background: var(--accent-blue-dim); color: var(--accent-blue);
+  border-color: rgba(96,165,250,0.25);
+}
+.player-tag.purple {
+  background: var(--accent-purple-dim); color: var(--accent-purple);
+  border-color: rgba(167,139,250,0.25);
+}
+
+/* ========== Player Detail Page ========== */
+.detail-container {
+  max-width: 800px; margin: 0 auto; padding: 20px 24px 60px;
+}
+.detail-back {
+  margin-bottom: 24px;
+}
+.detail-hero {
+  text-align: center; padding: 40px 20px 32px;
+  position: relative;
+}
+.detail-avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--bg-secondary), #2a3550);
+  border: 3px solid var(--border-color); margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; overflow: hidden;
+  box-shadow: 0 0 40px rgba(96,165,250,0.1);
+}
+.detail-avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+.detail-name {
+  font-size: 2rem; font-weight: 800; display: flex; align-items: center;
+  justify-content: center; gap: 10px;
+}
+.detail-name .flag { font-size: 1.5rem; }
+.detail-eng-name { font-size: 0.95rem; color: var(--text-muted); margin-top: 4px; }
+
+/* Info Grid */
+.detail-info-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px; margin: 28px 0;
+}
+.detail-info-item {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 10px; padding: 14px 16px;
+}
+.detail-info-label {
+  font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 6px;
+}
+.detail-info-value { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+
+/* Tags in detail */
+.detail-tags {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; justify-content: center;
+}
+.detail-tag {
+  font-size: 0.82rem; padding: 6px 16px; border-radius: 20px; font-weight: 600;
+}
+.detail-tag.gold { background: var(--accent-amber-dim); color: var(--accent-amber); border: 1px solid rgba(251,191,36,0.3); }
+.detail-tag.blue { background: var(--accent-blue-dim); color: var(--accent-blue); border: 1px solid rgba(96,165,250,0.3); }
+.detail-tag.purple { background: var(--accent-purple-dim); color: var(--accent-purple); border: 1px solid rgba(167,139,250,0.3); }
+.detail-tag.green { background: var(--accent-green-dim); color: var(--accent-green); border: 1px solid rgba(52,211,153,0.3); }
+
+/* Section */
+.detail-section {
+  margin: 32px 0;
+}
+.detail-section-title {
+  font-size: 1.1rem; font-weight: 700; color: var(--text-primary);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border-color);
+}
+.detail-section-title .icon { font-size: 1.2rem; }
+
+/* Market Value Timeline */
+.mv-timeline {
+  display: flex; flex-direction: column; gap: 0;
+}
+.mv-item {
+  display: flex; align-items: stretch; gap: 16px; position: relative;
+}
+.mv-line {
+  width: 2px; background: var(--border-color); position: relative; flex-shrink: 0;
+}
+.mv-dot {
+  width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent-blue);
+  background: var(--bg-primary); position: absolute; top: 16px; left: -6px; z-index: 1;
+}
+.mv-item:last-child .mv-line { background: transparent; }
+.mv-content {
+  flex: 1; background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
+  transition: all 0.2s;
+}
+.mv-content:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); }
+.mv-year { font-size: 0.78rem; color: var(--accent-blue); font-weight: 600; }
+.mv-value { font-size: 1.15rem; font-weight: 700; color: var(--accent-amber); margin: 4px 0; }
+.mv-note { font-size: 0.82rem; color: var(--text-secondary); }
+
+/* Value bar visual */
+.mv-bar-wrap {
+  margin-top: 8px; height: 6px; background: rgba(255,255,255,0.06);
+  border-radius: 3px; overflow: hidden;
+}
+.mv-bar {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-amber));
+  transition: width 0.8s ease;
+}
+
+/* Transfer Timeline */
+.transfer-timeline {
+  display: flex; flex-direction: column; gap: 0;
+}
+.transfer-item {
+  display: flex; align-items: stretch; gap: 16px; position: relative;
+}
+.transfer-line {
+  width: 2px; background: var(--border-color); position: relative; flex-shrink: 0;
+}
+.transfer-dot {
+  width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent-green);
+  background: var(--bg-primary); position: absolute; top: 16px; left: -6px; z-index: 1;
+}
+.transfer-item:last-child .transfer-line { background: transparent; }
+.transfer-content {
+  flex: 1; background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
+  transition: all 0.2s;
+}
+.transfer-content:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); }
+.transfer-year { font-size: 0.78rem; color: var(--accent-green); font-weight: 600; }
+.transfer-route {
+  font-size: 0.95rem; color: var(--text-primary); margin: 4px 0;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.transfer-arrow { color: var(--accent-amber); font-size: 1.1rem; }
+.transfer-fee {
+  font-size: 0.82rem; color: var(--accent-amber); font-weight: 600;
+  background: var(--accent-amber-dim); padding: 2px 10px; border-radius: 6px;
+  display: inline-block;
+}
+
+/* Milestones */
+.milestone-list {
+  display: flex; flex-direction: column; gap: 0;
+}
+.milestone-item {
+  display: flex; align-items: stretch; gap: 16px; position: relative;
+}
+.milestone-line {
+  width: 2px; background: var(--border-color); position: relative; flex-shrink: 0;
+}
+.milestone-dot {
+  width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent-purple);
+  background: var(--bg-primary); position: absolute; top: 16px; left: -6px; z-index: 1;
+}
+.milestone-item:last-child .milestone-line { background: transparent; }
+.milestone-content {
+  flex: 1; background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
+  transition: all 0.2s;
+}
+.milestone-content:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); }
+.milestone-year { font-size: 0.78rem; color: var(--accent-purple); font-weight: 600; }
+.milestone-event { font-size: 0.95rem; color: var(--text-primary); margin-top: 4px; }
+
+/* Highlights */
+.highlight-list { display: flex; flex-direction: column; gap: 14px; }
+.highlight-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 12px; padding: 20px 22px; position: relative; overflow: hidden;
+  transition: all 0.2s;
+}
+.highlight-card:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); }
+.highlight-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent-amber), var(--accent-red));
+}
+.highlight-match {
+  font-size: 1rem; font-weight: 700; color: var(--text-primary);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.highlight-result {
+  font-size: 0.82rem; padding: 2px 10px; border-radius: 6px;
+  background: var(--accent-green-dim); color: var(--accent-green);
+  font-weight: 600;
+}
+.highlight-opponent {
+  font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;
+}
+.highlight-desc {
+  font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7;
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color);
+}
+
+/* Back to list button at bottom */
+.detail-footer {
+  text-align: center; margin-top: 40px;
+}
+.detail-footer .back-btn {
+  font-size: 0.95rem; padding: 10px 28px;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 640px) {
+  .position-grid { grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px 16px; }
+  .player-grid { grid-template-columns: 1fr; padding: 12px 16px 32px; }
+  .detail-container { padding: 16px 16px 40px; }
+  .detail-info-grid { grid-template-columns: 1fr 1fr; }
+  .detail-name { font-size: 1.5rem; }
+  .detail-avatar { width: 90px; height: 90px; font-size: 2.2rem; }
+  .top-nav { padding: 0 12px; gap: 2px; }
+  .top-nav a { padding: 6px 10px; font-size: 0.8rem; }
+  .home-header { padding: 40px 16px 28px; }
+  .list-header { padding: 28px 16px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== TOP NAV ==================== -->
+<nav class="top-nav">
+  <span class="nav-brand">⚽ 鱼宝足球站</span>
+  <a href="index.html"><span class="nav-icon">🏠</span>首页</a>
+  <a href="dashboard.html"><span class="nav-icon">📊</span>赛事预测</a>
+  <a href="clubs.html"><span class="nav-icon">🏟️</span>俱乐部图鉴</a>
+  <a href="players.html" class="active"><span class="nav-icon">⭐</span>球星图鉴</a>
+</nav>
+
+<!-- ==================== HOME PAGE (Layer 1) ==================== -->
+<div id="page-home" class="page active">
+  <header class="home-header">
+    <h1 class="home-title">⭐ 五大联赛球星图鉴</h1>
+    <p class="home-subtitle">每日更新，带你走近传奇球星</p>
+  </header>
+  <main>
+    <div class="position-grid" id="position-grid"></div>
+  </main>
+  <footer class="page-footer">
+    五大联赛球星图鉴 · 数据每日更新 · 共收录 <span id="total-players">0</span> 位球星
+  </footer>
+</div>
+
+<!-- ==================== POSITION LIST PAGE (Layer 2) ==================== -->
+<div id="page-list" class="page">
+  <header class="list-header">
+    <button class="back-btn" onclick="navigateTo('home')">← 首页</button>
+    <h1 class="list-title" id="list-title"></h1>
+  </header>
+  <main>
+    <div class="player-grid" id="player-grid"></div>
+  </main>
+</div>
+
+<!-- ==================== PLAYER DETAIL PAGE (Layer 3) ==================== -->
+<div id="page-detail" class="page">
+  <div class="detail-container">
+    <div class="detail-back">
+      <button class="back-btn" id="detail-back-btn">← 返回列表</button>
+    </div>
+    <div class="detail-hero">
+      <div class="detail-avatar" id="detail-avatar"></div>
+      <h1 class="detail-name" id="detail-name"></h1>
+      <div class="detail-eng-name" id="detail-eng-name"></div>
+      <div class="detail-tags" id="detail-tags"></div>
+    </div>
+    <div class="detail-info-grid" id="detail-info-grid"></div>
+
+    <!-- 身价变化 -->
+    <div class="detail-section" id="section-market-value">
+      <h2 class="detail-section-title"><span class="icon">📈</span>身价变化</h2>
+      <div class="mv-timeline" id="mv-timeline"></div>
+    </div>
+
+    <!-- 转会历程 -->
+    <div class="detail-section" id="section-transfers">
+      <h2 class="detail-section-title"><span class="icon">🔄</span>转会历程</h2>
+      <div class="transfer-timeline" id="transfer-timeline"></div>
+    </div>
+
+    <!-- 重大时间节点 -->
+    <div class="detail-section" id="section-milestones">
+      <h2 class="detail-section-title"><span class="icon">🏆</span>重大时间节点</h2>
+      <div class="milestone-list" id="milestone-list"></div>
+    </div>
+
+    <!-- 精彩发挥 -->
+    <div class="detail-section" id="section-highlights">
+      <h2 class="detail-section-title"><span class="icon">🔥</span>精彩发挥</h2>
+      <div class="highlight-list" id="highlight-list"></div>
+    </div>
+
+    <div class="detail-footer">
+      <button class="back-btn" id="detail-back-btn2">← 返回列表</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== DATA ====================
+const DATA = {
+  positions: [
+    { id: 'forward', name: '前锋', emoji: '⚡', desc: '锋线杀手' },
+    { id: 'midfielder', name: '中场', emoji: '🎯', desc: '中场大师' },
+    { id: 'defender', name: '后卫', emoji: '🛡️', desc: '铁血后卫' },
+    { id: 'goalkeeper', name: '门将', emoji: '🧤', desc: '最后一道防线' }
+  ],
+  players: {
+    'messi': {
+      id: 'messi',
+      name: '梅西',
+      englishName: 'Lionel Messi',
+      nationality: '阿根廷',
+      flag: '🇦🇷',
+      position: 'forward',
+      positionName: '前锋',
+      birthDate: '1987年6月24日',
+      height: '170cm',
+      clubs: ['巴塞罗那', '巴黎圣日耳曼', '迈阿密国际'],
+      currentClub: '迈阿密国际',
+      tags: ['8座金球奖', '世界杯冠军', '欧冠4冠'],
+      tagTypes: ['gold', 'blue', 'purple'],
+      photo: '',
+      avatarEmoji: '🔟',
+      marketValue: [
+        { year: '2006', value: '6000万欧', valueNum: 60, note: '崭露头角' },
+        { year: '2010', value: '1亿欧', valueNum: 100, note: '金球奖首冠' },
+        { year: '2018', value: '1.8亿欧', valueNum: 180, note: '巅峰身价' },
+        { year: '2021', value: '6000万欧', valueNum: 60, note: '含泪离队巴萨' },
+        { year: '2023', value: '3500万欧', valueNum: 35, note: '转战美职联' }
+      ],
+      transfers: [
+        { year: '2000', from: '纽维尔老男孩青训', to: '巴塞罗那拉玛西亚', fee: '免费' },
+        { year: '2021', from: '巴塞罗那', to: '巴黎圣日耳曼', fee: '自由转会' },
+        { year: '2023', from: '巴黎圣日耳曼', to: '迈阿密国际', fee: '自由转会' }
+      ],
+      milestones: [
+        { year: '2004', event: '巴萨一线队首秀' },
+        { year: '2009', event: '首座金球奖' },
+        { year: '2012', event: '年度91球吉尼斯纪录' },
+        { year: '2015', event: '欧冠三冠王核心' },
+        { year: '2022', event: '世界杯冠军，封王加冕' }
+      ],
+      highlights: [
+        { match: '2011欧冠决赛', opponent: '曼联', result: '3-1', description: '梅开二度，尤其是第二球停球过人射门的连贯动作堪称艺术品，被球迷誉为欧冠决赛史上最精彩的个人表演之一' },
+        { match: '2022世界杯半决赛', opponent: '克罗地亚', result: '3-0', description: '点球破门+助攻阿尔瓦雷斯，34岁的梅西统治全场，带领阿根廷时隔8年重返世界杯决赛' },
+        { match: '2022世界杯决赛', opponent: '法国', result: '3-3(点球4-2)', description: '加时赛关键进球，点球大战稳稳命中，率队夺冠，完成职业生涯最伟大的救赎' }
+      ]
+    },
+    'ronaldo': {
+      id: 'ronaldo',
+      name: 'C罗',
+      englishName: 'Cristiano Ronaldo',
+      nationality: '葡萄牙',
+      flag: '🇵🇹',
+      position: 'forward',
+      positionName: '前锋',
+      birthDate: '1985年2月5日',
+      height: '187cm',
+      clubs: ['里斯本竞技', '曼联', '皇家马德里', '尤文图斯', '曼联', '利雅得胜利'],
+      currentClub: '利雅得胜利',
+      tags: ['5座金球奖', '欧冠5冠', '历史射手王'],
+      tagTypes: ['gold', 'blue', 'purple'],
+      photo: '',
+      avatarEmoji: '7️⃣',
+      marketValue: [
+        { year: '2004', value: '2000万欧', valueNum: 20, note: '曼联新星' },
+        { year: '2009', value: '9000万欧', valueNum: 90, note: '天价转投皇马' },
+        { year: '2014', value: '1.2亿欧', valueNum: 120, note: '金球奖加身' },
+        { year: '2018', value: '1亿欧', valueNum: 100, note: '转战尤文' },
+        { year: '2021', value: '4500万欧', valueNum: 45, note: '回归曼联' },
+        { year: '2023', value: '1500万欧', valueNum: 15, note: '远赴沙特' }
+      ],
+      transfers: [
+        { year: '2003', from: '里斯本竞技', to: '曼联', fee: '1900万欧' },
+        { year: '2009', from: '曼联', to: '皇家马德里', fee: '9400万欧' },
+        { year: '2018', from: '皇家马德里', to: '尤文图斯', fee: '1.17亿欧' },
+        { year: '2021', from: '尤文图斯', to: '曼联', fee: '1500万欧' },
+        { year: '2023', from: '曼联', to: '利雅得胜利', fee: '自由转会' }
+      ],
+      milestones: [
+        { year: '2003', event: '曼联首秀' },
+        { year: '2008', event: '首座金球奖+欧冠冠军' },
+        { year: '2014', event: '欧冠单赛季17球纪录' },
+        { year: '2016', event: '率葡萄牙夺得欧洲杯' },
+        { year: '2018', event: '欧冠三连冠功臣' },
+        { year: '2023', event: '职业足球历史射手王' }
+      ],
+      highlights: [
+        { match: '2008欧冠决赛', opponent: '切尔西', result: '1-1(点球6-5)', description: '头球先拔头筹，虽然点球大战中罚失，但最终随队夺冠，收获首座欧冠+首座金球奖' },
+        { match: '2018欧冠1/4决赛首回合', opponent: '尤文图斯', result: '3-0', description: '倒挂金钩破门震惊全场，连尤文球迷都起立鼓掌，被欧足联评为欧冠历史最佳进球' },
+        { match: '2018世界杯小组赛', opponent: '西班牙', result: '3-3', description: '帽子戏法+最后时刻任意球绝平，单骑救主一人扛起葡萄牙，上演世界杯经典个人秀' }
+      ]
+    }
+  }
+};
+
+// ==================== STATE ====================
+let currentView = 'home'; // 'home' | 'list' | 'detail'
+let currentPosition = null;
+let currentPlayer = null;
+
+// ==================== NAVIGATION ====================
+function navigateTo(view, data) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('visible');
+    setTimeout(() => p.classList.remove('active'), 350);
+  });
+
+  setTimeout(() => {
+    if (view === 'home') {
+      currentView = 'home';
+      renderHome();
+      showPage('page-home');
+      window.scrollTo(0, 0);
+    } else if (view === 'list') {
+      currentView = 'list';
+      currentPosition = data;
+      renderList(data);
+      showPage('page-list');
+      window.scrollTo(0, 0);
+    } else if (view === 'detail') {
+      currentView = 'detail';
+      currentPlayer = data;
+      renderDetail(data);
+      showPage('page-detail');
+      window.scrollTo(0, 0);
+    }
+  }, 100);
+}
+
+function showPage(id) {
+  const page = document.getElementById(id);
+  page.classList.add('active');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      page.classList.add('visible');
+    });
+  });
+}
+
+// ==================== RENDER HOME ====================
+function renderHome() {
+  const grid = document.getElementById('position-grid');
+  const playerList = Object.values(DATA.players);
+  let totalCount = playerList.length;
+
+  grid.innerHTML = DATA.positions.map(pos => {
+    const count = playerList.filter(p => p.position === pos.id).length;
+    return `
+      <div class="position-card" data-pos="${pos.id}" onclick="navigateTo('list','${pos.id}')">
+        <div class="position-emoji">${pos.emoji}</div>
+        <div class="position-name">${pos.name}</div>
+        <div class="position-desc">${pos.desc}</div>
+        <div class="position-count">${count} 位球星</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('total-players').textContent = totalCount;
+}
+
+// ==================== RENDER LIST ====================
+function renderList(positionId) {
+  const pos = DATA.positions.find(p => p.id === positionId);
+  const players = Object.values(DATA.players).filter(p => p.position === positionId);
+
+  document.getElementById('list-title').innerHTML =
+    `<span class="emoji">${pos.emoji}</span>${pos.name}`;
+
+  const grid = document.getElementById('player-grid');
+  grid.innerHTML = players.map(p => {
+    const tagHtml = p.tags.map((t, i) => {
+      const cls = p.tagTypes && p.tagTypes[i] ? p.tagTypes[i] : '';
+      return `<span class="player-tag ${cls}">${t}</span>`;
+    }).join('');
+
+    return `
+      <div class="player-card" onclick="navigateTo('detail','${p.id}')">
+        <div class="player-card-top">
+          <div class="player-avatar">${p.photo ? `<img src="${p.photo}" alt="${p.name}">` : p.avatarEmoji || '⚽'}</div>
+          <div class="player-card-info">
+            <div class="player-card-name">
+              <span class="player-card-flag">${p.flag}</span>${p.name}
+            </div>
+            <div class="player-card-eng">${p.englishName}</div>
+            <div class="player-card-club">
+              ${p.currentClub} <span class="current-badge">现役</span>
+            </div>
+          </div>
+        </div>
+        <div class="player-card-tags">${tagHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  if (players.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted);">
+        <div style="font-size:3rem;margin-bottom:12px;">🚧</div>
+        <div>暂无${pos.name}球员数据，敬请期待</div>
+      </div>
+    `;
+  }
+}
+
+// ==================== RENDER DETAIL ====================
+function renderDetail(playerId) {
+  const p = DATA.players[playerId];
+  if (!p) return;
+
+  // Back button
+  document.getElementById('detail-back-btn').onclick = () => navigateTo('list', p.position);
+  document.getElementById('detail-back-btn2').onclick = () => navigateTo('list', p.position);
+
+  // Avatar
+  document.getElementById('detail-avatar').innerHTML =
+    p.photo ? `<img src="${p.photo}" alt="${p.name}">` : (p.avatarEmoji || '⚽');
+
+  // Name
+  document.getElementById('detail-name').innerHTML =
+    `<span class="flag">${p.flag}</span>${p.name}`;
+  document.getElementById('detail-eng-name').textContent = p.englishName;
+
+  // Tags
+  document.getElementById('detail-tags').innerHTML = p.tags.map((t, i) => {
+    const cls = p.tagTypes && p.tagTypes[i] ? p.tagTypes[i] : 'blue';
+    return `<span class="detail-tag ${cls}">${t}</span>`;
+  }).join('');
+
+  // Info grid
+  document.getElementById('detail-info-grid').innerHTML = `
+    <div class="detail-info-item">
+      <div class="detail-info-label">国籍</div>
+      <div class="detail-info-value">${p.flag} ${p.nationality}</div>
+    </div>
+    <div class="detail-info-item">
+      <div class="detail-info-label">位置</div>
+      <div class="detail-info-value">${p.positionName}</div>
+    </div>
+    <div class="detail-info-item">
+      <div class="detail-info-label">出生日期</div>
+      <div class="detail-info-value">${p.birthDate}</div>
+    </div>
+    <div class="detail-info-item">
+      <div class="detail-info-label">身高</div>
+      <div class="detail-info-value">${p.height}</div>
+    </div>
+    <div class="detail-info-item">
+      <div class="detail-info-label">效力俱乐部</div>
+      <div class="detail-info-value">${p.clubs.join(' → ')}</div>
+    </div>
+    <div class="detail-info-item">
+      <div class="detail-info-label">当前俱乐部</div>
+      <div class="detail-info-value" style="color:var(--accent-green)">${p.currentClub}</div>
+    </div>
+  `;
+
+  // Market value
+  const maxVal = Math.max(...p.marketValue.map(v => v.valueNum));
+  document.getElementById('mv-timeline').innerHTML = p.marketValue.map(mv => `
+    <div class="mv-item">
+      <div class="mv-line"><div class="mv-dot"></div></div>
+      <div class="mv-content">
+        <div class="mv-year">${mv.year}年</div>
+        <div class="mv-value">${mv.value}</div>
+        <div class="mv-note">${mv.note}</div>
+        <div class="mv-bar-wrap">
+          <div class="mv-bar" style="width:${Math.round((mv.valueNum / maxVal) * 100)}%"></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Show/hide sections
+  document.getElementById('section-market-value').style.display =
+    p.marketValue && p.marketValue.length ? '' : 'none';
+  document.getElementById('section-transfers').style.display =
+    p.transfers && p.transfers.length ? '' : 'none';
+  document.getElementById('section-milestones').style.display =
+    p.milestones && p.milestones.length ? '' : 'none';
+  document.getElementById('section-highlights').style.display =
+    p.highlights && p.highlights.length ? '' : 'none';
+
+  // Transfers
+  if (p.transfers && p.transfers.length) {
+    document.getElementById('transfer-timeline').innerHTML = p.transfers.map(t => `
+      <div class="transfer-item">
+        <div class="transfer-line"><div class="transfer-dot"></div></div>
+        <div class="transfer-content">
+          <div class="transfer-year">${t.year}年</div>
+          <div class="transfer-route">
+            ${t.from} <span class="transfer-arrow">→</span> ${t.to}
+          </div>
+          <span class="transfer-fee">${t.fee}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Milestones
+  if (p.milestones && p.milestones.length) {
+    document.getElementById('milestone-list').innerHTML = p.milestones.map(m => `
+      <div class="milestone-item">
+        <div class="milestone-line"><div class="milestone-dot"></div></div>
+        <div class="milestone-content">
+          <div class="milestone-year">${m.year}年</div>
+          <div class="milestone-event">${m.event}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Highlights
+  if (p.highlights && p.highlights.length) {
+    document.getElementById('highlight-list').innerHTML = p.highlights.map(h => `
+      <div class="highlight-card">
+        <div class="highlight-match">
+          ${h.match} <span class="highlight-result">${h.result}</span>
+        </div>
+        <div class="highlight-opponent">对手：${h.opponent}</div>
+        <div class="highlight-desc">${h.description}</div>
+      </div>
+    `).join('');
+  }
+}
+
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', function() {
+  navigateTo('home');
+});
+</script>
+</body>
+</html>
