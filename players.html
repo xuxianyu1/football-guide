@@ -631,32 +631,34 @@ let currentPlayer = null;
 
 // ==================== NAVIGATION ====================
 function navigateTo(view, data) {
-  // Hide all pages
+  // Determine target page id
+  const targetId = view === 'home' ? 'page-home' : view === 'list' ? 'page-list' : 'page-detail';
+
+  // Hide all pages EXCEPT the target (no race condition)
   document.querySelectorAll('.page').forEach(p => {
+    if (p.id === targetId) return;
     p.classList.remove('visible');
     setTimeout(() => p.classList.remove('active'), 350);
   });
 
-  setTimeout(() => {
-    if (view === 'home') {
-      currentView = 'home';
-      renderHome();
-      showPage('page-home');
-      window.scrollTo(0, 0);
-    } else if (view === 'list') {
-      currentView = 'list';
-      currentPosition = data;
-      renderList(data);
-      showPage('page-list');
-      window.scrollTo(0, 0);
-    } else if (view === 'detail') {
-      currentView = 'detail';
-      currentPlayer = data;
-      renderDetail(data);
-      showPage('page-detail');
-      window.scrollTo(0, 0);
-    }
-  }, 100);
+  if (view === 'home') {
+    currentView = 'home';
+    renderHome();
+    showPage('page-home');
+    window.scrollTo(0, 0);
+  } else if (view === 'list') {
+    currentView = 'list';
+    currentPosition = data;
+    renderList(data);
+    showPage('page-list');
+    window.scrollTo(0, 0);
+  } else if (view === 'detail') {
+    currentView = 'detail';
+    currentPlayer = data;
+    renderDetail(data);
+    showPage('page-detail');
+    window.scrollTo(0, 0);
+  }
 }
 
 function showPage(id) {
