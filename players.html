@@ -28,6 +28,23 @@
   --accent-red-dim: rgba(248,113,113,0.15);
   --accent-cyan: #22d3ee;
   --accent-cyan-dim: rgba(34,211,238,0.15);
+  /* Position theme colors */
+  --forward-primary: #fbbf24;
+  --forward-secondary: #f87171;
+  --forward-bg: rgba(251,191,36,0.08);
+  --forward-gradient: linear-gradient(135deg, #fbbf24, #f87171);
+  --midfielder-primary: #60a5fa;
+  --midfielder-secondary: #22d3ee;
+  --midfielder-bg: rgba(96,165,250,0.08);
+  --midfielder-gradient: linear-gradient(135deg, #60a5fa, #22d3ee);
+  --defender-primary: #a78bfa;
+  --defender-secondary: #818cf8;
+  --defender-bg: rgba(167,139,250,0.08);
+  --defender-gradient: linear-gradient(135deg, #a78bfa, #818cf8);
+  --goalkeeper-primary: #34d399;
+  --goalkeeper-secondary: #fbbf24;
+  --goalkeeper-bg: rgba(52,211,153,0.08);
+  --goalkeeper-gradient: linear-gradient(135deg, #34d399, #fbbf24);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -73,7 +90,7 @@ body {
   white-space: nowrap; display: flex; align-items: center; gap: 5px;
 }
 .top-nav a:hover { background: rgba(255,255,255,0.08); color: #fff; }
-.top-nav a.active { background: rgba(96,165,250,0.15); color: #60a5fa; }
+.top-nav a.active { background: rgba(251,191,36,0.15); color: #fbbf24; }
 .top-nav .nav-icon { font-size: 1rem; }
 .top-nav .nav-brand {
   font-weight: 700; font-size: 0.95rem; color: #fff;
@@ -81,7 +98,7 @@ body {
   flex-shrink: 0;
 }
 
-/* ========== Home Page ========== */
+/* ========== HOME PAGE ========== */
 .home-header {
   text-align: center; padding: 60px 20px 40px;
   background: linear-gradient(135deg, #0a0e17 0%, #1a1a3e 50%, #0a0e17 100%);
@@ -89,8 +106,8 @@ body {
 }
 .home-header::before {
   content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle at 30% 50%, rgba(96,165,250,0.06) 0%, transparent 50%),
-              radial-gradient(circle at 70% 50%, rgba(167,139,250,0.06) 0%, transparent 50%);
+  background: radial-gradient(circle at 30% 50%, rgba(251,191,36,0.06) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(248,113,113,0.06) 0%, transparent 50%);
   animation: bgPulse 8s ease-in-out infinite alternate;
 }
 @keyframes bgPulse {
@@ -99,7 +116,7 @@ body {
 }
 .home-title {
   font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; position: relative; z-index: 1;
-  background: linear-gradient(135deg, #fff 0%, #e0e7ff 50%, #c7d2fe 100%);
+  background: linear-gradient(135deg, #fff 0%, #fde68a 50%, #fbbf24 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .home-subtitle {
@@ -110,7 +127,7 @@ body {
 /* Position Grid */
 .position-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px; padding: 32px 24px; max-width: 1200px; margin: 0 auto;
 }
 .position-card {
@@ -127,10 +144,14 @@ body {
   border-radius: 16px 16px 0 0; opacity: 0; transition: opacity var(--transition-speed);
 }
 .position-card:hover::after { opacity: 1; }
-.position-card[data-pos="forward"]::after { background: linear-gradient(90deg, var(--accent-amber), var(--accent-red)); }
-.position-card[data-pos="midfielder"]::after { background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); }
-.position-card[data-pos="defender"]::after { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
-.position-card[data-pos="goalkeeper"]::after { background: linear-gradient(90deg, var(--accent-amber), var(--accent-green)); }
+.position-card[data-pos="forward"]::after { background: var(--forward-gradient); }
+.position-card[data-pos="forward"]:hover { border-color: rgba(251,191,36,0.3); }
+.position-card[data-pos="midfielder"]::after { background: var(--midfielder-gradient); }
+.position-card[data-pos="midfielder"]:hover { border-color: rgba(96,165,250,0.3); }
+.position-card[data-pos="defender"]::after { background: var(--defender-gradient); }
+.position-card[data-pos="defender"]:hover { border-color: rgba(167,139,250,0.3); }
+.position-card[data-pos="goalkeeper"]::after { background: var(--goalkeeper-gradient); }
+.position-card[data-pos="goalkeeper"]:hover { border-color: rgba(52,211,153,0.3); }
 
 .position-emoji { font-size: 2.8rem; margin-bottom: 14px; }
 .position-name { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
@@ -148,7 +169,7 @@ body {
   margin-top: 40px;
 }
 
-/* ========== Position List Page ========== */
+/* ========== POSITION LIST PAGE ========== */
 .list-header {
   padding: 40px 24px 20px; max-width: 1200px; margin: 0 auto;
 }
@@ -168,32 +189,54 @@ body {
 /* Player Grid */
 .player-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 18px; padding: 12px 24px 40px; max-width: 1200px; margin: 0 auto;
 }
 .player-card {
   background: var(--bg-card); border: 1px solid var(--border-color);
-  border-radius: 14px; padding: 22px 20px; cursor: pointer;
+  border-radius: 16px; padding: 24px; cursor: pointer;
   transition: all var(--transition-speed) ease; position: relative; overflow: hidden;
 }
 .player-card:hover {
   background: var(--bg-card-hover); border-color: rgba(255,255,255,0.12);
   transform: translateY(-3px); box-shadow: 0 10px 36px rgba(0,0,0,0.35);
 }
+.player-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  opacity: 0; transition: opacity var(--transition-speed);
+}
+.player-card:hover::before { opacity: 1; }
+.player-card[data-pos="forward"]::before { background: var(--forward-gradient); }
+.player-card[data-pos="forward"]:hover { border-color: rgba(251,191,36,0.25); }
+.player-card[data-pos="midfielder"]::before { background: var(--midfielder-gradient); }
+.player-card[data-pos="midfielder"]:hover { border-color: rgba(96,165,250,0.25); }
+.player-card[data-pos="defender"]::before { background: var(--defender-gradient); }
+.player-card[data-pos="defender"]:hover { border-color: rgba(167,139,250,0.25); }
+.player-card[data-pos="goalkeeper"]::before { background: var(--goalkeeper-gradient); }
+.player-card[data-pos="goalkeeper"]:hover { border-color: rgba(52,211,153,0.25); }
+
 .player-card-top {
   display: flex; align-items: center; gap: 16px; margin-bottom: 14px;
 }
+.player-avatar-wrap {
+  position: relative; flex-shrink: 0;
+}
 .player-avatar {
-  width: 60px; height: 60px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card-hover));
-  border: 2px solid var(--border-color); display: flex; align-items: center;
-  justify-content: center; font-size: 1.6rem; flex-shrink: 0;
-  overflow: hidden;
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 2.5px solid var(--border-color);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; overflow: hidden;
+  transition: border-color 0.3s;
 }
 .player-avatar img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  width: 100%; height: 100%; object-fit: cover;
 }
-.player-card-info { min-width: 0; }
+.player-card[data-pos="forward"] .player-avatar { border-color: rgba(251,191,36,0.5); }
+.player-card[data-pos="midfielder"] .player-avatar { border-color: rgba(96,165,250,0.5); }
+.player-card[data-pos="defender"] .player-avatar { border-color: rgba(167,139,250,0.5); }
+.player-card[data-pos="goalkeeper"] .player-avatar { border-color: rgba(52,211,153,0.5); }
+
+.player-card-info { min-width: 0; flex: 1; }
 .player-card-name {
   font-size: 1.15rem; font-weight: 700; color: var(--text-primary);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -206,7 +249,15 @@ body {
 }
 .player-card-club {
   font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;
-  display: flex; align-items: center; gap: 4px;
+  display: flex; align-items: center; gap: 6px;
+}
+.player-card-club-logo {
+  width: 20px; height: 20px; border-radius: 50%; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.08); flex-shrink: 0;
+}
+.player-card-club-logo img {
+  width: 100%; height: 100%; object-fit: cover;
 }
 .player-card-club .current-badge {
   background: var(--accent-green-dim); color: var(--accent-green);
@@ -219,6 +270,7 @@ body {
   font-size: 0.72rem; padding: 3px 10px; border-radius: 6px;
   border: 1px solid var(--border-color); background: rgba(255,255,255,0.03);
   color: var(--text-secondary); white-space: nowrap;
+  transition: all 0.2s;
 }
 .player-tag.gold {
   background: var(--accent-amber-dim); color: var(--accent-amber);
@@ -232,29 +284,68 @@ body {
   background: var(--accent-purple-dim); color: var(--accent-purple);
   border-color: rgba(167,139,250,0.25);
 }
+.player-tag.green {
+  background: var(--accent-green-dim); color: var(--accent-green);
+  border-color: rgba(52,211,153,0.25);
+}
+.player-card:hover .player-tag { border-color: rgba(255,255,255,0.12); }
 
-/* ========== Player Detail Page ========== */
+/* ========== PLAYER DETAIL PAGE ========== */
 .detail-container {
   max-width: 800px; margin: 0 auto; padding: 20px 24px 60px;
 }
 .detail-back {
   margin-bottom: 24px;
 }
+
+/* Hero Area */
 .detail-hero {
-  text-align: center; padding: 40px 20px 32px;
-  position: relative;
+  text-align: center; padding: 48px 20px 36px;
+  position: relative; border-radius: 20px; overflow: hidden;
+  margin-bottom: 8px;
+}
+.detail-hero::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0; opacity: 0.15;
+}
+.detail-hero[data-pos="forward"]::before { background: var(--forward-gradient); }
+.detail-hero[data-pos="midfielder"]::before { background: var(--midfielder-gradient); }
+.detail-hero[data-pos="defender"]::before { background: var(--defender-gradient); }
+.detail-hero[data-pos="goalkeeper"]::before { background: var(--goalkeeper-gradient); }
+
+.detail-hero-content {
+  position: relative; z-index: 1;
+}
+.detail-avatar-wrap {
+  position: relative; display: inline-block; margin-bottom: 18px;
 }
 .detail-avatar {
-  width: 120px; height: 120px; border-radius: 50%;
+  width: 130px; height: 130px; border-radius: 50%;
   background: linear-gradient(135deg, var(--bg-secondary), #2a3550);
-  border: 3px solid var(--border-color); margin: 0 auto 18px;
+  border: 3px solid var(--border-color); margin: 0 auto;
   display: flex; align-items: center; justify-content: center;
   font-size: 3rem; overflow: hidden;
-  box-shadow: 0 0 40px rgba(96,165,250,0.1);
+  box-shadow: 0 0 40px rgba(251,191,36,0.1);
+  position: relative;
 }
 .detail-avatar img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  width: 100%; height: 100%; object-fit: cover;
 }
+.detail-hero[data-pos="forward"] .detail-avatar { border-color: rgba(251,191,36,0.6); box-shadow: 0 0 40px rgba(251,191,36,0.15); }
+.detail-hero[data-pos="midfielder"] .detail-avatar { border-color: rgba(96,165,250,0.6); box-shadow: 0 0 40px rgba(96,165,250,0.15); }
+.detail-hero[data-pos="defender"] .detail-avatar { border-color: rgba(167,139,250,0.6); box-shadow: 0 0 40px rgba(167,139,250,0.15); }
+.detail-hero[data-pos="goalkeeper"] .detail-avatar { border-color: rgba(52,211,153,0.6); box-shadow: 0 0 40px rgba(52,211,153,0.15); }
+
+.detail-hero-club-logo {
+  position: absolute; bottom: 2px; right: 2px;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--bg-primary); border: 2px solid var(--border-color);
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+.detail-hero-club-logo img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
 .detail-name {
   font-size: 2rem; font-weight: 800; display: flex; align-items: center;
   justify-content: center; gap: 10px;
@@ -262,32 +353,50 @@ body {
 .detail-name .flag { font-size: 1.5rem; }
 .detail-eng-name { font-size: 0.95rem; color: var(--text-muted); margin-top: 4px; }
 
-/* Info Grid */
-.detail-info-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px; margin: 28px 0;
-}
-.detail-info-item {
-  background: var(--bg-card); border: 1px solid var(--border-color);
-  border-radius: 10px; padding: 14px 16px;
-}
-.detail-info-label {
-  font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;
-  letter-spacing: 1.5px; margin-bottom: 6px;
-}
-.detail-info-value { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
-
 /* Tags in detail */
 .detail-tags {
   display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; justify-content: center;
 }
 .detail-tag {
   font-size: 0.82rem; padding: 6px 16px; border-radius: 20px; font-weight: 600;
+  transition: transform 0.2s;
 }
+.detail-tag:hover { transform: scale(1.05); }
 .detail-tag.gold { background: var(--accent-amber-dim); color: var(--accent-amber); border: 1px solid rgba(251,191,36,0.3); }
 .detail-tag.blue { background: var(--accent-blue-dim); color: var(--accent-blue); border: 1px solid rgba(96,165,250,0.3); }
 .detail-tag.purple { background: var(--accent-purple-dim); color: var(--accent-purple); border: 1px solid rgba(167,139,250,0.3); }
 .detail-tag.green { background: var(--accent-green-dim); color: var(--accent-green); border: 1px solid rgba(52,211,153,0.3); }
+
+/* Info Grid */
+.detail-info-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px; margin: 28px 0;
+}
+.detail-info-item {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 12px; padding: 14px 16px;
+  transition: all 0.2s;
+}
+.detail-info-item:hover {
+  border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover);
+  transform: translateY(-1px);
+}
+.detail-info-label {
+  font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 6px;
+}
+.detail-info-value { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+.detail-info-value.club-value {
+  display: flex; align-items: center; gap: 6px;
+}
+.detail-info-value .mini-club-logo {
+  width: 22px; height: 22px; border-radius: 50%; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.08); flex-shrink: 0;
+}
+.detail-info-value .mini-club-logo img {
+  width: 100%; height: 100%; object-fit: cover;
+}
 
 /* Section */
 .detail-section {
@@ -300,43 +409,24 @@ body {
 }
 .detail-section-title .icon { font-size: 1.2rem; }
 
-/* Market Value Timeline */
-.mv-timeline {
-  display: flex; flex-direction: column; gap: 0;
+/* ========== Market Value SVG Chart ========== */
+.mv-chart-container {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 14px; padding: 24px 20px 16px; overflow: hidden;
 }
-.mv-item {
-  display: flex; align-items: stretch; gap: 16px; position: relative;
+.mv-chart-container svg { width: 100%; height: auto; }
+.mv-chart-tooltip {
+  position: absolute; background: rgba(17,24,39,0.95); border: 1px solid var(--border-color);
+  border-radius: 10px; padding: 10px 14px; font-size: 0.82rem; pointer-events: none;
+  opacity: 0; transition: opacity 0.2s; z-index: 10;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
-.mv-line {
-  width: 2px; background: var(--border-color); position: relative; flex-shrink: 0;
-}
-.mv-dot {
-  width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent-blue);
-  background: var(--bg-primary); position: absolute; top: 16px; left: -6px; z-index: 1;
-}
-.mv-item:last-child .mv-line { background: transparent; }
-.mv-content {
-  flex: 1; background: var(--bg-card); border: 1px solid var(--border-color);
-  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
-  transition: all 0.2s;
-}
-.mv-content:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); }
-.mv-year { font-size: 0.78rem; color: var(--accent-blue); font-weight: 600; }
-.mv-value { font-size: 1.15rem; font-weight: 700; color: var(--accent-amber); margin: 4px 0; }
-.mv-note { font-size: 0.82rem; color: var(--text-secondary); }
+.mv-chart-tooltip.visible { opacity: 1; }
+.mv-chart-tooltip .tt-year { color: var(--accent-blue); font-weight: 600; }
+.mv-chart-tooltip .tt-value { color: var(--accent-amber); font-weight: 700; font-size: 1rem; margin: 2px 0; }
+.mv-chart-tooltip .tt-note { color: var(--text-secondary); }
 
-/* Value bar visual */
-.mv-bar-wrap {
-  margin-top: 8px; height: 6px; background: rgba(255,255,255,0.06);
-  border-radius: 3px; overflow: hidden;
-}
-.mv-bar {
-  height: 100%; border-radius: 3px;
-  background: linear-gradient(90deg, var(--accent-blue), var(--accent-amber));
-  transition: width 0.8s ease;
-}
-
-/* Transfer Timeline */
+/* ========== Transfer Timeline ========== */
 .transfer-timeline {
   display: flex; flex-direction: column; gap: 0;
 }
@@ -348,28 +438,43 @@ body {
 }
 .transfer-dot {
   width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent-green);
-  background: var(--bg-primary); position: absolute; top: 16px; left: -6px; z-index: 1;
+  background: var(--bg-primary); position: absolute; top: 20px; left: -6px; z-index: 1;
 }
 .transfer-item:last-child .transfer-line { background: transparent; }
 .transfer-content {
   flex: 1; background: var(--bg-card); border: 1px solid var(--border-color);
-  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
+  border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;
   transition: all 0.2s;
 }
 .transfer-content:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); }
 .transfer-year { font-size: 0.78rem; color: var(--accent-green); font-weight: 600; }
 .transfer-route {
-  font-size: 0.95rem; color: var(--text-primary); margin: 4px 0;
+  font-size: 0.95rem; color: var(--text-primary); margin: 8px 0;
   display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
 }
-.transfer-arrow { color: var(--accent-amber); font-size: 1.1rem; }
+.transfer-club-logo {
+  width: 28px; height: 28px; border-radius: 50%; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.06); flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.transfer-club-logo img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.transfer-club-name {
+  font-weight: 600;
+}
+.transfer-arrow {
+  color: var(--accent-amber); font-size: 1.2rem; flex-shrink: 0;
+  display: flex; align-items: center;
+}
 .transfer-fee {
   font-size: 0.82rem; color: var(--accent-amber); font-weight: 600;
   background: var(--accent-amber-dim); padding: 2px 10px; border-radius: 6px;
   display: inline-block;
 }
 
-/* Milestones */
+/* ========== Milestones ========== */
 .milestone-list {
   display: flex; flex-direction: column; gap: 0;
 }
@@ -386,24 +491,24 @@ body {
 .milestone-item:last-child .milestone-line { background: transparent; }
 .milestone-content {
   flex: 1; background: var(--bg-card); border: 1px solid var(--border-color);
-  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
+  border-radius: 12px; padding: 14px 18px; margin-bottom: 12px;
   transition: all 0.2s;
 }
 .milestone-content:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); }
 .milestone-year { font-size: 0.78rem; color: var(--accent-purple); font-weight: 600; }
-.milestone-event { font-size: 0.95rem; color: var(--text-primary); margin-top: 4px; }
+.milestone-event { font-size: 0.95rem; color: var(--text-primary); margin-top: 4px; line-height: 1.5; }
 
-/* Highlights */
+/* ========== Highlights ========== */
 .highlight-list { display: flex; flex-direction: column; gap: 14px; }
 .highlight-card {
   background: var(--bg-card); border: 1px solid var(--border-color);
-  border-radius: 12px; padding: 20px 22px; position: relative; overflow: hidden;
+  border-radius: 14px; padding: 20px 22px; position: relative; overflow: hidden;
   transition: all 0.2s;
 }
-.highlight-card:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); }
+.highlight-card:hover { border-color: rgba(255,255,255,0.12); background: var(--bg-card-hover); transform: translateY(-1px); }
 .highlight-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--accent-amber), var(--accent-red));
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--forward-gradient);
 }
 .highlight-match {
   font-size: 1rem; font-weight: 700; color: var(--text-primary);
@@ -430,6 +535,34 @@ body {
   font-size: 0.95rem; padding: 10px 28px;
 }
 
+/* ========== Animations ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  animation: fadeInUp 0.5s ease forwards;
+}
+.delay-1 { animation-delay: 0.1s; opacity: 0; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.player-avatar-wrap::after {
+  content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border-radius: 50%; opacity: 0; transition: opacity 0.3s;
+}
+.player-card:hover .player-avatar-wrap::after { opacity: 1; }
+.player-card[data-pos="forward"] .player-avatar-wrap::after {
+  background: conic-gradient(from 0deg, #fbbf24, #f87171, #fbbf24);
+  z-index: -1; animation: shimmer 3s linear infinite;
+  background-size: 200% 100%;
+}
+
 /* ========== Responsive ========== */
 @media (max-width: 640px) {
   .position-grid { grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px 16px; }
@@ -437,11 +570,14 @@ body {
   .detail-container { padding: 16px 16px 40px; }
   .detail-info-grid { grid-template-columns: 1fr 1fr; }
   .detail-name { font-size: 1.5rem; }
-  .detail-avatar { width: 90px; height: 90px; font-size: 2.2rem; }
+  .detail-avatar { width: 100px; height: 100px; font-size: 2.2rem; }
+  .detail-hero-club-logo { width: 32px; height: 32px; }
   .top-nav { padding: 0 12px; gap: 2px; }
   .top-nav a { padding: 6px 10px; font-size: 0.8rem; }
   .home-header { padding: 40px 16px 28px; }
   .list-header { padding: 28px 16px 12px; }
+  .transfer-route { gap: 6px; }
+  .transfer-club-logo { width: 24px; height: 24px; }
 }
 </style>
 </head>
@@ -487,18 +623,23 @@ body {
     <div class="detail-back">
       <button class="back-btn" id="detail-back-btn">← 返回列表</button>
     </div>
-    <div class="detail-hero">
-      <div class="detail-avatar" id="detail-avatar"></div>
-      <h1 class="detail-name" id="detail-name"></h1>
-      <div class="detail-eng-name" id="detail-eng-name"></div>
-      <div class="detail-tags" id="detail-tags"></div>
+    <div class="detail-hero" id="detail-hero">
+      <div class="detail-hero-content">
+        <div class="detail-avatar-wrap">
+          <div class="detail-avatar" id="detail-avatar"></div>
+          <div class="detail-hero-club-logo" id="detail-hero-club-logo"></div>
+        </div>
+        <h1 class="detail-name" id="detail-name"></h1>
+        <div class="detail-eng-name" id="detail-eng-name"></div>
+        <div class="detail-tags" id="detail-tags"></div>
+      </div>
     </div>
     <div class="detail-info-grid" id="detail-info-grid"></div>
 
     <!-- 身价变化 -->
     <div class="detail-section" id="section-market-value">
       <h2 class="detail-section-title"><span class="icon">📈</span>身价变化</h2>
-      <div class="mv-timeline" id="mv-timeline"></div>
+      <div class="mv-chart-container" id="mv-chart-container"></div>
     </div>
 
     <!-- 转会历程 -->
@@ -545,11 +686,14 @@ const DATA = {
       positionName: '前锋',
       birthDate: '1987年6月24日',
       height: '170cm',
+      jerseyNumber: '10',
+      preferredFoot: '左脚',
       clubs: ['巴塞罗那', '巴黎圣日耳曼', '迈阿密国际'],
       currentClub: '迈阿密国际',
+      currentClubLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f61ae1d92032fe497adfff_inter-miami-footballlogos-org.png',
       tags: ['8座金球奖', '世界杯冠军', '欧冠4冠'],
       tagTypes: ['gold', 'blue', 'purple'],
-      photo: '',
+      photo: 'images/players/messi.png',
       avatarEmoji: '🔟',
       marketValue: [
         { year: '2006', value: '6000万欧', valueNum: 60, note: '崭露头角' },
@@ -559,9 +703,14 @@ const DATA = {
         { year: '2023', value: '3500万欧', valueNum: 35, note: '转战美职联' }
       ],
       transfers: [
-        { year: '2000', from: '纽维尔老男孩青训', to: '巴塞罗那拉玛西亚', fee: '免费' },
-        { year: '2021', from: '巴塞罗那', to: '巴黎圣日耳曼', fee: '自由转会' },
-        { year: '2023', from: '巴黎圣日耳曼', to: '迈阿密国际', fee: '自由转会' }
+        { year: '2000', from: '纽维尔老男孩青训', to: '巴塞罗那拉玛西亚', fee: '免费',
+          fromLogo: '', toLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5509a2570ca032273c3d8_fc-barcelona-footballlogos-org-p-500.png' },
+        { year: '2021', from: '巴塞罗那', to: '巴黎圣日耳曼', fee: '自由转会',
+          fromLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5509a2570ca032273c3d8_fc-barcelona-footballlogos-org-p-500.png',
+          toLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5509a2570ca032273c518_paris-saint-germain-footballlogos-org-p-500.png' },
+        { year: '2023', from: '巴黎圣日耳曼', to: '迈阿密国际', fee: '自由转会',
+          fromLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5509a2570ca032273c518_paris-saint-germain-footballlogos-org-p-500.png',
+          toLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f61ae1d92032fe497adfff_inter-miami-footballlogos-org.png' }
       ],
       milestones: [
         { year: '2004', event: '巴萨一线队首秀' },
@@ -586,11 +735,14 @@ const DATA = {
       positionName: '前锋',
       birthDate: '1985年2月5日',
       height: '187cm',
+      jerseyNumber: '7',
+      preferredFoot: '右脚',
       clubs: ['里斯本竞技', '曼联', '皇家马德里', '尤文图斯', '曼联', '利雅得胜利'],
       currentClub: '利雅得胜利',
+      currentClubLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f6ce45e6c3d6bbab1f368f_al-nassr-footballlogos-org.png',
       tags: ['5座金球奖', '欧冠5冠', '历史射手王'],
       tagTypes: ['gold', 'blue', 'purple'],
-      photo: '',
+      photo: 'images/players/ronaldo.png',
       avatarEmoji: '7️⃣',
       marketValue: [
         { year: '2004', value: '2000万欧', valueNum: 20, note: '曼联新星' },
@@ -601,11 +753,21 @@ const DATA = {
         { year: '2023', value: '1500万欧', valueNum: 15, note: '远赴沙特' }
       ],
       transfers: [
-        { year: '2003', from: '里斯本竞技', to: '曼联', fee: '1900万欧' },
-        { year: '2009', from: '曼联', to: '皇家马德里', fee: '9400万欧' },
-        { year: '2018', from: '皇家马德里', to: '尤文图斯', fee: '1.17亿欧' },
-        { year: '2021', from: '尤文图斯', to: '曼联', fee: '1500万欧' },
-        { year: '2023', from: '曼联', to: '利雅得胜利', fee: '自由转会' }
+        { year: '2003', from: '里斯本竞技', to: '曼联', fee: '1900万欧',
+          fromLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f60a4d7eeae879d2815701_sporting-cp-portugal-footballlogos-org.png',
+          toLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f550992570ca032273c2bc_manchester-united-footballlogos-org-p-500.png' },
+        { year: '2009', from: '曼联', to: '皇家马德里', fee: '9400万欧',
+          fromLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f550992570ca032273c2bc_manchester-united-footballlogos-org-p-500.png',
+          toLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f550992570ca032273c2a2_real-madrid-footballlogos-org-p-500.png' },
+        { year: '2018', from: '皇家马德里', to: '尤文图斯', fee: '1.17亿欧',
+          fromLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f550992570ca032273c2a2_real-madrid-footballlogos-org-p-500.png',
+          toLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5509a2570ca032273c3a2_juventus-footballlogos-org-p-500.png' },
+        { year: '2021', from: '尤文图斯', to: '曼联', fee: '1500万欧',
+          fromLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5509a2570ca032273c3a2_juventus-footballlogos-org-p-500.png',
+          toLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f550992570ca032273c2bc_manchester-united-footballlogos-org-p-500.png' },
+        { year: '2023', from: '曼联', to: '利雅得胜利', fee: '自由转会',
+          fromLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f550992570ca032273c2bc_manchester-united-footballlogos-org-p-500.png',
+          toLogo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f6ce45e6c3d6bbab1f368f_al-nassr-footballlogos-org.png' }
       ],
       milestones: [
         { year: '2003', event: '曼联首秀' },
@@ -625,16 +787,27 @@ const DATA = {
 };
 
 // ==================== STATE ====================
-let currentView = 'home'; // 'home' | 'list' | 'detail'
+let currentView = 'home';
 let currentPosition = null;
 let currentPlayer = null;
 
+// ==================== HELPER: Build club logo HTML ====================
+function clubLogoHTML(url, size) {
+  if (!url) return '';
+  const s = size || 20;
+  return `<span class="mini-club-logo" style="width:${s}px;height:${s}px;"><img src="${url}" alt="" onerror="this.style.display='none'"></span>`;
+}
+
+function transferClubLogoHTML(url, size) {
+  const s = size || 28;
+  if (!url) return `<span class="transfer-club-logo" style="width:${s}px;height:${s}px;font-size:${s*0.5}px;">⚽</span>`;
+  return `<span class="transfer-club-logo" style="width:${s}px;height:${s}px;"><img src="${url}" alt="" onerror="this.style.display='none';this.parentNode.innerHTML='⚽'"></span>`;
+}
+
 // ==================== NAVIGATION ====================
 function navigateTo(view, data) {
-  // Determine target page id
   const targetId = view === 'home' ? 'page-home' : view === 'list' ? 'page-list' : 'page-detail';
 
-  // Hide all pages EXCEPT the target (no race condition)
   document.querySelectorAll('.page').forEach(p => {
     if (p.id === targetId) return;
     p.classList.remove('visible');
@@ -677,10 +850,10 @@ function renderHome() {
   const playerList = Object.values(DATA.players);
   let totalCount = playerList.length;
 
-  grid.innerHTML = DATA.positions.map(pos => {
+  grid.innerHTML = DATA.positions.map((pos, idx) => {
     const count = playerList.filter(p => p.position === pos.id).length;
     return `
-      <div class="position-card" data-pos="${pos.id}" onclick="navigateTo('list','${pos.id}')">
+      <div class="position-card animate-in delay-${idx+1}" data-pos="${pos.id}" onclick="navigateTo('list','${pos.id}')">
         <div class="position-emoji">${pos.emoji}</div>
         <div class="position-name">${pos.name}</div>
         <div class="position-desc">${pos.desc}</div>
@@ -701,22 +874,33 @@ function renderList(positionId) {
     `<span class="emoji">${pos.emoji}</span>${pos.name}`;
 
   const grid = document.getElementById('player-grid');
-  grid.innerHTML = players.map(p => {
+  grid.innerHTML = players.map((p, idx) => {
     const tagHtml = p.tags.map((t, i) => {
       const cls = p.tagTypes && p.tagTypes[i] ? p.tagTypes[i] : '';
       return `<span class="player-tag ${cls}">${t}</span>`;
     }).join('');
 
+    const avatarHtml = p.photo
+      ? `<img src="${p.photo}" alt="${p.name}" onerror="this.style.display='none';this.parentNode.innerHTML='${p.avatarEmoji || '⚽'}'">`
+      : (p.avatarEmoji || '⚽');
+
+    const clubLogoHtml = p.currentClubLogo
+      ? `<span class="player-card-club-logo"><img src="${p.currentClubLogo}" alt="" onerror="this.style.display='none'"></span>`
+      : '';
+
     return `
-      <div class="player-card" onclick="navigateTo('detail','${p.id}')">
+      <div class="player-card animate-in delay-${Math.min(idx+1,4)}" data-pos="${p.position}" onclick="navigateTo('detail','${p.id}')">
         <div class="player-card-top">
-          <div class="player-avatar">${p.photo ? `<img src="${p.photo}" alt="${p.name}">` : p.avatarEmoji || '⚽'}</div>
+          <div class="player-avatar-wrap">
+            <div class="player-avatar">${avatarHtml}</div>
+          </div>
           <div class="player-card-info">
             <div class="player-card-name">
               <span class="player-card-flag">${p.flag}</span>${p.name}
             </div>
             <div class="player-card-eng">${p.englishName}</div>
             <div class="player-card-club">
+              ${clubLogoHtml}
               ${p.currentClub} <span class="current-badge">现役</span>
             </div>
           </div>
@@ -736,6 +920,89 @@ function renderList(positionId) {
   }
 }
 
+// ==================== BUILD SVG MARKET VALUE CHART ====================
+function buildMVChart(marketValue, position) {
+  if (!marketValue || marketValue.length < 2) return '<p style="color:var(--text-muted);text-align:center;padding:20px;">数据不足</p>';
+
+  const values = marketValue.map(v => v.valueNum);
+  const maxVal = Math.max(...values);
+  const minVal = Math.min(...values);
+  const range = maxVal - minVal || 1;
+
+  const W = 700, H = 260;
+  const padL = 55, padR = 20, padT = 20, padB = 40;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+
+  // Color based on position
+  const colors = {
+    forward: { line: '#fbbf24', dot: '#f87171', fill1: 'rgba(251,191,36,0.3)', fill2: 'rgba(248,113,113,0.02)' },
+    midfielder: { line: '#60a5fa', dot: '#22d3ee', fill1: 'rgba(96,165,250,0.3)', fill2: 'rgba(34,211,238,0.02)' },
+    defender: { line: '#a78bfa', dot: '#818cf8', fill1: 'rgba(167,139,250,0.3)', fill2: 'rgba(129,140,248,0.02)' },
+    goalkeeper: { line: '#34d399', dot: '#fbbf24', fill1: 'rgba(52,211,153,0.3)', fill2: 'rgba(251,191,36,0.02)' }
+  };
+  const c = colors[position] || colors.forward;
+
+  // Points
+  const n = marketValue.length;
+  const stepX = chartW / (n - 1);
+  const points = marketValue.map((mv, i) => {
+    const x = padL + i * stepX;
+    const y = padT + chartH - ((mv.valueNum - minVal) / range) * chartH * 0.85 - chartH * 0.05;
+    return { x, y, ...mv };
+  });
+
+  // SVG path
+  const linePath = points.map((p, i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
+  const areaPath = linePath + ` L${points[n-1].x.toFixed(1)},${(padT + chartH).toFixed(1)} L${points[0].x.toFixed(1)},${(padT + chartH).toFixed(1)} Z`;
+
+  // Y-axis labels
+  const yTicks = 5;
+  let yAxisHtml = '';
+  for (let i = 0; i <= yTicks; i++) {
+    const val = minVal + (range * i / yTicks);
+    const y = padT + chartH - (i / yTicks) * chartH * 0.85 - chartH * 0.05;
+    yAxisHtml += `<text x="${padL - 8}" y="${y + 4}" text-anchor="end" fill="#6b7280" font-size="11">${Math.round(val)}</text>`;
+    yAxisHtml += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#2d3748" stroke-width="0.5" stroke-dasharray="4,4"/>`;
+  }
+
+  // X-axis labels
+  let xAxisHtml = '';
+  points.forEach(p => {
+    xAxisHtml += `<text x="${p.x}" y="${padT + chartH + 20}" text-anchor="middle" fill="#6b7280" font-size="11">${p.year}</text>`;
+  });
+
+  // Dots and hover areas
+  let dotsHtml = '';
+  points.forEach((p, i) => {
+    dotsHtml += `
+      <circle cx="${p.x}" cy="${p.y}" r="14" fill="transparent" class="mv-hover-area" data-idx="${i}"/>
+      <circle cx="${p.x}" cy="${p.y}" r="5" fill="${c.dot}" stroke="#0a0e17" stroke-width="2" class="mv-dot" data-idx="${i}"/>
+      <text x="${p.x}" y="${p.y - 12}" text-anchor="middle" fill="${c.line}" font-size="10" font-weight="600">${p.value}</text>
+    `;
+  });
+
+  return `
+    <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+      <defs>
+        <linearGradient id="mvGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${c.fill1}"/>
+          <stop offset="100%" stop-color="${c.fill2}"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      ${yAxisHtml}
+      ${xAxisHtml}
+      <path d="${areaPath}" fill="url(#mvGrad)"/>
+      <path d="${linePath}" fill="none" stroke="${c.line}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+      ${dotsHtml}
+    </svg>
+  `;
+}
+
 // ==================== RENDER DETAIL ====================
 function renderDetail(playerId) {
   const p = DATA.players[playerId];
@@ -745,9 +1012,24 @@ function renderDetail(playerId) {
   document.getElementById('detail-back-btn').onclick = () => navigateTo('list', p.position);
   document.getElementById('detail-back-btn2').onclick = () => navigateTo('list', p.position);
 
+  // Hero
+  const heroEl = document.getElementById('detail-hero');
+  heroEl.setAttribute('data-pos', p.position);
+
   // Avatar
-  document.getElementById('detail-avatar').innerHTML =
-    p.photo ? `<img src="${p.photo}" alt="${p.name}">` : (p.avatarEmoji || '⚽');
+  const avatarHtml = p.photo
+    ? `<img src="${p.photo}" alt="${p.name}" onerror="this.style.display='none';this.parentNode.innerHTML='${p.avatarEmoji || '⚽'}'">`
+    : (p.avatarEmoji || '⚽');
+  document.getElementById('detail-avatar').innerHTML = avatarHtml;
+
+  // Hero club logo
+  const heroClubLogoEl = document.getElementById('detail-hero-club-logo');
+  if (p.currentClubLogo) {
+    heroClubLogoEl.innerHTML = `<img src="${p.currentClubLogo}" alt="${p.currentClub}" onerror="this.style.display='none'">`;
+    heroClubLogoEl.style.display = '';
+  } else {
+    heroClubLogoEl.style.display = 'none';
+  }
 
   // Name
   document.getElementById('detail-name').innerHTML =
@@ -761,6 +1043,10 @@ function renderDetail(playerId) {
   }).join('');
 
   // Info grid
+  const clubInfoHtml = p.currentClubLogo
+    ? `<span class="mini-club-logo"><img src="${p.currentClubLogo}" alt="" onerror="this.style.display='none'"></span>${p.currentClub}`
+    : p.currentClub;
+
   document.getElementById('detail-info-grid').innerHTML = `
     <div class="detail-info-item">
       <div class="detail-info-label">国籍</div>
@@ -779,30 +1065,25 @@ function renderDetail(playerId) {
       <div class="detail-info-value">${p.height}</div>
     </div>
     <div class="detail-info-item">
-      <div class="detail-info-label">效力俱乐部</div>
-      <div class="detail-info-value">${p.clubs.join(' → ')}</div>
+      <div class="detail-info-label">球衣号码</div>
+      <div class="detail-info-value" style="color:var(--accent-amber);">#${p.jerseyNumber || '-'}</div>
+    </div>
+    <div class="detail-info-item">
+      <div class="detail-info-label">惯用脚</div>
+      <div class="detail-info-value">${p.preferredFoot || '-'}</div>
     </div>
     <div class="detail-info-item">
       <div class="detail-info-label">当前俱乐部</div>
-      <div class="detail-info-value" style="color:var(--accent-green)">${p.currentClub}</div>
+      <div class="detail-info-value club-value" style="color:var(--accent-green)">${clubInfoHtml}</div>
+    </div>
+    <div class="detail-info-item">
+      <div class="detail-info-label">效力俱乐部</div>
+      <div class="detail-info-value" style="font-size:0.88rem;">${p.clubs.join(' → ')}</div>
     </div>
   `;
 
-  // Market value
-  const maxVal = Math.max(...p.marketValue.map(v => v.valueNum));
-  document.getElementById('mv-timeline').innerHTML = p.marketValue.map(mv => `
-    <div class="mv-item">
-      <div class="mv-line"><div class="mv-dot"></div></div>
-      <div class="mv-content">
-        <div class="mv-year">${mv.year}年</div>
-        <div class="mv-value">${mv.value}</div>
-        <div class="mv-note">${mv.note}</div>
-        <div class="mv-bar-wrap">
-          <div class="mv-bar" style="width:${Math.round((mv.valueNum / maxVal) * 100)}%"></div>
-        </div>
-      </div>
-    </div>
-  `).join('');
+  // Market value SVG chart
+  document.getElementById('mv-chart-container').innerHTML = buildMVChart(p.marketValue, p.position);
 
   // Show/hide sections
   document.getElementById('section-market-value').style.display =
@@ -814,20 +1095,29 @@ function renderDetail(playerId) {
   document.getElementById('section-highlights').style.display =
     p.highlights && p.highlights.length ? '' : 'none';
 
-  // Transfers
+  // Transfers with logos
   if (p.transfers && p.transfers.length) {
-    document.getElementById('transfer-timeline').innerHTML = p.transfers.map(t => `
-      <div class="transfer-item">
-        <div class="transfer-line"><div class="transfer-dot"></div></div>
-        <div class="transfer-content">
-          <div class="transfer-year">${t.year}年</div>
-          <div class="transfer-route">
-            ${t.from} <span class="transfer-arrow">→</span> ${t.to}
+    document.getElementById('transfer-timeline').innerHTML = p.transfers.map(t => {
+      const fromLogoHtml = transferClubLogoHTML(t.fromLogo);
+      const toLogoHtml = transferClubLogoHTML(t.toLogo);
+
+      return `
+        <div class="transfer-item">
+          <div class="transfer-line"><div class="transfer-dot"></div></div>
+          <div class="transfer-content">
+            <div class="transfer-year">${t.year}年</div>
+            <div class="transfer-route">
+              ${fromLogoHtml}
+              <span class="transfer-club-name">${t.from}</span>
+              <span class="transfer-arrow">→</span>
+              ${toLogoHtml}
+              <span class="transfer-club-name">${t.to}</span>
+            </div>
+            <span class="transfer-fee">${t.fee}</span>
           </div>
-          <span class="transfer-fee">${t.fee}</span>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   // Milestones

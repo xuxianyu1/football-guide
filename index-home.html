@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚽ 鱼宝足球站</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0e17;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 48px;
+    }
+    /* ========== Top Navigation Bar ========== */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10,14,23,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      height: 48px;
+      gap: 6px;
+    }
+    .top-nav a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .top-nav a:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .top-nav a.active {
+      background: rgba(96,165,250,0.15);
+      color: #60a5fa;
+    }
+    .top-nav .nav-icon {
+      font-size: 1rem;
+    }
+    .top-nav .nav-brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .container { text-align: center; padding: 40px 20px; }
+    .logo { font-size: 64px; margin-bottom: 16px; }
+    h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .subtitle { color: #888; font-size: 1rem; margin-bottom: 48px; }
+    .cards { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 36px 32px;
+      width: 320px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-4px);
+    }
+    .card-icon { font-size: 48px; margin-bottom: 16px; }
+    .card h2 { font-size: 1.3rem; margin-bottom: 8px; color: #fff; }
+    .card p { font-size: 0.9rem; color: #999; line-height: 1.5; }
+    .footer { margin-top: 60px; color: #555; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <span class="nav-brand">⚽ 鱼宝足球站</span>
+    <a href="index.html" class="active"><span class="nav-icon">🏠</span>首页</a>
+    <a href="dashboard.html"><span class="nav-icon">📊</span>赛事预测</a>
+    <a href="clubs.html"><span class="nav-icon">🏟️</span>俱乐部图鉴</a>
+    <a href="players.html"><span class="nav-icon">⭐</span>球星图鉴</a>
+  </nav>
+  <div class="container">
+    <div class="logo">⚽</div>
+    <h1>鱼宝足球站</h1>
+    <p class="subtitle">由鱼宝2.0为你打造</p>
+    <div class="cards">
+      <a class="card" href="dashboard.html">
+        <div class="card-icon">📊</div>
+        <h2>赛事预测</h2>
+        <p>每日足球赛事量化分析、EV计算、凯利值、冷门评分，数据驱动决策</p>
+      </a>
+      <a class="card" href="clubs.html">
+        <div class="card-icon">🏟️</div>
+        <h2>俱乐部图鉴</h2>
+        <p>欧洲五大联赛俱乐部深度介绍，历史、阵容、传奇球星一网打尽</p>
+      </a>
+      <a class="card" href="players.html">
+        <div class="card-icon">⭐</div>
+        <h2>球星图鉴</h2>
+        <p>五大联赛球星档案，身价变化、转会历程、经典时刻全覆盖</p>
+      </a>
+    </div>
+    <div class="footer">Powered by 鱼宝2.0 · Data from 中国体彩官网</div>
+  </div>
+</body>
+</html>
