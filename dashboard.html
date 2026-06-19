@@ -419,7 +419,6 @@ body {
   <a href="index.html"><span class="nav-icon">🏠</span>首页</a>
   <a href="dashboard.html" class="active"><span class="nav-icon">📊</span>赛事预测</a>
   <a href="clubs.html"><span class="nav-icon">🏟️</span>俱乐部图鉴</a>
-  <a href="players.html"><span class="nav-icon">⭐</span>球星图鉴</a>
 </nav>
 <div class="container">
   <div class="header">
@@ -740,7 +739,7 @@ function renderRisk(m, score, level) {
   const tags = [];
   parts.forEach(p => {
     const kv = p.split('=');
-    if(kv.length===2) {
+    if(kv.length===2 && kv[0]!=='各项得分明细') {
       const c = kv[1].includes('强')?'green':kv[1].includes('无欲')?'amber':'cyan';
       tags.push({l:kv[0],v:kv[1],c});
     }
@@ -760,7 +759,7 @@ function renderRisk(m, score, level) {
         </div>
       </div>
       <div class="risk-tags">${tags.map(t=>`<span class="risk-tag ${t.c}">${t.l}: ${t.v}</span>`).join('')}</div>
-      ${detail?`<div class="risk-detail-line">得分明细: ${detail}</div>`:''}
+      ${detail?`<div class="risk-detail-line">各项得分明细: ${detail}</div>`:''}
     </div>
   </div>`;
 }
@@ -866,7 +865,7 @@ function navDate(dir) {
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   // Load data dynamically — dataUrl will be injected when generating the page link
-  const dataUrl = 'football_data.js';
+  const dataUrl = 'football_data.js?v=' + Date.now();
   if (dataUrl && dataUrl !== '__DATA_URL__') {
     loadDataAndRender(dataUrl);
   } else {
