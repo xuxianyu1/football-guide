@@ -176,9 +176,8 @@ body::after{
   font-family:var(--font-display);font-size:15px;font-weight:600;
   padding:7px 16px;border-radius:var(--radius-sm);letter-spacing:.5px;white-space:nowrap;
 }
-.match-decision-badge.win{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,230,118,.35)}
-.match-decision-badge.draw{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(255,171,0,.35)}
-.match-decision-badge.lose{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,23,68,.35)}
+.match-decision-badge.default{background:rgba(0,230,118,.1);color:#4fc3f7;border:1px solid rgba(79,195,247,.35);font-weight:600}
+.match-decision-badge.disc{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,23,68,.35)}
 .match-score-line{font-family:var(--font-mono);font-size:12px;color:var(--text3)}
 .match-score-line .pred{color:var(--amber);font-weight:600}
 .match-score-line .actual{color:var(--green);font-weight:600;font-size:14px}
@@ -213,7 +212,7 @@ body::after{
 }
 @media(max-width:700px){.decision-box{grid-template-columns:1fr}}
 .decision-main .label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:8px;font-weight:600}
-.decision-main .choice{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--green);letter-spacing:.5px}
+.decision-main .choice{font-family:var(--font-display);font-size:22px;font-weight:600;color:#4fc3f7;letter-spacing:.5px}
 .decision-score-box{text-align:center;padding:14px 28px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border2)}
 .decision-score-box .label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:6px;font-weight:600}
 .decision-score-box .scores{font-family:var(--font-mono);font-size:20px;font-weight:600;color:var(--amber);letter-spacing:3px}
@@ -437,11 +436,7 @@ body {
   <div class="toolbar">
     <div class="toolbar-left">
       <span id="matchCount"></span>
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">全部</button>
-        <button class="filter-btn" data-filter="pending" onclick="setFilter('pending')">⏳待赛</button>
-        <button class="filter-btn" data-filter="done" onclick="setFilter('done')">✅已完赛</button>
-      </div>
+
     </div>
     <div class="toolbar-right">
       <button onclick="expandAll()">展开全部</button>
@@ -491,7 +486,7 @@ function evCls(v) { if(v==null) return ''; return v>0.01?'ev-pos':v>-0.01?'ev-ze
 function kellyCls(v) { if(v==null) return ''; return v>0?'kelly-pos':'kelly-neg'; }
 function parseRisk(s) { const m1=s.match(/冷门压力测试v4\.2:(-?\d+)分/); if(m1) return parseInt(m1[1]); const m2=s.match(/^(-?\d+)[⚡✅🚨]/); if(m2) return parseInt(m2[1]); const m3=s.match(/^(-?\d+)\(/); if(m3) return parseInt(m3[1]); return 0; }
 function riskLvl(s) { return s>=9?'danger':s>=6?'caution':'safe'; }
-function decCls(d) { if(d.includes('弃盘')) return 'lose'; if(d.includes('平局')||d.includes('让平')) return 'draw'; return 'win'; }
+function decCls(d) { if(d.includes('弃盘')) return 'disc'; return 'default'; }
 function hasResult(m) { return !!(m.actual_score || m.correct); }
 function parseCorrect(c) {
   if(!c) return {normal:null, handicap:null};
@@ -579,13 +574,12 @@ function renderStats(data) {
 
 function renderMatches(data) {
   let ms = data.matches;
-  if(currentFilter==='pending') ms = ms.filter(m=>!hasResult(m));
-  else if(currentFilter==='done') ms = ms.filter(m=>hasResult(m));
+
 
   document.getElementById('matchCount').textContent = `共 ${ms.length} / ${data.matches.length} 场`;
 
   if(ms.length===0) {
-    const msg = currentFilter==='done'?'暂无已完赛场次':currentFilter==='pending'?'暂无待赛场次':'当日暂无预测数据';
+    const msg = '当日暂无预测数据';
     document.getElementById('matchGrid').innerHTML = `<div class="empty-state"><div class="icon">📭</div><div class="msg">${msg}</div></div>`;
     return;
   }
@@ -663,7 +657,7 @@ function renderCard(m, idx) {
         <div class="match-teams"><span>${m.home}</span><span class="vs">VS</span><span>${m.away}</span></div>
         <div class="match-time-row">
           <span>📅 ${m.date} ${m.time}</span>
-          ${isReviewed?'<span class="result-score">🏅 实际: '+m.actual_score+'</span>':''}
+          
         </div>
       </div>
       <div class="match-meta">
@@ -685,7 +679,7 @@ function renderCard(m, idx) {
         </div>
         ${(hasN||hasH) ? renderTable(m) : ''}
         <div class="analysis-grid">${renderAnalysis(m)}</div>
-        ${!isReviewed ? renderPostMatchPending() : ''}
+
       </div>
     </div>
   </div>`;
@@ -861,16 +855,7 @@ function renderAnalysis(m) {
   `).join('');
 }
 
-function renderPostMatchPending() {
-  return `
-  <div class="post-match" style="margin-top:20px">
-    <div class="label">赛后追踪</div>
-    <div class="result-row">
-      <span class="pm-tag pending">⏳ 待赛</span>
-      <span style="font-size:12px;color:var(--text3)">比赛尚未开始</span>
-    </div>
-  </div>`;
-}
+
 
 // ===== INTERACTIONS =====
 function toggle(idx) { document.getElementById('mc-'+idx).classList.toggle('expanded'); }
