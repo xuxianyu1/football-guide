@@ -1356,11 +1356,8 @@ window.FOOTCAST_DATA = {
           "kelly_draw": -0.0444,
           "kelly_lose": -0.0326
         },
-        "risk_signal": "5⚡C1+(3)+C3c(1)+C10c(2)+C10f(1)+C10h(1)",
-        "decision": "平局",
-        "score_predict": "1-1/2-2/0-0",
         "handicap": {
-          "type": "让球盘(-1)",
+          "type": "让球盘-1",
           "win_pct": 25,
           "draw_pct": 30,
           "lose_pct": 45,
@@ -1373,7 +1370,10 @@ window.FOOTCAST_DATA = {
           "kelly_win": 0.3186,
           "kelly_draw": -0.0599,
           "kelly_lose": -0.5773
-        }
+        },
+        "risk_signal": "5⚡C1+(3)+C3c(1)+C10c(2)+C10f(1)+C10h(1)",
+        "decision": "平局 / 让负",
+        "score_predict": "1-1/2-2/0-0"
       },
       {
         "seq": 2,
@@ -1405,11 +1405,8 @@ window.FOOTCAST_DATA = {
           "kelly_draw": -0.0363,
           "kelly_lose": -0.0241
         },
-        "risk_signal": "2✅C3b(2)+C10f(1)+C10g(-1)",
-        "decision": "主胜",
-        "score_predict": "2-1/3-2/1-0",
         "handicap": {
-          "type": "让球盘(-1)",
+          "type": "让球盘-1",
           "win_pct": 40,
           "draw_pct": 35,
           "lose_pct": 25,
@@ -1422,7 +1419,10 @@ window.FOOTCAST_DATA = {
           "kelly_win": 0.3339,
           "kelly_draw": -0.0834,
           "kelly_lose": -0.4254
-        }
+        },
+        "risk_signal": "2✅C3b(2)+C10f(1)+C10g(-1)",
+        "decision": "主胜 / 让平",
+        "score_predict": "2-1/3-2/1-0"
       },
       {
         "seq": 3,
@@ -1441,24 +1441,21 @@ window.FOOTCAST_DATA = {
         },
         "normal": {
           "type": "普通盘未开售",
-          "win_pct": null,
-          "draw_pct": null,
-          "lose_pct": null,
-          "win_odds": null,
-          "draw_odds": null,
-          "lose_odds": null,
-          "ev_win": null,
-          "ev_draw": null,
-          "ev_lose": null,
-          "kelly_win": null,
-          "kelly_draw": null,
-          "kelly_lose": null
+          "win_pct": 0,
+          "draw_pct": 0,
+          "lose_pct": 0,
+          "win_odds": 0,
+          "draw_odds": 0,
+          "lose_odds": 0,
+          "ev_win": 0,
+          "ev_draw": 0,
+          "ev_lose": 0,
+          "kelly_win": 0,
+          "kelly_draw": 0,
+          "kelly_lose": 0
         },
-        "risk_signal": "0(普通盘未开售，冷门分默认0)",
-        "decision": "未开售",
-        "score_predict": "3-0/4-0/2-0",
         "handicap": {
-          "type": "让球盘(-2)",
+          "type": "让球盘-2",
           "win_pct": 50,
           "draw_pct": 25,
           "lose_pct": 25,
@@ -1471,7 +1468,10 @@ window.FOOTCAST_DATA = {
           "kelly_win": -0.1271,
           "kelly_draw": -0.0388,
           "kelly_lose": -0.0615
-        }
+        },
+        "risk_signal": "0(普通盘未开售，冷门分默认0)",
+        "decision": "未开售 / 让胜",
+        "score_predict": "3-0/4-0/2-0"
       },
       {
         "seq": 4,
@@ -1503,11 +1503,8 @@ window.FOOTCAST_DATA = {
           "kelly_draw": -0.0388,
           "kelly_lose": -0.3024
         },
-        "risk_signal": "2✅C1+(3)+C3a(1)+C10b(-1)+C10e(-1)",
-        "decision": "平局",
-        "score_predict": "1-1/0-0/1-0",
         "handicap": {
-          "type": "让球盘(+1)",
+          "type": "让球盘+1",
           "win_pct": 35,
           "draw_pct": 30,
           "lose_pct": 35,
@@ -1520,7 +1517,10 @@ window.FOOTCAST_DATA = {
           "kelly_win": -0.4415,
           "kelly_draw": -0.1,
           "kelly_lose": 0.3655
-        }
+        },
+        "risk_signal": "2✅C1+(3)+C3a(1)+C10b(-1)+C10e(-1)",
+        "decision": "平局 / 让胜",
+        "score_predict": "1-1/0-0/1-0"
       }
     ]
   }
