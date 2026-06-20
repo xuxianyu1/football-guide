@@ -778,6 +778,7 @@ function renderRisk(m, score, level) {
   const s = m.risk_signal || '';
   const tags = [];
   let detail = '';
+  let isCompact = false;
   // Detect format: old format has " | " separators and "=value" pairs
   if (s.includes(' | ')) {
     const parts = s.split(' | ');
@@ -785,22 +786,22 @@ function renderRisk(m, score, level) {
       const kv = p.split('=');
       if(kv.length===2 && kv[0]!=='各项得分明细') {
         const c = kv[1].includes('强')?'green':kv[1].includes('无欲')?'amber':'cyan';
-        tags.push({l:kv[0],v:kv[1],c});
+        tags.push({text:kv[0]+': '+kv[1], c});
       }
     });
     const dm = s.match(/各项得分明细=(.*)/);
     detail = dm?dm[1]:'';
   } else {
     // New compact format: "5⚡C1+(3)+C3c(1)+..." or "0(普通盘未开售...)"
+    isCompact = true;
     const compactMatch = s.match(/^(-?\d+)[⚡✅🚨]?(.*)/);
     if (compactMatch) {
       detail = compactMatch[2] || '';
-      // Parse individual scoring items like C1+(3), C3c(1), etc.
       const items = detail.match(/[A-Z]\d+[a-z]*\([^)]*\)/g);
       if (items) {
         items.forEach(item => {
           const c = item.includes('-')?'red':item.includes('+')?'green':'cyan';
-          tags.push({l:item.replace(/\([^)]*\)/,''),v:item.match(/\([^)]*\)/)?.[0]||'',c});
+          tags.push({text:item, c});
         });
       }
     }
@@ -817,8 +818,8 @@ function renderRisk(m, score, level) {
           <div class="risk-desc">冷门压力测试 v4.2</div>
         </div>
       </div>
-      <div class="risk-tags">${tags.map(t=>`<span class="risk-tag ${t.c}">${t.l}: ${t.v}</span>`).join('')}</div>
-      ${detail?`<div class="risk-detail-line">各项得分明细: ${detail}</div>`:''}
+      ${tags.length?`<div class="risk-tags">${tags.map(t=>`<span class="risk-tag ${t.c}">${t.text}</span>`).join('')}</div>`:''}
+      ${!isCompact && detail?`<div class="risk-detail-line">各项得分明细: ${detail}</div>`:''}
     </div>
   </div>`;
 }
@@ -915,7 +916,7 @@ function navDate(dir) {
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   // Load data dynamically — dataUrl will be injected when generating the page link
-  const dataUrl = 'football_data.js?v=20260620c&' + Date.now();
+  const dataUrl = 'football_data.js?v=20260620d&' + Date.now();
   if (dataUrl && dataUrl !== '__DATA_URL__') {
     loadDataAndRender(dataUrl);
   } else {
