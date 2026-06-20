@@ -1338,7 +1338,7 @@ window.FOOTCAST_DATA = {
           "bifad": "68%中度偏热，误差+12%，穿盘信号弱",
           "injury": "C1++：荷兰4核心报销(廷贝尔+德里赫特+西蒙斯+斯豪滕)；瑞典仅库卢缺阵",
           "tactical": "瑞典3-4-1-2克制残阵荷兰4-3-3；伊萨克vs残破后防=瑞典优势",
-          "form": "5维共振→平局★★★★★[C1++C10cC10f]",
+          "form": "5维共振→平局★★★★[C1+C3cC10cC10fC10h]",
           "uncertain": "近7战5平！投注过热+德佩伤愈首发变数"
         },
         "normal": {
@@ -1371,9 +1371,13 @@ window.FOOTCAST_DATA = {
           "kelly_draw": -0.0599,
           "kelly_lose": -0.5773
         },
-        "risk_signal": "5⚡C1+(3)+C3c(1)+C10c(2)+C10f(1)+C10h(1)",
+        "risk_signal": "8⚡C1+(3)+C3c(1)+C10c(2)+C10f(1)+C10h(1)",
         "decision": "平局 / 让负",
-        "score_predict": "1-1/2-2/0-0"
+        "score_predict": "1-1/2-2/0-0",
+        "actual_score": null,
+        "handicap_result": null,
+        "correct": null,
+        "attribution": null
       },
       {
         "seq": 2,
@@ -1387,7 +1391,7 @@ window.FOOTCAST_DATA = {
           "bifad": "⚠️⚠️80%大热倒灶，误差+16%本轮最高！",
           "injury": "德国仅伦纳特·卡尔(★★)缺阵；科特迪瓦瓦希(★★★)被捕缺阵+恩迪卡出战成疑",
           "tactical": "宽松裁判利好科特迪瓦身体对抗型防守，拖慢德国节奏",
-          "form": "4维共振→德胜难穿★★★★[C3aC10a⚠️5h降权]",
+          "form": "4维共振→德胜难穿★★★★[C3bC10fC10g↓⚠️5h降权]",
           "uncertain": "误差+16%本轮最高=诱盘动机最强；7场未零封"
         },
         "normal": {
@@ -1422,7 +1426,11 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "2✅C3b(2)+C10f(1)+C10g(-1)",
         "decision": "主胜 / 让平",
-        "score_predict": "2-1/3-2/1-0"
+        "score_predict": "2-1/3-2/1-0",
+        "actual_score": null,
+        "handicap_result": null,
+        "correct": null,
+        "attribution": null
       },
       {
         "seq": 3,
@@ -1441,18 +1449,18 @@ window.FOOTCAST_DATA = {
         },
         "normal": {
           "type": "普通盘未开售",
-          "win_pct": 0,
-          "draw_pct": 0,
-          "lose_pct": 0,
-          "win_odds": 0,
-          "draw_odds": 0,
-          "lose_odds": 0,
-          "ev_win": 0,
-          "ev_draw": 0,
-          "ev_lose": 0,
-          "kelly_win": 0,
-          "kelly_draw": 0,
-          "kelly_lose": 0
+          "win_pct": null,
+          "draw_pct": null,
+          "lose_pct": null,
+          "win_odds": null,
+          "draw_odds": null,
+          "lose_odds": null,
+          "ev_win": null,
+          "ev_draw": null,
+          "ev_lose": null,
+          "kelly_win": null,
+          "kelly_draw": null,
+          "kelly_lose": null
         },
         "handicap": {
           "type": "让球盘-2",
@@ -1471,7 +1479,11 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "0(普通盘未开售，冷门分默认0)",
         "decision": "未开售 / 让胜",
-        "score_predict": "3-0/4-0/2-0"
+        "score_predict": "3-0/4-0/2-0",
+        "actual_score": null,
+        "handicap_result": null,
+        "correct": null,
+        "attribution": null
       },
       {
         "seq": 4,
@@ -1485,7 +1497,7 @@ window.FOOTCAST_DATA = {
           "bifad": "⚠️76%接近大热倒灶线，误差+13%，市场忽视日本残阵风险",
           "injury": "日本C1++灾难级：远藤航+三笘薰+南野+久保4名★★★缺席；突尼斯全员健康",
           "tactical": "勒纳尔5-4-1克制无翼4-2-3-1，2022率沙特爆冷阿根廷同款战术",
-          "form": "6维共振→冷门极强★★★★★[C1++C3aC10cC10f⚠️5h降权]",
+          "form": "6维共振→5h禁止日本★★★★[C1+C3aC10b↓C10e↓⚠️5h降权]",
           "uncertain": "勒纳尔爆冷履历+次战魔咒+世界杯第1000场里程碑"
         },
         "normal": {
@@ -1520,7 +1532,11 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "2✅C1+(3)+C3a(1)+C10b(-1)+C10e(-1)",
         "decision": "平局 / 让胜",
-        "score_predict": "1-1/0-0/1-0"
+        "score_predict": "1-1/0-0/1-0",
+        "actual_score": null,
+        "handicap_result": null,
+        "correct": null,
+        "attribution": null
       }
     ]
   }
