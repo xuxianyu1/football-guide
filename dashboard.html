@@ -213,9 +213,12 @@ body::after{
 @media(max-width:700px){.decision-box{grid-template-columns:1fr}}
 .decision-main .label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:8px;font-weight:600}
 .decision-main .choice{font-family:var(--font-display);font-size:22px;font-weight:600;color:#4fc3f7;letter-spacing:.5px}
+.choice .dec-ok{color:var(--green)}
+.choice .dec-err{color:var(--red);opacity:.7}
 .decision-score-box{text-align:center;padding:14px 28px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border2)}
 .decision-score-box .label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:6px;font-weight:600}
 .decision-score-box .scores{font-family:var(--font-mono);font-size:20px;font-weight:600;color:var(--amber);letter-spacing:3px}
+.decision-box.reviewed .decision-score-box .scores{opacity:.65}
 
 /* ===== Review Section (NEW) ===== */
 .review-section{
@@ -686,11 +689,32 @@ function renderCard(m, idx) {
 }
 
 function renderDecision(m) {
+  const ci = parseCorrect(m.correct);
+  const isReviewed = !!(m.actual_score || m.correct);
+  let choiceHtml = '';
+  if (isReviewed && m.decision.includes('/')) {
+    const parts = m.decision.split('/').map(s => s.trim());
+    // parts[0] = normal盘方向, parts[1] = handicap盘方向
+    const colored = parts.map((p, i) => {
+      const isOk = i === 0 ? ci.normal === '对' : ci.handicap === '对';
+      const isErr = i === 0 ? ci.normal === '错' : ci.handicap === '错';
+      const cls = isOk ? 'dec-ok' : isErr ? 'dec-err' : '';
+      return `<span class="${cls}">${p}</span>`;
+    });
+    choiceHtml = colored.join(' <span style="color:var(--text3)">/</span> ');
+  } else if (isReviewed) {
+    const isOk = ci.normal === '对' || ci.handicap === '对';
+    const isErr = ci.normal === '错' || ci.handicap === '错';
+    const cls = isOk ? 'dec-ok' : isErr ? 'dec-err' : '';
+    choiceHtml = `<span class="${cls}">${m.decision}</span>`;
+  } else {
+    choiceHtml = m.decision;
+  }
   return `
-  <div class="decision-box">
+  <div class="decision-box${isReviewed ? ' reviewed' : ''}">
     <div class="decision-main">
       <div class="label">最终决策</div>
-      <div class="choice">${m.decision}</div>
+      <div class="choice">${choiceHtml}</div>
     </div>
     <div class="decision-score-box">
       <div class="label">比分预测</div>
