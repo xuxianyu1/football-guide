@@ -268,6 +268,59 @@ body::after{
   background:var(--green);border:none;color:var(--bg);font-weight:600;
 }
 .upload-actions .confirm-btn:hover{opacity:.85}
+
+/* Editor Modal */
+.editor-overlay{
+  display:none;position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+}
+.editor-overlay.active{display:flex}
+.editor-modal{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:24px;max-width:900px;width:95%;
+  max-height:90vh;display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.editor-modal h2{
+  font-family:var(--font-display);font-size:22px;color:var(--green);
+  margin-bottom:4px;letter-spacing:1px;
+}
+.editor-modal .desc{font-size:12px;color:var(--text3);margin-bottom:12px}
+.editor-toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.editor-toolbar label{font-size:12px;color:var(--text2)}
+.editor-toolbar select{
+  padding:4px 8px;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);color:var(--text);font-size:12px;outline:none;
+}
+.editor-toolbar select:focus{border-color:var(--green)}
+.editor-container{
+  flex:1;overflow:hidden;display:flex;flex-direction:column;
+  border:1px solid var(--border2);border-radius:var(--radius-sm);
+  background:var(--bg3);
+}
+.editor-container textarea{
+  flex:1;width:100%;min-height:400px;max-height:60vh;
+  background:transparent;border:none;color:var(--text);
+  font-family:var(--font-mono);font-size:12px;line-height:1.6;
+  padding:12px;resize:vertical;outline:none;tab-size:2;
+}
+.editor-error{
+  display:none;padding:8px 12px;font-size:12px;color:var(--red);
+  background:rgba(255,82,82,.1);border-top:1px solid rgba(255,82,82,.3);
+}
+.editor-error.active{display:block}
+.editor-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+.editor-actions button{
+  padding:8px 20px;border-radius:var(--radius-sm);cursor:pointer;
+  font-family:var(--font-body);font-size:13px;transition:all .2s;
+}
+.editor-actions .cancel-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
+.editor-actions .cancel-btn:hover{border-color:var(--text2);color:var(--text)}
+.editor-actions .save-btn{background:var(--green);border:none;color:var(--bg);font-weight:600}
+.editor-actions .save-btn:hover{opacity:.85}
+.editor-actions .save-push-btn{background:#6c5ce7;border:none;color:#fff;font-weight:600}
+.editor-actions .save-push-btn:hover{opacity:.85}
 .upload-actions .confirm-btn:disabled{opacity:.4;cursor:default}
 
 /* Match Cards */
@@ -595,6 +648,7 @@ body {
       <button class="upload-btn" onclick="openUploadModal()">📤 导入Excel</button>
       <button class="push-btn" id="pushBtn" onclick="pushToGitHub()">🚀 推送GitHub</button>
       <button class="settings-btn" onclick="openSettingsModal()">⚙️</button>
+      <button class="edit-btn" onclick="openEditorModal()">📝 编辑数据</button>
       <button onclick="expandAll()">展开全部</button>
       <button onclick="collapseAll()">收起全部</button>
     </div>
@@ -602,6 +656,30 @@ body {
   <div class="match-grid" id="matchGrid"></div>
   <div class="footer">
     ⚠️ AI生成内容仅供参考，不构成投注建议 · 赔率数据来源：中国体彩官网 · 冷门压力测试
+  </div>
+</div>
+
+
+<!-- ==================== EDITOR MODAL ==================== -->
+<div class="editor-overlay" id="editorOverlay" onclick="if(event.target===this)closeEditorModal()">
+  <div class="editor-modal">
+    <h2>📝 编辑数据</h2>
+    <div class="desc">直接编辑当天或任意日期的比赛数据，保存后生效于本地；可一键推送至GitHub。</div>
+    <div class="editor-toolbar">
+      <label>选择日期：</label>
+      <select id="editorDateSelect" onchange="loadDateToEditor()"></select>
+      <button style="padding:4px 10px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text2);cursor:pointer" onclick="formatEditorJSON()">格式化</button>
+      <button style="padding:4px 10px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text2);cursor:pointer" onclick="addNewDate()">+ 新增日期</button>
+    </div>
+    <div class="editor-container">
+      <textarea id="editorTextarea" spellcheck="false" placeholder="选择日期后，数据将在此显示..."></textarea>
+      <div class="editor-error" id="editorError"></div>
+    </div>
+    <div class="editor-actions">
+      <button class="cancel-btn" onclick="closeEditorModal()">关闭</button>
+      <button class="save-btn" onclick="saveEditorData()">💾 保存本地</button>
+      <button class="save-push-btn" onclick="saveAndPush()">💾 保存 + 🚀 推送GitHub</button>
+    </div>
   </div>
 </div>
 
@@ -1582,6 +1660,93 @@ document.addEventListener('DOMContentLoaded', function() {
   const dataUrl = 'football_data.js?v=20260621e&' + Date.now();
   loadDataAndRender(dataUrl);
 });
+
+
+// ===== EDITOR FUNCTIONS =====
+function openEditorModal() {
+  const select = document.getElementById('editorDateSelect');
+  select.innerHTML = '';
+  const keys = Object.keys(ALL_DATA).sort();
+  keys.forEach(k => {
+    const opt = document.createElement('option');
+    opt.value = k;
+    opt.textContent = k.slice(0,4) + '-' + k.slice(4,6) + '-' + k.slice(6,8) + ' (' + (ALL_DATA[k].matches?.length||0) + '场)';
+    select.appendChild(opt);
+  });
+  // Default to current date
+  const today = new Date();
+  const todayKey = today.getFullYear() + String(today.getMonth()+1).padStart(2,'0') + String(today.getDate()).padStart(2,'0');
+  if (keys.includes(todayKey)) select.value = todayKey;
+
+  loadDateToEditor();
+  document.getElementById('editorOverlay').classList.add('active');
+}
+
+function closeEditorModal() {
+  document.getElementById('editorOverlay').classList.remove('active');
+}
+
+function loadDateToEditor() {
+  const key = document.getElementById('editorDateSelect').value;
+  if (!key || !ALL_DATA[key]) {
+    document.getElementById('editorTextarea').value = '';
+    return;
+  }
+  document.getElementById('editorTextarea').value = JSON.stringify(ALL_DATA[key], null, 2);
+  document.getElementById('editorError').classList.remove('active');
+}
+
+function formatEditorJSON() {
+  const ta = document.getElementById('editorTextarea');
+  try {
+    const obj = JSON.parse(ta.value);
+    ta.value = JSON.stringify(obj, null, 2);
+    document.getElementById('editorError').classList.remove('active');
+  } catch(e) {
+    showEditorError('JSON格式错误: ' + e.message);
+  }
+}
+
+function addNewDate() {
+  const dateStr = prompt('输入新日期（格式：YYYYMMDD，如20260622）：');
+  if (!dateStr || !/^\d{8}$/.test(dateStr)) return;
+  if (ALL_DATA[dateStr]) {
+    alert('该日期已存在');
+    return;
+  }
+  ALL_DATA[dateStr] = { date: dateStr.slice(0,4)+'-'+dateStr.slice(4,6)+'-'+dateStr.slice(6,8), matches: [] };
+  openEditorModal(); // Refresh select
+  document.getElementById('editorDateSelect').value = dateStr;
+  loadDateToEditor();
+}
+
+function showEditorError(msg) {
+  const el = document.getElementById('editorError');
+  el.textContent = msg;
+  el.classList.add('active');
+}
+
+function saveEditorData() {
+  const key = document.getElementById('editorDateSelect').value;
+  if (!key) return;
+
+  try {
+    const parsed = JSON.parse(document.getElementById('editorTextarea').value);
+    ALL_DATA[key] = parsed;
+    localStorage.setItem('football_data_override', JSON.stringify(ALL_DATA));
+    renderCurrentDate();
+    showPushToast('✅ 保存成功', `${key} 数据已更新到本地`, 'success');
+    return true;
+  } catch(e) {
+    showEditorError('JSON格式错误，保存失败: ' + e.message);
+    return false;
+  }
+}
+
+async function saveAndPush() {
+  if (!saveEditorData()) return;
+  await pushToGitHub();
+}
 </script>
 </body>
 </html>
