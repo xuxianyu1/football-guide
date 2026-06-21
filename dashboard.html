@@ -1174,6 +1174,20 @@ function showPushToast(title, detail, type) {
   if (type === 'error') setTimeout(() => toast.remove(), 10000);
 }
 
+async function fetchWithTimeout(url, options, timeoutMs = 30000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const resp = await fetch(url, { ...options, signal: controller.signal });
+    clearTimeout(timer);
+    return resp;
+  } catch(e) {
+    clearTimeout(timer);
+    if (e.name === 'AbortError') throw new Error('请求超时，请检查网络连接');
+    throw e;
+  }
+}
+
 async function pushToGitHub() {
   const token = localStorage.getItem('gh_token');
   if (!token) {
@@ -1189,12 +1203,15 @@ async function pushToGitHub() {
 
   try {
     // 1. Get current football_data.js SHA
-    const getResp = await fetch(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
+    const getResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
-    });
+    }, 15000);
 
     if (!getResp.ok) {
       const errData = await getResp.json().catch(() => ({}));
+      if (getResp.status === 401) throw new Error('Token无效或已过期，请重新配置');
+      if (getResp.status === 403) throw new Error('Token权限不足，需要repo权限');
+      if (getResp.status === 404) throw new Error('仓库或文件不存在');
       throw new Error(`获取文件信息失败 (${getResp.status}): ${errData.message || '未知错误'}`);
     }
 
@@ -1216,7 +1233,7 @@ async function pushToGitHub() {
     const dateStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
     const timeStr = String(today.getHours()).padStart(2,'0') + ':' + String(today.getMinutes()).padStart(2,'0');
 
-    const putResp = await fetch(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
+    const putResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
       method: 'PUT',
       headers: {
         'Authorization': `token ${token}`,
@@ -1229,10 +1246,11 @@ async function pushToGitHub() {
         sha: sha,
         branch: 'main'
       })
-    });
+    }, 30000);
 
     if (!putResp.ok) {
       const errData = await putResp.json().catch(() => ({}));
+      if (putResp.status === 409) throw new Error('文件已被其他人修改，请刷新页面后重试（SHA冲突）');
       throw new Error(`推送失败 (${putResp.status}): ${errData.message || '未知错误'}`);
     }
 
