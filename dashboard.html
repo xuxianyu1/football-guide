@@ -498,10 +498,31 @@ function decCls(d) { if(d.includes('弃盘')) return 'disc'; return 'default'; }
 function hasResult(m) { return !!(m.actual_score || m.correct); }
 function parseCorrect(c) {
   if(!c) return {normal:null, handicap:null};
-  const p = c.split('/');
-  if(p.length===2) return {normal:p[0].trim()==='-'?null:p[0].trim(), handicap:p[1].trim()==='-'?null:p[1].trim()};
-  if(p.length===1) return {normal:p[0].trim()==='-'?null:p[0].trim(), handicap:null};
-  return {normal:null, handicap:null};
+  // 格式1: "对/对" "错/错" "✅/✅" "❌/❌" "-/对" etc (用/分隔)
+  // 格式2: "普通盘:✅ | 让球盘:❌" "普通盘:- | 让球盘:-" (用|分隔，有前缀)
+  // 格式3: "✅" "❌" "❌平局" "✅客胜" (单值，无分隔)
+  // 格式4: "✅ / ✅" "❌ / ❌" (带空格/)
+  // 格式5: "弃盘/弃盘" "✅普通盘 / ❌让球盘"
+  // 统一: 先尝试|分隔
+  let nv=null, hv=null;
+  const stripLabel = s => s.replace(/^(普通盘|让球盘)\s*[:：]\s*/,'').trim();
+  const toResult = s => {
+    if(!s || s==='-' || s==='—' || s==='弃盘') return null;
+    return s;
+  };
+  if(c.includes('|')) {
+    const p = c.split('|');
+    if(p.length>=2) { nv=toResult(stripLabel(p[0])); hv=toResult(stripLabel(p[1])); }
+    else { nv=toResult(stripLabel(p[0])); }
+  } else if(c.includes('/')) {
+    const p = c.split('/');
+    if(p.length>=2) {
+      nv=toResult(stripLabel(p[0].trim())); hv=toResult(stripLabel(p[1].trim()));
+    } else { nv=toResult(stripLabel(p[0].trim())); }
+  } else {
+    nv=toResult(c.trim());
+  }
+  return {normal:nv, handicap:hv};
 }
 function hlText(t) {
   return t
