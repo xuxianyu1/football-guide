@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>⚽ FOOTCAST - 足球预测面板</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -73,6 +74,17 @@ body::after{
   padding:8px 20px;border-radius:var(--radius-sm);letter-spacing:1.5px;
   min-width:140px;text-align:center;
 }
+.date-select{
+  background:var(--green-dim);border:1px solid rgba(0,230,118,.35);color:var(--green);
+  font-family:var(--font-mono);font-size:13px;font-weight:600;
+  padding:8px 16px;border-radius:var(--radius-sm);letter-spacing:1px;
+  cursor:pointer;outline:none;min-width:160px;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%2300e676'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;
+  padding-right:32px;
+}
+.date-select option{background:var(--bg2);color:var(--text);font-family:var(--font-mono)}
 
 /* Stats */
 .stats-bar{
@@ -116,6 +128,80 @@ body::after{
   font-family:var(--font-body);font-size:12px;transition:all .2s;
 }
 .toolbar-right button:hover{border-color:var(--green);color:var(--green)}
+.upload-btn{
+  background:linear-gradient(135deg,rgba(0,230,118,.15),rgba(0,229,255,.1))!important;
+  border:1px solid rgba(0,230,118,.4)!important;color:var(--green)!important;
+  font-weight:600!important;
+}
+.upload-btn:hover{
+  background:linear-gradient(135deg,rgba(0,230,118,.25),rgba(0,229,255,.18))!important;
+  border-color:var(--green)!important;box-shadow:0 0 16px rgba(0,230,118,.2);
+}
+
+/* Upload Modal */
+.upload-overlay{
+  display:none;position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+}
+.upload-overlay.active{display:flex}
+.upload-modal{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:32px;max-width:520px;width:90%;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.upload-modal h2{
+  font-family:var(--font-display);font-size:22px;color:var(--green);
+  margin-bottom:8px;letter-spacing:1px;
+}
+.upload-modal .desc{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6}
+.upload-drop{
+  border:2px dashed var(--border2);border-radius:var(--radius-sm);
+  padding:40px 20px;text-align:center;cursor:pointer;
+  transition:all .3s;margin-bottom:20px;position:relative;
+}
+.upload-drop:hover,.upload-drop.dragover{
+  border-color:var(--green);background:var(--green-dim);
+}
+.upload-drop .icon{font-size:36px;margin-bottom:8px}
+.upload-drop .text{font-size:14px;color:var(--text2)}
+.upload-drop .text strong{color:var(--green)}
+.upload-drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-progress{
+  display:none;margin-bottom:20px;
+}
+.upload-progress.active{display:block}
+.upload-progress-bar{
+  height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:8px;
+}
+.upload-progress-fill{
+  height:100%;background:var(--green);border-radius:3px;
+  transition:width .3s;width:0;
+}
+.upload-progress-text{font-size:12px;color:var(--text2);margin-top:4px}
+.upload-result{
+  display:none;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);padding:16px;margin-bottom:16px;
+  max-height:200px;overflow-y:auto;
+}
+.upload-result.active{display:block}
+.upload-result .success{color:var(--green);font-weight:600;margin-bottom:8px}
+.upload-result .error{color:var(--red);font-weight:600;margin-bottom:8px}
+.upload-result .detail{font-size:12px;color:var(--text2);line-height:1.8}
+.upload-actions{display:flex;gap:10px;justify-content:flex-end}
+.upload-actions button{
+  padding:8px 20px;border-radius:var(--radius-sm);cursor:pointer;
+  font-family:var(--font-body);font-size:13px;transition:all .2s;
+}
+.upload-actions .cancel-btn{
+  background:var(--bg3);border:1px solid var(--border2);color:var(--text2);
+}
+.upload-actions .cancel-btn:hover{border-color:var(--text2);color:var(--text)}
+.upload-actions .confirm-btn{
+  background:var(--green);border:none;color:var(--bg);font-weight:600;
+}
+.upload-actions .confirm-btn:hover{opacity:.85}
+.upload-actions .confirm-btn:disabled{opacity:.4;cursor:default}
 
 /* Match Cards */
 .match-grid{display:flex;flex-direction:column;gap:16px}
@@ -225,7 +311,7 @@ body::after{
 .decision-score-box .scores{font-family:var(--font-mono);font-size:20px;font-weight:600;color:var(--amber);letter-spacing:3px}
 .decision-box.reviewed .decision-score-box .scores{opacity:.65}
 
-/* ===== Review Section (NEW) ===== */
+/* ===== Review Section ===== */
 .review-section{
   background:linear-gradient(135deg,rgba(0,230,118,.08),rgba(0,229,255,.06));
   border:1px solid rgba(0,230,118,.3);border-radius:var(--radius);
@@ -333,13 +419,6 @@ body::after{
 .hl-amber{color:var(--amber);font-weight:600}
 .hl-red{color:var(--red);font-weight:600}
 
-/* Post-match pending */
-.post-match{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:16px 20px}
-.post-match .label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:8px;font-weight:600}
-.result-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.pm-tag{padding:5px 14px;border-radius:6px;font-size:13px;font-weight:600;font-family:var(--font-mono)}
-.pm-tag.pending{background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
-
 /* Footer */
 .footer{text-align:center;padding:28px 0 12px;font-size:11px;color:var(--text2);border-top:1px solid var(--border2);margin-top:36px;letter-spacing:.5px}
 
@@ -436,7 +515,7 @@ body {
     </div>
     <div class="date-nav">
       <button id="prevBtn" onclick="navDate(-1)">◀</button>
-      <div class="current-date" id="currentDate"></div>
+      <select class="date-select" id="dateSelect" onchange="selectDate(this.value)"></select>
       <button id="nextBtn" onclick="navDate(1)">▶</button>
     </div>
   </div>
@@ -444,32 +523,55 @@ body {
   <div class="toolbar">
     <div class="toolbar-left">
       <span id="matchCount"></span>
-
     </div>
     <div class="toolbar-right">
+      <button class="upload-btn" onclick="openUploadModal()">📤 导入Excel</button>
       <button onclick="expandAll()">展开全部</button>
       <button onclick="collapseAll()">收起全部</button>
     </div>
   </div>
   <div class="match-grid" id="matchGrid"></div>
   <div class="footer">
-    ⚠️ AI生成内容仅供参考，不构成投注建议 · 赔率数据来源：中国体彩官网 · 冷门压力测试 v4.2
+    ⚠️ AI生成内容仅供参考，不构成投注建议 · 赔率数据来源：中国体彩官网 · 冷门压力测试
+  </div>
+</div>
+
+<!-- ==================== UPLOAD MODAL ==================== -->
+<div class="upload-overlay" id="uploadOverlay" onclick="if(event.target===this)closeUploadModal()">
+  <div class="upload-modal">
+    <h2>📤 导入Excel数据</h2>
+    <div class="desc">
+      上传预测或复盘Excel文件，系统将自动识别类型并合并到对应日期。<br>
+      <strong>复盘文件</strong>：文件名含"复盘"，日期=比赛日（文件名日期-1天）<br>
+      <strong>预测文件</strong>：文件名含"预测"，日期=文件名中的日期
+    </div>
+    <div class="upload-drop" id="uploadDrop">
+      <div class="icon">📁</div>
+      <div class="text">拖拽Excel文件到此处，或 <strong>点击选择</strong></div>
+      <input type="file" accept=".xlsx,.xls" onchange="handleFileSelect(event)" id="fileInput">
+    </div>
+    <div class="upload-progress" id="uploadProgress">
+      <div class="upload-progress-bar"><div class="upload-progress-fill" id="progressFill"></div></div>
+      <div class="upload-progress-text" id="progressText">解析中...</div>
+    </div>
+    <div class="upload-result" id="uploadResult"></div>
+    <div class="upload-actions">
+      <button class="cancel-btn" onclick="closeUploadModal()">取消</button>
+      <button class="confirm-btn" id="confirmBtn" onclick="confirmUpload()" disabled>确认导入</button>
+    </div>
   </div>
 </div>
 
 <script>
 // ===== DATA (loaded dynamically) =====
 let ALL_DATA = {};
-let _dataUrl = ''; // will be set by loader
 
 function loadDataAndRender(dataUrl) {
-  _dataUrl = dataUrl;
   const script = document.createElement('script');
   script.onload = function() {
     if (window.FOOTCAST_DATA) {
       ALL_DATA = window.FOOTCAST_DATA;
       dateKeys = Object.keys(ALL_DATA).sort();
-      // default to latest date
       currentDateKey = dateKeys[dateKeys.length - 1];
       render();
     }
@@ -483,8 +585,9 @@ function loadDataAndRender(dataUrl) {
 
 // ===== STATE =====
 let currentDateKey = "";
-let currentFilter = "all"; // "all" | "pending" | "done"
+let currentFilter = "all";
 let dateKeys = [];
+let pendingUpload = null; // {type:'review'|'predict', dateKey:'YYYYMMDD', data:object}
 
 // ===== UTILS =====
 const f = (v, d=4) => (v==null) ? '—' : Number(v).toFixed(d);
@@ -492,18 +595,12 @@ const fpct = v => (v==null) ? '—' : Math.round(v) + '%';
 const fodds = v => (v==null) ? '—' : Number(v).toFixed(2);
 function evCls(v) { if(v==null) return ''; return v>0.01?'ev-pos':v>-0.01?'ev-zero':'ev-neg'; }
 function kellyCls(v) { if(v==null) return ''; return v>0?'kelly-pos':'kelly-neg'; }
-function parseRisk(s) { const m1=s.match(/冷门压力测试v4\.2:(-?\d+)分/); if(m1) return parseInt(m1[1]); const m2=s.match(/^(-?\d+)[⚡✅🚨]/); if(m2) return parseInt(m2[1]); const m3=s.match(/^(-?\d+)\(/); if(m3) return parseInt(m3[1]); return 0; }
+function parseRisk(s) { const m1=s.match(/冷门压力测试v?[\d.]*:?(-?\d+)分/); if(m1) return parseInt(m1[1]); const m2=s.match(/^(-?\d+)[⚡✅🚨]/); if(m2) return parseInt(m2[1]); const m3=s.match(/^(-?\d+)\(/); if(m3) return parseInt(m3[1]); return 0; }
 function riskLvl(s) { return s>=9?'danger':s>=6?'caution':'safe'; }
 function decCls(d) { if(d.includes('弃盘')) return 'disc'; return 'default'; }
 function hasResult(m) { return !!(m.actual_score || m.correct); }
 function parseCorrect(c) {
   if(!c) return {normal:null, handicap:null};
-  // 格式1: "对/对" "错/错" "✅/✅" "❌/❌" "-/对" etc (用/分隔)
-  // 格式2: "普通盘:✅ | 让球盘:❌" "普通盘:- | 让球盘:-" (用|分隔，有前缀)
-  // 格式3: "✅" "❌" "❌平局" "✅客胜" (单值，无分隔)
-  // 格式4: "✅ / ✅" "❌ / ❌" (带空格/)
-  // 格式5: "弃盘/弃盘" "✅普通盘 / ❌让球盘"
-  // 统一: 先尝试|分隔
   let nv=null, hv=null;
   const stripLabel = s => s.replace(/^(普通盘|让球盘)\s*[:：]\s*/,'').trim();
   const toResult = s => {
@@ -535,6 +632,14 @@ function hlText(t) {
     .replace(/★★/g,'<span class="hl-amber">★★</span>');
 }
 
+// ===== Decision parsing: split on " / " to get [normal, handicap] =====
+function splitDecision(d) {
+  if (!d) return {normal: '', handicap: ''};
+  const idx = d.indexOf(' / ');
+  if (idx >= 0) return {normal: d.substring(0, idx).trim(), handicap: d.substring(idx + 3).trim()};
+  return {normal: d.trim(), handicap: ''};
+}
+
 // ===== FILTER =====
 function setFilter(f) {
   currentFilter = f;
@@ -546,15 +651,25 @@ function setFilter(f) {
 function render() {
   const data = ALL_DATA[currentDateKey];
   const dIdx = dateKeys.indexOf(currentDateKey);
+
+  // Update date select
+  const sel = document.getElementById('dateSelect');
+  if (sel.options.length !== dateKeys.length) {
+    sel.innerHTML = dateKeys.map(k => {
+      const d = ALL_DATA[k];
+      const label = d ? d.date : k;
+      return `<option value="${k}">${label}</option>`;
+    }).join('');
+  }
+  sel.value = currentDateKey;
+
   document.getElementById('prevBtn').disabled = dIdx <= 0;
   document.getElementById('nextBtn').disabled = dIdx >= dateKeys.length - 1;
 
   if (!data) {
     document.getElementById('matchGrid').innerHTML = '<div class="empty-state"><div class="icon">📭</div><div class="msg">当日暂无预测数据</div></div>';
-    document.getElementById('currentDate').textContent = '—';
     return;
   }
-  document.getElementById('currentDate').textContent = data.date;
   renderStats(data);
   renderMatches(data);
 }
@@ -605,13 +720,10 @@ function renderStats(data) {
 
 function renderMatches(data) {
   let ms = data.matches;
-
-
   document.getElementById('matchCount').textContent = `共 ${ms.length} / ${data.matches.length} 场`;
 
   if(ms.length===0) {
-    const msg = '当日暂无预测数据';
-    document.getElementById('matchGrid').innerHTML = `<div class="empty-state"><div class="icon">📭</div><div class="msg">${msg}</div></div>`;
+    document.getElementById('matchGrid').innerHTML = '<div class="empty-state"><div class="icon">📭</div><div class="msg">当日暂无预测数据</div></div>';
     return;
   }
 
@@ -632,7 +744,6 @@ function renderCard(m, idx) {
   const hasH = m.handicap.type && m.handicap.win_pct!=null;
   const correctInfo = parseCorrect(m.correct);
 
-  // Determine review class for card border
   let reviewCls = '';
   if(isReviewed) {
     const nOk = correctInfo.normal==='对', nErr = correctInfo.normal==='错';
@@ -649,7 +760,6 @@ function renderCard(m, idx) {
   else if(rl==='caution') cls += ' risk-warn';
   cls += reviewCls ? ' ' + reviewCls : '';
 
-  // Result tag for header
   let resultTag = '';
   if(isReviewed) {
     const nOk = correctInfo.normal==='对', nErr = correctInfo.normal==='错';
@@ -666,7 +776,6 @@ function renderCard(m, idx) {
     }
   }
 
-  // Score line in header
   let scoreLine = '';
   if(isReviewed) {
     scoreLine = `预测 <span class="pred dim">${m.score_predict}</span><span class="sep">|</span>实际 <span class="actual">${m.actual_score}</span>`;
@@ -686,10 +795,7 @@ function renderCard(m, idx) {
           ${resultTag}
         </div>
         <div class="match-teams"><span>${m.home}</span><span class="vs">VS</span><span>${m.away}</span></div>
-        <div class="match-time-row">
-          <span>📅 ${m.date} ${m.time}</span>
-          
-        </div>
+        <div class="match-time-row"><span>📅 ${m.date} ${m.time}</span></div>
       </div>
       <div class="match-meta">
         <div class="match-decision-badge ${dc}">${isReviewed ? renderBadgeDecision(m, correctInfo) : m.decision}</div>
@@ -710,35 +816,30 @@ function renderCard(m, idx) {
         </div>
         ${(hasN||hasH) ? renderTable(m) : ''}
         <div class="analysis-grid">${renderAnalysis(m)}</div>
-
       </div>
     </div>
   </div>`;
 }
 
 function renderBadgeDecision(m, ci) {
-  if (m.decision.includes('/')) {
-    const parts = m.decision.split('/').map(s => s.trim());
-    return parts.map((p, i) => {
-      const isOk = i === 0 ? ci.normal === '对' : ci.handicap === '对';
-      const isErr = i === 0 ? ci.normal === '错' : ci.handicap === '错';
-      const cls = isOk ? 'b-ok' : isErr ? 'b-err' : '';
-      return `<span class="${cls}">${p}</span>`;
-    }).join('<span class="b-sep">/</span>');
-  }
-  const isOk = ci.normal === '对' || ci.handicap === '对';
-  const isErr = ci.normal === '错' || ci.handicap === '错';
-  const cls = isOk ? 'b-ok' : isErr ? 'b-err' : '';
-  return `<span class="${cls}">${m.decision}</span>`;
+  const sp = splitDecision(m.decision);
+  const parts = [sp.normal, sp.handicap].filter(Boolean);
+  return parts.map((p, i) => {
+    const isOk = i === 0 ? ci.normal === '对' : ci.handicap === '对';
+    const isErr = i === 0 ? ci.normal === '错' : ci.handicap === '错';
+    const cls = isOk ? 'b-ok' : isErr ? 'b-err' : '';
+    return `<span class="${cls}">${p}</span>`;
+  }).join('<span class="b-sep"> / </span>');
 }
 
 function renderDecision(m) {
   const ci = parseCorrect(m.correct);
   const isReviewed = !!(m.actual_score || m.correct);
+  const sp = splitDecision(m.decision);
   let choiceHtml = '';
-  if (isReviewed && m.decision.includes('/')) {
-    const parts = m.decision.split('/').map(s => s.trim());
-    // parts[0] = normal盘方向, parts[1] = handicap盘方向
+
+  if (isReviewed) {
+    const parts = [sp.normal, sp.handicap].filter(Boolean);
     const colored = parts.map((p, i) => {
       const isOk = i === 0 ? ci.normal === '对' : ci.handicap === '对';
       const isErr = i === 0 ? ci.normal === '错' : ci.handicap === '错';
@@ -746,11 +847,6 @@ function renderDecision(m) {
       return `<span class="${cls}">${p}</span>`;
     });
     choiceHtml = colored.join(' <span style="color:var(--text3)">/</span> ');
-  } else if (isReviewed) {
-    const isOk = ci.normal === '对' || ci.handicap === '对';
-    const isErr = ci.normal === '错' || ci.handicap === '错';
-    const cls = isOk ? 'dec-ok' : isErr ? 'dec-err' : '';
-    choiceHtml = `<span class="${cls}">${m.decision}</span>`;
   } else {
     choiceHtml = m.decision;
   }
@@ -802,7 +898,6 @@ function renderRisk(m, score, level) {
   const tags = [];
   let detail = '';
   let isCompact = false;
-  // Detect format: old format has " | " separators and "=value" pairs
   if (s.includes(' | ')) {
     const parts = s.split(' | ');
     parts.forEach(p => {
@@ -815,7 +910,6 @@ function renderRisk(m, score, level) {
     const dm = s.match(/各项得分明细=(.*)/);
     detail = dm?dm[1]:'';
   } else {
-    // New compact format: "5⚡C1+(3)+C3c(1)+..." or "0(普通盘未开售...)"
     isCompact = true;
     const compactMatch = s.match(/^(-?\d+)[⚡✅🚨]?(.*)/);
     if (compactMatch) {
@@ -829,7 +923,7 @@ function renderRisk(m, score, level) {
       }
     }
   }
-  const levelText = score>=12?'🚨强制弃盘':score>=9?'🚨强制弃盘':score>=6?'⚠️建议弃盘':score>=3?'⚡冷门警惕':'✅正常';
+  const levelText = score>=9?'🚨强制弃盘':score>=6?'⚠️建议弃盘':score>=3?'⚡冷门警惕':'✅正常';
 
   return `
   <div class="risk-section">
@@ -838,7 +932,7 @@ function renderRisk(m, score, level) {
         <div class="risk-gauge ${level}">${score}</div>
         <div class="risk-info">
           <div class="risk-level ${level}">${levelText}</div>
-          <div class="risk-desc">冷门压力测试 v4.2</div>
+          <div class="risk-desc">冷门压力测试</div>
         </div>
       </div>
       ${tags.length?`<div class="risk-tags">${tags.map(t=>`<span class="risk-tag ${t.c}">${t.text}</span>`).join('')}</div>`:''}
@@ -924,8 +1018,6 @@ function renderAnalysis(m) {
   `).join('');
 }
 
-
-
 // ===== INTERACTIONS =====
 function toggle(idx) { document.getElementById('mc-'+idx).classList.toggle('expanded'); }
 function expandAll() { document.querySelectorAll('.match-card').forEach(c=>c.classList.add('expanded')); }
@@ -935,23 +1027,322 @@ function navDate(dir) {
   const ni = i + dir;
   if(ni>=0 && ni<dateKeys.length) { currentDateKey = dateKeys[ni]; render(); }
 }
+function selectDate(key) {
+  if (key && ALL_DATA[key]) { currentDateKey = key; render(); }
+}
+
+// ===== EXCEL UPLOAD =====
+function openUploadModal() {
+  document.getElementById('uploadOverlay').classList.add('active');
+  document.getElementById('uploadProgress').classList.remove('active');
+  document.getElementById('uploadResult').classList.remove('active');
+  document.getElementById('uploadResult').innerHTML = '';
+  document.getElementById('confirmBtn').disabled = true;
+  document.getElementById('fileInput').value = '';
+  pendingUpload = null;
+}
+function closeUploadModal() {
+  document.getElementById('uploadOverlay').classList.remove('active');
+  pendingUpload = null;
+}
+
+// Drag and drop
+const drop = document.getElementById('uploadDrop');
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+drop.addEventListener('dragleave', () => { drop.classList.remove('dragover'); });
+drop.addEventListener('drop', e => {
+  e.preventDefault(); drop.classList.remove('dragover');
+  if (e.dataTransfer.files.length) processExcelFile(e.dataTransfer.files[0]);
+});
+
+function handleFileSelect(e) {
+  if (e.target.files.length) processExcelFile(e.target.files[0]);
+}
+
+function processExcelFile(file) {
+  const name = file.name;
+  // Detect type from filename
+  let fileType = null;
+  let fileDateStr = null;
+  let dateKey = null;
+
+  const reviewMatch = name.match(/复盘[_\-]?(\d{8})/);
+  const predictMatch = name.match(/预测[_\-]?(\d{8})/);
+
+  if (reviewMatch) {
+    fileType = 'review';
+    fileDateStr = reviewMatch[1]; // generation date
+    // For review: data key = generation date - 1 day
+    const genDate = new Date(fileDateStr.substring(0,4)+'-'+fileDateStr.substring(4,6)+'-'+fileDateStr.substring(6,8));
+    genDate.setDate(genDate.getDate() - 1);
+    const y = genDate.getFullYear();
+    const m = String(genDate.getMonth()+1).padStart(2,'0');
+    const d = String(genDate.getDate()).padStart(2,'0');
+    dateKey = y + m + d;
+  } else if (predictMatch) {
+    fileType = 'predict';
+    fileDateStr = predictMatch[1]; // match date
+    dateKey = fileDateStr;
+  } else {
+    showUploadResult(false, '无法识别文件类型：文件名需包含"复盘"或"预测"+日期(如复盘_20260621.xlsx)');
+    return;
+  }
+
+  // Show progress
+  document.getElementById('uploadProgress').classList.add('active');
+  document.getElementById('progressFill').style.width = '30%';
+  document.getElementById('progressText').textContent = '读取Excel文件...';
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      document.getElementById('progressFill').style.width = '60%';
+      document.getElementById('progressText').textContent = '解析数据...';
+
+      const wb = XLSX.read(e.target.result, {type:'array'});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rawRows = XLSX.utils.sheet_to_json(ws, {header:1, defval:null});
+
+      document.getElementById('progressFill').style.width = '80%';
+      document.getElementById('progressText').textContent = '转换数据结构...';
+
+      // Parse matches from Excel
+      const matches = parseExcelRows(rawRows, fileType);
+
+      if (matches.length === 0) {
+        showUploadResult(false, '未解析到有效比赛数据');
+        return;
+      }
+
+      const existingDate = ALL_DATA[dateKey];
+      const dateDisplay = dateKey.substring(0,4)+'-'+dateKey.substring(4,6)+'-'+dateKey.substring(6,8);
+
+      let detail = '';
+      if (fileType === 'review') {
+        detail = `文件名日期: ${fileDateStr} → 比赛日: ${dateDisplay}\n`;
+        detail += `解析到 ${matches.length} 场复盘数据\n`;
+        if (existingDate) {
+          detail += `已有数据 ${existingDate.matches.length} 场，将合并复盘信息（实际比分/盘口结果/对错/归因）`;
+        } else {
+          detail += `该日期尚无数据，将新增日期条目`;
+        }
+      } else {
+        detail = `预测日期: ${dateDisplay}\n`;
+        detail += `解析到 ${matches.length} 场预测数据\n`;
+        if (existingDate) {
+          detail += `已有数据 ${existingDate.matches.length} 场，将覆盖替换`;
+        } else {
+          detail += `将新增日期条目`;
+        }
+      }
+
+      pendingUpload = {type: fileType, dateKey: dateKey, dateDisplay: dateDisplay, matches: matches, fileName: name};
+      showUploadResult(true, detail);
+
+    } catch(err) {
+      showUploadResult(false, '解析Excel失败: ' + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function parseExcelRows(rows, fileType) {
+  // Column mapping (0-indexed):
+  // A(0):seq B(1):date C(2):league D(3):home E(4):away F(5):time
+  // G-L:analysis M(12):type N(13):win% O(14):draw% P(15):lose%
+  // Q(16):win_odds R(17):draw_odds S(18):lose_odds
+  // T(19):ev_win U(20):ev_draw V(21):ev_lose
+  // W(22):kelly_win X(23):kelly_draw Y(24):kelly_lose
+  // Z(25):risk_signal AA(26):decision AB(27):score_predict
+  // AC(28):actual_score AD(29):handicap_result AE(30):correct AF(31):attribution
+
+  const matches = [];
+  let currentMatch = null;
+
+  for (let i = 1; i < rows.length; i++) { // skip header
+    const r = rows[i];
+    if (!r || !r[0] && !r[12] && !r[3]) continue; // skip empty rows
+
+    const seq = r[0];
+    const home = r[3];
+    const away = r[4];
+    const typeCol = r[12] ? String(r[12]) : '';
+
+    const isSecondRow = !seq && !home && !away && (typeCol.includes('让') || typeCol.includes('未开售'));
+
+    if (!isSecondRow) {
+      // First row of a match (or only row)
+      if (currentMatch) matches.push(currentMatch);
+
+      const dateStr = r[1] ? String(r[1]) : '';
+      const timeStr = r[5] ? String(r[5]) : '';
+
+      currentMatch = {
+        seq: seq || matches.length + 1,
+        date: dateStr,
+        league: r[2] || '',
+        home: home || '',
+        away: away || '',
+        time: timeStr,
+        analysis: {
+          handicap: r[6] || '', bifad: r[7] || '', injury: r[8] || '',
+          tactical: r[9] || '', form: r[10] || '', uncertain: r[11] || ''
+        },
+        normal: parseMarketData(r, 12, 13),
+        handicap: {type:'', win_pct:0, draw_pct:0, lose_pct:0, win_odds:0, draw_odds:0, lose_odds:0, ev_win:0, ev_draw:0, ev_lose:0, kelly_win:0, kelly_draw:0, kelly_lose:0},
+        risk_signal: r[25] ? String(r[25]) : '',
+        decision: r[26] ? normalizeDecision(String(r[26])) : '',
+        score_predict: r[27] ? String(r[27]) : '',
+        actual_score: r[28] ? String(r[28]) : '',
+        handicap_result: r[29] ? String(r[29]) : '',
+        correct: r[30] ? String(r[30]) : '',
+        attribution: r[31] ? String(r[31]) : ''
+      };
+
+      // If type column indicates normal market not available, set handicap only
+      if (typeCol.includes('未开售')) {
+        currentMatch.normal = {type: typeCol, win_pct:null, draw_pct:null, lose_pct:null, win_odds:null, draw_odds:null, lose_odds:null, ev_win:null, ev_draw:null, ev_lose:null, kelly_win:null, kelly_draw:null, kelly_lose:null};
+      }
+    } else {
+      // Second row - handicap data
+      if (currentMatch) {
+        const handicapData = parseMarketData(r, 12, 13);
+        handicapData.type = typeCol;
+        currentMatch.handicap = handicapData;
+        // Also update review fields from second row if present
+        if (r[28] && !currentMatch.actual_score) currentMatch.actual_score = String(r[28]);
+        if (r[29] && !currentMatch.handicap_result) currentMatch.handicap_result = String(r[29]);
+        if (r[30] && !currentMatch.correct) currentMatch.correct = String(r[30]);
+        if (r[31] && !currentMatch.attribution) currentMatch.attribution = String(r[31]);
+      }
+    }
+  }
+  if (currentMatch) matches.push(currentMatch);
+
+  return matches;
+}
+
+function parseMarketData(row, typeIdx, pctStartIdx) {
+  const type = row[typeIdx] ? String(row[typeIdx]) : '';
+  const wpct = row[13] != null ? Math.round(Number(row[13]) * 100) : null;
+  const dpct = row[14] != null ? Math.round(Number(row[14]) * 100) : null;
+  const lpct = row[15] != null ? Math.round(Number(row[15]) * 100) : null;
+
+  return {
+    type: type,
+    win_pct: wpct, draw_pct: dpct, lose_pct: lpct,
+    win_odds: row[16] != null ? Number(row[16]) : null,
+    draw_odds: row[17] != null ? Number(row[17]) : null,
+    lose_odds: row[18] != null ? Number(row[18]) : null,
+    ev_win: row[19] != null ? Number(row[19]) : null,
+    ev_draw: row[20] != null ? Number(row[20]) : null,
+    ev_lose: row[21] != null ? Number(row[21]) : null,
+    kelly_win: row[22] != null ? Number(row[22]) : null,
+    kelly_draw: row[23] != null ? Number(row[23]) : null,
+    kelly_lose: row[24] != null ? Number(row[24]) : null,
+  };
+}
+
+function normalizeDecision(d) {
+  if (!d) return d;
+  // Strip common prefixes
+  d = d.replace(/普通盘[：:]/g, '').replace(/让球盘[：:]/g, '');
+  // Remove parenthetical explanations
+  d = d.replace(/（[^）]*）/g, '').replace(/\([^)]*\)/g, '');
+  // Normalize 客负 → 主胜
+  d = d.replace(/客负/g, '主胜');
+  return d.trim();
+}
+
+function showUploadResult(success, detail) {
+  document.getElementById('uploadProgress').classList.add('active');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = '解析完成';
+
+  const resultEl = document.getElementById('uploadResult');
+  resultEl.classList.add('active');
+  resultEl.innerHTML = `<div class="${success?'success':'error'}">${success?'✅ 解析成功':'❌ 解析失败'}</div><div class="detail">${detail.replace(/\n/g,'<br>')}</div>`;
+
+  document.getElementById('confirmBtn').disabled = !success;
+}
+
+function confirmUpload() {
+  if (!pendingUpload) return;
+
+  const {type, dateKey, dateDisplay, matches} = pendingUpload;
+
+  if (type === 'review') {
+    // Merge review data into existing matches
+    if (!ALL_DATA[dateKey]) {
+      // No existing data - create a minimal date entry
+      ALL_DATA[dateKey] = {
+        date: dateDisplay,
+        matches: matches
+      };
+    } else {
+      // Merge: update existing matches with review info
+      const existing = ALL_DATA[dateKey].matches;
+      matches.forEach(nm => {
+        // Find matching match by seq or home+away
+        const found = existing.find(em =>
+          em.seq === nm.seq || (em.home === nm.home && em.away === nm.away)
+        );
+        if (found) {
+          if (nm.actual_score) found.actual_score = nm.actual_score;
+          if (nm.handicap_result) found.handicap_result = nm.handicap_result;
+          if (nm.correct) found.correct = nm.correct;
+          if (nm.attribution) found.attribution = nm.attribution;
+          // Also update prediction fields if they were empty before
+          if (!found.decision && nm.decision) found.decision = nm.decision;
+          if (!found.score_predict && nm.score_predict) found.score_predict = nm.score_predict;
+          if (!found.risk_signal && nm.risk_signal) found.risk_signal = nm.risk_signal;
+        } else {
+          // New match not in existing data - add it
+          existing.push(nm);
+        }
+      });
+    }
+  } else {
+    // Predict: replace entire date entry
+    ALL_DATA[dateKey] = {
+      date: dateDisplay,
+      matches: matches
+    };
+  }
+
+  // Refresh date keys and render
+  dateKeys = Object.keys(ALL_DATA).sort();
+  currentDateKey = dateKey;
+  render();
+
+  closeUploadModal();
+
+  // Also save to localStorage for persistence
+  try {
+    localStorage.setItem('footcast_data', JSON.stringify(ALL_DATA));
+  } catch(e) { /* quota exceeded, ignore */ }
+}
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
-  // Load data dynamically — dataUrl will be injected when generating the page link
-  const dataUrl = 'football_data.js?v=20260620d&' + Date.now();
-  if (dataUrl && dataUrl !== '__DATA_URL__') {
-    loadDataAndRender(dataUrl);
-  } else {
-    // Fallback: try loading from same directory
-    const scripts = document.querySelectorAll('script[data-data-url]');
-    const url = scripts.length ? scripts[0].dataset.dataUrl : null;
-    if (url) {
-      loadDataAndRender(url);
-    } else {
-      document.getElementById('matchGrid').innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><div class="msg">数据加载中...</div></div>';
+  // Try loading from localStorage first
+  try {
+    const saved = localStorage.getItem('footcast_data');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Object.keys(parsed).length > 0) {
+        ALL_DATA = parsed;
+        dateKeys = Object.keys(ALL_DATA).sort();
+        currentDateKey = dateKeys[dateKeys.length - 1];
+        render();
+        return;
+      }
     }
-  }
+  } catch(e) {}
+
+  // Fallback: load from football_data.js
+  const dataUrl = 'football_data.js?v=20260621e&' + Date.now();
+  loadDataAndRender(dataUrl);
 });
 </script>
 </body>

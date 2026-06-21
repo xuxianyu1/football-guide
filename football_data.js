@@ -101,7 +101,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "热门深盘低赔却升水信号",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/4-0",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
@@ -154,7 +154,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "无明显弃盘信号",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
@@ -318,7 +318,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "皇马筹码过热(>65%)|客胜1.54接近1.57死亡区间|让负凯利0.94安全区间",
-        "decision": "皇马不败 / 让负(主队让+1，比分0-2→让后1-2客胜)",
+        "decision": "客胜或平局 / 让负",
         "score_predict": "1-0/1-1/2-1 / -",
         "actual_score": "0-2",
         "handicap_result": "皇马胜/让负",
@@ -371,7 +371,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赔率1.35危险区间(1.30-1.35)|必发成交>75%大热必死|夺冠背景诱盘",
-        "decision": "国米胜(谨慎) / 让胜(主队让-2，比分3-0→让后1-0主胜≥3球)",
+        "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1 / -",
         "actual_score": "2-0",
         "handicap_result": "国米胜/让平",
@@ -424,7 +424,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "退盘升水诱上盘|里昂主场热度高|平赔3.50接近敏感值|主胜2.00触及关口",
-        "decision": "分胜负(倾向客) / 让负(主队让-1，比分1-2→让后0-2客胜)",
+        "decision": "分胜负 / 让负",
         "score_predict": "0-1/1-2/2-3 / -",
         "actual_score": "4-2",
         "handicap_result": "里昂胜/让胜",
@@ -477,7 +477,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "热刺11人伤停灾难级|维拉欧联分心|平赔3.40接近敏感值|投注分歧",
-        "decision": "热刺不败 / 让负(主队让-1，比分1-2→让后0-2客胜)",
+        "decision": "客胜或平局 / 让负",
         "score_predict": "1-1/1-2/2-2 / -",
         "actual_score": "1-2",
         "handicap_result": "热刺胜/让负",
@@ -530,7 +530,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "退盘升水|多特6人伤停|客胜1.54接近死亡区间|主胜4.3+平赔4.05冷门组合",
-        "decision": "多特胜 / 让平(主队让+1，比分0-1→让后1-1平)",
+        "decision": "客胜 / 让平",
         "score_predict": "2-1/1-1/2-0 / -",
         "actual_score": "1-0",
         "handicap_result": "门兴胜/让胜",
@@ -588,7 +588,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "①赔率1.61位于危险区间；②EV胜-0.678负值大；③主队5连败495分钟主场不进球；④主胜55%热度偏大。普通盘跟客胜，让球盘让负。",
-        "decision": "普通盘：客胜 / 让球盘：让负",
+        "decision": "客胜 / 让负",
         "score_predict": "普通盘：0-1/0-2/1-2 / 让球盘：0-0/0-2/1-3",
         "actual_score": "",
         "handicap_result": "",
@@ -641,7 +641,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "①客胜83%大热，必发高温≠必胜；②客队欧冠分心+防线伤停；③让负需客赢2球+门槛高。普通盘跟客胜，让球盘让负。",
-        "decision": "普通盘：客胜 / 让球盘：让负",
+        "decision": "客胜 / 让负",
         "score_predict": "普通盘：0-2/0-3/1-3 / 让球盘：0-2/0-3/1-3",
         "actual_score": "",
         "handicap_result": "",
@@ -694,7 +694,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "①主胜70%市场过热；②主队多名主力伤缺恐难大胜；③让-1需净胜2球+难度大。普通盘主胜，让球盘让平。",
-        "decision": "普通盘：主胜 / 让球盘：让平",
+        "decision": "主胜 / 让平",
         "score_predict": "普通盘：1-0/2-1/3-2 / 让球盘：1-0/2-1/3-2",
         "actual_score": "",
         "handicap_result": "",
@@ -747,7 +747,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "①平赔3.00平局热度高；②主队中场核心停赛；③让+1让负需客赢2球+但客队战意不足。普通盘客胜，让球盘让负。",
-        "decision": "普通盘：客胜 / 让球盘：让负",
+        "decision": "客胜 / 让负",
         "score_predict": "普通盘：0-2/0-3/1-3 / 让球盘：0-2/0-3/1-3",
         "actual_score": "",
         "handicap_result": "",
@@ -800,7 +800,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "①客队杯赛分心联赛留力；②主队主场2026年0胜；③历史交锋3连败；④让+1让胜只需主队不败。普通盘主胜，让球盘让胜。",
-        "decision": "普通盘：主胜 / 让球盘：让胜",
+        "decision": "主胜 / 让胜",
         "score_predict": "普通盘：1-0/2-1/2-0 / 让球盘：1-0/2-1/2-0",
         "actual_score": "",
         "handicap_result": "",
@@ -858,7 +858,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "#投注过热 #赔率1.50区间 #弱队水位不动 #客胜赔率低赔陷阱 #芬超开局不确定性",
-        "decision": "普通盘：客胜 / 让球盘：让负",
+        "decision": "客胜 / 让负",
         "score_predict": "0-2 / 0-3 / 1-3",
         "actual_score": "2-0",
         "handicap_result": "胜/让胜",
@@ -911,7 +911,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "#阵容大面积缺阵 #体能鸿沟 #投注热度适中 #历史交锋客队碾压 #附加赛关键战",
-        "decision": "普通盘：客胜 / 让球盘：让负",
+        "decision": "客胜 / 让负",
         "score_predict": "0-1 / 0-2 / 1-2",
         "actual_score": "0-1",
         "handicap_result": "负/让负",
@@ -964,7 +964,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "#深盘高水阻上 #战意差距悬殊 #历史交锋客队碾压 #联赛唯一不败 #本泽马复出利好",
-        "decision": "普通盘：客胜 / 让球盘：让负",
+        "decision": "客胜 / 让负",
         "score_predict": "0-3 / 1-4 / 0-4",
         "actual_score": "1-2",
         "handicap_result": "负/让胜",
@@ -1017,7 +1017,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "#升盘降水造热 #欧冠半决赛生死战 #核心伤缺 #主场强势 #马竞客场虫属性",
-        "decision": "普通盘：主胜 / 让球盘：让平",
+        "decision": "主胜 / 让平",
         "score_predict": "2-1 / 3-2 / 1-0",
         "actual_score": "1-0",
         "handicap_result": "胜/让平",
@@ -1075,7 +1075,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "普通盘弃盘：盘口浅开0.25→平手+赔率上升2.25示弱；让球盘弃盘：盘口偏深需净胜2球；分胜负倾向+让平概率较高",
-        "decision": "普通盘3/0；让-1让平优先（让平EV=0.2864最高）",
+        "decision": "分胜负 / 让平",
         "score_predict": "普通盘:2-0/1-0/0-1；让球盘:1-0(让平)/2-1(让平)/2-0(让胜)",
         "actual_score": "3-1",
         "handicap_result": "主胜",
@@ -1128,7 +1128,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "普通盘弃盘：赔率1.24蚊子肉+支持率67%过热+刚负弱旅状态存疑；让球盘弃盘：盘口极深(球半/两球)+客队可能死守大巴",
-        "decision": "普通盘主胜3+球；让-1让胜优先（让胜EV=0.157+盘深防范）",
+        "decision": "主胜 / 让胜",
         "score_predict": "普通盘:2-0/3-0/3-1；让球盘:2-0(让胜)/3-1(让胜)/3-0(让胜)",
         "actual_score": "3-1",
         "handicap_result": "主胜",
@@ -1181,7 +1181,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "普通盘弃盘：16场无平局宿命+巴黎反击致命+拜仁需逆转；让球盘弃盘：让胜EV=-0.1222为负+市场倾向让负",
-        "decision": "普通盘分胜负3/0；让-1让平优先（让平EV=0.1144最高）",
+        "decision": "分胜负 / 让平",
         "score_predict": "普通盘:2-1/1-2/3-1；让球盘:1-0(让平)/2-1(让平)/1-1(让负)",
         "actual_score": "1-1",
         "handicap_result": "平局",
@@ -4147,7 +4147,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "普通盘未开售",
-        "decision": "让胜(谨慎) / 让胜",
+        "decision": "主胜 / 让胜",
         "score_predict": "3-0, 4-1, 4-0",
         "actual_score": "5-1",
         "handicap_result": "主胜 / 让胜",
@@ -4200,7 +4200,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "决赛单场变数大，曼城近两届决赛均失利，瓜帅可能离任增加不确定性",
-        "decision": "客胜(搏让平) / 让平",
+        "decision": "客胜 / 让平",
         "score_predict": "1-2, 2-3",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
@@ -4470,7 +4470,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R28弱队隐藏优势：狼队已降级可能出工不出力 | R03投注过热：客胜成交51%略高需防",
-        "decision": "客胜 / 让平/让负",
+        "decision": "客胜 / 让平或让负",
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
@@ -4523,7 +4523,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R02弱队水位持续下降：埃弗顿主场大热但主胜成交仅52%信心不足 | R05核心缺阵",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/2-1/3-0",
         "actual_score": "1-3",
         "handicap_result": "客胜 / 让负",
@@ -4576,7 +4576,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R01盘口深开诱主：主让1球过深+主胜63%大热 | R04赔率反向",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/2-1/3-0",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
@@ -4682,7 +4682,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R08升盘降水：毕尔巴鄂让0.5球盘口偏深 | R12派系诱导",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
@@ -4735,7 +4735,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R14弱队深盘：阿拉维斯客场被严重低估 | R28弱队隐藏优势",
-        "decision": "客胜 / 让平/让负",
+        "decision": "客胜 / 让平或让负",
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
@@ -4788,7 +4788,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R01盘口深开诱主：马竞让1球过深 | R03投注过热：主胜77%大热倒灶风险",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -4841,7 +4841,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R10平赔适中：保级生死战平局意义有限 | R29初盘偏浅",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
@@ -4947,7 +4947,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R14弱队深盘：赫塔费欧联战意被低估 | R05核心缺阵",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -5000,7 +5000,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R04强队赔率反升：皇马赔率从2.10升至2.15 | R05核心缺阵：皇马7人伤停",
-        "decision": "客胜 / 让平/让负",
+        "decision": "客胜 / 让平或让负",
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
@@ -5053,7 +5053,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R02弱队水位下降：巴伦西亚状态回升被低估 | R10平赔适中",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "3-4",
         "handicap_result": "客胜 / 让负",
@@ -5974,7 +5974,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R01退盘升水诱上盘+R05核心阵容缺阵（主队门将+前锋缺阵），双重预警信号。",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/2-1/1-0",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
@@ -6350,7 +6350,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "客队实力优势明显(芬超霸主)，但7人伤停削弱战力；主队主场韧性足；让球盘+1主队受让，关注让胜机会。",
-        "decision": "客胜 / 让平/让负",
+        "decision": "客胜 / 让平或让负",
         "score_predict": "0-2/1-2/0-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让胜",
@@ -6403,7 +6403,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "主队9连胜交锋碾压+主场强势，但赔率1.32属低赔区间(1.33-1.50陷阱)需防；客队中场双核停赛致命；让-1盘口深开关注让平可能。",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
@@ -6456,7 +6456,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "附加赛首回合双方保守；主队4人伤停削弱战力但主场龙属性强；客队金靴可出战；盘口平手示弱主队，关注主队不败机会。",
-        "decision": "平局/主胜 / 让胜",
+        "decision": "平局或主胜 / 让胜",
         "score_predict": "1-1/2-1/1-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让胜",
@@ -6509,7 +6509,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "主队弗兰基主场3连胜零封客队，心理优势巨大；但进攻效率联赛倒数；客队中场双核缺阵；盘口平手示弱客队，关注主队不败。",
-        "decision": "平局/主胜 / 让胜",
+        "decision": "平局或主胜 / 让胜",
         "score_predict": "1-1/2-1/1-0",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
@@ -6562,7 +6562,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "主队状态火热4-0大胜里昂+战意拉满；客队分心保级+防线残缺；让-1盘口合理；法国杯决赛单场偶然性存在，关注让平可能。",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让胜",
@@ -6620,7 +6620,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R03必发过热86%+3名核心伤缺+收官战轮换 | 冷门压力测试v2.1:11分(建议弃盘)",
-        "decision": "平局/客胜 / 让负 ⚠️弃盘(11分)",
+        "decision": "平局或客胜 / 让负",
         "score_predict": "1-1 / 0-1 / 1-2",
         "actual_score": "4-2",
         "handicap_result": "主胜 / 让胜",
@@ -6673,7 +6673,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "R03必发过热87%+门将缺阵+3名核心伤缺 | 冷门压力测试v2.1:13分(强制弃盘)",
-        "decision": "平局/客胜 / 让负 ⚠️弃盘(13分)",
+        "decision": "平局或客胜 / 让负",
         "score_predict": "1-1 / 1-2 / 0-1",
         "actual_score": "3-0",
         "handicap_result": "主胜 / 让胜",
@@ -6726,7 +6726,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "主场胜率28%与盘口深开背离+塞维利亚防线崩盘 | 冷门压力测试v2.1:1分(正常)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1 / 1-0 / 2-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -6779,7 +6779,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "国米2名核心轮换+交锋1-1心理默契 | 冷门压力测试v2.1:7分(AA加冷门)",
-        "decision": "平局/客胜 / 让胜/让平",
+        "decision": "平局或客胜 / 让胜或让平",
         "score_predict": "1-1 / 0-0 / 2-2",
         "actual_score": "3-3",
         "handicap_result": "平局 / 让胜",
@@ -6943,7 +6943,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C8a真正无欲+1;C8b-3客场收官+1;C9赛季末轮+1;C3a赔率<1.40+必发>65%→+1;C4b必发>80%→+2 | 冷门压力测试v3.2:6分(必须加冷门)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0 / 3-1 / 1-0",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让胜",
@@ -6996,7 +6996,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C4a必发65-80%→+1;C9赛季末轮+1;C3a赔率<1.40+必发>65%→+1;C8a真正无欲+1;C8b-3客场收官+1 | 冷门压力测试v3.2:5分(冷门警惕)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0 / 2-1 / 1-0",
         "actual_score": "2-3",
         "handicap_result": "客胜 / 让负",
@@ -7155,7 +7155,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C9赛季末轮+1;C4a必发65-80%→+1;C8b-2瓜帅告别战+1;C1.5维拉轮换+1;C3b赔率1.40-1.50+必发>65%→+1 | 冷门压力测试v3.2:5分(冷门警惕)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "3-1 / 2-0 / 4-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
@@ -7261,7 +7261,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C9赛季末轮+1;C8a双方均已降级无欲+1 | 冷门压力测试v3.2:2分(正常)",
-        "decision": "主胜/平局 / 让平/让负",
+        "decision": "主胜或平局 / 让平或让负",
         "score_predict": "1-0 / 1-1 / 2-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
@@ -7314,7 +7314,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C9赛季末轮+1;C4a必发65-80%→+1;C8a阿森纳已夺冠无压力+1;C1.5阿森纳大幅轮换+2;C7a赔率<1.50且主EV负→+1;C3a赔率<1.40+必发>65%→+1 | 冷门压力测试v3.2:7分(必须加冷门)",
-        "decision": "主胜/平局 / 让胜",
+        "decision": "主胜或平局 / 让胜",
         "score_predict": "1-1 / 2-1 / 1-0",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
@@ -7420,7 +7420,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C9赛季末轮+1;C4a必发65-80%→+1;C8b-1主场收官保级战+2;C6主场龙(客队热门)+2;C1热刺9人伤缺含多名核心+3;C1.5埃弗顿防线3人缺阵+1;C1.5双方残阵-2 | 冷门压力测试v3.2:9分(建议弃盘)",
-        "decision": "主胜/平局 / 让平/让负 ⚠️弃盘(9分)",
+        "decision": "主胜或平局 / 让平或让负",
         "score_predict": "1-1 / 2-1 / 1-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -7579,7 +7579,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C9赛季末轮+1;C4b必发>80%→+2;C3a赔率<1.40+必发>65%→+1;C8a克里斯蒂无欲+1;C6客场热门+2;C1克里斯蒂7人伤缺+1;C1.5双方残阵-1 | 冷门压力测试v3.2:8分(建议弃盘)",
-        "decision": "客胜 / 让负 ⚠️弃盘(8分)",
+        "decision": "客胜 / 让负",
         "score_predict": "0-2 / 1-3 / 0-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
@@ -7632,7 +7632,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C9赛季末轮+1;C4a必发65-80%→+1;C8a热那亚已保级无欲+1;C8b-1莱切主场收官+2 | 冷门压力测试v3.2:5分(冷门警惕)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1 / 1-0 / 3-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -7738,7 +7738,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C9赛季末轮+1;C4a必发65-80%→+1;C8a都灵已保级无欲+1;C1尤文3主力缺阵+3;C11德比战+1;C6客场热门+2;C1.5双方残阵-2 | 冷门压力测试v3.2:7分(必须加冷门)",
-        "decision": "客胜/平局 / 让负/让平",
+        "decision": "客胜或平局 / 让负或让平",
         "score_predict": "1-2 / 1-1 / 0-1",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让胜",
@@ -7897,7 +7897,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C9赛季末轮+1;C4a必发65-80%→+1;C8a双方同分争季军+1;C1.5马竞阵容不整+1;C8b-1主场收官+1;C1.5双方残阵-1 | 冷门压力测试v3.2:4分(冷门警惕)",
-        "decision": "主胜/平局 / 让胜/让平",
+        "decision": "主胜或平局 / 让胜或让平",
         "score_predict": "2-1 / 1-1 / 3-1",
         "actual_score": "5-1",
         "handicap_result": "主胜 / 让胜",
@@ -8220,7 +8220,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "| 冷门压力测试v3.2:6分(⚠️建议弃盘) | 哥德堡7人伤停含核心前腰，米亚尔比客场3连胜状态火热",
-        "decision": "⚠️建议弃盘(6分) 客胜 / 让平",
+        "decision": "客胜 / 让平",
         "score_predict": "1-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
@@ -8437,7 +8437,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "冷门压力测试v3.3: 5分 | ⚡冷门警惕 | C2门将缺阵+3 C1.5多主力+1 C9附加赛+1 C10c冷门状态强+2 H2冷门方核心缺阵-2",
-        "decision": "主胜/让平 | ⚡冷门警惕(5分)",
+        "decision": "主胜 / 让平",
         "score_predict": "2-1/1-0/2-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
@@ -8490,7 +8490,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "冷门压力测试v3.3: 8分 | ⚠️建议弃盘 | C1热门方5主力伤停+3 C1.5多主力+1 C6a主队主场龙71%+2 C8d杯赛后+1 C9附加赛+1 C10h热门方近3场不胜+1 H2冷门方核心缺阵-1",
-        "decision": "⚠️建议弃盘(8分) 客胜/平局 / 让负/让平",
+        "decision": "客胜或平局 / 让负或让平",
         "score_predict": "1-2/0-1/1-1",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
@@ -8543,7 +8543,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "冷门压力测试v3.3: 5分 | ⚡冷门警惕 | C1热门方核心伤缺+3 C9收官+1 C10c冷门状态强+2 C10f冷门方不败+1 C10h热门方3连败+1",
-        "decision": "主胜/平局 / 让平 | ⚡冷门警惕(5分)",
+        "decision": "主胜或平局 / 让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -8596,7 +8596,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "冷门压力测试v3.3: 2分 | ✅正常 | C3a极低赔+过热+1 C4a必发65%+1 C7a低赔+EV负+1 C9收官+1 H1a战意悬殊-2",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "3-0/2-0/2-1",
         "actual_score": "3-2",
         "handicap_result": "主胜 / 让平",
@@ -8755,7 +8755,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "冷门压力测试v3.3: 1分 | ✅正常 | C9收官+1",
-        "decision": "主胜/平局 / 让胜/让平",
+        "decision": "主胜或平局 / 让胜或让平",
         "score_predict": "2-1/1-1/2-0",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
@@ -8813,7 +8813,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "无核心伤缺(Doucouré/Nketiah均为轮换) | 冷门压力测试v3.3:0分(✅正常预测)",
-        "decision": "平局/客胜 / 让负",
+        "decision": "平局或客胜 / 让负",
         "score_predict": "1-1/0-1/1-2",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -8866,7 +8866,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C1+3(Mercado核心中场+Schunke后防队长)+C2+3(门将Villar,替代C1不叠加)+C1.5+1(2核心额外)+H1a-2(热门强战意+冷门无欲) | 冷门压力测试v3.3:5分(✅正常预测)",
-        "decision": "客胜/平局 / 让负",
+        "decision": "客胜或平局 / 让负",
         "score_predict": "0-1/1-1/0-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -8919,7 +8919,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C1+3(Duarte后防核心)+C5a+2(深盘1.25球vs5连败诱上) | 冷门压力测试v3.3:5分(✅正常预测)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
@@ -8972,7 +8972,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "H1a-2(热门主队抢分+冷门客队锁定头名) | 冷门压力测试v3.3:0分(✅正常预测)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "1-3",
         "handicap_result": "客胜 / 让负",
@@ -9025,7 +9025,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C1+3(伊格纳西奥中卫+马丁内利后腰)+H1a-2(热门强战意+冷门微弱战意)+H2-2(拉瓜伊拉中卫里韦罗缺阵) | 冷门压力测试v3.3:0分(✅正常预测)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "3-0/2-0/3-1",
         "actual_score": "3-1",
         "handicap_result": "未开售 / 未开售",
@@ -9078,7 +9078,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C1+3(后防5人缺阵)+C1.5+2(≥3核心)+C8d+1(赛程密集)+H1b+2(热门无欲+冷门战意) | 冷门压力测试v3.3:8分(⚠️建议弃盘)",
-        "decision": "⚠️建议弃盘(8分) 客胜/平局 / 让负",
+        "decision": "客胜或平局 / 让负",
         "score_predict": "0-1/1-2/1-1",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
@@ -9131,7 +9131,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "C1.5+1(Depay等进攻核心缺阵)+C8a+1(已锁定头名)+H1b+2(热门无欲+冷门抢分)+H2-2 | 冷门压力测试v3.3:2分(✅正常预测)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "1-0/2-0/2-1",
         "actual_score": "0-2",
         "handicap_result": "客胜 / 让负",
@@ -9189,7 +9189,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=国际赛 | 热门方=爱尔兰 | 热门战意=无欲 | 冷门战意=无欲 | 冷门压力测试v4.0:1分(正常) | H1a(-2)热门强战意+冷门无欲 | 代码验算:1-2=-1分",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -9295,7 +9295,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=杯赛 | 热门方=波特诺 | 热门战意=正常 | 冷门战意=强 | 冷门压力测试v4.0:2分(正常) | C10d(+1)热门胜率≤50% | H2(-2)冷门方5人核心缺阵 | C10e(-1)冷门方近6场不败 | 代码验算:1-2-1=-2分",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/2-1/1-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
@@ -9348,7 +9348,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=杯赛 | 热门方=帕尔梅拉斯 | 热门战意=强 | 冷门战意=无欲 | 冷门压力测试v4.0:-4分(正常-回避热门) | H1a(-2)热门强战意+冷门无欲 | C10a(-1)热门胜率≥70% | C10g(-1)热门方连胜 | 代码验算:-2-1-1=-4分",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "3-0/3-1/4-0",
         "actual_score": "4-1",
         "handicap_result": "主胜 / 让胜",
@@ -9459,7 +9459,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "其他联赛 | 热门方=埃夫斯堡 | 热门战意=正常 | 冷门战意=强 | 冷门压力测试v4.0:1分(✅正常) | 无显著加减分项",
-        "decision": "客胜 / 让负/让平",
+        "decision": "客胜 / 让负或让平",
         "score_predict": "0-2/0-1/1-2",
         "actual_score": "2-2",
         "handicap_result": "平局/让胜",
@@ -9512,7 +9512,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "其他联赛 | 热门方=特罗姆瑟 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.0:2分(✅正常) | H2(-2冷门方10人伤停)+C9-Norway(+2)+C8b-1(+2)",
-        "decision": "客胜 / 让负/让平",
+        "decision": "客胜 / 让负或让平",
         "score_predict": "0-2/0-1/1-2",
         "actual_score": "0-0",
         "handicap_result": "平局/让胜",
@@ -9565,7 +9565,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "其他联赛 | 热门方=腓特烈斯塔 | 热门战意=强 | 冷门战意=正常 | 冷门压力测试v4.0:4分(⚡冷门警惕) | C9-Norway(+2)+C8b-1(+2)",
-        "decision": "主胜 / 让胜/让平 | ⚡AA加冷门(4分)",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1/1-0/2-0",
         "actual_score": "2-1",
         "handicap_result": "主胜/让平",
@@ -9618,7 +9618,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "其他联赛 | 热门方=奥勒松 | 热门战意=强 | 冷门战意=正常 | 冷门压力测试v4.0:4分(⚡冷门警惕) | C9-Norway(+2)+C8b-1(+2)",
-        "decision": "主胜 / 让胜/让平 | ⚡AA加冷门(4分)",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1/1-0/2-0",
         "actual_score": "2-2",
         "handicap_result": "平局/让负",
@@ -9671,7 +9671,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "其他联赛 | 热门方=瓦勒伦加 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.0:2分(✅正常) | C9-Norway(+2)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1/1-0/2-0",
         "actual_score": "3-1",
         "handicap_result": "主胜/让胜",
@@ -9724,7 +9724,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "其他联赛 | 热门方=博德闪耀 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.0:5分(⚡冷门警惕) | C8b-1(+2)+C9-Norway(+2)+C3b(+2)+C8d(+1)+H2(-2)",
-        "decision": "客胜/平局 / 让胜/让平 | ⚡AA加冷门(5分)",
+        "decision": "客胜或平局 / 让胜或让平",
         "score_predict": "0-1/1-2/1-1",
         "actual_score": "2-2",
         "handicap_result": "平局/让胜",
@@ -9777,7 +9777,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "其他联赛 | 热门方=布兰 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.0:7分(⚠️建议弃盘) | C1+:+3热门方≥2核心伤缺+C9-Norway(+2)+C8b-1(+2)",
-        "decision": "⚠️建议弃盘(7分)",
+        "decision": "弃盘 / 弃盘",
         "score_predict": "需弃盘",
         "actual_score": "1-2",
         "handicap_result": "客胜/让负",
@@ -9830,7 +9830,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "杯赛 | 热门方=波黑 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.0:2分(✅正常) | 无显著加减分项",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "0-0",
         "handicap_result": "平局/让负",
@@ -9883,7 +9883,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "杯赛 | 热门方=尼斯 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.0:2分(✅正常) | C1(+2热门方核心缺阵)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "4-1",
         "handicap_result": "主胜/让胜",
@@ -9941,7 +9941,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=国际赛 | 热门方=苏格兰 | 热门战意=正常 | 冷门战意=无欲 | C1(+0)+C8d(+1)+挪超偏移(+0)+瑞超偏移(+0)=+1",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/4-0",
         "actual_score": "",
         "handicap_result": "",
@@ -10100,7 +10100,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=天狼星 | 热门战意=强 | 冷门战意=正常 | C1++(+4)+C8a(+1)+挪超偏移(+0)+瑞超偏移(+1)=+6 | ⚡建议弃盘",
-        "decision": "客胜/平局 / 让负/让平",
+        "decision": "客胜或平局 / 让负或让平",
         "score_predict": "0-1/1-2/2-2",
         "actual_score": "",
         "handicap_result": "",
@@ -10153,7 +10153,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=莫尔德 | 热门战意=强 | 冷门战意=正常 | C0(+0)+C3a(+1)+C8a(+1)+挪超偏移(+2)+瑞超偏移(+0)=+4 | ⚠️冷门警惕",
-        "decision": "主胜/平局 / 让平/让胜",
+        "decision": "主胜或平局 / 让平或让胜",
         "score_predict": "2-1/1-1/3-1",
         "actual_score": "",
         "handicap_result": "",
@@ -10206,7 +10206,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=欧冠决赛 | 热门方=巴黎 | 热门战意=强 | 冷门战意=强 | C0(+0)+C10(+3)=+3 | 决赛无名局",
-        "decision": "平局/主胜 / 让平/让负",
+        "decision": "平局或主胜 / 让平或让负",
         "score_predict": "1-1/0-0/2-1",
         "actual_score": "",
         "handicap_result": "",
@@ -10259,7 +10259,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=国际赛 | 热门方=墨西哥 | 热门战意=正常 | 冷门战意=正常 | C0(+0)+H1b(+2)=+2 | 双方轮换",
-        "decision": "主胜/平局 / 让平/让胜",
+        "decision": "主胜或平局 / 让平或让胜",
         "score_predict": "1-0/2-1/1-1",
         "actual_score": "",
         "handicap_result": "",
@@ -10423,7 +10423,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=瑞超 | 热门方=代格福什 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.0:5分(⚡冷门警惕) | C1+(+3)+C10d(+1)+瑞超偏移(+1)=5",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "2-2",
         "handicap_result": "平局/让负",
@@ -10476,7 +10476,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=国际赛 | 热门方=瑞士 | 热门战意=正常 | 冷门战意=无欲 | 冷门压力测试v4.0:4分(⚡冷门警惕) | C1(+2)+H1b(+2)=4",
-        "decision": "让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "3-0/2-0/4-1",
         "actual_score": "4-1",
         "handicap_result": "未开售/让胜",
@@ -10529,7 +10529,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=芬超 | 热门方=AC奥卢 | 热门战意=强 | 冷门战意=正常 | 冷门压力测试v4.0:1分(✅正常) | C1(+2)+C10a(-2)+C10f(+1)=1",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "2-1",
         "handicap_result": "主胜/让平",
@@ -10582,7 +10582,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=国际赛 | 热门方=捷克 | 热门战意=正常 | 冷门战意=无欲 | 冷门压力测试v4.0:6分(⚡冷门警惕) | C1++(+4)+H1b(+2)=6",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "2-1",
         "handicap_result": "主胜/让平",
@@ -10693,7 +10693,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=黑山 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:1分(✅正常) | C10c(2)+C10j(-1)",
-        "decision": "客胜 / 让平/让负",
+        "decision": "客胜 / 让平或让负",
         "score_predict": "0-1 / 0-2 / 1-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
@@ -10746,7 +10746,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=挪威 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:0分(✅正常) | C1+(3)+C10i(-1)+C11-德比(1)+H2(-3)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0 / 3-1 / 2-1",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让胜",
@@ -10799,7 +10799,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=土耳其 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:-5分(✅正常) | C3a(1)+C7a(1)+C10(-4截断)+H2(-3)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0 / 3-0 / 3-1",
         "actual_score": "4-0",
         "handicap_result": "主胜 / 让胜",
@@ -10852,7 +10852,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=奥地利 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:1分(✅正常) | C1+(3)+C3a(1)+C7a(1)+C10(-4)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "1-0 / 2-0 / 2-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
@@ -10905,7 +10905,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=哥伦比亚 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:-2分(✅正常) | C10e(-1)+C10j(-1)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "3-0 / 3-1 / 4-0",
         "actual_score": "3-1",
         "handicap_result": "未开售 / 未开售",
@@ -10958,7 +10958,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=加拿大 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:0分(✅正常) | C3c(1)+C10b(-1)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0 / 2-1 / 1-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
@@ -11069,7 +11069,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "热门方=格鲁吉亚 | 热门战意=无欲 | 冷门战意=无欲 | 冷门压力测试v4.2:C10e(罗马尼亚连败)=+1 | 判定:✅正常(国际赛) | 让球赔率：让胜4.57/让平3.60/让负1.58 | 让胜4.57>2.0✓，让平3.60>2.0✓，可选双选让胜/让平",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "1-1",
         "handicap_result": "平局/让负",
@@ -11286,7 +11286,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "热门方=波兰 | 热门战意=无欲 | 冷门战意=无欲 | 冷门评分v4.2: 7分✅正常(冷门概率~35%) | C1(+2)+C8a(+1)+C10c(+2)+C10f(+1)+C10h(+1)",
-        "decision": "平局/客胜 / 让负",
+        "decision": "平局或客胜 / 让负",
         "score_predict": "1-1/0-0/0-1",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
@@ -11339,7 +11339,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "热门方=意大利 | 热门战意=正常 | 冷门战意=正常 | 冷门评分v4.2: 3分✅正常 | C3b(+2)+C6(60%)(+1)+C7a(+1)+C10f(+1)+C10g(-1)+C10i(-1)",
-        "decision": "客胜 / 让平/让负",
+        "decision": "客胜 / 让平或让负",
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
@@ -11397,7 +11397,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "数据已丢失(原被覆盖为实际比分)",
-        "decision": "让-1=让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "未知(原始数据已丢失)",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
@@ -11450,7 +11450,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "数据已丢失(原被覆盖为实际比分)",
-        "decision": "让-1=让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "未知(原始数据已丢失)",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
@@ -11503,7 +11503,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "1-1",
-        "decision": "让-3=让负/让平",
+        "decision": "主胜 / 让负或让平",
         "score_predict": "-",
         "actual_score": "普通盘未开售；让-3盘1-1走盘，C1+核心缺阵导致穿盘失败",
         "handicap_result": "-",
@@ -11556,7 +11556,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "数据已丢失(原被覆盖为实际比分)",
-        "decision": "让-1=让胜",
+        "decision": "主胜 / 让胜",
         "score_predict": "未知(原始数据已丢失)",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
@@ -11609,7 +11609,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "数据已丢失(原被覆盖为实际比分)",
-        "decision": "让-1=让胜",
+        "decision": "主胜 / 让胜",
         "score_predict": "未知(原始数据已丢失)",
         "actual_score": "5-1",
         "handicap_result": "主胜 / 让胜",
@@ -11720,7 +11720,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=国际赛 | 热门方=斯洛伐克 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:2分(✅正常) | C1++(+4)+C10e(-1)+C10j(-1)=+2",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/2-1/1-0",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
@@ -11773,7 +11773,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=国际赛 | 热门方=匈牙利 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:2分(✅正常) | C1++(+4)+C7a(+1)+C10b(-1)+C10e(-1)+C10j(-1)=+2",
-        "decision": "主胜 / 让平/让负",
+        "decision": "主胜 / 让平或让负",
         "score_predict": "1-0/2-1/1-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让平",
@@ -11826,7 +11826,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=国际赛 | 热门方=加拿大 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:6分(✅正常冷门概率35%) | C1+(+3)+C7a(+1)+C10d(+1)+C10f(+1)=+6",
-        "decision": "主胜 / 让平/让负",
+        "decision": "主胜 / 让平或让负",
         "score_predict": "1-0/2-1/1-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
@@ -11884,7 +11884,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=比利时 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:2分(✅正常) | 各项得分明细=比利时主场强+状态好",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "5-0",
         "handicap_result": "主胜 / 让胜",
@@ -11937,7 +11937,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=葡萄牙 | 热门战意=正常 | 冷门战意=无欲 | 冷门压力测试v4.2:4分(✅正常) | 各项得分明细=C1++(4将轮休)+让-2陷阱-2",
-        "decision": "主胜 / 让平/让负",
+        "decision": "主胜 / 让平或让负",
         "score_predict": "2-0/3-0/1-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让负",
@@ -11990,7 +11990,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=罗马尼亚 | 热门战意=无欲 | 冷门战意=无欲 | 冷门压力测试v4.2:1分(✅正常) | 各项得分明细=两队均无欲无求",
-        "decision": "平 / 让负/让平",
+        "decision": "平局 / 让负或让平",
         "score_predict": "0-0/1-1/0-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让胜",
@@ -12043,7 +12043,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=德国 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:3分(✅正常) | 各项得分明细=C1++(诺伊尔)+状态悬殊",
-        "decision": "客胜 / 让负/让平",
+        "decision": "客胜 / 让负或让平",
         "score_predict": "1-2/2-2/0-2",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
@@ -12096,7 +12096,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=瑞士 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:1分(✅正常) | 各项得分明细=瑞士稳定，澳洲新人",
-        "decision": "客胜 / 让平/让负",
+        "decision": "客胜 / 让平或让负",
         "score_predict": "0-1/0-2/1-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
@@ -12149,7 +12149,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=波黑 | 热门战意=无欲 | 冷门战意=正常 | 冷门压力测试v4.2:2分(✅正常) | 各项得分明细=波黑无战意，C10调整",
-        "decision": "平 / 让平",
+        "decision": "平局 / 让平",
         "score_predict": "0-1/1-1/0-0",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
@@ -12255,7 +12255,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=苏格兰 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:2分(✅正常) | 各项得分明细=苏格兰备战，玻利维亚高原",
-        "decision": "客胜 / 让负/让平",
+        "decision": "客胜 / 让负或让平",
         "score_predict": "0-1/1-2/0-0",
         "actual_score": "0-4",
         "handicap_result": "客胜 / 让负",
@@ -12308,7 +12308,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=巴西 | 热门战意=强 | 冷门战意=正常 | 冷门压力测试v4.2:3分(✅正常) | 各项得分明细=C1(内马尔)+主场强",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让平",
@@ -12361,7 +12361,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=土耳其 | 热门战意=正常 | 冷门战意=无欲 | 冷门压力测试v4.2:2分(✅正常) | 各项得分明细=土耳其状态好，委内瑞拉无欲",
-        "decision": "客胜 / 让负/让平",
+        "decision": "客胜 / 让负或让平",
         "score_predict": "0-1/0-2/1-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
@@ -12525,7 +12525,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=挪威 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:6分(✅正常(冷门概率~35%)) | 各项得分明细=C1(2), C6(85%)(2), C10d(1), C10f(1)",
-        "decision": "平 / 让平/让负",
+        "decision": "平局 / 让平或让负",
         "score_predict": "0-0/1-1/1-2",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
@@ -12578,7 +12578,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=意大利 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:-1分(✅正常) | 各项得分明细=C6(60%)(1), C10b(-1), C10g(-1)",
-        "decision": "平 / 让负",
+        "decision": "平局 / 让负",
         "score_predict": "1-1/0-0/1-0",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
@@ -12631,7 +12631,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=其他联赛 | 热门方=哥伦比亚 | 热门战意=强 | 冷门战意=正常 | 冷门压力测试v4.2:-4分(✅正常) | 各项得分明细=C10b(-1), C10e(-1), C10g(-1), C10j(-1)",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "3-0/2-0/4-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让平",
@@ -12853,7 +12853,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=杯赛 | 热门方=中国 | 热门战意=强 | 冷门战意=无欲 | 冷门压力测试v4.2:-2.5分(正常) | 各项得分明细=+C3c(1),+H1a(-2),+C10c(2),+C10f(1),+C10i(-1)",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "1-0/2-0/2-1",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
@@ -12959,7 +12959,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=杯赛 | 热门方=阿根廷 | 热门战意=正常 | 冷门战意=正常 | 冷门压力测试v4.2:-2分(正常) | 各项得分明细=+C3c(1),+C10g(-1),+H1a(-2)",
-        "decision": "未开售 / 让负/让平",
+        "decision": "未开售 / 让负或让平",
         "score_predict": "2-1/2-0/1-0",
         "actual_score": "3-0",
         "handicap_result": "未开售 / 让胜",
@@ -13292,7 +13292,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=美国 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:2分(✅正常) | 各项得分明细=C1(+2)=2",
-        "decision": "主胜 / 让胜/让平",
+        "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/3-1",
         "actual_score": "4-1",
         "handicap_result": "主胜 / 让胜",
@@ -13338,7 +13338,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.019
         },
         "risk_signal": "赛事类型=杯赛 | 热门方=瑞士 | 热门战意=强 | 冷门战意=正常 | 冷门压力测试v4.2:0分(✅正常) | 各项得分明细=C3a(+1)+C7a(+1)+C10e(-1)+C10j(-1)",
-        "decision": "未开售 / 让胜/让平",
+        "decision": "未开售 / 让胜或让平",
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "1-1",
         "handicap_result": "未开售/让胜",
@@ -13384,7 +13384,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0845
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=德国 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:0分(✅正常) | 各项得分明细=C1(+2格纳布里)+C10a(-2德国100%胜率)",
-        "decision": "未开售 / 让平/让负",
+        "decision": "未开售 / 让平或让负",
         "score_predict": "3-0/2-0/3-1",
         "actual_score": "7-1",
         "handicap_result": "未开售/让胜",
@@ -13642,7 +13642,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.01
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=比利时 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:3分(⚡冷门警惕) | 各项得分明细=C3b(+2)+C5b(+1)+C7a(+1)+C10b(-1)",
-        "decision": "主胜/让平",
+        "decision": "主胜 / 让平",
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "1-1",
         "handicap_result": "平/让负",
@@ -13695,7 +13695,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.236
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=乌拉圭(客) | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:4分(⚡冷门警惕) | 各项得分明细=C1+(+3)+C7a(+1)",
-        "decision": "客负/让平",
+        "decision": "主胜 / 让平",
         "score_predict": "0-1/1-2/2-3",
         "actual_score": "1-1",
         "handicap_result": "平/让胜",
@@ -13748,7 +13748,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.006
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=伊朗 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:1分(✅正常) | 各项得分明细=C1(+2)+C3c(+1)+C10a(-2)",
-        "decision": "主胜/让平",
+        "decision": "主胜 / 让平",
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "2-2",
         "handicap_result": "平/让负",
@@ -13806,7 +13806,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.127
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=法国 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:-1分(✅正常) | 各项得分明细=C3a(+1)+C7a(+1)+C10g(-1)❌+C10i(-1)❌+C10j(-1)❌ | ❌=推断变量:C10g热门连胜/C10i热门主场≥80%/C10j冷门客场≤20%",
-        "decision": "主胜/让胜",
+        "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-1",
         "handicap_result": "主胜/让胜",
@@ -13859,7 +13859,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.207
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=挪威(客) | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:0分(✅正常) | 普通盘未开售，冷门分默认0",
-        "decision": "客负/让负",
+        "decision": "主胜 / 让负",
         "score_predict": "0-3/1-4/0-4",
         "actual_score": "1-4",
         "handicap_result": "未开售/让负",
@@ -13912,7 +13912,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.055
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=阿根廷 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:3分(✅正常) | 各项得分明细=C1+(+3)+C3a(+1)+C7a(+1)+C10f(+1)❌+C10g(-1)❌+C10i(-1)❌+C10j(-1)❌ | ❌=推断变量:C10f冷门近3场不败/C10g热门连胜/C10i热门主场≥80%/C10j冷门客场≤20%",
-        "decision": "主胜/让胜",
+        "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-0",
         "handicap_result": "主胜/让胜",
@@ -13965,7 +13965,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.098
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=奥地利 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:-2分(✅正常) | 各项得分明细=C1(+2)+C3a(+1)+C7a(+1)+C10a(-2)❌+C10e(-1)❌+C10g(-1)❌+C10i(-1)❌+C10j(-1)❌ | ❌=推断变量:C10a状态悬殊/C10e冷门连败/C10g热门连胜/C10i热门主场≥80%/C10j冷门客场≤20%",
-        "decision": "主胜/让胜",
+        "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-1",
         "handicap_result": "主胜/让胜",
@@ -14442,7 +14442,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.05
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=美国 | 热门战意=强 | 冷门战意=正常 | 冷门压力测试v4.2:5分(✅正常⚡边界) | 各项得分明细=C1(+2普利西奇)+C3b(+2赔率1.47∈[1.40,1.50)+必发69%)+C7a(+1赔率<1.50且EV<0)",
-        "decision": "主胜/让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-1/3-1/3-2",
         "handicap": {
           "type": "让球盘-1",
@@ -14495,7 +14495,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.411
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=摩洛哥 | 热门战意=强 | 冷门战意=正常 | 冷门压力测试v4.2:5分(✅正常) | 各项得分明细=C1+(+3阿格尔德+埃扎尔祖利)+C6(+2苏格兰主场70%)+C10c(+2热门≤40%且冷门≥60%)+C10f(+1冷门连胜)+H2(-3苏格兰吉尔莫缺阵)",
-        "decision": "主胜/平局/让胜",
+        "decision": "主胜或平局 / 让胜",
         "score_predict": "1-0/1-1/0-0",
         "handicap": {
           "type": "让球盘+1",
@@ -14548,7 +14548,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": null
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=巴西 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:-2分(✅正常) | 各项得分明细=C1(+2内马尔)+C10b(-1热门≥60%且冷门≤40%)+C10e(-1冷门连败)+C10h(+1热门不胜)+H2(-3海地皮埃尔缺阵) | ⚠️跳过7项(普通盘未开售→C3/C6b/C7a/C10i/C10j缺失)",
-        "decision": "主胜/让平/让负",
+        "decision": "主胜 / 让平或让负",
         "score_predict": "2-0/3-1/1-0",
         "handicap": {
           "type": "让球盘-2",
@@ -14601,7 +14601,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.101
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=土耳其 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.2:-4分(✅正常) | 各项得分明细=C10e(-1冷门连败)+H2(-3巴拉圭恩西索+巴尔布埃纳缺阵) | ⚠️伤停过度定价风险(让负1.63可能已完全消化C1++)",
-        "decision": "主胜/让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "1-0/2-1/3-1",
         "handicap": {
           "type": "让球盘-1",
@@ -14891,7 +14891,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.2923
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=西班牙 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.3:0分(✅正常，普通盘未开售) | 明细=C8d(+1)+C10b(-1) | 5h微调：⚠️让胜67%偏热→让平/让负(方向不变) | 5j让-2深盘让胜降级 | 5k沙特门将🔥奥韦斯→让胜降级 | 5f沙特🔴级(对欧洲队1W11L) | 选对:✅西班牙方向风险低",
-        "decision": "未开售 / 让平/让负",
+        "decision": "未开售 / 让平或让负",
         "score_predict": "2-0/1-0/3-0",
         "actual_score": "",
         "handicap_result": "",
@@ -14944,7 +14944,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.3454
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=比利时 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.3:8分(⚡冷门警惕) | 明细=C1(+2多库)+C3a(+1赔率1.32<1.40+必发78%)+C7a(+1 EV<0)+C8d(+1)+C10h(+1比利时不胜)+C5a(+2升盘诱上) | 5h微调：🔴78%大热+⚠️升盘诱上→让胜→让平(方向不变) | 5i冷门分8→让球盘选难穿方向(让平) | 5f伊朗🟡级 | 选对:⚡比利时方向有风险但概率最高",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/1-0/3-1",
         "actual_score": "",
         "handicap_result": "",
@@ -14997,7 +14997,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.3428
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=乌拉圭 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.3:8分(⚡冷门警惕) | 明细=C1+(+3双核心缺)+C3a(+1赔率1.31<1.40+必发74%)+C7a(+1 EV<0)+C8d(+1)+C10h(+1乌拉圭不胜)+C5b(+1退盘示弱) | ⚠️六维共振偏下盘(92.3%)但冷门分8<9→5i不弃盘 | 5h微调：让胜66%偏热+退盘→让胜→让平(方向不变) | 5i冷门分8→让球盘选难穿方向(让平) | 5f佛得角🟡级 | 选对:⚡乌拉圭方向有风险但概率最高 | v5.7关键验证场",
-        "decision": "主胜 / 让平/让胜",
+        "decision": "主胜 / 让平或让胜",
         "score_predict": "1-0/2-1/2-0",
         "actual_score": "",
         "handicap_result": "",
@@ -15050,7 +15050,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.0667
         },
         "risk_signal": "赛事类型=世界杯 | 热门方=埃及 | 热门战意=强 | 冷门战意=强 | 冷门压力测试v4.3:5分(⚡冷门警惕) | 明细=C3b(+2赔率1.46+必发66%最危险区间)+C7a(+1 EV<0)+C8d(+1)+C10h(+1埃及不胜) | 🚨1.44死亡密码(负赔1.46) | 5h微调：1.44死亡密码+低赔陷阱→让负→让平(方向不变) | 5i冷门分5→让球盘选难穿方向(让平) | 5f新西兰🟡级 | 选对:⚡埃及方向风险中等",
-        "decision": "客胜 / 让平/让负",
+        "decision": "客胜 / 让平或让负",
         "score_predict": "0-1/1-2/0-2",
         "actual_score": "",
         "handicap_result": "",
