@@ -151,6 +151,8 @@ body::after{
   background:var(--bg3)!important;border:1px solid var(--border2)!important;color:var(--text3)!important;
 }
 .settings-btn:hover{border-color:var(--text2)!important;color:var(--text)!important}
+.refresh-btn{background:var(--bg3)!important;border:1px solid var(--border2)!important;color:var(--text3)!important;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;transition:all .2s}
+.refresh-btn:hover{border-color:var(--green)!important;color:var(--green)!important}
 .push-toast{
   position:fixed;top:60px;right:24px;z-index:3000;
   background:var(--bg2);border:1px solid var(--border2);
@@ -664,6 +666,7 @@ body {
       <button class="push-btn" id="pushBtn" onclick="pushToGitHub()">🚀 推送GitHub</button>
       <button class="settings-btn" onclick="openSettingsModal()">⚙️</button>
       <button class="edit-btn" onclick="openEditorModal()">📝 编辑</button>
+      <button class="refresh-btn" onclick="refreshFromServer()" title="清除本地缓存，重新加载服务端数据">🔄 刷新</button>
       <button onclick="expandAll()">展开全部</button>
       <button onclick="collapseAll()">收起全部</button>
     </div>
@@ -1342,6 +1345,10 @@ async function pushToGitHub() {
     }
 
     const result = await putResp.json();
+    // Clear localStorage cache so next page load fetches fresh data from GitHub
+    localStorage.removeItem('footcast_data');
+    localStorage.removeItem('football_data_override');
+
     showPushToast(
       '✅ 推送成功！',
       `已更新 football_data.js<br>${dateCount}个日期 / ${matchCount}场比赛<br>Commit: ${result.commit.sha.substring(0,7)}<br><a href="https://xuxianyu1.github.io/football-guide/dashboard.html" target="_blank" style="color:var(--green)">查看页面 →</a>`,
@@ -1648,6 +1655,13 @@ function confirmUpload() {
   } catch(e) { /* quota exceeded, ignore */ }
 }
 
+// ===== DATA REFRESH =====
+function refreshFromServer() {
+  localStorage.removeItem('footcast_data');
+  localStorage.removeItem('football_data_override');
+  location.reload();
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   // Try loading from localStorage first
@@ -1705,7 +1719,8 @@ function renderEditorForm() {
   container.innerHTML = matches.map((m, idx) => {
     const normalCorrect = (m.correct || '—/—').split('/')[0] || '—';
     const hcCorrect = (m.correct || '—/—').split('/')[1] || '—';
-    const hrParts = (m.handicap_result || '— / —').split(' / ');
+    const hr = (m.handicap_result || '— / —');
+    const hrParts = hr.includes(' / ') ? hr.split(' / ') : hr.split('/');
     const normalResult = hrParts[0] || '—';
     const hcResult = hrParts[1] || '—';
     return `
@@ -1736,7 +1751,12 @@ function renderEditorForm() {
         </div>
         <div class="editor-field">
           <label>普通盘结果</label>
-          <input type="text" data-idx="${idx}" data-field="normal_result" value="${normalResult}">
+          <select data-idx="${idx}" data-field="normal_result">
+            <option value="主胜" ${normalResult==='主胜'?'selected':''}>主胜</option>
+            <option value="客胜" ${normalResult==='客胜'?'selected':''}>客胜</option>
+            <option value="平局" ${normalResult==='平局'?'selected':''}>平局</option>
+            <option value="—" ${normalResult==='—' || !normalResult?'selected':''}>—</option>
+          </select>
         </div>
         <div class="editor-field">
           <label>普通盘对错</label>
@@ -1748,7 +1768,12 @@ function renderEditorForm() {
         </div>
         <div class="editor-field">
           <label>让球盘结果</label>
-          <input type="text" data-idx="${idx}" data-field="hc_result" value="${hcResult}">
+          <select data-idx="${idx}" data-field="hc_result">
+            <option value="让胜" ${hcResult==='让胜'?'selected':''}>让胜</option>
+            <option value="让平" ${hcResult==='让平'?'selected':''}>让平</option>
+            <option value="让负" ${hcResult==='让负'?'selected':''}>让负</option>
+            <option value="—" ${hcResult==='—' || !hcResult?'selected':''}>—</option>
+          </select>
         </div>
         <div class="editor-field">
           <label>让球盘对错</label>
@@ -1782,8 +1807,9 @@ function collectEditorData() {
     else if (field === 'decision') matches[idx].decision = val;
     else if (field === 'score_predict') matches[idx].score_predict = val;
     else if (field === 'normal_result' || field === 'hc_result') {
-      // Reconstruct handicap_result
-      const oldParts = (matches[idx].handicap_result || '— / —').split(' / ');
+      // Reconstruct handicap_result (handle both ' / ' and '/' separators)
+      const hr = matches[idx].handicap_result || '— / —';
+      const oldParts = hr.includes(' / ') ? hr.split(' / ') : hr.split('/');
       if (field === 'normal_result') oldParts[0] = val;
       else oldParts[1] = val;
       matches[idx].handicap_result = oldParts.join(' / ');
@@ -1801,7 +1827,7 @@ function collectEditorData() {
 function saveEditorData() {
   const key = collectEditorData();
   if (!key) return false;
-  localStorage.setItem('football_data_override', JSON.stringify(ALL_DATA));
+  localStorage.setItem('footcast_data', JSON.stringify(ALL_DATA));
   dateKeys = Object.keys(ALL_DATA).sort();
   const sel = document.getElementById('dateSelect');
   if (sel) {
