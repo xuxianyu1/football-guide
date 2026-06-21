@@ -774,6 +774,8 @@ function loadDateData(dateKey) {
     render();
     return;
   }
+  // Initialize FOOTCAST_DATA so per-date files can assign to it
+  if (!window.FOOTCAST_DATA) window.FOOTCAST_DATA = {};
   _loadingDate = dateKey;
   const script = document.createElement('script');
   script.onload = function() {
@@ -798,6 +800,8 @@ function loadDateData(dateKey) {
 
 // Load index file then load the target date
 function loadIndexAndDate(targetKey) {
+  // Initialize FOOTCAST_DATA so per-date files can assign to it
+  if (!window.FOOTCAST_DATA) window.FOOTCAST_DATA = {};
   const script = document.createElement('script');
   script.onload = function() {
     if (window.FOOTCAST_INDEX) {
