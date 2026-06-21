@@ -744,8 +744,10 @@ body {
 </div>
 
 <script>
-// ===== DATA (loaded dynamically) =====
+// ===== DATA (loaded dynamically per-date) =====
 let ALL_DATA = {};
+let _loadedDates = new Set(); // track which dates are loaded
+let _loadingDate = null;      // prevent concurrent loads
 
 function loadDataAndRender(dataUrl) {
   const script = document.createElement('script');
@@ -754,6 +756,7 @@ function loadDataAndRender(dataUrl) {
       ALL_DATA = window.FOOTCAST_DATA;
       dateKeys = Object.keys(ALL_DATA).sort();
       currentDateKey = dateKeys[dateKeys.length - 1];
+      dateKeys.forEach(k => _loadedDates.add(k));
       render();
     }
   };
@@ -761,6 +764,51 @@ function loadDataAndRender(dataUrl) {
     document.getElementById('matchGrid').innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><div class="msg">数据加载失败，请刷新重试</div></div>';
   };
   script.src = dataUrl;
+  document.head.appendChild(script);
+}
+
+// Load a single date file, then render
+function loadDateData(dateKey) {
+  if (_loadedDates.has(dateKey) || _loadingDate === dateKey) {
+    currentDateKey = dateKey;
+    render();
+    return;
+  }
+  _loadingDate = dateKey;
+  const script = document.createElement('script');
+  script.onload = function() {
+    _loadedDates.add(dateKey);
+    _loadingDate = null;
+    currentDateKey = dateKey;
+    render();
+  };
+  script.onerror = function() {
+    _loadingDate = null;
+    // Fallback: show empty
+    currentDateKey = dateKey;
+    render();
+  };
+  script.src = 'data_' + dateKey + '.js?v=' + Date.now();
+  document.head.appendChild(script);
+}
+
+// Load index file then load the target date
+function loadIndexAndDate(targetKey) {
+  const script = document.createElement('script');
+  script.onload = function() {
+    if (window.FOOTCAST_INDEX) {
+      dateKeys = window.FOOTCAST_INDEX;
+      // Ensure ALL_DATA has empty slots for all dates
+      dateKeys.forEach(k => { if (!ALL_DATA[k]) ALL_DATA[k] = null; });
+      currentDateKey = targetKey || dateKeys[dateKeys.length - 1];
+      loadDateData(currentDateKey);
+    }
+  };
+  script.onerror = function() {
+    // Fallback: load full football_data.js
+    loadDataAndRender('football_data.js?v=' + Date.now());
+  };
+  script.src = 'data_index.js?v=' + Date.now();
   document.head.appendChild(script);
 }
 
@@ -838,7 +886,7 @@ function render() {
   if (sel.options.length !== dateKeys.length) {
     sel.innerHTML = dateKeys.map(k => {
       const d = ALL_DATA[k];
-      const label = d ? d.date : k;
+      const label = (d && d.date) ? d.date : k;
       return `<option value="${k}">${label}</option>`;
     }).join('');
   }
@@ -848,7 +896,16 @@ function render() {
   document.getElementById('nextBtn').disabled = dIdx >= dateKeys.length - 1;
 
   if (!data) {
-    document.getElementById('matchGrid').innerHTML = '<div class="empty-state"><div class="icon">📭</div><div class="msg">当日暂无预测数据</div></div>';
+    // Date exists in index but not loaded yet - trigger load
+    if (currentDateKey && !_loadedDates.has(currentDateKey) && _loadingDate !== currentDateKey) {
+      loadDateData(currentDateKey);
+      document.getElementById('matchGrid').innerHTML = '<div class="empty-state"><div class="icon">⏳</div><div class="msg">加载中...</div></div>';
+    } else {
+      document.getElementById('matchGrid').innerHTML = '<div class="empty-state"><div class="icon">📭</div><div class="msg">当日暂无预测数据</div></div>';
+    }
+    // Clear stats
+    document.getElementById('statsBar').innerHTML = '';
+    document.getElementById('matchCount').textContent = '';
     return;
   }
   renderStats(data);
@@ -1206,10 +1263,10 @@ function collapseAll() { document.querySelectorAll('.match-card').forEach(c=>c.c
 function navDate(dir) {
   const i = dateKeys.indexOf(currentDateKey);
   const ni = i + dir;
-  if(ni>=0 && ni<dateKeys.length) { currentDateKey = dateKeys[ni]; render(); }
+  if(ni>=0 && ni<dateKeys.length) loadDateData(dateKeys[ni]);
 }
 function selectDate(key) {
-  if (key && ALL_DATA[key]) { currentDateKey = key; render(); }
+  if (key) loadDateData(key);
 }
 
 // ===== GITHUB PUSH =====
@@ -1292,66 +1349,110 @@ async function pushToGitHub() {
   showPushToast('🔄 正在推送...', '正在获取仓库文件信息...', 'progress');
 
   try {
-    // 1. Get current football_data.js SHA
-    const getResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
-      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
-    }, 15000);
-
-    if (!getResp.ok) {
-      const errData = await getResp.json().catch(() => ({}));
-      if (getResp.status === 401) throw new Error('Token无效或已过期，请重新配置');
-      if (getResp.status === 403) throw new Error('Token权限不足，需要repo权限');
-      if (getResp.status === 404) throw new Error('仓库或文件不存在');
-      throw new Error(`获取文件信息失败 (${getResp.status}): ${errData.message || '未知错误'}`);
-    }
-
-    const fileData = await getResp.json();
-    const sha = fileData.sha;
-
-    showPushToast('🔄 正在推送...', '正在生成数据并上传...', 'progress');
-
-    // 2. Generate file content
-    const dateCount = Object.keys(ALL_DATA).length;
-    let matchCount = 0;
-    Object.values(ALL_DATA).forEach(d => matchCount += d.matches.length);
-
-    const content = 'window.FOOTCAST_DATA = ' + JSON.stringify(ALL_DATA) + ';\n';
-    const encoded = btoa(unescape(encodeURIComponent(content)));
-
-    // 3. Push update
     const today = new Date();
     const dateStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
     const timeStr = String(today.getHours()).padStart(2,'0') + ':' + String(today.getMinutes()).padStart(2,'0');
 
-    const putResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
+    // Only push the current date's data file + index + full backup
+    const targetKey = currentDateKey;
+    if (!targetKey || !ALL_DATA[targetKey]) {
+      throw new Error('当前日期无数据可推送');
+    }
+
+    const matchCount = ALL_DATA[targetKey].matches.length;
+    const commitMsg = `更新${ALL_DATA[targetKey].date || targetKey}数据 ${dateStr} ${timeStr} (${matchCount}场)`;
+
+    // 1. Push the single date file
+    const dateFileName = 'data_' + targetKey + '.js';
+    showPushToast('🔄 正在推送...', `正在更新 ${dateFileName}...`, 'progress');
+
+    const dateContent = 'window.FOOTCAST_DATA["' + targetKey + '"] = ' + JSON.stringify(ALL_DATA[targetKey]) + ';\n';
+
+    // Get SHA of date file (may not exist yet = 404 = create)
+    let dateSha = null;
+    const getDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFileName}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    }, 15000);
+
+    if (getDateResp.ok) {
+      const df = await getDateResp.json();
+      dateSha = df.sha;
+    }
+    // 404 = new file, no SHA needed
+
+    const dateEncoded = btoa(unescape(encodeURIComponent(dateContent)));
+    const pushDateBody = {
+      message: commitMsg,
+      content: dateEncoded,
+      branch: 'main'
+    };
+    if (dateSha) pushDateBody.sha = dateSha;
+
+    const pushDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFileName}`, {
       method: 'PUT',
       headers: {
         'Authorization': `token ${token}`,
         'Accept': 'application/vnd.github.v3+json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        message: `更新预测数据 ${dateStr} ${timeStr} (${dateCount}日期${matchCount}场)`,
-        content: encoded,
-        sha: sha,
-        branch: 'main'
-      })
+      body: JSON.stringify(pushDateBody)
     }, 30000);
 
-    if (!putResp.ok) {
-      const errData = await putResp.json().catch(() => ({}));
-      if (putResp.status === 409) throw new Error('文件已被其他人修改，请刷新页面后重试（SHA冲突）');
-      throw new Error(`推送失败 (${putResp.status}): ${errData.message || '未知错误'}`);
+    if (!pushDateResp.ok) {
+      const errData = await pushDateResp.json().catch(() => ({}));
+      if (pushDateResp.status === 409) throw new Error('文件已被其他人修改，请刷新页面后重试（SHA冲突）');
+      throw new Error(`推送${dateFileName}失败 (${pushDateResp.status}): ${errData.message || '未知错误'}`);
     }
 
-    const result = await putResp.json();
-    // Clear localStorage cache so next page load fetches fresh data from GitHub
+    const dateResult = await pushDateResp.json();
+    const shortSha = dateResult.commit.sha.substring(0,7);
+
+    // 2. Update index file (list of all date keys)
+    showPushToast('🔄 正在推送...', '正在更新索引文件...', 'progress');
+    const allDateKeys = Object.keys(ALL_DATA).filter(k => ALL_DATA[k] !== null).sort();
+    const indexContent = 'window.FOOTCAST_INDEX = ' + JSON.stringify(allDateKeys) + ';\n';
+    const indexEncoded = btoa(unescape(encodeURIComponent(indexContent)));
+
+    let indexSha = null;
+    const getIdxResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/data_index.js`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    }, 15000);
+    if (getIdxResp.ok) {
+      indexSha = (await getIdxResp.json()).sha;
+    }
+    const pushIdxBody = { message: '更新索引 ' + dateStr, content: indexEncoded, branch: 'main' };
+    if (indexSha) pushIdxBody.sha = indexSha;
+
+    await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/data_index.js`, {
+      method: 'PUT',
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(pushIdxBody)
+    }, 30000);
+
+    // 3. Also update the full football_data.js for backward compatibility
+    showPushToast('🔄 正在推送...', '正在更新完整数据文件...', 'progress');
+    const fullContent = 'window.FOOTCAST_DATA = ' + JSON.stringify(ALL_DATA) + ';\n';
+    const fullEncoded = btoa(unescape(encodeURIComponent(fullContent)));
+
+    const getFullResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    }, 15000);
+    if (!getFullResp.ok) throw new Error('获取football_data.js信息失败');
+    const fullSha = (await getFullResp.json()).sha;
+
+    await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
+      method: 'PUT',
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: commitMsg + ' [full]', content: fullEncoded, sha: fullSha, branch: 'main' })
+    }, 60000);
+
+    // Clear localStorage cache
     localStorage.removeItem('footcast_data');
     localStorage.removeItem('football_data_override');
 
     showPushToast(
       '✅ 推送成功！',
-      `已更新 football_data.js<br>${dateCount}个日期 / ${matchCount}场比赛<br>Commit: ${result.commit.sha.substring(0,7)}<br><a href="https://xuxianyu1.github.io/football-guide/dashboard.html" target="_blank" style="color:var(--green)">查看页面 →</a>`,
+      `已更新 ${dateFileName}<br>${ALL_DATA[targetKey].date || targetKey} / ${matchCount}场<br>Commit: ${shortSha}<br><a href="https://xuxianyu1.github.io/football-guide/dashboard.html" target="_blank" style="color:var(--green)">查看页面 →</a>`,
       'success'
     );
 
@@ -1672,6 +1773,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (Object.keys(parsed).length > 0) {
         ALL_DATA = parsed;
         dateKeys = Object.keys(ALL_DATA).sort();
+        dateKeys.forEach(k => _loadedDates.add(k));
         currentDateKey = dateKeys[dateKeys.length - 1];
         render();
         return;
@@ -1679,9 +1781,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch(e) {}
 
-  // Fallback: load from football_data.js
-  const dataUrl = 'football_data.js?v=20260621e&' + Date.now();
-  loadDataAndRender(dataUrl);
+  // Load index + latest date file (per-date mode)
+  loadIndexAndDate();
 });
 
 
