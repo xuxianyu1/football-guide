@@ -113,14 +113,6 @@ body::after{
   margin-bottom:16px;flex-wrap:wrap;gap:8px;
 }
 .toolbar-left{font-size:13px;color:var(--text2);display:flex;align-items:center;gap:14px}
-.filter-bar{display:inline-flex;gap:2px;background:var(--bg2);border-radius:var(--radius-sm);padding:3px;border:1px solid var(--border2)}
-.filter-btn{
-  padding:5px 14px;border:none;background:transparent;
-  color:var(--text2);font-family:var(--font-body);font-size:12px;
-  cursor:pointer;border-radius:6px;transition:all .2s;white-space:nowrap;
-}
-.filter-btn.active{background:var(--bg3);color:var(--text);box-shadow:0 2px 10px rgba(0,0,0,.4);font-weight:600}
-.filter-btn:hover:not(.active){color:var(--text)}
 .toolbar-right{display:flex;gap:6px}
 .toolbar-right button{
   background:var(--bg3);border:1px solid var(--border2);color:var(--text2);
@@ -168,23 +160,43 @@ body::after{
 .push-toast .toast-close{position:absolute;top:10px;right:14px;cursor:pointer;color:var(--text3);font-size:16px}
 .push-toast .toast-close:hover{color:var(--text)}
 
-/* Settings Modal */
-.settings-overlay{
+/* Shared Modal Overlay & Buttons */
+.modal-overlay{
   display:none;position:fixed;inset:0;z-index:2000;
   background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
   align-items:center;justify-content:center;
 }
-.settings-overlay.active{display:flex}
-.settings-modal{
+.modal-overlay.active{display:flex}
+.modal-box{
   background:var(--bg2);border:1px solid var(--border2);
-  border-radius:var(--radius);padding:32px;max-width:480px;width:90%;
+  border-radius:var(--radius);padding:28px;max-width:560px;width:90%;
   box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
-.settings-modal h2{
+.modal-box h2{
   font-family:var(--font-display);font-size:22px;color:var(--green);
   margin-bottom:8px;letter-spacing:1px;
 }
-.settings-modal .desc{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6}
+.modal-box .desc{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}
+.modal-actions button{
+  padding:8px 20px;border-radius:var(--radius-sm);cursor:pointer;
+  font-family:var(--font-body);font-size:13px;transition:all .2s;
+}
+.btn-cancel{background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
+.btn-cancel:hover{border-color:var(--text2);color:var(--text)}
+.btn-save{background:var(--green);border:none;color:var(--bg);font-weight:600}
+.btn-save:hover{opacity:.85}
+.btn-confirm{background:var(--green);border:none;color:var(--bg);font-weight:600}
+.btn-confirm:hover{opacity:.85}
+.btn-confirm:disabled{opacity:.4;cursor:default}
+.btn-push{background:#6c5ce7;border:none;color:#fff;font-weight:600}
+.btn-push:hover{opacity:.85}
+
+/* Settings-specific */
+.settings-modal{padding:32px;max-width:480px}
+.settings-status{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding:10px 14px;border-radius:var(--radius-sm);font-size:13px}
+.settings-status.connected{background:var(--green-dim);border:1px solid rgba(0,230,118,.3);color:var(--green)}
+.settings-status.disconnected{background:var(--amber-dim);border:1px solid rgba(255,171,0,.3);color:var(--amber)}
 .settings-field{margin-bottom:16px}
 .settings-field label{display:block;font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;font-weight:600}
 .settings-field input{
@@ -194,37 +206,14 @@ body::after{
 }
 .settings-field input:focus{border-color:var(--green)}
 .settings-field .hint{font-size:11px;color:var(--text3);margin-top:4px;line-height:1.5}
-.settings-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}
-.settings-actions button{
-  padding:8px 20px;border-radius:var(--radius-sm);cursor:pointer;
-  font-family:var(--font-body);font-size:13px;transition:all .2s;
-}
-.settings-actions .cancel-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
-.settings-actions .cancel-btn:hover{border-color:var(--text2);color:var(--text)}
-.settings-actions .save-btn{background:var(--green);border:none;color:var(--bg);font-weight:600}
-.settings-actions .save-btn:hover{opacity:.85}
-.settings-status{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding:10px 14px;border-radius:var(--radius-sm);font-size:13px}
-.settings-status.connected{background:var(--green-dim);border:1px solid rgba(0,230,118,.3);color:var(--green)}
-.settings-status.disconnected{background:var(--amber-dim);border:1px solid rgba(255,171,0,.3);color:var(--amber)}
 
 
-/* Editor Modal - Form Style */
-.editor-overlay{
-  display:none;position:fixed;inset:0;z-index:2000;
-  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
-  align-items:center;justify-content:center;
-}
-.editor-overlay.active{display:flex}
+/* Editor Modal - specific overrides */
 .editor-modal{
-  background:var(--bg2);border:1px solid var(--border2);
-  border-radius:var(--radius);padding:24px;max-width:860px;width:95%;
+  max-width:860px;padding:24px;
   max-height:90vh;display:flex;flex-direction:column;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
-.editor-modal h2{
-  font-family:var(--font-display);font-size:20px;color:var(--green);
-  margin-bottom:12px;letter-spacing:1px;
-}
+.editor-modal h2{font-size:20px;margin-bottom:12px}
 .editor-date-bar{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
 .editor-date-bar label{font-size:12px;color:var(--text2);font-weight:600}
 .editor-date-bar select{
@@ -262,36 +251,12 @@ body::after{
 }
 .editor-field input:focus, .editor-field select:focus{border-color:var(--green)}
 .editor-field select{cursor:pointer}
-.editor-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
-.editor-actions button{
-  padding:8px 20px;border-radius:var(--radius-sm);cursor:pointer;
-  font-family:var(--font-body);font-size:13px;transition:all .2s;
-}
-.editor-actions .cancel-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
-.editor-actions .cancel-btn:hover{border-color:var(--text2);color:var(--text)}
-.editor-actions .save-btn{background:var(--green);border:none;color:var(--bg);font-weight:600}
-.editor-actions .save-btn:hover{opacity:.85}
-.editor-actions .save-push-btn{background:#6c5ce7;border:none;color:#fff;font-weight:600}
-.editor-actions .save-push-btn:hover{opacity:.85}
 .editor-empty{color:var(--text3);text-align:center;padding:40px;font-size:14px}
 
-/* Upload Modal */
-.upload-overlay{
-  display:none;position:fixed;inset:0;z-index:2000;
-  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
-  align-items:center;justify-content:center;
-}
-.upload-overlay.active{display:flex}
-.upload-modal{
-  background:var(--bg2);border:1px solid var(--border2);
-  border-radius:var(--radius);padding:32px;max-width:520px;width:90%;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-}
-.upload-modal h2{
-  font-family:var(--font-display);font-size:22px;color:var(--green);
-  margin-bottom:8px;letter-spacing:1px;
-}
-.upload-modal .desc{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6}
+/* Upload Modal - specific overrides */
+.upload-modal{max-width:520px}
+.upload-modal h2{margin-bottom:8px}
+.upload-modal .desc{margin-bottom:20px}
 .upload-drop{
   border:2px dashed var(--border2);border-radius:var(--radius-sm);
   padding:40px 20px;text-align:center;cursor:pointer;
@@ -325,20 +290,6 @@ body::after{
 .upload-result .success{color:var(--green);font-weight:600;margin-bottom:8px}
 .upload-result .error{color:var(--red);font-weight:600;margin-bottom:8px}
 .upload-result .detail{font-size:12px;color:var(--text2);line-height:1.8}
-.upload-actions{display:flex;gap:10px;justify-content:flex-end}
-.upload-actions button{
-  padding:8px 20px;border-radius:var(--radius-sm);cursor:pointer;
-  font-family:var(--font-body);font-size:13px;transition:all .2s;
-}
-.upload-actions .cancel-btn{
-  background:var(--bg3);border:1px solid var(--border2);color:var(--text2);
-}
-.upload-actions .cancel-btn:hover{border-color:var(--text2);color:var(--text)}
-.upload-actions .confirm-btn{
-  background:var(--green);border:none;color:var(--bg);font-weight:600;
-}
-.upload-actions .confirm-btn:hover{opacity:.85}
-.upload-actions .confirm-btn:disabled{opacity:.4;cursor:default}
 
 /* Match Cards */
 .match-grid{display:flex;flex-direction:column;gap:16px}
@@ -679,25 +630,25 @@ body {
 
 
 <!-- ==================== EDITOR MODAL ==================== -->
-<div class="editor-overlay" id="editorOverlay" onclick="if(event.target===this)closeEditorModal()">
-  <div class="editor-modal">
+<div class="modal-overlay editor-overlay" id="editorOverlay" onclick="if(event.target===this)closeEditorModal()">
+  <div class="modal-box editor-modal">
     <h2>📝 编辑数据</h2>
     <div class="editor-date-bar">
       <label>日期：</label>
       <select id="editorDateSelect" onchange="renderEditorForm()"></select>
     </div>
     <div class="editor-match-list" id="editorMatchList"></div>
-    <div class="editor-actions">
-      <button class="cancel-btn" onclick="closeEditorModal()">关闭</button>
-      <button class="save-btn" onclick="saveEditorData()">💾 保存本地</button>
-      <button class="save-push-btn" onclick="saveAndPush()">💾 保存 + 🚀 推送</button>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeEditorModal()">关闭</button>
+      <button class="btn-save" onclick="saveEditorData()">💾 保存本地</button>
+      <button class="btn-push" onclick="saveAndPush()">💾 保存 + 🚀 推送</button>
     </div>
   </div>
 </div>
 
 <!-- ==================== UPLOAD MODAL ==================== -->
-<div class="upload-overlay" id="uploadOverlay" onclick="if(event.target===this)closeUploadModal()">
-  <div class="upload-modal">
+<div class="modal-overlay upload-overlay" id="uploadOverlay" onclick="if(event.target===this)closeUploadModal()">
+  <div class="modal-box upload-modal">
     <h2>📤 导入Excel数据</h2>
     <div class="desc">
       上传预测或复盘Excel文件，系统将自动识别类型并合并到对应日期。<br>
@@ -714,16 +665,16 @@ body {
       <div class="upload-progress-text" id="progressText">解析中...</div>
     </div>
     <div class="upload-result" id="uploadResult"></div>
-    <div class="upload-actions">
-      <button class="cancel-btn" onclick="closeUploadModal()">取消</button>
-      <button class="confirm-btn" id="confirmBtn" onclick="confirmUpload()" disabled>确认导入</button>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeUploadModal()">取消</button>
+      <button class="btn-confirm" id="confirmBtn" onclick="confirmUpload()" disabled>确认导入</button>
     </div>
   </div>
 </div>
 
 <!-- ==================== SETTINGS MODAL ==================== -->
-<div class="settings-overlay" id="settingsOverlay" onclick="if(event.target===this)closeSettingsModal()">
-  <div class="settings-modal">
+<div class="modal-overlay settings-overlay" id="settingsOverlay" onclick="if(event.target===this)closeSettingsModal()">
+  <div class="modal-box settings-modal">
     <h2>⚙️ GitHub 推送设置</h2>
     <div class="desc">配置GitHub Personal Access Token后，可直接从页面推送数据到仓库。<br>Token仅存储在浏览器本地，不会上传到任何服务器。</div>
     <div class="settings-status" id="settingsStatus"></div>
@@ -736,9 +687,9 @@ body {
       <label>仓库（只读）</label>
       <input type="text" value="xuxianyu1/football-guide" disabled style="opacity:.6">
     </div>
-    <div class="settings-actions">
-      <button class="cancel-btn" onclick="closeSettingsModal()">关闭</button>
-      <button class="save-btn" onclick="saveGitHubSettings()">保存设置</button>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeSettingsModal()">关闭</button>
+      <button class="btn-save" onclick="saveGitHubSettings()">保存设置</button>
     </div>
   </div>
 </div>
@@ -746,8 +697,9 @@ body {
 <script>
 // ===== DATA (loaded dynamically per-date) =====
 let ALL_DATA = {};
-let _loadedDates = new Set(); // track which dates are loaded
-let _loadingDate = null;      // prevent concurrent loads
+let _loadedDates = new Set();
+let _loadingDate = null;
+window.FOOTCAST_DATA = window.FOOTCAST_DATA || {};
 
 function loadDataAndRender(dataUrl) {
   const script = document.createElement('script');
@@ -774,8 +726,6 @@ function loadDateData(dateKey) {
     render();
     return;
   }
-  // Initialize FOOTCAST_DATA so per-date files can assign to it
-  if (!window.FOOTCAST_DATA) window.FOOTCAST_DATA = {};
   _loadingDate = dateKey;
   const script = document.createElement('script');
   script.onload = function() {
@@ -800,8 +750,6 @@ function loadDateData(dateKey) {
 
 // Load index file then load the target date
 function loadIndexAndDate(targetKey) {
-  // Initialize FOOTCAST_DATA so per-date files can assign to it
-  if (!window.FOOTCAST_DATA) window.FOOTCAST_DATA = {};
   const script = document.createElement('script');
   script.onload = function() {
     if (window.FOOTCAST_INDEX) {
@@ -822,9 +770,8 @@ function loadIndexAndDate(targetKey) {
 
 // ===== STATE =====
 let currentDateKey = "";
-let currentFilter = "all";
 let dateKeys = [];
-let pendingUpload = null; // {type:'review'|'predict', dateKey:'YYYYMMDD', data:object}
+let pendingUpload = null;
 
 // ===== UTILS =====
 const f = (v, d=4) => (v==null) ? '—' : Number(v).toFixed(d);
@@ -875,13 +822,6 @@ function splitDecision(d) {
   const idx = d.indexOf(' / ');
   if (idx >= 0) return {normal: d.substring(0, idx).trim(), handicap: d.substring(idx + 3).trim()};
   return {normal: d.trim(), handicap: ''};
-}
-
-// ===== FILTER =====
-function setFilter(f) {
-  currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f));
-  render();
 }
 
 // ===== RENDER =====
@@ -1457,7 +1397,6 @@ async function pushToGitHub() {
 
     // Clear localStorage cache
     localStorage.removeItem('footcast_data');
-    localStorage.removeItem('football_data_override');
 
     showPushToast(
       '✅ 推送成功！',
@@ -1768,7 +1707,6 @@ function confirmUpload() {
 // ===== DATA REFRESH =====
 function refreshFromServer() {
   localStorage.removeItem('footcast_data');
-  localStorage.removeItem('football_data_override');
   location.reload();
 }
 
