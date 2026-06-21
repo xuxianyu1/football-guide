@@ -777,6 +777,10 @@ function loadDateData(dateKey) {
   _loadingDate = dateKey;
   const script = document.createElement('script');
   script.onload = function() {
+    // Copy loaded data from window.FOOTCAST_DATA to ALL_DATA
+    if (window.FOOTCAST_DATA && window.FOOTCAST_DATA[dateKey]) {
+      ALL_DATA[dateKey] = window.FOOTCAST_DATA[dateKey];
+    }
     _loadedDates.add(dateKey);
     _loadingDate = null;
     currentDateKey = dateKey;
