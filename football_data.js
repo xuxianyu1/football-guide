@@ -51,8 +51,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜或平局 / 让负",
         "score_predict": "1-0/1-1/2-1",
         "actual_score": "0-2",
-        "handicap_result": "客胜/让负",
-        "correct": "✅",
+        "handicap_result": "客胜 / 让负",
+        "correct": "对/—",
         "attribution": "皇马2-0完胜西班牙人，姆巴佩等5人伤停仍展现强队底蕴，维尼修斯双响锁定胜局。预测精准识别皇马热门陷阱，让球盘让负判断正确。"
       },
       {
@@ -104,8 +104,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "2-0",
-        "handicap_result": "主胜/让平",
-        "correct": "✅",
+        "handicap_result": "主胜 / 让平",
+        "correct": "对/—",
         "attribution": "国米2-0完胜帕尔马提前夺冠，但让球盘让-2过深，实际只赢2球让盘走水。教训：夺冠战往往小胜即安。"
       },
       {
@@ -157,8 +157,8 @@ window.FOOTCAST_DATA = {
         "decision": "分胜负 / 让负",
         "score_predict": "0-1/1-2/2-3",
         "actual_score": "4-2",
-        "handicap_result": "主胜/让胜",
-        "correct": "❌",
+        "handicap_result": "主胜 / 让胜",
+        "correct": "错/—",
         "attribution": "里昂主场4-2大胜雷恩，预测\"倾向客队\"完全错误。教训：低估里昂主场强势，盘口退盘被误读为冷门信号。"
       },
       {
@@ -210,8 +210,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜或平局 / 让负",
         "score_predict": "1-1/1-2/2-2",
         "actual_score": "1-2",
-        "handicap_result": "客胜/让负",
-        "correct": "✅",
+        "handicap_result": "客胜 / 让负",
+        "correct": "对/—",
         "attribution": "热刺2-1客胜维拉，预测精准识别保级战意压制欧冠战意，德泽尔比战术改善效果显著。"
       },
       {
@@ -263,8 +263,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让平",
         "score_predict": "2-1/1-1/2-0",
         "actual_score": "1-0",
-        "handicap_result": "主胜/让胜",
-        "correct": "❌",
+        "handicap_result": "主胜 / 让胜",
+        "correct": "错/—",
         "attribution": "门兴88分钟绝杀1-0多特，预测\"多特胜\"完全错误。教训：埃姆雷-詹缺阵影响被低估，客胜1.81接近死亡区间。"
       }
     ]
@@ -321,8 +321,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -374,8 +374,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -427,8 +427,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -480,8 +480,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -533,8 +533,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜",
         "score_predict": "1-0/2-1/2-0",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       }
     ]
@@ -591,8 +591,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-2 / 0-3 / 1-3",
         "actual_score": "2-0",
-        "handicap_result": "胜/让胜",
-        "correct": "❌/❌",
+        "handicap_result": "胜 / 让胜",
+        "correct": "错/错",
         "attribution": "芬超弱队爆冷，主队2-0完胜，客胜+让负全错"
       },
       {
@@ -644,8 +644,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-1 / 0-2 / 1-2",
         "actual_score": "0-1",
-        "handicap_result": "负/让负",
-        "correct": "✅/✅",
+        "handicap_result": "负 / 让负",
+        "correct": "对/对",
         "attribution": "客胜+让负双命中"
       },
       {
@@ -697,8 +697,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-3 / 1-4 / 0-4",
         "actual_score": "1-2",
-        "handicap_result": "负/让胜",
-        "correct": "✅/❌",
+        "handicap_result": "负 / 让胜",
+        "correct": "对/错",
         "attribution": "客胜命中，但仅赢1球让+2后让胜，让负预测错"
       },
       {
@@ -750,8 +750,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "2-1 / 3-2 / 1-0",
         "actual_score": "1-0",
-        "handicap_result": "胜/让平",
-        "correct": "✅/✅",
+        "handicap_result": "胜 / 让平",
+        "correct": "对/对",
         "attribution": "主胜+让平双命中，萨卡制胜球"
       }
     ]
@@ -2322,9 +2322,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "亚盘降盘+水位上升，主队主场不稳(近4主场1胜3负)，必发主胜69.4%过热，客队保级战意强烈；让负赔率1.97被市场高估，塞尔塔净胜2球+概率约50%",
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0, 3-1, 3-0",
-        "actual_score": "2:3",
+        "actual_score": "2-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "❌ / ❌",
+        "correct": "错/错",
         "attribution": "普通盘归因：盘口分析(G列)亚盘从0.5/1球降盘至0.5球信号被准确识别但低估了莱万特保级战意爆发；伤停分析(I列)莱万特6人缺阵被识别但塞尔塔近两连胜的状态被忽视；状态战意(K列)莱万特保级生死战的求生欲完全被低估 / 让球盘归因：同普通盘"
       },
       {
@@ -2375,9 +2375,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "主队3名门将全部缺阵，门线存重大隐患；新月库利巴利缺阵但整体不败金身，客场平局大师属性；让负赔率1.58对应63.3%，EV约+15%核心推荐",
         "decision": "主胜 / 让平",
         "score_predict": "2:1 / 1:0 / 3:2",
-        "actual_score": "1:1",
+        "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "❌ / ❌",
+        "correct": "错/错",
         "attribution": "普通盘归因：盘口分析(G列)主胜赔率1.35-1.45超低赔区间被准确识别；伤停分析(I列)埃尔切防守漏洞被识别但降级队荣誉战意被低估；状态战意(K列)埃尔切已降级但为下赛季磨合可能超常发挥被忽视 / 让球盘归因：同普通盘"
       },
       {
@@ -2428,9 +2428,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "埃尔切已降级无欲无求，心态放松可能超常发挥；双方首回合贝蒂斯已赢球，大胜预期反成心理压力；让胜赔率3.05对应38.5%，市场可能低估",
         "decision": "主胜 / 让胜",
         "score_predict": "2-0, 3-0, 3-1",
-        "actual_score": "2:1",
+        "actual_score": "2-1",
         "handicap_result": "主胜 / 让平",
-        "correct": "✅ / ❌",
+        "correct": "对/错",
         "attribution": "普通盘归因：盘口分析(G列)从0.5/1球升至1球升盘信号准确；伤停分析(I列)米堡4人缺阵+3名中卫近乎崩塌被识别；状态战意(K列)南安普敦主场10连胜+荣誉战意被低估但最终激发超常发挥 / 让球盘归因：让球盘让负正确，米堡首回合4球优势在手战意松懈"
       },
       {
@@ -2481,9 +2481,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "主胜真实概率40%对应赔率2.06，隐含48.5%，偏差8.5%严重高估；近3次交锋均为1-1心理默契极高；让负赔率1.6对应63.3%，EV约+15%",
         "decision": "平局 / 让负",
         "score_predict": "1:1 / 0:0 / 2:2",
-        "actual_score": "2:3",
+        "actual_score": "2-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "❌ / ✅",
+        "correct": "错/对",
         "attribution": "预测错误 / 预测正确"
       },
       {
@@ -2534,9 +2534,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "首回合0-4劣势翻盘概率极低；必发主胜过热(>65%)与基本面背离，倒逼风险高；南安普敦被曝光偷拍训练负面新闻；让负赔率1.5被严重高估",
         "decision": "平局 / 让负",
         "score_predict": "1:1 / 0:0 / 2:2",
-        "actual_score": "1:1",
+        "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "✅ / ✅",
+        "correct": "对/对",
         "attribution": "预测正确 / 预测正确"
       }
     ]
@@ -2592,9 +2592,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "R07半球盘死亡陷阱：主队占优但盘口仅0.5球偏浅，升盘信心不足；R30盘口不变+水位上涨(0.91)维持；塞维利亚客场4连败但保级战意强烈，存在诱上风险",
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1, 1-0, 2-0",
-        "actual_score": "2:3",
+        "actual_score": "2-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "❌ / ❌",
+        "correct": "错/错",
         "attribution": "盘口分析(G列)亚盘从0.5/1球降盘至0.5球信号被识别但低估了塞维利亚保级战意爆发；伤停分析(I列)塞维利亚中后场伤缺被提及但未能预测到其反击效率爆发；状态战意(K列)塞维利亚保级生死战的求生欲完全被低估，最终逆转制胜 / 让球盘让-1球，比利亚雷亚尔2-3负，塞维利亚下半场连入2球完成逆转；让球盘预测让胜或让平，但实际让负；主队无欲无求被低效利用，客队求生欲超出预期"
       },
       {
@@ -2645,9 +2645,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "R25平半退平手阻平：盘口从受让0.25退至平手盘，机构示弱主队明显；R32临场1小时变盘风险；西班牙人保级战意强烈可能超常发挥",
         "decision": "平局或主胜 / 让胜",
         "score_predict": "1-1, 0-0, 1-0",
-        "actual_score": "2:0",
+        "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "✅ / ✅",
+        "correct": "对/对",
         "attribution": "盘口分析(G列)盘口从让球降为平手被识别为示弱主队；伤停分析(I列)西班牙人仅边缘球员伤缺主力完整被正确识别；状态战意(K列)保级战意强烈被正确识别，西班牙人主场2-0完胜毕尔巴鄂竞技 / 让球盘让+1球主队受让，西班牙人2-0胜，实际让胜；预测让胜正确；盘口从让球退至平手实际是诱空主队，西班牙人保级战意完全兑现"
       },
       {
@@ -2698,9 +2698,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "R01退盘升水诱上盘：亚盘从客让0.25急降至平手，客队水位1.35→1.10急降；R09机构对客队让球支撑力度骤降，布雷斯特主场7次交锋不败",
         "decision": "主胜 / 让胜",
         "score_predict": "1-0, 2-1, 2-0",
-        "actual_score": "1:2",
+        "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
-        "correct": "❌ / ❌",
+        "correct": "错/错",
         "attribution": "盘口分析(G列)亚盘从客让0.25急降至平手被识别；伤停分析(I列)两队状态均处低谷被正确识别；状态战意(K列)斯特拉斯堡战意更强被识别但布雷斯特主场7次交锋不败的题材被高估；最终布雷斯特1-2负于斯特拉斯堡 / 让球盘让+1球主队受让，布雷斯特1-2负，实际让平(1+1-2=0)；预测让胜错误；斯特拉斯堡开场抢攻战术成功，纳纳西传射表现超出预期"
       },
       {
@@ -2751,9 +2751,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "R09深盘高水阻上：2球深盘水位高估曼城赢盘能力；R22必发75%成交过热，倒逼风险极高；R05核心阵容缺阵(罗德里报销+德布劳内伤疑)，防线漏洞明显",
         "decision": "主胜 / 让胜或让平",
         "score_predict": "3-1, 2-0, 4-2",
-        "actual_score": "3:0",
+        "actual_score": "3-0",
         "handicap_result": "未开售 / 让胜",
-        "correct": "— / ✅",
+        "correct": "—/对",
         "attribution": "普通盘未开售 / 让球盘让-2球，曼城3-0胜，实际让胜(3-2-0=1>0)；预测让胜或让平正确；曼城残阵但福登+马尔穆什进攻组合发挥出色，2球深盘虽存诱上风险但实力碾压兑现"
       },
       {
@@ -2804,9 +2804,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "R10平赔异常低：平局凯利0.89为最低值，赔付风险被低估；R32临场盘口震荡风险；杯赛决赛偶然性大，拉齐奥死守可能拖入加时",
         "decision": "客胜 / 让负或让平",
         "score_predict": "0-1, 0-2, 1-2",
-        "actual_score": "0:2",
+        "actual_score": "0-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "✅ / ✅",
+        "correct": "对/对",
         "attribution": "盘口分析(G列)国米客让0.75高水与欧指存在偏差被识别；伤停分析(I列)拉齐奥三人伤疑影响战力被识别；状态战意(K列)国米剑指双冠战意拉满被正确识别；最终国米2-0完胜，预测客胜正确 / 让球盘让+1球主队受让，拉齐奥0-2负，实际让负(0+1-2=-1<0)；预测让负或让平，实际让负；国米实力碾压，图拉姆头球破门+劳塔罗单刀，推迟夺冠庆典变成提前庆祝双冠"
       },
       {
@@ -2857,9 +2857,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "R30盘口不变+水位上涨：客队水位从0.85升至0.90，机构防范主队爆冷；R09深盘阻上造势巴黎；巴黎需兼顾欧冠体能分配，朗斯主场87.5%胜率法甲最高",
         "decision": "平局 / 让胜",
         "score_predict": "1-1, 2-2, 0-0",
-        "actual_score": "0:2",
+        "actual_score": "0-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "❌ / ❌",
+        "correct": "错/错",
         "attribution": "盘口分析(G列)巴黎客让0.5升至0.75信号被识别但低估了巴黎轮换后仍有的实力差距；伤停分析(I列)巴黎主力轮换被提及但低估了替补深度；状态战意(K列)巴黎虽已提前夺冠但朗斯主场强势被高估，实际巴黎替补阵容仍碾压 / 让球盘让+1球主队受让，朗斯0-2负，实际让负(0+1-2=-1<0)；预测让胜错误；巴黎即使轮换依然实力远超朗斯，客场完全掌控比赛节奏"
       },
       {
@@ -2910,9 +2910,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "R10客队水位急升(0.80→0.95)：机构示弱巴萨防范主队；R25保级战意9.5分vs巴萨7分(已夺冠)；阿拉维斯主场韧性可能被低估；平局防范价值高",
         "decision": "平局或客胜 / 让胜或让平",
         "score_predict": "0-1, 1-1, 1-2",
-        "actual_score": "1:0",
+        "actual_score": "1-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "❌ / ✅",
+        "correct": "错/对",
         "attribution": "盘口分析(G列)巴萨客让1球降盘信号被识别但误判为示弱而非真实看低；伤停分析(I列)巴萨莱万缺阵被提及但低估了进攻体系瓦解程度；状态战意(K列)巴萨欧冠消耗+联赛已夺冠的双重松懈被识别但力度不够，阿拉维斯保级拼命被低估 / 让球盘让+1球主队受让，阿拉维斯1-0胜，实际让胜(1+1-0=2>0)；预测让胜或让平正确；阿拉维斯主场铁桶阵+反击一击致命，巴萨欧冠后遗症明显"
       },
       {
@@ -2963,9 +2963,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "R03主场虫属性：赫塔费主场胜率35%为西甲倒数第3；R09马洛卡保级战意强烈(9分)+穆里奇22球；R26历史交锋马洛卡3胜1平1负占优；让平半偏虚",
         "decision": "平局 / 让负",
         "score_predict": "1-1, 0-0, 0-1",
-        "actual_score": "3:1",
+        "actual_score": "3-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "❌ / ❌",
+        "correct": "错/错",
         "attribution": "盘口分析(G列)主让0.5低水信号被识别但误判为支撑不足，实际主队强势让球合理；伤停分析(I列)马洛卡核心中场缺阵被提及但低估了对组织进攻的影响；状态战意(K列)赫塔费主场收官战意被低估，3球火力爆发远超预期 / 让球盘让-1球，赫塔费3-1胜，实际让胜(3-1-1=1>0)；预测让负错误；赫塔费主场完全碾压马洛卡，3球净胜远超预期，让-1球盘口支撑充分"
       }
     ]
@@ -3021,9 +3021,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "盘口从0.25降至平手主队被看衰；平局概率45%最高且EV平+19%核心推荐区间；两队近6次交锋全平平局惯性极强；两队各有关键位置缺阵(巴伦后防4人/巴列中场核心停赛)均难压制对手；巴列卡诺需为5月28日欧协联决赛蓄力可能轮换战意打折；让球-1赔率1.55对应52%概率被市场低估",
         "decision": "平局 / 让负",
         "score_predict": "1:1 / 0:0 / 2:2",
-        "actual_score": "1:1",
-        "handicap_result": "平局",
-        "correct": "✅",
+        "actual_score": "1-1",
+        "handicap_result": "平局 / —",
+        "correct": "对/—",
         "attribution": "双方战意不足平局收场"
       },
       {
@@ -3074,9 +3074,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "吉达联合客场胜率仅12.5%是致命软肋；达曼协定主场10场不败率80%且首回合1-0击败对手心理占优；主队上场0-5惨败急需反弹；客队法比尼奥停赛+多名主力出战成疑中场控制力下滑；让球+1赔率1.66对应45%概率被低估；凯利数据显示市场对主胜有所保留但综合主场优势值得支持",
         "decision": "主胜 / 让胜",
         "score_predict": "2:1 / 1:0 / 2:0",
-        "actual_score": "1:3",
-        "handicap_result": "客胜",
-        "correct": "❌",
+        "actual_score": "1-3",
+        "handicap_result": "客胜 / —",
+        "correct": "错/—",
         "attribution": "预测主胜实际客胜，沙职豪门客场强势"
       },
       {
@@ -3127,9 +3127,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "主队超低赔1.30-1.40区间EV胜-0.36存在低赔陷阱风险；必发市场大量资金倾向主胜方向热度>75%存在R03/R116高危信号；客队近9个客场1平8负客场虫属性且主力门将伤缺防线重组；主队奥巴梅扬争金靴战意十足+主场16场不败气势如虹；让球-2盘让胜2.28概率32%低于普通盘主胜58%，赔率存在价值；综合大胜概率仍较高但需防1球小胜",
         "decision": "主胜 / 让胜",
         "score_predict": "3:0 / 4:0 / 3:1",
-        "actual_score": "2:0",
-        "handicap_result": "主胜",
-        "correct": "✅",
+        "actual_score": "2-0",
+        "handicap_result": "主胜 / —",
+        "correct": "对/—",
         "attribution": "主队实力碾压取胜"
       },
       {
@@ -3180,9 +3180,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "赫罗纳保级形势岌岌可危仅领先降级区1分，背水一战战意拉满；但三线核心缺阵阵容残缺近5轮2平3负状态低迷；皇家社会已锁定欧联资格战意存疑可能接受平局；凯利胜-0.38负-0.01均<0，客胜EV+16.3%核心推荐区间市场低估客队；历史交锋赫罗纳近6次仅1胜心理劣势；综合客队实力优势+战意打折可利用反击制胜",
         "decision": "客胜 / 让负",
         "score_predict": "0:1 / 1:2 / 0:2",
-        "actual_score": "1:1",
-        "handicap_result": "平局",
-        "correct": "❌",
+        "actual_score": "1-1",
+        "handicap_result": "平局 / —",
+        "correct": "错/—",
         "attribution": "预测客胜实际平局"
       },
       {
@@ -3233,9 +3233,9 @@ window.FOOTCAST_DATA = {
         "risk_signal": "皇马超低赔1.12-1.18区间EV胜-0.25存在低赔陷阱R04风险；但皇马国家德比0-2惨败巴萨急需赢球挽回颜面战意可信；皇马主场17场14胜胜率82%主场优势巨大；奥维耶多提前降级无欲无求后防几乎重组；让球-2盘让胜2.61对应37%概率赔率偏低有投资价值；主队虽大热存在R03/R116风险但奥维耶多降级后战意全无难以抵挡；综合仍看好皇马大胜",
         "decision": "主胜 / 让胜",
         "score_predict": "3:0 / 4:0 / 3:1",
-        "actual_score": "2:0",
-        "handicap_result": "主胜",
-        "correct": "✅",
+        "actual_score": "2-0",
+        "handicap_result": "主胜 / —",
+        "correct": "对/—",
         "attribution": "皇马主场强势取胜"
       }
     ]
@@ -3293,7 +3293,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 0-0 / 2-2",
         "actual_score": "3-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "达马克保级绝境爆发：贝德兰梅开二度+对手无战意+主场三连败后反弹。普通盘错判平局，忽视保级队求生欲。让-1判断完全相反，深盘判断失误。"
       },
       {
@@ -3346,7 +3346,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1, 1-0, 3-2",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "利雅得体育保级战意超预期：客场死守反击成功。布赖合作主场三连败后状态不稳，马丁内斯点球救主未能改变平局。让-1判断错误。"
       },
       {
@@ -3399,7 +3399,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 0-0 / 2-2",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "圣埃蒂安进攻残阵（11人缺阵）无力破门，罗德兹21场不败防守韧性惊人。90分钟互交白卷准确预测，点球晋级符合双方合理预期。普通盘和让球盘判断完全正确。"
       },
       {
@@ -3452,7 +3452,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 0-0 / 2-2",
         "actual_score": "4-2",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "correct": "错/对",
         "attribution": "利物浦13人缺阵+范戴克独木难支+索博斯洛伊致命滑倒送礼。维拉沃特金斯双响状态火热+主场68%胜率兑现。普通盘平局错判，让+1判断正确。"
       }
     ]
@@ -3510,7 +3510,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1 / 3-2 / 1-0",
         "actual_score": "5-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "博德闪耀主场强势+周中杯赛心理优势完美兑现，但净胜5球超出预期 / 让球-1预期净胜2球，实际净胜5球远超预期，判断过于保守"
       },
       {
@@ -3563,7 +3563,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 2-2 / 0-0",
         "actual_score": "5-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "严重低估赫尔火花进攻爆发力，赛前数据被彻底颠覆 / 主队净胜5球，让负完全错误，严重误判双方实力"
       },
       {
@@ -3616,7 +3616,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1 / 3-2 / 1-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "AC奥卢主场优势+芬超最强进攻精准兑现，1-0比分完美命中 / 让球-1盘口判断精准，让平完美覆盖"
       },
       {
@@ -3669,7 +3669,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 2-2 / 0-0",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "布拉加防线5人伤停+保级队绝境爆发力完美验证，防平策略成功 / 布拉加让球-1仅平局，让负完美命中"
       },
       {
@@ -3722,7 +3722,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0 / 3-1 / 3-0",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "亚冠决赛大热倒灶，主队20脚射门无果，9倍身价差未能兑现 / 大阪钢巴防守反击完美执行，让负完美命中冷门"
       },
       {
@@ -3775,7 +3775,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2, 1-3, 0-2",
         "actual_score": "4-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "correct": "错/对",
         "attribution": "门兴保级战意被严重低估，德甲收官战主场强势爆发大胜 / 门兴受让+1盘口完美命中，净胜4球超出让球预期"
       },
       {
@@ -3828,7 +3828,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2, 1-3, 2-3",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "法兰克福主场告别战绝境爆发，斯图加特战意未能体现 / 法兰克福受让+1盘口让胜完美命中，斯图加特大热倒灶"
       },
       {
@@ -3881,7 +3881,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0, 4-1, 4-0",
         "actual_score": "5-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "✅ / ✅",
+        "correct": "对/对",
         "attribution": "拜仁主场冠军庆典+凯恩纪录战完美爆发，普通盘正确 / 让球-2净胜4球，让胜完美命中，凯恩帽子戏法破纪录"
       },
       {
@@ -3934,7 +3934,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2, 2-3",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "曼城整体实力+心理优势压制切尔西，客胜正确 / 让球+1盘口让平完美命中，切尔西仅输1球"
       }
     ]
@@ -3992,7 +3992,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意/盘口信号误判 / 让球盘信号误判"
       },
       {
@@ -4045,7 +4045,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意/盘口信号误判 / 让球盘信号误判"
       },
       {
@@ -4098,7 +4098,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "0-4",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意/盘口信号误判 / 让球盘信号误判"
       },
       {
@@ -4151,7 +4151,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "0-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意/盘口信号误判 / 让球盘信号误判"
       },
       {
@@ -4204,7 +4204,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意误判 / 让球计算错误(让+1: 1+1=2>1=让胜, 非让平)"
       },
       {
@@ -4257,7 +4257,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-0",
         "actual_score": "1-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意/盘口信号误判 / 让球盘信号误判"
       },
       {
@@ -4310,7 +4310,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-0",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意误判 / 让球计算错误(让-1: 2-1=1<2=让负, 非让平)"
       },
       {
@@ -4363,7 +4363,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/0-0/2-2",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "correct": "错/对",
         "attribution": "战意/盘口信号误判 / 让球计算正确"
       },
       {
@@ -4416,7 +4416,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意/盘口信号误判 / 让球盘信号误判"
       },
       {
@@ -4469,7 +4469,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "客胜分析正确 / 让球计算修正(让+1: 0+1=1=1=让平, 非让负)"
       },
       {
@@ -4522,7 +4522,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "六维度信号准确 / 让球计算正确"
       },
       {
@@ -4575,7 +4575,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "六维度信号准确 / 让球计算正确"
       },
       {
@@ -4628,7 +4628,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意/盘口信号误判 / 让球盘信号误判"
       },
       {
@@ -4681,7 +4681,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "六维度信号准确 / 让球计算正确"
       },
       {
@@ -4734,7 +4734,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "战意分析正确 / 让球计算修正(让+1: 0+1=1=1=让平, 非让负)"
       },
       {
@@ -4787,7 +4787,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "3-4",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "战意/盘口信号误判 / 让球盘信号误判"
       }
     ]
@@ -4845,7 +4845,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/1-2/0-2",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "correct": "错/对",
         "attribution": "普通盘：低估拉赫蒂主场韧性，主力门将缺阵被夸大；让球盘：1-1平局让-1=让负✅，弃盘信号R05门将停赛实为陷阱但让球方向正确"
       },
       {
@@ -4898,7 +4898,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "2-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：低估领头羊天狼星7轮不败状态，历史交锋劣势被忽视；让球盘：天狼星强势穿盘，R28弱队信号失效"
       },
       {
@@ -4951,7 +4951,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-0/2-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：主队保级战意被高估，哥德堡底蕴犹在；让球盘：哥德堡客场反客为主，R14弱队深盘陷阱命中"
       },
       {
@@ -5004,7 +5004,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0/4-1/5-2",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让负",
-        "correct": "✅主胜 / ❌让平",
+        "correct": "对/错",
         "attribution": "普通盘：竞彩未开售无法投注；让球盘：阿森纳大热翻车，让3球穿盘失败，R03投注过热+R116高危区信号全部命中"
       }
     ]
@@ -5062,7 +5062,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：曼城被逼平，哈兰德补时救主，保级队战意爆发；让球盘：1-1让+1→2vs1=让胜≠让负，预测方向全错"
       },
       {
@@ -5115,7 +5115,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/0-0/2-2",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：❌平局误判。预测平局但实际主胜，恩佐世界波+桑托斯破门，切尔西进攻效率超预期。德比战情绪化因素导致比赛偏离基本面分析。盘口深开造势主队被正确识别，但低估了切尔西主场触底反弹动力。\n让球盘：❌让负错误。2-1=1等于0，热刺让-1后1-1走水。盘口深开+客队伤停被正确识别，但德比战变数大，走水是让球盘常见结果。"
       }
     ]
@@ -5173,7 +5173,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "1-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "客队芬超第1实力碾压，主队保级压力大但实力差距明显，大热客队正常打出 | 1-3让+1→2vs3=-1让负，实际比分验证让球盘计算无误✅"
       },
       {
@@ -5226,7 +5226,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-3/0-4/1-4",
         "actual_score": "1-4",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "客队挪超第4进攻最强，客让2球深盘合理，斯达防守崩盘大败符合预期 | 1-4让+2→3vs4=-1让负，客队穿盘大胜✅"
       },
       {
@@ -5279,7 +5279,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "主队芬超强队主场全胜，让1球深盘主队大胜穿盘，符合预期 | 3-0让-1→2vs0=2让胜，主队大胜穿盘✅"
       },
       {
@@ -5332,7 +5332,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "主队哥德堡盖斯主场2-0爆冷击败瑞超第2哈马比，预测客胜翻车❌ | 2-0让+1→3vs0=3让胜，但预测让负❌"
       },
       {
@@ -5385,7 +5385,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "主队利勒斯特罗姆让1.5球深盘被客队克里斯蒂安松爆冷击败，预测主胜翻车❌ | 1-2让-1→0vs2=-2让负，但预测让胜❌"
       },
       {
@@ -5438,7 +5438,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "1-4",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "客队吉达国民沙职第3进攻火力凶猛，客队大胜符合预期 | 1-4让+1→2vs4=-2让负，客队大胜穿盘✅"
       },
       {
@@ -5491,7 +5491,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "主队奥勒松挪超第15保级压力下爆冷2-1击败第6布兰，预测客胜翻车❌ | 2-1让+1→3vs1=2让胜，但预测让负❌"
       },
       {
@@ -5544,7 +5544,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "0-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "欧联决赛维拉3-0完胜弗赖堡，客队实力优势明显，符合预期 | 0-3让+1→1vs3=-2让负，客队大胜✅"
       },
       {
@@ -5597,7 +5597,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/0-0/2-2",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "correct": "错/对",
         "attribution": "威廉二世主队让0.25球退盘示弱，客队福伦丹实际2-1击败主队，平局预测翻车❌ | 1-2让-1→0vs2=-2让负，但预测平局❌"
       },
       {
@@ -5650,7 +5650,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/0-0/2-2",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "托林斯让0.25球平局0-0收场，平局预测命中✅ | 0-0让-1→-1vs0=-1让负，与让负预测一致✅"
       }
     ]
@@ -5708,7 +5708,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/1-0",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "预测主胜，实际平局 / 预测让胜/让平，实际让负(虚拟1+-1=0vs1=-1)"
       },
       {
@@ -5761,7 +5761,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-3/0-4/1-4",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "预测正确 / 预测让负，实际让胜(虚拟0+2=2vs1=1)"
       },
       {
@@ -5814,7 +5814,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "1-5",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "预测正确 / 预测正确"
       },
       {
@@ -5867,7 +5867,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-1/4-2",
         "actual_score": "4-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "预测正确 / 预测让平，实际让胜(虚拟4+-2=2vs1=1)"
       },
       {
@@ -5920,7 +5920,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/0-0/2-2",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "预测平局，实际主胜 / 预测让负，实际让胜(虚拟2+-1=1vs0=1)"
       },
       {
@@ -5973,7 +5973,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1/1-0/3-2",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "预测主胜，实际平局 / 预测让平，实际让负(虚拟0+-1=-1vs0=-1)"
       },
       {
@@ -6026,7 +6026,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-2",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "预测正确 / 预测让胜，实际让平(虚拟3+-1=2vs2=0)"
       }
     ]
@@ -6084,7 +6084,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/1-2/0-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "客胜→主胜，错误 / 让平/让负→让胜，错误"
       },
       {
@@ -6137,7 +6137,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "主胜→客胜，错误 / 让胜/让平→让负，错误"
       },
       {
@@ -6190,7 +6190,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/2-1/1-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "平局/主胜→主胜，正确 / 让+1: 1+1=2vs0=让胜，预测让胜=✅"
       },
       {
@@ -6243,7 +6243,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/2-1/1-0",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "平局→平局，正确 / 主胜/让胜→让胜，正确"
       },
       {
@@ -6296,7 +6296,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "主胜→主胜，正确 / 让胜/让平→让胜，正确"
       }
     ]
@@ -6354,7 +6354,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 0-1 / 1-2",
         "actual_score": "4-2",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "皇马收官战大胜，卡瓦哈尔告别+姆巴佩金靴战意强，毕巴双核缺阵无还手之力 / 弃盘场不评判"
       },
       {
@@ -6407,7 +6407,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 1-2 / 0-1",
         "actual_score": "3-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "凯恩帽子戏法，拜仁三冠王完美收官，斯图加特无力抵抗 / 弃盘场不评判"
       },
       {
@@ -6460,7 +6460,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1 / 1-0 / 2-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "塞尔塔主场1-0小胜塞维利亚，莫里巴第51分钟制胜球 / 塞尔塔让1球→1-1=0→让平(走水)，预测让胜/让平包含让平✅"
       },
       {
@@ -6513,7 +6513,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 0-0 / 2-2",
         "actual_score": "3-3",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "博洛尼亚3-3绝平国际米兰，迪马尔科任意球+乌龙球+绝平 / 博洛尼亚+1→3+1=4 vs 3→让胜，预测让胜/让平包含让胜✅"
       },
       {
@@ -6566,7 +6566,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 0-0 / 2-2",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "赫塔费1-0小胜奥萨苏纳，但预测平局方向错误 / 赫塔费让1球→1-1=0→让平(走水)，预测让负错误"
       },
       {
@@ -6619,7 +6619,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 0-0 / 2-2",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "西班牙人1-1皇家社会，奥斯卡松破门后罗伯托扳平 / 西班牙人让1球→1-1=0→让负，预测让负正确✅"
       }
     ]
@@ -6677,7 +6677,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0 / 3-1 / 1-0",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": ""
       },
       {
@@ -6730,7 +6730,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0 / 2-1 / 1-0",
         "actual_score": "2-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": ""
       },
       {
@@ -6783,7 +6783,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2 / 0-2 / 1-3",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": ""
       },
       {
@@ -6836,7 +6836,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0 / 3-1 / 1-0",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": ""
       },
       {
@@ -6889,7 +6889,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-1 / 2-0 / 4-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": ""
       },
       {
@@ -6942,7 +6942,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2 / 1-2 / 0-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": ""
       },
       {
@@ -6995,7 +6995,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0 / 1-1 / 2-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": ""
       },
       {
@@ -7048,7 +7048,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 2-1 / 1-0",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": ""
       },
       {
@@ -7101,7 +7101,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1 / 2-0 / 1-0",
         "actual_score": "3-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": ""
       },
       {
@@ -7154,7 +7154,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1 / 2-1 / 1-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": ""
       },
       {
@@ -7207,7 +7207,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2 / 1-2 / 0-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": ""
       },
       {
@@ -7260,7 +7260,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0 / 3-1 / 1-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": ""
       },
       {
@@ -7313,7 +7313,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2 / 1-3 / 0-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": ""
       },
       {
@@ -7366,7 +7366,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1 / 1-0 / 3-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": ""
       },
       {
@@ -7419,7 +7419,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2 / 0-1 / 1-2",
         "actual_score": "0-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": ""
       },
       {
@@ -7472,7 +7472,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2 / 1-1 / 0-1",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": ""
       },
       {
@@ -7525,7 +7525,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2 / 0-1 / 1-3",
         "actual_score": "1-4",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": ""
       },
       {
@@ -7578,7 +7578,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0 / 2-0 / 4-0",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": ""
       },
       {
@@ -7631,7 +7631,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1 / 1-1 / 3-1",
         "actual_score": "5-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": ""
       }
     ]
@@ -7689,7 +7689,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/1-2/2-3",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "【冷门规则失效-典型案例】斯达(让+1)主场2-0完胜，赛季首胜。分析偏差：1)过度依赖纸面实力(客队身价2.44倍)；2)忽视主队保级战意爆发；3)挪超主队主场龙属性未被纳入冷门评估；4)v3.3规则C6b/C8e仅针对英超，对北欧联赛主队强势特征失效。"
       },
       {
@@ -7742,7 +7742,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-1/2-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "【正确预判】汉坎主场让+1球2-0完胜，主场龙属性验证。盘口分析准确识别主队强势基本面，冷门信号有效。"
       },
       {
@@ -7795,7 +7795,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "【双错-冷门规则失效】特罗姆瑟让-1球最终1-1平局，让负打出。主队开场进球但未能守住，暴露让深盘后的进攻效率问题。普通盘主胜预测失误，让球盘让胜预测失误，方向完全反了。"
       },
       {
@@ -7848,7 +7848,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1/3-2/4-2",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "【普通盘正确/让球盘失误】奥斯KFUM平手盘2-0完胜，主胜方向正确。但让球盘让-1→虚拟1:0→让胜，预测让平未命中。主队赢2球但让球盘仍为让胜，说明挪超主场强势被低估。"
       },
       {
@@ -7901,7 +7901,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1/3-1/3-2",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "【正确预判】萨普斯堡2-1战胜莫尔德，主胜+让平双命中。主队主场强势抵消实力差距。"
       },
       {
@@ -7954,7 +7954,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "【双错-让球盘系统性偏差】哥德堡(让+1)1-1平局让胜打出。问题：1)预测倾向客胜/让平，实际主队让胜；2)忽视哥德堡主场虽然0%胜率但防守尚可；3)瑞超主队受让盘口时的逆袭概率被低估。"
       },
       {
@@ -8007,7 +8007,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "【双错-让球盘系统性偏差】埃夫斯堡(让+1)1-1平局让胜打出。与哥德堡同样的模式：受让+1球下主队守平即让胜，预测偏向客胜/让平完全忽视让胜可能。"
       },
       {
@@ -8060,7 +8060,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "【双错-让深盘冷门】桑纳菲让-1球最终1-1，让负打出。分析偏差：1)主队主场仅失2球防守稳固但进攻转化差；2)客队90+1分钟绝平打破客场无平规律；3)让深盘(-1)后主队进攻效率不足无法打穿。"
       },
       {
@@ -8113,7 +8113,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "【正确预判】帕德博恩(让+1)2-1战胜狼堡(加时)，主胜/让胜双命中。德甲升降级附加赛主队强势规律验证。"
       }
     ]
@@ -8171,7 +8171,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1/1-0/2-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "菲尔特2-0完胜保级。普通盘主胜命中✓。让球盘让-1：2-0→1-0=让胜，预测让平✗，主队净胜2球超预期。冷门评分5分但战意压制了伤病影响。"
       },
       {
@@ -8224,7 +8224,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2/0-1/1-1",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "圣埃蒂安0-0闷平尼斯。普通盘客胜/平局命中平局✓，弃盘决策正确。让球盘让-1：0-0→-1-0=让负，预测让负/让平，让负命中✓。8分弃盘信号验证有效，尼斯5主力伤停=客场无力进攻。"
       },
       {
@@ -8277,7 +8277,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "拉努斯1-0小胜。普通盘主胜/平局命中主胜✓，比分1-0命中。让球盘让-1：1-0→0-0=让平，预测让平✓。5分冷门警惕但主队仍1-0险胜，冷门信号部分验证（仅赢1球）。"
       },
       {
@@ -8330,7 +8330,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0/2-0/2-1",
         "actual_score": "3-2",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "基多体大3-2险胜。普通盘主胜命中✓。让球盘让-1：3-2→2-2=让平，预测让胜/让平，让平命中✓。深盘仅净胜1球，C3a极低赔+过热信号部分验证（大热未完全穿盘）。"
       },
       {
@@ -8383,7 +8383,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0/2-0/3-1",
         "actual_score": "3-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "弗拉门戈3-0大胜。普通盘主胜命中✓，比分3-0命中。让球盘让-2：3-0→1-0=让胜✓。实力碾压，0分冷门评分验证正确。"
       },
       {
@@ -8436,7 +8436,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/1-2/0-2",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "❌蒙国民1-0胜。普通盘预测客胜错误✗。让球盘让-1：1-0→0-0=让平，预测让负✗。教训：乌拉圭主场优势+科金博联锁定头名后战意不足被低估，盘口支持客队但主队守住主场。"
       },
       {
@@ -8489,7 +8489,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1/1-1/2-0",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "大学体育0-0闷平。普通盘主胜/平局命中平局✓。让球盘让-1：0-0→-1-0=让负，预测让胜/让平✗。主队攻坚能力差+客队铁桶防守，让球盘低估了平局概率。"
       }
     ]
@@ -8547,7 +8547,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/0-1/1-2",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：水晶宫主场氛围强劲+战意明确（赢球锁定欧联资格），巴列卡诺无欲无求。最终1-0小胜，符合主队优势判断，但普通盘预测走客/平方向错误。让球盘体彩让-1球: 1-1=0 vs 0 → 让平，AA预测让负 → ❌错误。\n\n让球盘：体彩让-1球: 1-1=0 vs 0 → 让平，AA预测让负 → ❌错误。"
       },
       {
@@ -8600,7 +8600,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/1-1/0-0",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：德尔瓦耶主场高原优势+需争头名，最终1-0击败罗萨里奥锁定小组第一。但普通盘预测走客/平错误，误判了主队战意。让球盘体彩让-1球: 1-1=0 vs 0 → 让平，AA预测让负 → ❌错误。\n\n让球盘：体彩让-1球: 1-1=0 vs 0 → 让平，AA预测让负 → ❌错误。"
       },
       {
@@ -8653,7 +8653,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：亚松森自由开出超深盘1.25球但实际0-1完败，中央大学客场表现出色。普通盘预测主胜完全错误，误判了主队实力。让球盘体彩让-1球: 0-1=-1 vs 1 → 让负，AA预测让胜/让平 → ❌错误。\n\n让球盘：体彩让-1球: 0-1=-1 vs 1 → 让负，AA预测让胜/让平 → ❌错误。"
       },
       {
@@ -8706,7 +8706,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "1-3",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：玻利瓦尔主场1-3惨败，状态低迷+高原主场优势被取消后战斗力锐减。里瓦达维亚客场强势提前锁定头名。普通盘预测主胜错误。让球盘体彩让-1球: 1-1=0 vs 3 → 让负，AA预测让胜/让平 → ❌错误。\n\n让球盘：体彩让-1球: 1-1=0 vs 3 → 让负，AA预测让胜/让平 → ❌错误。"
       },
       {
@@ -8759,7 +8759,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0/2-0/3-1",
         "actual_score": "3-1",
         "handicap_result": "未开售 / 未开售",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "普通盘：弗鲁米嫩塞主场3-1大胜拉瓜伊拉，争胜成功晋级。普通盘预测主胜✅正确！主队主场强势+需胜争晋级战意明确。让球盘体彩让-2球: 3-2=1 vs 1 → 让平，AA预测让胜/让平 → ✅正确！\n\n让球盘：体彩让-2球: 3-2=1 vs 1 → 让平，AA预测让胜/让平 → ✅正确！"
       },
       {
@@ -8812,7 +8812,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/1-2/1-1",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "普通盘：佩纳罗尔严重伤病潮+无欲无求，最终0-1负于圣菲独立。普通盘预测客/平正确✅（客胜命中）！但因冷门评分8分被建议弃盘，弃盘决策正确。让球盘体彩让-1球: 0-1=-1 vs 1 → 让负，AA预测让负 → ✅正确！\n\n让球盘：体彩让-1球: 0-1=-1 vs 1 → 让负，AA预测让负 → ✅正确！"
       },
       {
@@ -8865,7 +8865,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-0/2-1",
         "actual_score": "0-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：科林蒂安锁定头名后大幅轮换，最终0-2完败给普拉滕斯。普通盘预测主胜完全错误，科林蒂安战意不足+轮换导致防守崩盘。让球盘体彩让-1球: 0-1=-1 vs 2 → 让负，AA预测让胜/让平 → ❌错误。\n\n让球盘：体彩让-1球: 0-1=-1 vs 2 → 让负，AA预测让胜/让平 → ❌错误。"
       }
     ]
@@ -8923,7 +8923,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/3-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：✅ 主胜预测正确。爱尔兰开场5分钟闪击破门，尽管半场被罚下一人，最终仍1-0零封获胜，符合爱尔兰近期不败的竞技走势。卡塔尔为世界杯练兵，战意存疑，进攻效率低下（全场仅1次射正）。\n\n让球盘：✅ 让平（走水）。1-0让-1后虚拟比分0-0=让平，与预测让平/让胜一致。爱尔兰虽然少打一人但防守韧性极强，成功守住1-0比分让球盘走水。\n\n教训：友谊赛主队1-0小胜是典型\"小胜即安\"模式，爱尔兰虽有实力优势但进攻欲望不强，预测比分2-0/2-1/3-1过于激进。"
       },
       {
@@ -8976,7 +8976,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/1-2/0-2",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：❌ 预测客胜，实际主胜2-0。卡萨皮亚42岁老将丰特谢幕战极大激励全队，主场强势完胜。低估了谢幕战的情感战意加成，也低估了主场保级压力下的爆发力。\n\n让球盘：❌ 预测让负，实际让-1后2-1=让胜。主队完全压制客队，让球盘也没守住。谢幕战+保级双重战意下，卡萨皮亚表现远超赔率预期。"
       },
       {
@@ -9029,7 +9029,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/1-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：✅ 主胜预测正确。波特诺主场强势2-0完胜，符合主场优势+解放者杯重视度高的特征。\n\n让球盘：✅ 预测让胜/让平，实际让胜（2-0让-1→1-0=让胜）。双选策略覆盖了让胜方向，正确命中。"
       },
       {
@@ -9082,7 +9082,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0/3-1/4-0",
         "actual_score": "4-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：✅ 主胜预测正确。帕尔梅拉斯4-1大胜，实力碾压明显。\n\n让球盘：✅ 预测让胜/让平，实际让胜（4-1让-2→2-1=让胜）。帕尔梅拉斯进攻火力十足，让-2也顺利穿盘。双选策略成功覆盖。"
       },
       {
@@ -9135,7 +9135,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-0/1-1/2-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "correct": "错/对",
         "attribution": "普通盘：❌ 预测平局，实际客胜0-1。博卡主场爆冷输球，解放者杯小组出线形势严峻。博卡近期状态低迷，主场进攻哑火，平局判断过于乐观。\n\n让球盘：✅ 预测让负，实际让负（0-1让-1→-1-1=让负）。今早修正了AA从\"平局/让胜\"→\"平局/让负\"，让负方向命中！这是AA/AB一致性修正的直接收益——如果没改，让球盘也会错。"
       }
     ]
@@ -9192,8 +9192,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负或让平",
         "score_predict": "0-2/0-1/1-2",
         "actual_score": "2-2",
-        "handicap_result": "平局/让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "平局 / 让胜",
+        "correct": "错/错",
         "attribution": "厄格里特主场2-0领先后被连扳2球追平。保级战意爆发+主场60%不败率被低估，埃夫斯堡杯赛消耗后进攻效率下降。"
       },
       {
@@ -9245,8 +9245,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负或让平",
         "score_predict": "0-2/0-1/1-2",
         "actual_score": "0-0",
-        "handicap_result": "平局/让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "平局 / 让胜",
+        "correct": "错/错",
         "attribution": "挪超主场优势显著，主队残阵死守拿到1分，客队争冠压力下表现保守。"
       },
       {
@@ -9298,8 +9298,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1/1-0/2-0",
         "actual_score": "2-1",
-        "handicap_result": "主胜/让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "handicap_result": "主胜 / 让平",
+        "correct": "对/对",
         "attribution": "主队新帅上任状态回升，斯达客场6连败防线崩盘。主胜方向预测正确。"
       },
       {
@@ -9351,8 +9351,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1/1-0/2-0",
         "actual_score": "2-2",
-        "handicap_result": "平局/让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "平局 / 让负",
+        "correct": "错/错",
         "attribution": "主队有乌龙送礼但守住1分，保级队主场强势。汉坎客场表现优于预期。"
       },
       {
@@ -9404,8 +9404,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-1/1-0/2-0",
         "actual_score": "3-1",
-        "handicap_result": "主胜/让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "handicap_result": "主胜 / 让胜",
+        "correct": "对/对",
         "attribution": "开场1分钟闪击+下半场连续进球，主队保级压力下主场强势发挥。大胜正确。"
       },
       {
@@ -9457,8 +9457,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜或平局 / 让胜或让平",
         "score_predict": "0-1/1-2/1-1",
         "actual_score": "2-2",
-        "handicap_result": "平局/让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "handicap_result": "平局 / 让胜",
+        "correct": "对/对",
         "attribution": "AA客胜/平局+让胜/让平，实际平局命中普通盘✅，+1让球让胜命中让球盘✅"
       },
       {
@@ -9510,8 +9510,8 @@ window.FOOTCAST_DATA = {
         "decision": "弃盘 / 弃盘",
         "score_predict": "需弃盘",
         "actual_score": "1-2",
-        "handicap_result": "客胜/让负",
-        "correct": "普通盘:- | 让球盘:-",
+        "handicap_result": "客胜 / 让负",
+        "correct": "—/—",
         "attribution": "弃盘场次，实际萨普斯堡客场2-1逆转，布兰防线连续失误。"
       },
       {
@@ -9563,8 +9563,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "0-0",
-        "handicap_result": "平局/让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "平局 / 让负",
+        "correct": "错/错",
         "attribution": "友谊赛性质，双方替补出战，半场全员轮换导致下半场毫无竞争力。"
       },
       {
@@ -9616,8 +9616,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "4-1",
-        "handicap_result": "主胜/让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "handicap_result": "主胜 / 让胜",
+        "correct": "对/对",
         "attribution": "尼斯主场强势发挥，瓦希梅开二度+最后10分钟连入3球，总比分4-1保级成功。"
       }
     ]
@@ -9674,8 +9674,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/4-0",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -9727,8 +9727,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -9780,8 +9780,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "2-1/1-0/3-2",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -9833,8 +9833,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜或平局 / 让负或让平",
         "score_predict": "0-1/1-2/2-2",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -9886,8 +9886,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜或平局 / 让平或让胜",
         "score_predict": "2-1/1-1/3-1",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -9939,8 +9939,8 @@ window.FOOTCAST_DATA = {
         "decision": "平局或主胜 / 让平或让负",
         "score_predict": "1-1/0-0/2-1",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -9992,8 +9992,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜或平局 / 让平或让胜",
         "score_predict": "1-0/2-1/1-1",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       }
     ]
@@ -10050,8 +10050,8 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让平",
         "score_predict": "1-1/0-0/2-2",
         "actual_score": "4-5",
-        "handicap_result": "客胜/让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "客胜 / 让负",
+        "correct": "错/错",
         "attribution": "普通盘：实际客胜预测平局；让球盘4+(-1)=3 vs 5→让负，预测让平"
       },
       {
@@ -10103,8 +10103,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-2/0-3/1-3",
         "actual_score": "3-2",
-        "handicap_result": "主胜/让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "主胜 / 让胜",
+        "correct": "错/错",
         "attribution": "普通盘：实际主胜预测客胜；让球盘3+(1)=4 vs 2→让胜，预测让负"
       },
       {
@@ -10156,8 +10156,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "2-2",
-        "handicap_result": "平局/让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "平局 / 让负",
+        "correct": "错/错",
         "attribution": "普通盘：实际平局预测主胜；让球盘2+(-1)=1 vs 2→让负，预测让胜/让平"
       },
       {
@@ -10209,8 +10209,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "3-0/2-0/4-1",
         "actual_score": "4-1",
-        "handicap_result": "未开售/让胜",
-        "correct": "弃盘/弃盘",
+        "handicap_result": "未开售 / 让胜",
+        "correct": "—/—",
         "attribution": "普通盘未开售；让球盘4+(-2)=2 vs 1，实际让胜，预测让胜/让平，让球盘✅"
       },
       {
@@ -10262,8 +10262,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "2-1",
-        "handicap_result": "主胜/让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "handicap_result": "主胜 / 让平",
+        "correct": "对/对",
         "attribution": "普通盘：实际主胜预测主胜；让球盘2+(-1)=1 vs 1→让平，预测让胜/让平"
       },
       {
@@ -10315,8 +10315,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/1-0/2-1",
         "actual_score": "2-1",
-        "handicap_result": "主胜/让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "handicap_result": "主胜 / 让平",
+        "correct": "对/对",
         "attribution": "普通盘：实际主胜预测主胜；让球盘2+(-1)=1 vs 1→让平，预测让胜/让平"
       },
       {
@@ -10368,8 +10368,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-1/1-2/0-2",
         "actual_score": "3-2",
-        "handicap_result": "主胜/让平",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "主胜 / 让平",
+        "correct": "错/错",
         "attribution": "普通盘：实际主胜预测客胜；让球盘3+(-1)=2 vs 2→让平，预测让负"
       }
     ]
@@ -10427,7 +10427,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1 / 0-2 / 1-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：客胜命中。黑山客场1-0小胜保加利亚。\n\n让球盘：让+1球，0+1=1 vs 1，让平命中。"
       },
       {
@@ -10480,7 +10480,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0 / 3-1 / 2-1",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：主胜命中。挪威3-1完胜瑞典。\n\n让球盘：让-1球，3-1=2 vs 1，让胜命中。"
       },
       {
@@ -10533,7 +10533,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0 / 3-0 / 3-1",
         "actual_score": "4-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：主胜命中。土耳其4-0大胜北马其顿。\n\n让球盘：让-2球，4-2=2 vs 0，让胜命中。"
       },
       {
@@ -10586,7 +10586,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0 / 2-0 / 2-1",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：主胜命中。奥地利1-0小胜突尼斯。\n\n让球盘：让-1球，1-1=0 vs 0，让平命中。"
       },
       {
@@ -10639,7 +10639,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0 / 3-1 / 4-0",
         "actual_score": "3-1",
         "handicap_result": "未开售 / 未开售",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "普通盘：普通盘未开售。\n\n让球盘：让-2球，3-2=1 vs 1，让平命中。"
       },
       {
@@ -10692,7 +10692,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0 / 2-1 / 1-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：主胜命中。\n\n让球盘：让-1球，2-1=1 vs 0，让胜命中。"
       }
     ]
@@ -10749,8 +10749,8 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让负",
         "score_predict": "1-1/0-0/1-1",
         "actual_score": "0-2",
-        "handicap_result": "客胜/让负",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "handicap_result": "客胜 / 让负",
+        "correct": "错/对",
         "attribution": "【普通盘❌】预测平局，实际0-2比利时完胜。\n原因：①热门方判断失误——赔率2.55/2.9/2.55均相等，误判比利时为热门；②国际赛默契球陷阱——世界杯前热身赛，强队练兵但态度认真，德布劳内缺阵但卢卡库复出进球；③战术克制——比利时高效反击，多库爆破+蒂莱曼斯终结，0-2完胜。\n\n【让球盘✅】克罗地亚让1球，让负正确"
       },
       {
@@ -10802,8 +10802,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "1-1",
-        "handicap_result": "平局/让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "handicap_result": "平局 / 让负",
+        "correct": "错/错",
         "attribution": "【普通盘❌】预测主胜，实际1-1平局。\n原因：①克瓦拉茨赫利亚缺阵致命，进攻14射仅1球效率极低；②罗马尼亚务实防守，抓住唯一机会扳平。\n\n【让球盘❌】格鲁吉亚让1球，1+(-1)=0vs1→让负，AA预测让胜/让平均未命中。1-1平局+让-1必然=让负，但AA不含让负方向。"
       },
       {
@@ -10855,8 +10855,8 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让负",
         "score_predict": "1-1/0-0/1-1",
         "actual_score": "1-1",
-        "handicap_result": "平局/未开售",
-        "correct": "普通盘:✅ | 让球盘:-",
+        "handicap_result": "平局 / 未开售",
+        "correct": "对/—",
         "attribution": "【普通盘✅】预测平局，实际1-1完全命中！\n关键：①加纳5连败+世界杯练兵，战术意图明确；②威尔士得势不得分——18次射门，2次中框，补时绝平符合预期；③赔率支持平局2.91。\n\n【让球盘弃盘】体彩未开售让球盘，弃盘处理正确"
       }
     ]
@@ -10914,7 +10914,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/1-1/0-1(弃盘)",
         "actual_score": "0-0",
         "handicap_result": "弃盘 / 让负",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "普通盘：丹麦弃盘正确；实际平局符合刚果金防守强项；舒梅切尔缺阵影响显著\n\n让球盘：让球盘-1：丹麦0+(-1)=-1 vs 0=让负；弃盘处理正确"
       },
       {
@@ -10967,7 +10967,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：荷兰全主力围攻不进+被绝杀；预测主胜误判；C1++应触发冷门警示但未重视\n\n让球盘：让球盘-1：荷兰0+(-1)=-1 vs 1=让负；预测让平误判"
       },
       {
@@ -11020,7 +11020,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/0-0/0-1",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：双方各取1分符合双方无欲定位；平局精准命中；让球盘-1：波兰2+(-1)=1 vs 2=让负✓\n\n让球盘：让球盘-1：波兰2+(-1)=1 vs 2=让负✓"
       },
       {
@@ -11073,7 +11073,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：意大利U21小将稳健，埃斯波西托头球制胜；客胜精准命中；让球盘+1：卢森堡0+1=1 vs 1=让平✓\n\n让球盘：让球盘+1：卢森堡0+1=1 vs 1=让平✓"
       }
     ]
@@ -11131,7 +11131,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "未知(原始数据已丢失)",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：AA方向主胜未中(1-1平局)；C1+塞斯科缺阵生效，62%控球21射0穿盘；让平赔>让负赔验证穿盘信心不足\n\n让球盘：AA让胜/让平均未中(1-1(-1)=0:1=让负)；让平赔>让负赔验证穿盘信心不足；C1++验证"
       },
       {
@@ -11184,61 +11184,8 @@ window.FOOTCAST_DATA = {
         "score_predict": "未知(原始数据已丢失)",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：AA方向主胜未中(2-2平局)；比分预测2-2命中但与AA方向不符；凯利平局收敛0.86-0.94信号；希腊90+5绝平\n\n让球盘：AA让胜/让平均未中(2-2(-1)=1:2=让负)；凯利平局收敛0.86-0.94未充分重视；希腊90+5绝平"
-      },
-      {
-        "seq": 3,
-        "date": "06-05",
-        "league": "国际赛",
-        "home": "西班牙",
-        "away": "伊拉克",
-        "time": "03:00",
-        "analysis": {
-          "handicap": "体彩-3盘(罕见深盘)，让胜2.25/让平4.30/让负2.21，让胜让负赔率接近，市场对穿盘分歧大。",
-          "bifad": "普通盘未开售，仅让球盘可投；让胜让负成交额接近，市场极度分歧。",
-          "injury": "西班牙：亚马尔(腿筋)、尼科·威廉姆斯(腹股沟)、穆尼奥斯伤缺(2名核心边锋C1+)；梅里诺/拉亚/苏比门迪欧冠后轮休；罗德里/佩德里/加维中轴线完整。伊拉克：全主力健康，门将哈桑领衔。",
-          "tactical": "西班牙4-3-3极致传控vs伊拉克5-4-1铁桶大巴，亚马尔/尼科缺阵后边路爆破能力折损大半，破密集靠中路渗透效率低；伊拉克主帅阿诺德(前澳大利亚主帅)大巴战术老练，里亚索草皮状况差利好防守方。",
-          "form": "西班牙世界杯热身，主帅计划轮换多名替补，主力半场出战不追求大比分屠杀；伊拉克40年重返世界杯全队重视实战锻炼机会 | 近期: 西班牙近5场4胜1平(胜率80%)但3月0-0闷平埃及；伊拉克近5场2胜2平1负(胜率40%)防守稳固",
-          "uncertain": "里亚索草皮因拉科鲁尼亚升甲庆祝受损严重，传控效率下降；西班牙下半场大面积轮换后攻坚效率骤降；3月对埃及0-0前车之鉴。"
-        },
-        "normal": {
-          "type": "普通盘",
-          "win_pct": 0,
-          "draw_pct": 0,
-          "lose_pct": 0,
-          "win_odds": 0.0,
-          "draw_odds": 0.0,
-          "lose_odds": 0.0,
-          "ev_win": 0.0,
-          "ev_draw": 0.0,
-          "ev_lose": 0.0,
-          "kelly_win": 0.0,
-          "kelly_draw": 0.0,
-          "kelly_lose": 0.0
-        },
-        "handicap": {
-          "type": "让球盘",
-          "win_pct": 0,
-          "draw_pct": 0,
-          "lose_pct": 0,
-          "win_odds": 0.0,
-          "draw_odds": 0.0,
-          "lose_odds": 0.0,
-          "ev_win": 0.0,
-          "ev_draw": 0.0,
-          "ev_lose": 0.0,
-          "kelly_win": 0.0,
-          "kelly_draw": 0.0,
-          "kelly_lose": 0.0
-        },
-        "risk_signal": "1-1",
-        "decision": "主胜 / 让负或让平",
-        "score_predict": "-",
-        "actual_score": "普通盘未开售；让-3盘1-1走盘，C1+核心缺阵导致穿盘失败",
-        "handicap_result": "-",
-        "correct": "-",
-        "attribution": "-"
       },
       {
         "seq": 4,
@@ -11290,7 +11237,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "未知(原始数据已丢失)",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：AA方向主胜未中(1-2客胜)；萨利巴缺阵防线被打穿，C1++核心后卫缺阵验证\n\n让球盘：AA让胜未中(1-2(-1)=0:2=让负)；萨利巴缺阵防线崩溃，大冷门"
       },
       {
@@ -11343,7 +11290,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "未知(原始数据已丢失)",
         "actual_score": "5-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：C1++三线核心缺阵验证；高原主场+塞尔维亚进攻瘫痪双重利多兑现；双乌龙\n\n让球盘：让-1后4-0让胜完美兑现"
       }
     ]
@@ -11401,7 +11348,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/2-1/1-2(弃盘)",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "普通盘：弃盘正确✅ 冷门9分弃盘，实际客胜1.56若押可赢但风险>收益\n\n让球盘：弃盘正确✅ 让球后2:2让平3.35若押可赢，但9分信号不可忽视"
       },
       {
@@ -11454,7 +11401,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/2-1/1-0",
         "actual_score": "2-2",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：AA主胜未中(2-2平局)；4核缺阵C1++验证但评分仅2分未触发弃盘；凯利平负信号被忽视\n\n让球盘：AA让胜/让平均未中(让球后1:2=让负)；斯洛伐克4核缺阵影响被低估；让负赔2.15最低机构已预警"
       },
       {
@@ -11507,7 +11454,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-1/1-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：AA主胜命中；瓦尔加双响25'+43'验证主队实力；上半场2-0掌控全场\n\n让球盘：AA让平方向命中；让球后1:1=让平；芬兰71'远射破门缩小差距但未翻盘"
       },
       {
@@ -11560,7 +11507,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-1/1-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "correct": "错/对",
         "attribution": "普通盘：AA主胜未中(1-1平局)；戴维斯C1++缺阵影响被低估；爱尔兰60'点球补射扳平\n\n让球盘：AA让负方向命中；让球后0:1=让负；爱尔兰防反韧性+点球补射验证让平/让负双选策略"
       }
     ]
@@ -11618,7 +11565,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "5-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：普通盘预测:主胜→实际:主胜\n\n让球盘：让球盘预测:让胜/让平→实际:让胜"
       },
       {
@@ -11671,7 +11618,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/1-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：普通盘预测:主胜→实际:主胜\n\n让球盘：让球盘预测:让平/让负→实际:让负"
       },
       {
@@ -11724,7 +11671,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-0/1-1/0-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：普通盘预测:平→实际:主胜\n\n让球盘：让球盘预测:让负/让平→实际:让胜"
       },
       {
@@ -11777,7 +11724,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2/2-2/0-2",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：普通盘预测:客胜→实际:客胜\n\n让球盘：让球盘预测:让负/让平→实际:让平"
       },
       {
@@ -11830,7 +11777,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/0-2/1-1",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：普通盘预测:客胜→实际:平局\n\n让球盘：让球盘预测:让平/让负→实际:让胜"
       },
       {
@@ -11883,7 +11830,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/1-1/0-0",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "普通盘：普通盘预测:平→实际:平局\n\n让球盘：让球盘预测:让平→实际:让胜"
       },
       {
@@ -11936,7 +11883,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-1/0-0(弃盘)",
         "actual_score": "1-0",
         "handicap_result": "主胜 / 让负",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "普通盘：普通盘预测:弃盘→实际:主胜\n\n让球盘：让球盘预测:弃盘→实际:让负"
       },
       {
@@ -11989,7 +11936,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/1-2/0-0",
         "actual_score": "0-4",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：普通盘预测:客胜→实际:客胜\n\n让球盘：让球盘预测:让负/让平→实际:让负"
       },
       {
@@ -12042,7 +11989,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/2-1",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：普通盘预测:主胜→实际:主胜\n\n让球盘：让球盘预测:让胜/让平→实际:让平"
       },
       {
@@ -12095,7 +12042,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-1/0-2/1-1",
         "actual_score": "1-2",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：普通盘预测:客胜→实际:客胜\n\n让球盘：让球盘预测:让负/让平→实际:让平"
       },
       {
@@ -12148,7 +12095,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-0/1-1(弃盘)",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:- | 让球盘:-",
+        "correct": "—/—",
         "attribution": "普通盘：普通盘预测:弃盘→实际:主胜\n\n让球盘：让球盘预测:弃盘→实际:让平"
       }
     ]
@@ -12206,7 +12153,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：主胜命中。克罗地亚2-1小胜斯洛文尼亚。\n\n让球盘：让-1球，2-1调整后1-1，让平命中。"
       },
       {
@@ -12259,7 +12206,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-0/1-1/1-2",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "普通盘：平局命中。摩洛哥1-1战平挪威。\n\n让球盘：让+1球，1-1调整后2-1，让胜未能命中（预测让平/让负）。"
       },
       {
@@ -12312,7 +12259,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-1/0-0/1-0",
         "actual_score": "0-1",
         "handicap_result": "客胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:✅",
+        "correct": "错/对",
         "attribution": "普通盘：客胜，预测平局未中。希腊0-1不敌意大利U21。\n\n让球盘：让-1球，0-1调整后-1 vs 1，让负命中。"
       },
       {
@@ -12365,7 +12312,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "3-0/2-0/4-0",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：主胜命中。哥伦比亚2-0完胜约旦。\n\n让球盘：让-2球，2-0调整后0-0，让平命中（双选让胜/让平中1）。"
       }
     ]
@@ -12423,7 +12370,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-1/4-2",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "普通盘：✅ 荷兰绝杀2-1，主胜预测正确\n让球盘：❌ 让-2球，2-1调整后0 vs 1，让负未命中（预测让平）"
       },
       {
@@ -12476,7 +12423,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "普通盘：✅ 奥利塞戴帽，法国大胜3-1，主胜命中\n让球盘：❌ 让-2球，3-1调整后1 vs 1，让平未命中（预测让负）"
       },
       {
@@ -12529,7 +12476,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "0-2/1-3/2-4",
         "actual_score": "1-3",
         "handicap_result": "客胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：✅ 西班牙完胜秘鲁，客胜预测正确\n让球盘：✅ 让+2球，1-3调整后3 vs 3，让平精准命中"
       }
     ]
@@ -12587,7 +12534,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-0/2-1",
         "actual_score": "0-0",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：❌ 预测主胜，实际平局\n让球盘：❌ 预测让平/让胜，实际让负（中国0-0泰国，让-1后0+(-1)=-1 vs 0=让负）"
       },
       {
@@ -12640,7 +12587,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-1/4-2",
         "actual_score": "3-1",
         "handicap_result": "主胜 / 让平",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：✅ 主胜预测正确（匈牙利3-1逆转哈萨克斯坦）\n让球盘：✅ 让平预测正确（让-2后3+(-2)=1 vs 1=让平）"
       },
       {
@@ -12693,7 +12640,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1/2-0/1-0",
         "actual_score": "3-0",
         "handicap_result": "未开售 / 让胜",
-        "correct": "普通盘:- | 让球盘:❌",
+        "correct": "—/错",
         "attribution": "普通盘：- 未开售（阿根廷3-0冰岛，普通盘未开售，体彩不计算）\n让球盘：❌ 预测让负/让平，实际让胜（阿根廷3-0冰岛，让-2后3+(-2)=1 vs 0=让胜）"
       }
     ]
@@ -12751,7 +12698,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-1/4-2",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让负",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "普通盘：✅ 主胜预测正确\n让球盘：❌ 让-2调整后0vs1，让负未命中"
       },
       {
@@ -12804,7 +12751,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/3-1/4-2",
         "actual_score": "3-0",
         "handicap_result": "未开售 / 让胜",
-        "correct": "- / 让球盘:❌",
+        "correct": "—/错",
         "attribution": "普通盘：未开售（不计入统计）\n让球盘：❌ 让-2调整后1vs0，让胜未命中"
       }
     ]
@@ -12862,7 +12809,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-1/1-0/3-2",
         "actual_score": "2-0",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:❌",
+        "correct": "对/错",
         "attribution": "普通盘：✅ 主队2-0完胜，揭幕战高原主场优势明显，实力碾压\n让球盘：❌ 主队让-1.5后净胜球2>1.5，但预测让平实际打出让胜"
       },
       {
@@ -12915,7 +12862,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-2/0-1/0-2",
         "actual_score": "2-1",
         "handicap_result": "主胜 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：❌ 预测客胜但主队2-1逆转，孙兴慜最后一届激发全队\n让球盘：❌ 预测让负但主队净胜球+1<1.5，实际让负未打出"
       }
     ]
@@ -12973,7 +12920,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "1-1",
         "handicap_result": "平局 / 让负",
-        "correct": "普通盘:❌ | 让球盘:❌",
+        "correct": "错/错",
         "attribution": "普通盘：❌ 预测主胜实际平局\n让球盘：❌ 预测让平实际让负"
       },
       {
@@ -13026,7 +12973,7 @@ window.FOOTCAST_DATA = {
         "score_predict": "2-0/1-0/3-1",
         "actual_score": "4-1",
         "handicap_result": "主胜 / 让胜",
-        "correct": "普通盘:✅ | 让球盘:✅",
+        "correct": "对/对",
         "attribution": "普通盘：✅ 预测主胜方向正确\n让球盘：✅ 双选让胜/让平命中让胜"
       }
     ]
@@ -13071,8 +13018,8 @@ window.FOOTCAST_DATA = {
         "decision": "未开售 / 让胜或让平",
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "1-1",
-        "handicap_result": "未开售/让胜",
-        "correct": "-/对",
+        "handicap_result": "未开售 / 让胜",
+        "correct": "—/—",
         "attribution": "让球盘+2方向正确，决策'让胜/让平'命中让胜。盘口分析准确识别亚指升盘至-2为诱盘信号，必发数据让负与让胜持平验证大胜存疑。不确定因素'瑞士2-0后可能收力'预判到位。偏差：冷门压力测试0分有误，低估了瑞士终结效率极差(26射7正仅1点球)及卡塔尔防守韧性。比分预测0-1/0-2/1-2未覆盖1-1平局，应更重视瑞士终结不足风险。"
       }
     ]
@@ -13117,8 +13064,8 @@ window.FOOTCAST_DATA = {
         "decision": "未开售 / 让平或让负",
         "score_predict": "3-0/2-0/3-1",
         "actual_score": "7-1",
-        "handicap_result": "未开售/让胜",
-        "correct": "-/错",
+        "handicap_result": "未开售 / 让胜",
+        "correct": "—/—",
         "attribution": "让球盘判断失误。预测让平/让负基于深盘陷阱(-3踩坑率68%)和让胜过热(68%)，但德国6人进球多点开花，净胜6球远超3球让球线。低估了①库拉索对攻而非龟缩导致防线大开(非预测的铁桶阵)，②德国替补深度(翁达夫独造3球)，③穆西亚拉出战后中路突破力(4-1关键球)。盘口诱盘信号识别方向正确但力度判断失误，深盘陷阱未生效。"
       },
       {
@@ -13170,7 +13117,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "2-1/1-0/3-2",
         "actual_score": "2-2",
-        "handicap_result": "平局/让负",
+        "handicap_result": "平局 / 让负",
         "correct": "错/错",
         "attribution": "双盘全错。普通盘高估荷兰赢球能力，日本三核缺阵后仍展现极强韧性(中村敬斗扳平、镰田折射绝平)。让球盘预测让平(赢1球)但实际平局→让负。关键误判：①低估日本精神属性和防守纪律(铃木彩艳4次关键扑救)，②荷兰2-1后保守收缩被89分钟绝平，③伤停分析C1++虽已降权但实际影响仍被高估，日本替补深度和战术执行力弥补了核心缺阵。"
       },
@@ -13223,7 +13170,7 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让胜",
         "score_predict": "1-1/0-0/2-2",
         "actual_score": "1-0",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "错/对",
         "attribution": "让球盘命中但普通盘失误。让胜判断正确：科特迪瓦(+1)后2-0稳赢让球盘。普通盘预测平局偏差：厄瓜多尔虽19场不败但本场4中门框运气极差(耶博阿、明达、瓦伦西亚中框)，科特迪瓦迪亚洛90分钟绝杀。伤停分析准确(恩迪卡缺阵但厄瓜多尔未充分利用反击针对)，战术分析部分准确(厄瓜多尔守强攻弱格局成立但12射1正效率极低)。平局方向判断逻辑合理(厄瓜多尔平局属性强)但被运气因素逆转。"
       },
@@ -13276,7 +13223,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "2-1/1-0/3-2",
         "actual_score": "5-1",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "对/错",
         "attribution": "普通盘命中但让球盘力度判断失误。瑞典5-1大胜远超预测让平(赢1球)范围，净胜4球穿盘。必发分析已预警81%大热风险但瑞典实际热穿盘。低估了①伊萨克+哲凯赖什英超双核传射化学反应(1射2传+1射1助)，②阿亚里世界波双响(22岁新星爆发)，③突尼斯防线崩盘(队长斯希里致命失误+门将低级失误)。状态战意分析准确(瑞典救赎之战战意极强)，连续11场丢球隐患本场仅丢1球未实质暴露。"
       }
@@ -13322,8 +13269,8 @@ window.FOOTCAST_DATA = {
         "decision": "未开售 / 让胜",
         "score_predict": "3-0/4-0/4-1",
         "actual_score": "0-0",
-        "handicap_result": "未开售/让负",
-        "correct": "-/错",
+        "handicap_result": "未开售 / 让负",
+        "correct": "—/—",
         "attribution": "深盘-2踩坑率68%+世界杯铁桶阵久攻不下先例再次应验；必发78%极热接近大热倒灶阈值但冷门压力测试仅2分低估佛得角防守韧性；40岁门将沃齐尼亚7次扑救封神零封西班牙；亚马尔替补登场仍无法突破铁桶阵"
       },
       {
@@ -13375,7 +13322,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "1-1",
-        "handicap_result": "平/让负",
+        "handicap_result": "平 / 让负",
         "correct": "错/错",
         "attribution": "退盘示弱信号应验(亚盘1→0.75退盘)；必发82%主胜极热触发大热倒灶率59%；伤停分析识别正确(德巴斯特/德布劳内/卢卡库三线隐患)但未充分提升权重到决策层面；埃及阿舒尔19分钟远射破门领先，卢卡库替补23秒造乌龙仅扳平"
       },
@@ -13428,7 +13375,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "0-1/1-2/2-3",
         "actual_score": "1-1",
-        "handicap_result": "平/让胜",
+        "handicap_result": "平 / 让胜",
         "correct": "错/错",
         "attribution": "乌拉圭三核心伤缺(阿劳霍+德阿拉斯凯塔+希门尼斯C1++级)影响大于预期；迈阿密高温32℃高湿利好沙特低估；努涅斯4月无比赛状态低迷屡失良机，仅靠阿劳霍80分钟补射扳平；冷门压力测试4分已警示但决策仍偏向客胜"
       },
@@ -13481,7 +13428,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "2-2",
-        "handicap_result": "平/让负",
+        "handicap_result": "平 / 让负",
         "correct": "错/错",
         "attribution": "阿兹蒙政治落选(89场56球)进攻核心缺失影响远超预期，火力折损一半；新西兰贾斯特双响+伍德2助攻反击效率极高；冷门压力测试仅1分严重低估新西兰战力；伊朗两度落后两度扳平(雷扎伊扬+莫赫比)展现韧性但防守漏洞明显"
       }
@@ -13539,7 +13486,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-1",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "对/对",
         "attribution": "6维分析方向全对✅ 盘口分析准确判断法国主胜极低赔率指向赢球；必发分析识别85%过热风险但正确判断硬实力碾压下过热≠必冷(2022首战教训已纳入)且冷门压力测试-1分正常；伤停分析精准预判萨利巴可首发+库利巴利防线核心崩塌实际兑现(库利巴利首发出战但防线被姆巴佩+巴尔科拉打穿)；战术分析姆巴佩+登贝莱双翼碾压+奥利塞直塞助攻均兑现；比分3-1命中。唯一偏差：预测上半场破局，实际半场0-0闷平，下半场才发力"
       },
@@ -13592,8 +13539,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让负",
         "score_predict": "0-3/1-4/0-4",
         "actual_score": "1-4",
-        "handicap_result": "未开售/让负",
-        "correct": "-/对",
+        "handicap_result": "未开售 / 让负",
+        "correct": "—/—",
         "attribution": "让球盘方向正确✅ 预判挪威穿+2深盘实际4-1大胜穿盘。哈兰德双响+厄斯蒂高头球+乌龙球4-1如预判；伤停分析精准预判伊拉克叶海亚+阿德南伤缺边路漏洞(实际伊拉克边路被努萨+沃尔费反复打穿)；伊拉克1-1扳平时展现的铁血精神与预判\"541铁桶+防守韧性\"吻合但硬实力差距无法持续；普通盘未开售无法判断。唯一偏差：预判伊拉克进攻几乎为零，实际伊拉克上半场射门9-7领先挪威并一度扳平，进攻比预期强"
       },
       {
@@ -13645,7 +13592,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-0",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "对/对",
         "attribution": "6维分析方向全对✅ 盘口分析准确判断让-1盘让胜赔率最低机构看好阿根廷赢2球+；必发分析识别86%严重过热但正确判断\"过热≠必冷(2022首战1-2负沙特教训需警惕)\"且冷门压力测试3分正常；战意分析\"梅西最后一届+第200场里程碑战意极强\"完全兑现(梅西帽子戏法追平克洛泽16球纪录)；伤停分析预判塔利亚菲科缺阵左路薄弱但阿尔及利亚也左路伤缺对冲实际左路未成漏洞；比分3-0命中。完美预判"
       },
@@ -13698,7 +13645,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-1",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "对/对",
         "attribution": "6维分析方向全对✅ 战意分析\"时隔28年重返世界杯必须全取三分+抢净胜球\"正确；伤停分析精准预判约旦双核伤缺(奈马特+萨布拉)后进攻仅剩塔马里单核反击几乎无效(实际约旦仅1次射正)；冷门压力测试-2分正常排除冷门。但过程比预判惊险：约旦第50分钟乌勒万反击破门扳平(世界杯队史首球)暴露奥地利破密集后防线回撤不及时的隐患，让-1盘让胜仅2-1险胜而非预判的2-0/3-0大胜；阿瑙托维奇替补造乌龙+点射锁定胜局。比分3-1命中但让胜过程偏紧"
       }
@@ -13756,7 +13703,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "2-0 / 3-1",
         "actual_score": "1-1",
-        "handicap_result": "平/让负",
+        "handicap_result": "平 / 让负",
         "correct": "错/错",
         "attribution": "预测错误。盘口分析已识别深盘陷阱⚠️和必发大热🔴，但最终决策仍选主胜/让平，未充分执行深盘陷阱降权规则。C罗哑火+全场7射1正验证了深盘陷阱判断，刚果金利用角球头球扳平打进队史世界杯首球。盘口必发两维度实际已指向风险，决策未能与预警信号一致。"
       },
@@ -13809,7 +13756,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "1-0 / 2-1",
         "actual_score": "4-2",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "对/错",
         "attribution": "普通盘命中但让球盘失手。预测让平(赢1球)实际赢2球→让胜。4-2进球大战超预期，凯恩双响+贝林厄姆一条龙+拉什福德锁定胜局，进攻火力远超让平保守预期。盘口分析指出的\"机构对英格兰覆盖-1信心不足\"被赛果否定——图赫尔首战未成障碍，年轻球员爆发力超出预判。战意维度正确但比分幅度估计不足。"
       },
@@ -13862,7 +13809,7 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-1 / 0-2 / 1-2",
         "actual_score": "1-0",
-        "handicap_result": "主胜/让平",
+        "handicap_result": "主胜 / 让平",
         "correct": "错/错",
         "attribution": "预测完全错误。中轴线崩塌分析(帕尔特伊拒签+库杜斯重伤)看似指向巴拿马方向，但加纳仍凭整体实力1-0绝杀。关键失误：①过度放大伤停影响，低估加纳替补深度和主场韧性；②排名陷阱反向操作过度——巴拿马62%控球+4射正但效率极低，加纳虽创造少但转化率更高。伤停战术维度判断与赛果背离，加纳门将伤退后替补仍零封。"
       },
@@ -13915,7 +13862,7 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-3 / 1-3 / 1-4",
         "actual_score": "1-3",
-        "handicap_result": "客胜/让负",
+        "handicap_result": "客胜 / 让负",
         "correct": "对/对",
         "attribution": "预测完全正确。客胜+让负双命中，哥伦比亚3-1验证南美vs亚洲克制规律。盘口(让负降至1.80)、战术(4-3-3碾压中场)、战意(80%胜率vs20%)三维度共振，冷门压力测试-3分指向正路。费祖拉耶夫60分钟扳平一度制造悬念，但迪亚斯传射+坎帕斯补时锁定，强队控场节奏符合预判。"
       }
@@ -13973,7 +13920,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "1-1",
-        "handicap_result": "平/让负",
+        "handicap_result": "平 / 让负",
         "correct": "错/错",
         "attribution": "预测主胜/让胜，实际平局。盘口分析'穿盘存疑'方向正确但'跟盘口方向'判断主胜错误。伤停分析正确识别南非双核缺阵但低估其残阵防守韧性(全场仅1次射正=点球)。不确定因素列已预警'捷克领先后可能保守1-0经济模式'⚠️，实际正是60分钟大规模退守导致被扳平。冷门压力测试-3分(✅正常)未触发预警但实际平局=冷门。核心教训：领先后的保守退守策略风险未被充分量化。"
       },
@@ -14026,7 +13973,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-1/4-0",
         "actual_score": "4-1",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "对/对",
         "attribution": "预测主胜/让胜，实际4-1大胜。盘口分析'穿盘存疑'判断偏保守(实际穿盘)，但主胜方向正确。必发分析判断'让球偏让平'有偏差(实际让胜)。伤停分析正确识别波黑后防缺阵但低估替补曼赞比爆发力(替补双响)。比分预测4-0在实际结果范围内，方向完全正确。战意分析准确判断瑞士实力碾压。整体6维分析框架有效，仅让球盘细分方向略有保守。"
       },
@@ -14079,7 +14026,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜",
         "score_predict": "2-0/3-0/4-0",
         "actual_score": "6-0",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "对/对",
         "attribution": "预测主胜/让胜，实际6-0大胜。盘口分析'穿盘存疑'判断偏保守(实际6-0碾压穿盘)，但主胜方向正确。冷门压力测试3分(⚡冷门警惕)但实际无冷门=东道主光环非理性但方向正确。伤停分析正确识别戴维斯缺阵但低估加拿大整体进攻火力(戴维帽子戏法)。比分预测4-0接近实际6-0，方向完全正确。卡塔尔两张红牌加速崩盘=不可预测因素。"
       },
@@ -14132,7 +14079,7 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让负",
         "score_predict": "1-1/0-0/2-2",
         "actual_score": "1-0",
-        "handicap_result": "主胜/让平",
+        "handicap_result": "主胜 / 让平",
         "correct": "错/错",
         "attribution": "预测平局/让负，实际1-0墨西哥主胜。盘口分析正确识别'平赔低=机构防平局'但实际防的是小比分而非平局。伤停分析正确识别墨西哥双核缺阵(蒙特斯+阿尔瓦雷斯)重大影响，但低估：①东道主高原优势(1566米)仍有效；②韩国门将金承奎超巨失误送礼=非战术黑天鹅。冷门压力测试4分(⚡冷门警惕)但实际主胜是正常结果。核心教训：门将失误等不可预测因素对低比分比赛具有决定性影响，平局预测需附加'非正常失误'风险提示。"
       }
@@ -14190,7 +14137,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": 0.151
         },
         "actual_score": "2-0",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "对/错",
         "attribution": "普通盘主胜预测正确，让球盘让平预测错误(实际让胜)。乌龙球+弗里曼头球奠定胜局，美国控球62%压制澳大利亚。普利西奇缺阵影响有限，巴洛贡边路冲击持续制造威胁。让球盘方向判断保守，美国实际赢2球穿盘。"
       },
@@ -14243,7 +14190,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.074
         },
         "actual_score": "0-1",
-        "handicap_result": "客胜/让平",
+        "handicap_result": "客胜 / 让平",
         "correct": "错/错",
         "attribution": "普通盘平局预测错误(实际客胜)，让球盘让胜预测错误(实际让平)。摩洛哥70秒闪击+全面压制(控球59%+12射2正)，苏格兰6射0正完全瘫痪。伤停判断方向正确但苏格兰未能利用定位球。战术克制判断完全错误——摩洛哥传控体系(601次传球创纪录)全面压制。"
       },
@@ -14296,8 +14243,8 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.004
         },
         "actual_score": "3-0",
-        "handicap_result": "未开售/让胜",
-        "correct": "-/错",
+        "handicap_result": "未开售 / 让胜",
+        "correct": "—/—",
         "attribution": "普通盘未开售，让球盘让平/让负预测错误(实际让胜)。维尼修斯传射建功，巴西上半场36分钟3球锁定。5h双重信号降权判断失误——深盘+高支持率在绝对实力差距下非过热信号。让胜75%反映真实实力差距。"
       },
       {
@@ -14349,7 +14296,7 @@ window.FOOTCAST_DATA = {
           "kelly_lose": -0.242
         },
         "actual_score": "0-1",
-        "handicap_result": "客胜/让负",
+        "handicap_result": "客胜 / 让负",
         "correct": "错/错",
         "attribution": "普通盘主胜预测错误(实际客胜)，让球盘让平/让胜预测错误(实际让负)。65秒闪击改变走势，土耳其72%控球+20射5正0球终结效率持续为零。伤停信息重大失误——预测恩西索缺阵实际首发并助攻。多打1人70分钟仍0进球。"
       }
@@ -14407,7 +14354,7 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让负",
         "score_predict": "1-1/2-2/0-0",
         "actual_score": "5-1",
-        "handicap_result": "主胜/让胜",
+        "handicap_result": "主胜 / 让胜",
         "correct": "错/错",
         "attribution": "终结效率极端爆发(7射正5球=71.4%)，C1++伤病未影响进攻端；5h大热信号误判，68%热度反映真实实力差"
       },
@@ -14460,7 +14407,7 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "2-1/3-2/1-0",
         "actual_score": "2-1",
-        "handicap_result": "主胜/让平",
+        "handicap_result": "主胜 / 让平",
         "correct": "对/对",
         "attribution": "翁达夫替补双响绝杀；德国59%控球+16射门压制，但上半场终结低效一度落后"
       },
@@ -14513,8 +14460,8 @@ window.FOOTCAST_DATA = {
         "decision": "未开售 / 让胜",
         "score_predict": "3-0/4-0/2-0",
         "actual_score": "0-0",
-        "handicap_result": "未开售/让负",
-        "correct": "-/错",
+        "handicap_result": "未开售 / 让负",
+        "correct": "—/—",
         "attribution": "库拉索门将鲁姆15次扑救创世界杯纪录，厄瓜多尔27射15正0球，xG3.05被门将封杀"
       },
       {
@@ -14566,7 +14513,7 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让胜",
         "score_predict": "1-1/0-0/1-0",
         "actual_score": "0-4",
-        "handicap_result": "客胜/让负",
+        "handicap_result": "客胜 / 让负",
         "correct": "错/错",
         "attribution": "日本4球横扫，C1++伤病完全未影响进攻；上田绮世2射1传，5h禁止选日本规则严重误判"
       }
@@ -14624,8 +14571,8 @@ window.FOOTCAST_DATA = {
         "decision": "未开售 / 让平或让负",
         "score_predict": "2-0/1-0/3-0",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -14677,8 +14624,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平或让胜",
         "score_predict": "2-0/1-0/3-1",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -14730,8 +14677,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平或让胜",
         "score_predict": "1-0/2-1/2-0",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       },
       {
@@ -14783,8 +14730,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让平或让负",
         "score_predict": "0-1/1-2/0-2",
         "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
+        "handicap_result": "— / —",
+        "correct": "—/—",
         "attribution": ""
       }
     ]
