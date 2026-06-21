@@ -792,7 +792,7 @@ function loadDateData(dateKey) {
     currentDateKey = dateKey;
     render();
   };
-  script.src = 'data_' + dateKey + '.js?v=' + Date.now();
+  script.src = 'football-data/data_' + dateKey + '.js?v=' + Date.now();
   document.head.appendChild(script);
 }
 
@@ -810,9 +810,9 @@ function loadIndexAndDate(targetKey) {
   };
   script.onerror = function() {
     // Fallback: load full football_data.js
-    loadDataAndRender('football_data.js?v=' + Date.now());
+    loadDataAndRender('football-data/football_data.js?v=' + Date.now());
   };
-  script.src = 'data_index.js?v=' + Date.now();
+  script.src = 'football-data/data_index.js?v=' + Date.now();
   document.head.appendChild(script);
 }
 
@@ -1368,13 +1368,14 @@ async function pushToGitHub() {
 
     // 1. Push the single date file
     const dateFileName = 'data_' + targetKey + '.js';
+    const dateFilePath = 'football-data/' + dateFileName;
     showPushToast('🔄 正在推送...', `正在更新 ${dateFileName}...`, 'progress');
 
     const dateContent = 'window.FOOTCAST_DATA["' + targetKey + '"] = ' + JSON.stringify(ALL_DATA[targetKey]) + ';\n';
 
     // Get SHA of date file (may not exist yet = 404 = create)
     let dateSha = null;
-    const getDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFileName}`, {
+    const getDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFilePath}`, {
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
     }, 15000);
 
@@ -1392,7 +1393,7 @@ async function pushToGitHub() {
     };
     if (dateSha) pushDateBody.sha = dateSha;
 
-    const pushDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFileName}`, {
+    const pushDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFilePath}`, {
       method: 'PUT',
       headers: {
         'Authorization': `token ${token}`,
@@ -1418,7 +1419,7 @@ async function pushToGitHub() {
     const indexEncoded = btoa(unescape(encodeURIComponent(indexContent)));
 
     let indexSha = null;
-    const getIdxResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/data_index.js`, {
+    const getIdxResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football-data/data_index.js`, {
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
     }, 15000);
     if (getIdxResp.ok) {
@@ -1427,7 +1428,7 @@ async function pushToGitHub() {
     const pushIdxBody = { message: '更新索引 ' + dateStr, content: indexEncoded, branch: 'main' };
     if (indexSha) pushIdxBody.sha = indexSha;
 
-    await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/data_index.js`, {
+    await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football-data/data_index.js`, {
       method: 'PUT',
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify(pushIdxBody)
@@ -1438,13 +1439,13 @@ async function pushToGitHub() {
     const fullContent = 'window.FOOTCAST_DATA = ' + JSON.stringify(ALL_DATA) + ';\n';
     const fullEncoded = btoa(unescape(encodeURIComponent(fullContent)));
 
-    const getFullResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
+    const getFullResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football-data/football_data.js`, {
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
     }, 15000);
     if (!getFullResp.ok) throw new Error('获取football_data.js信息失败');
     const fullSha = (await getFullResp.json()).sha;
 
-    await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football_data.js`, {
+    await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football-data/football_data.js`, {
       method: 'PUT',
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: commitMsg + ' [full]', content: fullEncoded, sha: fullSha, branch: 'main' })
