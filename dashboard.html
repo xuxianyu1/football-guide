@@ -508,6 +508,8 @@ function parseCorrect(c) {
   const stripLabel = s => s.replace(/^(普通盘|让球盘)\s*[:：]\s*/,'').trim();
   const toResult = s => {
     if(!s || s==='-' || s==='—' || s==='弃盘') return null;
+    if(s==='✅' || s==='对') return '对';
+    if(s==='❌' || s==='错') return '错';
     return s;
   };
   if(c.includes('|')) {
