@@ -14676,10 +14676,10 @@ window.FOOTCAST_DATA = {
         "risk_signal": "8⚡C1+(3)+C3c(1)+C10c(2)+C10f(1)+C10h(1)",
         "decision": "平局 / 让负",
         "score_predict": "1-1/2-2/0-0",
-        "actual_score": null,
-        "handicap_result": null,
-        "correct": null,
-        "attribution": null
+        "actual_score": "2-0",
+        "handicap_result": "主胜/让胜",
+        "correct": "对/错",
+        "attribution": "普通盘主胜预测正确，让球盘让平预测错误(实际让胜)。乌龙球+弗里曼头球奠定胜局，美国控球62%压制澳大利亚。普利西奇缺阵影响有限，巴洛贡边路冲击持续制造威胁。让球盘方向判断保守，美国实际赢2球穿盘。"
       },
       {
         "seq": 2,
@@ -14729,10 +14729,10 @@ window.FOOTCAST_DATA = {
         "risk_signal": "2✅C3b(2)+C10f(1)+C10g(-1)",
         "decision": "主胜 / 让平",
         "score_predict": "2-1/3-2/1-0",
-        "actual_score": null,
-        "handicap_result": null,
-        "correct": null,
-        "attribution": null
+        "actual_score": "0-1",
+        "handicap_result": "客胜/让平",
+        "correct": "错/错",
+        "attribution": "普通盘平局预测错误(实际客胜)，让球盘让胜预测错误(实际让平)。摩洛哥70秒闪击+全面压制(控球59%+12射2正)，苏格兰6射0正完全瘫痪。伤停判断方向正确但苏格兰未能利用定位球。战术克制判断完全错误——摩洛哥传控体系(601次传球创纪录)全面压制。"
       },
       {
         "seq": 3,
@@ -14782,10 +14782,10 @@ window.FOOTCAST_DATA = {
         "risk_signal": "0(普通盘未开售，冷门分默认0)",
         "decision": "未开售 / 让胜",
         "score_predict": "3-0/4-0/2-0",
-        "actual_score": null,
-        "handicap_result": null,
-        "correct": null,
-        "attribution": null
+        "actual_score": "3-0",
+        "handicap_result": "未开售/让胜",
+        "correct": "-/错",
+        "attribution": "普通盘未开售，让球盘让平/让负预测错误(实际让胜)。维尼修斯传射建功，巴西上半场36分钟3球锁定。5h双重信号降权判断失误——深盘+高支持率在绝对实力差距下非过热信号。让胜75%反映真实实力差距。"
       },
       {
         "seq": 4,
@@ -14835,10 +14835,10 @@ window.FOOTCAST_DATA = {
         "risk_signal": "2✅C1+(3)+C3a(1)+C10b(-1)+C10e(-1)",
         "decision": "平局 / 让胜",
         "score_predict": "1-1/0-0/1-0",
-        "actual_score": null,
-        "handicap_result": null,
-        "correct": null,
-        "attribution": null
+        "actual_score": "0-1",
+        "handicap_result": "客胜/让负",
+        "correct": "错/错",
+        "attribution": "普通盘主胜预测错误(实际客胜)，让球盘让平/让胜预测错误(实际让负)。65秒闪击改变走势，土耳其72%控球+20射5正0球终结效率持续为零。伤停信息重大失误——预测恩西索缺阵实际首发并助攻。多打1人70分钟仍0进球。"
       }
     ]
   }
