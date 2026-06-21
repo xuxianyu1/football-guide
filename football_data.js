@@ -319,7 +319,7 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "①赔率1.61位于危险区间；②EV胜-0.678负值大；③主队5连败495分钟主场不进球；④主胜55%热度偏大。普通盘跟客胜，让球盘让负。",
         "decision": "客胜 / 让负",
-        "score_predict": "0-1/0-2/1-2 / 0-0/0-2/1-3",
+        "score_predict": "0-1/0-2/1-2",
         "actual_score": "",
         "handicap_result": "",
         "correct": "",
@@ -372,7 +372,7 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "①客胜83%大热，必发高温≠必胜；②客队欧冠分心+防线伤停；③让负需客赢2球+门槛高。普通盘跟客胜，让球盘让负。",
         "decision": "客胜 / 让负",
-        "score_predict": "0-2/0-3/1-3 / 0-2/0-3/1-3",
+        "score_predict": "0-2/0-3/1-3",
         "actual_score": "",
         "handicap_result": "",
         "correct": "",
@@ -425,7 +425,7 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "①主胜70%市场过热；②主队多名主力伤缺恐难大胜；③让-1需净胜2球+难度大。普通盘主胜，让球盘让平。",
         "decision": "主胜 / 让平",
-        "score_predict": "1-0/2-1/3-2 / 1-0/2-1/3-2",
+        "score_predict": "1-0/2-1/3-2",
         "actual_score": "",
         "handicap_result": "",
         "correct": "",
@@ -478,7 +478,7 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "①平赔3.00平局热度高；②主队中场核心停赛；③让+1让负需客赢2球+但客队战意不足。普通盘客胜，让球盘让负。",
         "decision": "客胜 / 让负",
-        "score_predict": "0-2/0-3/1-3 / 0-2/0-3/1-3",
+        "score_predict": "0-2/0-3/1-3",
         "actual_score": "",
         "handicap_result": "",
         "correct": "",
@@ -531,7 +531,7 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "①客队杯赛分心联赛留力；②主队主场2026年0胜；③历史交锋3连败；④让+1让胜只需主队不败。普通盘主胜，让球盘让胜。",
         "decision": "主胜 / 让胜",
-        "score_predict": "1-0/2-1/2-0 / 1-0/2-1/2-0",
+        "score_predict": "1-0/2-1/2-0",
         "actual_score": "",
         "handicap_result": "",
         "correct": "",
@@ -806,10 +806,10 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "普通盘弃盘：盘口浅开0.25→平手+赔率上升2.25示弱；让球盘弃盘：盘口偏深需净胜2球；分胜负倾向+让平概率较高",
         "decision": "分胜负 / 让平",
-        "score_predict": "2-0/1-0/0-1 / 1-0/2-1/2-0",
+        "score_predict": "2-0/1-0/0-1",
         "actual_score": "3-1",
-        "handicap_result": "主胜",
-        "correct": "✅",
+        "handicap_result": "主胜 / 让平",
+        "correct": "对/对",
         "attribution": "普通盘预测正确：主胜3+球判断准确"
       },
       {
@@ -859,10 +859,10 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "普通盘弃盘：赔率1.24蚊子肉+支持率67%过热+刚负弱旅状态存疑；让球盘弃盘：盘口极深(球半/两球)+客队可能死守大巴",
         "decision": "主胜 / 让胜",
-        "score_predict": "2-0/3-0/3-1 / 2-0/3-1/3-0",
+        "score_predict": "2-0/3-0/3-1",
         "actual_score": "3-1",
-        "handicap_result": "主胜",
-        "correct": "✅",
+        "handicap_result": "主胜 / 让胜",
+        "correct": "对/对",
         "attribution": "普通盘预测正确：主胜3+球判断准确"
       },
       {
@@ -912,10 +912,10 @@ window.FOOTCAST_DATA = {
         },
         "risk_signal": "普通盘弃盘：16场无平局宿命+巴黎反击致命+拜仁需逆转；让球盘弃盘：让胜EV=-0.1222为负+市场倾向让负",
         "decision": "分胜负 / 让平",
-        "score_predict": "2-1/1-2/3-1 / 1-0/2-1/1-1",
+        "score_predict": "2-1/1-2/3-1",
         "actual_score": "1-1",
-        "handicap_result": "平局",
-        "correct": "❌",
+        "handicap_result": "平局 / 让负",
+        "correct": "错/错",
         "attribution": "普通盘预测错误：判断分胜负但实际平局"
       }
     ]
@@ -972,8 +972,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-3/0-4/1-4",
         "actual_score": "2-4",
-        "handicap_result": "客胜",
-        "correct": "✅客胜",
+        "handicap_result": "客胜 / —",
+        "correct": "对/—",
         "attribution": "客胜方向正确，C罗和菲利克斯火力全开"
       },
       {
@@ -1025,8 +1025,8 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让负",
         "score_predict": "1-1/2-2/0-0",
         "actual_score": "3-1",
-        "handicap_result": "主胜",
-        "correct": "❌平局",
+        "handicap_result": "主胜 / —",
+        "correct": "错/—",
         "attribution": "预测平局但弗赖堡主场11连胜+布拉加7分钟红牌，忽视主场buff"
       },
       {
@@ -1078,8 +1078,8 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让负",
         "score_predict": "1-1/2-2/0-0",
         "actual_score": "4-0",
-        "handicap_result": "主胜",
-        "correct": "❌平局",
+        "handicap_result": "主胜 / —",
+        "correct": "错/—",
         "attribution": "维拉欧联杯底蕴+森林防线6人缺阵，分析识别赔率陷阱但决策逆势"
       },
       {
@@ -1131,8 +1131,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让负",
         "score_predict": "0-1/0-2/1-2",
         "actual_score": "0-1",
-        "handicap_result": "客胜",
-        "correct": "✅客胜",
+        "handicap_result": "客胜 / —",
+        "correct": "对/—",
         "attribution": "头号射手报销影响验证，客队防守反击到位"
       },
       {
@@ -1184,8 +1184,8 @@ window.FOOTCAST_DATA = {
         "decision": "平局 / 让负",
         "score_predict": "1-1/2-2/0-0",
         "actual_score": "2-0",
-        "handicap_result": "主胜",
-        "correct": "❌平局",
+        "handicap_result": "主胜 / —",
+        "correct": "错/—",
         "attribution": "预测平局但主队主场龙+客队离开高原战力下降，大热倒灶未发生"
       }
     ]
@@ -1242,8 +1242,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "2-0/3-0/3-1",
         "actual_score": "2-2",
-        "handicap_result": "平局",
-        "correct": "❌平局",
+        "handicap_result": "平局 / —",
+        "correct": "错/—",
         "attribution": "防线3核心+前锋停赛导致无法压制对手，被对手2-2绝平。蚊子肉赔率1.26果然是陷阱。"
       },
       {
@@ -1295,8 +1295,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "3-0/4-1/3-1",
         "actual_score": "3-2",
-        "handicap_result": "主胜",
-        "correct": "✅主胜",
+        "handicap_result": "主胜 / —",
+        "correct": "对/—",
         "attribution": "多特主场收官战战意充足，法兰克福无欲无求，轻松拿下主胜。"
       },
       {
@@ -1348,8 +1348,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让胜或让平",
         "score_predict": "3-1/4-0/4-1",
         "actual_score": "1-0",
-        "handicap_result": "主胜",
-        "correct": "✅主胜",
+        "handicap_result": "主胜 / —",
+        "correct": "对/—",
         "attribution": "朗斯主力缺阵8人严重影响进攻效率，仅靠1-0小胜南特。"
       },
       {
@@ -1401,8 +1401,8 @@ window.FOOTCAST_DATA = {
         "decision": "客胜 / 让平或让负",
         "score_predict": "0-2/1-2/0-1",
         "actual_score": "0-0",
-        "handicap_result": "平局",
-        "correct": "❌平局",
+        "handicap_result": "平局 / —",
+        "correct": "错/—",
         "attribution": "附加赛首回合两队默契保守，0-0闷平符合小球判断。"
       },
       {
@@ -1454,8 +1454,8 @@ window.FOOTCAST_DATA = {
         "decision": "主胜 / 让平",
         "score_predict": "1-0/2-1/3-2",
         "actual_score": "3-2",
-        "handicap_result": "主胜",
-        "correct": "✅主胜",
+        "handicap_result": "主胜 / —",
+        "correct": "对/—",
         "attribution": "莱万特保级战意爆发，3-2绝杀奥萨苏纳。"
       }
     ]
