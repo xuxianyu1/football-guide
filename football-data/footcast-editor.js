@@ -2,6 +2,7 @@
 // ===== GITHUB PUSH =====
 const GH_REPO = 'xuxianyu1/football-guide';
 const GH_API = 'https://api.github.com';
+let _dirtyDates = new Set(); // Track dates modified in editor
 
 function openSettingsModal() {
   const token = localStorage.getItem('gh_token') || '';
@@ -72,75 +73,70 @@ async function pushToGitHub() {
     return;
   }
 
+  // Collect keys to push: dirty dates (editor changes) + current date fallback
+  const keysToPush = [..._dirtyDates];
+  if (keysToPush.length === 0) {
+    // No editor changes yet - push current date as fallback
+    if (currentDateKey && ALL_DATA[currentDateKey]) keysToPush.push(currentDateKey);
+    else { showPushToast('⚠️ 无数据', '没有需要推送的改动', 'error'); return; }
+  }
+
+  // Filter out keys with no data
+  const validKeys = keysToPush.filter(k => ALL_DATA[k] && ALL_DATA[k].matches);
+  if (validKeys.length === 0) { showPushToast('⚠️ 无数据', '选中的日期无数据可推送', 'error'); return; }
+
   const btn = document.getElementById('pushBtn');
   btn.classList.add('pushing');
-  btn.textContent = '⏳ 推送中...';
+  btn.textContent = '⏳';
 
-  showPushToast('🔄 正在推送...', '正在获取仓库文件信息...', 'progress');
+  const today = new Date();
+  const dateStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+  const timeStr = String(today.getHours()).padStart(2,'0') + ':' + String(today.getMinutes()).padStart(2,'0');
+
+  showPushToast('🔄 正在推送...', `共${validKeys.length}个日期待推送`, 'progress');
 
   try {
-    const today = new Date();
-    const dateStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
-    const timeStr = String(today.getHours()).padStart(2,'0') + ':' + String(today.getMinutes()).padStart(2,'0');
+    let lastSha = '';
+    const totalMatches = validKeys.reduce((s,k) => s + (ALL_DATA[k].matches ? ALL_DATA[k].matches.length : 0), 0);
+    const commitMsg = `更新${validKeys.length}个日期数据 ${dateStr} ${timeStr} (${totalMatches}场)`;
 
-    // Only push the current date's data file + index + full backup
-    const targetKey = currentDateKey;
-    if (!targetKey || !ALL_DATA[targetKey]) {
-      throw new Error('当前日期无数据可推送');
+    // 1. Push each dirty date file
+    for (let i = 0; i < validKeys.length; i++) {
+      const key = validKeys[i];
+      const dateFileName = 'data_' + key + '.js';
+      const dateFilePath = 'football-data/' + dateFileName;
+      showPushToast('🔄 正在推送...', `[${i+1}/${validKeys.length}] ${dateFileName}`, 'progress');
+
+      const dateContent = 'window.FOOTCAST_DATA["' + key + '"] = ' + JSON.stringify(ALL_DATA[key]) + ';\n';
+      const dateEncoded = btoa(unescape(encodeURIComponent(dateContent)));
+
+      let dateSha = null;
+      const getDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFilePath}`, {
+        headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+      }, 15000);
+      if (getDateResp.ok) dateSha = (await getDateResp.json()).sha;
+
+      const pushDateBody = { message: commitMsg, content: dateEncoded, branch: 'main' };
+      if (dateSha) pushDateBody.sha = dateSha;
+
+      const pushDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFilePath}`, {
+        method: 'PUT',
+        headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(pushDateBody)
+      }, 30000);
+
+      if (!pushDateResp.ok) {
+        const errData = await pushDateResp.json().catch(() => ({}));
+        if (pushDateResp.status === 409) throw new Error('SHA冲突，请刷新页面后重试');
+        throw new Error(`推送${dateFileName}失败: ${errData.message || '未知错误'}`);
+      }
+      const result = await pushDateResp.json();
+      lastSha = result.commit.sha.substring(0,7);
     }
 
-    const matchCount = ALL_DATA[targetKey].matches.length;
-    const commitMsg = `更新${ALL_DATA[targetKey].date || targetKey}数据 ${dateStr} ${timeStr} (${matchCount}场)`;
-
-    // 1. Push the single date file
-    const dateFileName = 'data_' + targetKey + '.js';
-    const dateFilePath = 'football-data/' + dateFileName;
-    showPushToast('🔄 正在推送...', `正在更新 ${dateFileName}...`, 'progress');
-
-    const dateContent = 'window.FOOTCAST_DATA["' + targetKey + '"] = ' + JSON.stringify(ALL_DATA[targetKey]) + ';\n';
-
-    // Get SHA of date file (may not exist yet = 404 = create)
-    let dateSha = null;
-    const getDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFilePath}`, {
-      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
-    }, 15000);
-
-    if (getDateResp.ok) {
-      const df = await getDateResp.json();
-      dateSha = df.sha;
-    }
-    // 404 = new file, no SHA needed
-
-    const dateEncoded = btoa(unescape(encodeURIComponent(dateContent)));
-    const pushDateBody = {
-      message: commitMsg,
-      content: dateEncoded,
-      branch: 'main'
-    };
-    if (dateSha) pushDateBody.sha = dateSha;
-
-    const pushDateResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/${dateFilePath}`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(pushDateBody)
-    }, 30000);
-
-    if (!pushDateResp.ok) {
-      const errData = await pushDateResp.json().catch(() => ({}));
-      if (pushDateResp.status === 409) throw new Error('文件已被其他人修改，请刷新页面后重试（SHA冲突）');
-      throw new Error(`推送${dateFileName}失败 (${pushDateResp.status}): ${errData.message || '未知错误'}`);
-    }
-
-    const dateResult = await pushDateResp.json();
-    const shortSha = dateResult.commit.sha.substring(0,7);
-
-    // 2. Update index file (list of all date keys)
+    // 2. Update index file
     showPushToast('🔄 正在推送...', '正在更新索引文件...', 'progress');
-    const allDateKeys = [...new Set([...dateKeys, targetKey])].sort();
+    const allDateKeys = [...new Set([...dateKeys, ...validKeys])].sort();
     const indexContent = 'window.FOOTCAST_INDEX = ' + JSON.stringify(allDateKeys) + ';\n';
     const indexEncoded = btoa(unescape(encodeURIComponent(indexContent)));
 
@@ -148,9 +144,7 @@ async function pushToGitHub() {
     const getIdxResp = await fetchWithTimeout(`${GH_API}/repos/${GH_REPO}/contents/football-data/data_index.js`, {
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
     }, 15000);
-    if (getIdxResp.ok) {
-      indexSha = (await getIdxResp.json()).sha;
-    }
+    if (getIdxResp.ok) indexSha = (await getIdxResp.json()).sha;
     const pushIdxBody = { message: '更新索引 ' + dateStr, content: indexEncoded, branch: 'main' };
     if (indexSha) pushIdxBody.sha = indexSha;
 
@@ -160,7 +154,7 @@ async function pushToGitHub() {
       body: JSON.stringify(pushIdxBody)
     }, 30000);
 
-    // 3. Also update the full football_data.js for backward compatibility
+    // 3. Update full football_data.js
     showPushToast('🔄 正在推送...', '正在更新完整数据文件...', 'progress');
     const fullContent = 'window.FOOTCAST_DATA = ' + JSON.stringify(ALL_DATA) + ';\n';
     const fullEncoded = btoa(unescape(encodeURIComponent(fullContent)));
@@ -177,12 +171,14 @@ async function pushToGitHub() {
       body: JSON.stringify({ message: commitMsg + ' [full]', content: fullEncoded, sha: fullSha, branch: 'main' })
     }, 60000);
 
-    // Clear localStorage cache
+    // Clear dirty set and localStorage cache
+    _dirtyDates.clear();
     localStorage.removeItem('footcast_data');
 
+    const dateList = validKeys.map(k => (ALL_DATA[k] && ALL_DATA[k].date) || k).join(', ');
     showPushToast(
       '✅ 推送成功！',
-      `已更新 ${dateFileName}<br>${ALL_DATA[targetKey].date || targetKey} / ${matchCount}场<br>Commit: ${shortSha}<br><a href="https://xuxianyu1.github.io/football-guide/dashboard.html" target="_blank" style="color:var(--green)">查看页面 →</a>`,
+      `${validKeys.length}个日期: ${dateList}<br>${totalMatches}场 · Commit: ${lastSha}<br><a href="https://xuxianyu1.github.io/football-guide/dashboard.html" target="_blank" style="color:var(--green)">查看页面 →</a>`,
       'success'
     );
 
@@ -359,6 +355,7 @@ function collectEditorData() {
 function saveEditorData() {
   const key = collectEditorData();
   if (!key) return false;
+  _dirtyDates.add(key);
   localStorage.setItem('footcast_data', JSON.stringify(ALL_DATA));
   dateKeys = Object.keys(ALL_DATA).sort();
   const sel = document.getElementById('dateSelect');
@@ -370,7 +367,8 @@ function saveEditorData() {
     sel.value = currentDateKey;
   }
   render();
-  showPushToast('✅ 保存成功', key + ' 数据已更新到本地', 'success');
+  const dirtyInfo = _dirtyDates.size > 1 ? `（共${_dirtyDates.size}个日期待推送）` : '';
+  showPushToast('✅ 保存成功', key + ' 数据已更新到本地 ' + dirtyInfo, 'success');
   return true;
 }
 
