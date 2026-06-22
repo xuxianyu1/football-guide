@@ -1296,7 +1296,7 @@ async function pushToGitHub() {
 
     // 2. Update index file (list of all date keys)
     showPushToast('🔄 正在推送...', '正在更新索引文件...', 'progress');
-    const allDateKeys = Object.keys(ALL_DATA).filter(k => ALL_DATA[k] !== null).sort();
+    const allDateKeys = [...new Set([...dateKeys, targetKey])].sort();
     const indexContent = 'window.FOOTCAST_INDEX = ' + JSON.stringify(allDateKeys) + ';\n';
     const indexEncoded = btoa(unescape(encodeURIComponent(indexContent)));
 
