@@ -384,3 +384,23 @@ function renderAnalysis(m) {
         <div class="title"><span class="icon">${d.icon}</span>${d.title}</div>
         <span class="chevron">▶</span>
       </div>
+      <div class="analysis-body">
+        <div class="analysis-content">${hlText(m.analysis[d.key])}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== INTERACTIONS =====
+function toggle(idx) { document.getElementById('mc-'+idx).classList.toggle('expanded'); }
+function expandAll() { document.querySelectorAll('.match-card').forEach(c=>c.classList.add('expanded')); }
+function collapseAll() { document.querySelectorAll('.match-card').forEach(c=>c.classList.remove('expanded')); }
+function navDate(dir) {
+  const i = dateKeys.indexOf(currentDateKey);
+  const ni = i + dir;
+  if(ni>=0 && ni<dateKeys.length) loadDateData(dateKeys[ni]);
+}
+function selectDate(key) {
+  if (key) loadDateData(key);
+}
+
