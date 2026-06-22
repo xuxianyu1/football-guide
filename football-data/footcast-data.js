@@ -82,7 +82,7 @@ const fpct = v => (v==null) ? '—' : Math.round(v) + '%';
 const fodds = v => (v==null) ? '—' : Number(v).toFixed(2);
 function evCls(v) { if(v==null) return ''; return v>0.01?'ev-pos':v>-0.01?'ev-zero':'ev-neg'; }
 function kellyCls(v) { if(v==null) return ''; return v>0?'kelly-pos':'kelly-neg'; }
-function parseRisk(s) { const m1=s.match(/冷门压力测试v?[\d.]*:?(-?\d+)分/); if(m1) return parseInt(m1[1]); const m2=s.match(/冷门分(-?\d+)/); if(m2) return parseInt(m2[1]); const m3=s.match(/^(-?\d+)[⚡✅🚨]/); if(m3) return parseInt(m3[1]); const m4=s.match(/^(-?\d+)\(/); if(m4) return parseInt(m4[1]); return 0; }
+function parseRisk(s) { const m0=s.match(/冷门压力测试:.*=(-?\d+)分/); if(m0) return parseInt(m0[1]); const m1=s.match(/冷门压力测试v?[\d.]*:?(-?\d+)分/); if(m1) return parseInt(m1[1]); const m2=s.match(/冷门分(-?\d+)/); if(m2) return parseInt(m2[1]); const m3=s.match(/^(-?\d+)[⚡✅🚨]/); if(m3) return parseInt(m3[1]); const m4=s.match(/^(-?\d+)\(/); if(m4) return parseInt(m4[1]); return 0; }
 function riskLvl(s) { return s>=9?'danger':s>=6?'caution':'safe'; }
 function decCls(d) { if(d.includes('弃盘')) return 'disc'; return 'default'; }
 function hasResult(m) { return !!(m.actual_score || m.correct); }
@@ -123,4 +123,6 @@ function hlText(t) {
 function splitDecision(d) {
   if (!d) return {normal: '', handicap: ''};
   const idx = d.indexOf(' / ');
-  if (idx >= 0) return {normal: d.substring(0, idx).trim(), handicap: d.subs
+  if (idx >= 0) return {normal: d.substring(0, idx).trim(), handicap: d.substring(idx + 3).trim()};
+  return {normal: d.trim(), handicap: ''};
+}

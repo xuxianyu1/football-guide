@@ -259,7 +259,19 @@ function renderRisk(m, score, level) {
   const tags = [];
   let detail = '';
   let isCompact = false;
-  if (s.includes(' | ')) {
+  if (s.match(/^冷门压力测试:/)) {
+    // 新格式: 冷门压力测试:加分项1+加分项2+...=总分分
+    const dm = s.match(/^冷门压力测试:(.*?)(=(-?\d+)分)?$/);
+    detail = dm?dm[1]:'';
+    if (detail) {
+      // ++是信号强度不是分隔符，先替换占位再split
+      const items = detail.replace(/\+\+/g,'§§').split('+').map(i=>i.replace(/§§/g,'++')).filter(i=>i&&!i.match(/^[+-]?\d+分$/));
+      items.forEach(item => {
+        const c = item.includes('-')||item.includes('降权')||item.includes('退盘')?'red':item.includes('++')||item.includes('死亡密码')||item.includes('过热')?'amber':'green';
+        tags.push({text:item, c});
+      });
+    }
+  } else if (s.includes(' | ')) {
     const parts = s.split(' | ');
     parts.forEach(p => {
       const kv = p.split('=');
@@ -372,23 +384,3 @@ function renderAnalysis(m) {
         <div class="title"><span class="icon">${d.icon}</span>${d.title}</div>
         <span class="chevron">▶</span>
       </div>
-      <div class="analysis-body">
-        <div class="analysis-content">${hlText(m.analysis[d.key])}</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ===== INTERACTIONS =====
-function toggle(idx) { document.getElementById('mc-'+idx).classList.toggle('expanded'); }
-function expandAll() { document.querySelectorAll('.match-card').forEach(c=>c.classList.add('expanded')); }
-function collapseAll() { document.querySelectorAll('.match-card').forEach(c=>c.classList.remove('expanded')); }
-function navDate(dir) {
-  const i = dateKeys.indexOf(currentDateKey);
-  const ni = i + dir;
-  if(ni>=0 && ni<dateKeys.length) loadDateData(dateKeys[ni]);
-}
-function selectDate(key) {
-  if (key) loadDateData(key);
-}
-
