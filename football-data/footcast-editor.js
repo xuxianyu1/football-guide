@@ -190,14 +190,8 @@ async function pushToGitHub() {
     showPushToast('❌ 推送失败', err.message, 'error');
   } finally {
     btn.classList.remove('pushing');
-    btn.textContent = '🚀 推送GitHub';
+    btn.textContent = '🚀';
   }
-}
-
-// ===== DATA REFRESH =====
-function refreshFromServer() {
-  localStorage.removeItem('footcast_data');
-  location.reload();
 }
 
 // ===== INIT =====

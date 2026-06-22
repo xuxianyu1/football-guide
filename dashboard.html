@@ -122,20 +122,17 @@ body::after{
 .toolbar-right button:hover{border-color:var(--green);color:var(--green)}
 
 .push-btn{
-  background:linear-gradient(135deg,rgba(68,138,255,.15),rgba(179,136,255,.1))!important;
-  border:1px solid rgba(68,138,255,.4)!important;color:#4fc3f7!important;
-  font-weight:600!important;
+  background:var(--bg3)!important;border:1px solid var(--border2)!important;color:var(--text3)!important;
+  padding:6px 10px!important;border-radius:8px!important;cursor:pointer;font-size:15px;transition:all .2s;
 }
-.push-btn:hover{
-  background:linear-gradient(135deg,rgba(68,138,255,.25),rgba(179,136,255,.18))!important;
-  border-color:#4fc3f7!important;box-shadow:0 0 16px rgba(68,138,255,.2);
-}
+.push-btn:hover{border-color:#4fc3f7!important;color:#4fc3f7!important;box-shadow:0 0 12px rgba(68,138,255,.15)}
 .push-btn.pushing{opacity:.6;pointer-events:none}
 .settings-btn{
-  background:var(--bg3)!important;border:1px solid var(--border2)!important;color:var(--text3)!important;
-  margin-left:16px!important;
+  background:transparent!important;border:1px solid transparent!important;color:var(--text3)!important;
+  padding:4px 8px!important;border-radius:8px!important;cursor:pointer;font-size:14px;transition:all .2s;
+  margin-left:12px;vertical-align:middle;
 }
-.settings-btn:hover{border-color:var(--text2)!important;color:var(--text)!important}
+.settings-btn:hover{border-color:var(--text3)!important;color:var(--text)!important}
 .edit-btn{
   background:linear-gradient(135deg,rgba(255,171,0,.12),rgba(255,171,0,.06))!important;
   border:1px solid rgba(255,171,0,.35)!important;color:var(--amber)!important;
@@ -145,8 +142,6 @@ body::after{
   background:linear-gradient(135deg,rgba(255,171,0,.22),rgba(255,171,0,.12))!important;
   border-color:var(--amber)!important;box-shadow:0 0 14px rgba(255,171,0,.15);
 }
-.refresh-btn{background:var(--bg3)!important;border:1px solid var(--border2)!important;color:var(--text3)!important;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;transition:all .2s}
-.refresh-btn:hover{border-color:var(--green)!important;color:var(--green)!important}
 .push-toast{
   position:fixed;bottom:24px;right:24px;z-index:3000;
   background:var(--bg2);border:1px solid var(--border2);
@@ -579,10 +574,8 @@ body {
       <span id="matchCount"></span>
     </div>
     <div class="toolbar-right">
-      <button class="push-btn" id="pushBtn" onclick="pushToGitHub()">🚀 推送GitHub</button>
-      <button class="settings-btn" onclick="openSettingsModal()">⚙️</button>
+      <button class="push-btn" id="pushBtn" onclick="pushToGitHub()" title="推送GitHub">🚀</button>
       <button class="edit-btn" onclick="openEditorModal()">📝 编辑</button>
-      <button class="refresh-btn" onclick="refreshFromServer()" title="清除本地缓存，重新加载服务端数据">🔄 刷新</button>
       <button onclick="expandAll()">展开全部</button>
       <button onclick="collapseAll()">收起全部</button>
     </div>
@@ -590,6 +583,7 @@ body {
   <div class="match-grid" id="matchGrid"></div>
   <div class="footer">
     ⚠️ AI生成内容仅供参考，不构成投注建议 · 赔率数据来源：中国体彩官网 · 冷门压力测试
+    <button class="settings-btn" onclick="openSettingsModal()" title="GitHub Token 设置">⚙️</button>
   </div>
 </div>
 
