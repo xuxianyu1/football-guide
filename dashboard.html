@@ -627,8 +627,33 @@ body {
   </div>
 </div>
 
-<script src="football-data/footcast-data.js"></script>
-<script src="football-data/footcast-render.js"></script>
-<script src="football-data/footcast-editor.js"></script>
+<!-- JS Error Fallback -->
+<div id="jsError" style="display:none;position:fixed;inset:0;z-index:9999;background:#060a12;color:#f0f2f5;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans SC',sans-serif">
+  <div style="text-align:center;max-width:500px;padding:40px">
+    <div style="font-size:48px;margin-bottom:16px">⚠️</div>
+    <h2 style="font-size:20px;margin-bottom:12px;color:#ffab00">页面加载异常</h2>
+    <p style="font-size:14px;color:#a0aec0;line-height:1.8" id="jsErrorMsg">JavaScript 文件加载或解析失败，请稍后刷新重试。如果问题持续，请联系管理员检查代码推送是否完整。</p>
+    <button onclick="location.reload()" style="margin-top:20px;padding:10px 28px;background:rgba(0,230,118,.15);border:1px solid rgba(0,230,118,.4);color:#00e676;border-radius:10px;cursor:pointer;font-size:14px">🔄 刷新页面</button>
+  </div>
+</div>
+
+<script>
+// Error detection: if JS init doesn't complete within 5s, show error
+var _jsOk = false;
+window.addEventListener('error', function(e) {
+  if (_jsOk) return;
+  var msg = '文件加载或解析失败';
+  if (e.message) msg = e.message;
+  if (e.filename) msg += '\n文件: ' + e.filename.split('/').pop();
+  var el = document.getElementById('jsErrorMsg');
+  if (el) el.textContent = msg;
+  document.getElementById('jsError').style.display = 'flex';
+});
+setTimeout(function(){ if(!_jsOk) document.getElementById('jsError').style.display='flex'; }, 5000);
+</script>
+
+<script src="football-data/footcast-data.js" onerror="_jsOk||document.getElementById('jsError').style.display='flex'"></script>
+<script src="football-data/footcast-render.js" onerror="_jsOk||document.getElementById('jsError').style.display='flex'"></script>
+<script src="football-data/footcast-editor.js" onerror="_jsOk||document.getElementById('jsError').style.display='flex'"></script>
 </body>
 </html>

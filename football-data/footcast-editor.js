@@ -192,6 +192,8 @@ async function pushToGitHub() {
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
+  // Mark JS init as OK to prevent error fallback from showing
+  if (typeof _jsOk !== 'undefined') { _jsOk = true; document.getElementById('jsError').style.display = 'none'; }
   // Try loading from localStorage first
   try {
     const saved = localStorage.getItem('footcast_data');
