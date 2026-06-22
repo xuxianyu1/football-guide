@@ -772,7 +772,7 @@ function render() {
   if (sel.options.length !== dateKeys.length) {
     sel.innerHTML = dateKeys.map(k => {
       const d = ALL_DATA[k];
-      const label = (d && d.date) ? d.date : k;
+      const label = (d && d.date) ? d.date : k.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');
       return `<option value="${k}">${label}</option>`;
     }).join('');
   }
@@ -1389,7 +1389,7 @@ function openEditorModal() {
     opt.value = k;
     const d = ALL_DATA[k];
     const cnt = d.matches ? d.matches.length : 0;
-    opt.textContent = (d.date || k) + ' (' + cnt + '场)';
+    opt.textContent = (d.date || k.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3')) + ' (' + cnt + '场)';
     select.appendChild(opt);
   });
   // Default to current date
@@ -1527,7 +1527,7 @@ function saveEditorData() {
   if (sel) {
     sel.innerHTML = dateKeys.map(k => {
       const d = ALL_DATA[k];
-      return '<option value="'+k+'">'+(d.date||k)+'</option>';
+      return '<option value="'+k+'">'+(d.date||k.replace(/^(\d{4})(\d{2})(\d{2})$/,'$1-$2-$3'))+'</option>';
     }).join('');
     sel.value = currentDateKey;
   }
