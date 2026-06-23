@@ -106,6 +106,7 @@ function renderCard(m, idx) {
   const correctInfo = parseCorrect(m.correct);
 
   let reviewCls = '';
+  let badgeReviewCls = '';
   if(isReviewed) {
     const nOk = correctInfo.normal==='对', nErr = correctInfo.normal==='错';
     const hOk = correctInfo.handicap==='对', hErr = correctInfo.handicap==='错';
@@ -113,6 +114,7 @@ function renderCard(m, idx) {
     const allCorrect = (nHas?nOk:true) && (hHas?hOk:true);
     const anyWrong = (nHas&&nErr) || (hHas&&hErr);
     reviewCls = allCorrect ? 'reviewed reviewed-allcorrect' : anyWrong ? 'reviewed reviewed-anywrong' : 'reviewed';
+    badgeReviewCls = allCorrect ? 'badge-ok' : anyWrong ? 'badge-err' : 'badge-neutral';
   }
 
   let cls = 'match-card';
@@ -159,7 +161,7 @@ function renderCard(m, idx) {
         <div class="match-time-row"><span>📅 ${m.date} ${m.time}</span></div>
       </div>
       <div class="match-meta">
-        <div class="match-decision-badge ${dc}">${isReviewed ? renderBadgeDecision(m, correctInfo) : m.decision}</div>
+        <div class="match-decision-badge ${dc} ${badgeReviewCls}">${isReviewed ? renderBadgeDecision(m, correctInfo) : m.decision}</div>
         <div class="match-score-line">${scoreLine}</div>
       </div>
     </div>
