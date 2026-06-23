@@ -112,9 +112,10 @@ function renderCard(m, idx) {
     const hOk = correctInfo.handicap==='对', hErr = correctInfo.handicap==='错';
     const nHas = correctInfo.normal!=null, hHas = correctInfo.handicap!=null;
     const allCorrect = (nHas?nOk:true) && (hHas?hOk:true);
+    const allWrong = (nHas?nErr:true) && (hHas?hErr:true) && (nHas||hHas);
     const anyWrong = (nHas&&nErr) || (hHas&&hErr);
     reviewCls = allCorrect ? 'reviewed reviewed-allcorrect' : anyWrong ? 'reviewed reviewed-anywrong' : 'reviewed';
-    badgeReviewCls = allCorrect ? 'badge-ok' : anyWrong ? 'badge-err' : 'badge-neutral';
+    badgeReviewCls = allCorrect ? 'badge-ok' : allWrong ? 'badge-err' : 'badge-partial';
   }
 
   let cls = 'match-card';
@@ -191,7 +192,8 @@ function renderBadgeDecision(m, ci) {
     const isOk = i === 0 ? ci.normal === '对' : ci.handicap === '对';
     const isErr = i === 0 ? ci.normal === '错' : ci.handicap === '错';
     const cls = isOk ? 'b-ok' : isErr ? 'b-err' : '';
-    return `<span class="${cls}">${p}</span>`;
+    const display = p === '未开售' ? '——' : p;
+    return `<span class="${cls}">${display}</span>`;
   }).join('<span class="b-sep"> / </span>');
 }
 
@@ -207,7 +209,8 @@ function renderDecision(m) {
       const isOk = i === 0 ? ci.normal === '对' : ci.handicap === '对';
       const isErr = i === 0 ? ci.normal === '错' : ci.handicap === '错';
       const cls = isOk ? 'dec-ok' : isErr ? 'dec-err' : '';
-      return `<span class="${cls}">${p}</span>`;
+      const display = p === '未开售' ? '——' : p;
+      return `<span class="${cls}">${display}</span>`;
     });
     choiceHtml = colored.join(' <span style="color:var(--text3)">/</span> ');
   } else {
