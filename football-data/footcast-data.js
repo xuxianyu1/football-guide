@@ -58,10 +58,15 @@ function loadIndexAndDate(targetKey) {
   script.onload = function() {
     if (window.FOOTCAST_INDEX) {
       dateKeys = window.FOOTCAST_INDEX;
-      // Ensure ALL_DATA has empty slots for all dates
+      // Ensure ALL_DATA has empty slots for all dates (but don't overwrite existing data)
       dateKeys.forEach(k => { if (!ALL_DATA[k]) ALL_DATA[k] = null; });
       currentDateKey = targetKey || dateKeys[dateKeys.length - 1];
-      loadDateData(currentDateKey);
+      // If the target date is already loaded, just refresh the date selector and render
+      if (_loadedDates.has(currentDateKey)) {
+        render();
+      } else {
+        loadDateData(currentDateKey);
+      }
     }
   };
   script.onerror = function() {

@@ -199,12 +199,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const saved = localStorage.getItem('footcast_data');
     if (saved) {
       const parsed = JSON.parse(saved);
+      // Only use non-null entries; null dates must be lazy-loaded
+      Object.keys(parsed).forEach(k => { if (!parsed[k]) delete parsed[k]; });
       if (Object.keys(parsed).length > 0) {
         ALL_DATA = parsed;
         dateKeys = Object.keys(ALL_DATA).sort();
+        // Only mark dates with actual data as loaded
         dateKeys.forEach(k => _loadedDates.add(k));
-        currentDateKey = dateKeys[dateKeys.length - 1];
+        currentDateKey = dateKeys.filter(k => ALL_DATA[k]).pop() || dateKeys[dateKeys.length - 1];
         render();
+        // Still load index for complete date list; merge without re-rendering current date
+        loadIndexAndDate(currentDateKey);
         return;
       }
     }
@@ -358,7 +363,10 @@ function saveEditorData() {
   const key = collectEditorData();
   if (!key) return false;
   _dirtyDates.add(key);
-  localStorage.setItem('footcast_data', JSON.stringify(ALL_DATA));
+  // Only save non-null entries to localStorage to avoid polluting _loadedDates on restore
+  const nonNull = {};
+  Object.keys(ALL_DATA).forEach(k => { if (ALL_DATA[k]) nonNull[k] = ALL_DATA[k]; });
+  localStorage.setItem('footcast_data', JSON.stringify(nonNull));
   dateKeys = Object.keys(ALL_DATA).sort();
   const sel = document.getElementById('dateSelect');
   if (sel) {
