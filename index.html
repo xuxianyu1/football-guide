@@ -1,134 +1,3997 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚽ 鱼宝足球站</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0a0e17;
-      color: #e0e0e0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 48px;
-    }
-    /* ========== Top Navigation Bar ========== */
-    .top-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(10,14,23,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      height: 48px;
-      gap: 6px;
-    }
-    .top-nav a {
-      color: #9ca3af;
-      text-decoration: none;
-      font-size: 0.85rem;
-      padding: 8px 14px;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .top-nav a:hover {
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-    }
-    .top-nav a.active {
-      background: rgba(96,165,250,0.15);
-      color: #60a5fa;
-    }
-    .top-nav .nav-icon {
-      font-size: 1rem;
-    }
-    .top-nav .nav-brand {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #fff;
-      margin-right: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .container { text-align: center; padding: 40px 20px; }
-    .logo { font-size: 64px; margin-bottom: 16px; }
-    h1 {
-      font-size: 2.2rem;
-      background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-    }
-    .subtitle { color: #888; font-size: 1rem; margin-bottom: 48px; }
-    .cards { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-    .card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 36px 32px;
-      width: 320px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .card:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.15);
-      transform: translateY(-4px);
-    }
-    .card-icon { font-size: 48px; margin-bottom: 16px; }
-    .card h2 { font-size: 1.3rem; margin-bottom: 8px; color: #fff; }
-    .card p { font-size: 0.9rem; color: #999; line-height: 1.5; }
-    .footer { margin-top: 60px; color: #555; font-size: 0.8rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ 五大联赛足球俱乐部图鉴</title>
+<style>
+/* ========== CSS Variables & Reset ========== */
+:root {
+  --bg-primary: #0a0e17;
+  --bg-secondary: #111827;
+  --bg-card: #1a2235;
+  --bg-card-hover: #1f2a40;
+  --text-primary: #f0f2f5;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --border-color: #2d3748;
+  --epl-color: #3d195b;
+  --epl-accent: #e90052;
+  --laliga-color: #ee8707;
+  --laliga-accent: #ff6b00;
+  --seriea-color: #024494;
+  --seriea-accent: #009246;
+  --bundesliga-color: #d20515;
+  --bundesliga-accent: #8b0000;
+  --ligue1-color: #091c3e;
+  --ligue1-accent: #1a5fbc;
+  --transition-speed: 0.35s;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========== Page Transitions ========== */
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+  min-height: 100vh;
+}
+.page.active {
+  display: block;
+}
+.page.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: #3a4560; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4a5580; }
+
+/* ========== Home Page ========== */
+.home-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(135deg, #0a0e17 0%, #1a1a3e 50%, #0a0e17 100%);
+  position: relative;
+  overflow: hidden;
+}
+.home-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(233,0,82,0.06) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(26,95,188,0.06) 0%, transparent 50%);
+  animation: bgPulse 8s ease-in-out infinite alternate;
+}
+@keyframes bgPulse {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.1) rotate(3deg); }
+}
+.home-title {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 50%, #c7d2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.home-subtitle {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  color: var(--text-secondary);
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== League Grid ========== */
+.league-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.league-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+}
+.league-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.league-card-accent {
+  height: 6px;
+  width: 100%;
+}
+.league-card-body {
+  padding: 28px;
+}
+.league-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.league-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.league-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.league-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.league-card-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.08);
+  color: var(--text-primary);
+}
+.league-card-arrow {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.3s;
+}
+.league-card:hover .league-card-arrow {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(4px);
+}
+
+/* ========== League Detail Page ========== */
+.league-detail-header {
+  padding: 50px 24px 40px;
+  text-align: center;
+  position: relative;
+}
+.league-detail-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+.league-back-btn {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.league-back-btn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-2px);
+}
+.league-detail-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+}
+.league-detail-sub {
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+.club-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 36px auto;
+  padding: 0 24px;
+}
+
+.club-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.club-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.club-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  border-color: rgba(255,255,255,0.1);
+}
+.club-card:hover::before {
+  opacity: 1;
+}
+.club-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.club-badge {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.club-card-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.club-card-nickname {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.club-card-year {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  background: rgba(255,255,255,0.06);
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.more-coming {
+  text-align: center;
+  padding: 32px 24px 60px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ========== Club Detail Page ========== */
+.club-detail-header {
+  padding: 40px 24px 30px;
+  text-align: center;
+  position: relative;
+}
+.club-detail-back {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.club-detail-back:hover {
+  background: rgba(255,255,255,0.15);
+}
+.club-detail-badge {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.club-detail-name {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800;
+}
+.club-detail-meta {
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.club-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 24px 80px;
+}
+
+/* ========== Markdown Rendered Content ========== */
+.md h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 40px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border-color);
+}
+.md h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 30px 0 12px;
+  color: #e0e7ff;
+}
+.md h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 24px 0 10px;
+  color: #c7d2fe;
+}
+.md p {
+  margin: 10px 0;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+.md strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+.md em {
+  color: #a5b4fc;
+  font-style: italic;
+}
+.md ul, .md ol {
+  margin: 10px 0;
+  padding-left: 24px;
+}
+.md li {
+  margin: 6px 0;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.md blockquote {
+  border-left: 3px solid #4f46e5;
+  padding: 10px 16px;
+  margin: 14px 0;
+  background: rgba(79,70,229,0.08);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.md table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+.md th {
+  background: var(--bg-card);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+  color: #e0e7ff;
+}
+.md td {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: var(--text-primary);
+}
+.md tr:hover td {
+  background: rgba(255,255,255,0.02);
+}
+.md code {
+  background: rgba(255,255,255,0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.md pre {
+  background: #0d1117;
+  padding: 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin: 14px 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  border: 1px solid var(--border-color);
+}
+.md pre code {
+  background: none;
+  padding: 0;
+}
+.md hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 28px 0;
+}
+.md a {
+  color: #818cf8;
+  text-decoration: none;
+}
+.md a:hover {
+  text-decoration: underline;
+}
+
+/* ========== Player Cards ========== */
+.player-section {
+  margin: 32px 0;
+}
+.player-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-color);
+}
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+.player-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.25s;
+}
+.player-card:hover {
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+.player-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.player-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.player-pos {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.player-years {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.player-stat {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.82rem;
+  color: #fbbf24;
+}
+
+/* ========== Footer ========== */
+.page-footer {
+  text-align: center;
+  padding: 30px 24px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 640px) {
+  .home-header { padding: 40px 16px 28px; }
+  .league-grid { padding: 0 16px; gap: 16px; }
+  .club-grid { padding: 0 16px; gap: 14px; }
+  .club-content { padding: 16px 16px 60px; }
+  .league-back-btn, .club-detail-back { left: 12px; top: 12px; padding: 6px 12px; font-size: 0.82rem; }
+  .league-detail-header { padding: 40px 16px 30px; }
+  .club-detail-header { padding: 36px 16px 24px; }
+  .player-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== Animations ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  animation: fadeInUp 0.5s ease forwards;
+}
+.delay-1 { animation-delay: 0.1s; opacity: 0; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; }
+.delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+/* ========== CSS Crests ========== */
+.crest {
+  width: 52px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.crest-large {
+  width: 80px;
+  height: 92px;
+}
+.crest-inner {
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 0%, 95% 15%, 95% 70%, 50% 100%, 5% 70%, 5% 15%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.crest-letter {
+  font-weight: 900;
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  line-height: 1;
+}
+.crest-large .crest-letter {
+  font-size: 24px;
+}
+.crest-sub {
+  font-size: 8px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.crest-large .crest-sub {
+  font-size: 11px;
+}
+/* Stripe effect for certain crests */
+.crest-stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.crest-stripes-bar {
+  position: absolute;
+  top: 0;
+  width: 14.28%;
+  height: 100%;
+}
+.crest-logo-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.crest-large .crest-logo-circle {
+  width: 80px;
+  height: 80px;
+}
+.crest-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ========== Top Navigation Bar ========== */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10,14,23,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 48px;
+  gap: 6px;
+}
+.top-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.top-nav a:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.top-nav a.active {
+  background: rgba(96,165,250,0.15);
+  color: #60a5fa;
+}
+.top-nav .nav-icon {
+  font-size: 1rem;
+}
+.top-nav .nav-brand {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+body {
+  padding-top: 48px;
+}
+</style>
 </head>
 <body>
-  <nav class="top-nav">
-    <span class="nav-brand">⚽ 鱼宝足球站</span>
-    <a href="index.html" class="active"><span class="nav-icon">🏠</span>首页</a>
-    <a href="dashboard.html"><span class="nav-icon">📊</span>赛事预测</a>
-    <a href="clubs.html"><span class="nav-icon">🏟️</span>俱乐部图鉴</a>
-    <a href="players.html"><span class="nav-icon">⭐</span>球星图鉴</a>
-  </nav>
-  <div class="container">
-    <div class="logo">⚽</div>
-    <h1>鱼宝足球站</h1>
-    <p class="subtitle">由鱼宝2.0为你打造</p>
-    <div class="cards">
-      <a class="card" href="dashboard.html">
-        <div class="card-icon">📊</div>
-        <h2>赛事预测</h2>
-        <p>每日足球赛事量化分析、EV计算、凯利值、冷门评分，数据驱动决策</p>
-      </a>
-      <a class="card" href="clubs.html">
-        <div class="card-icon">🏟️</div>
-        <h2>俱乐部图鉴</h2>
-        <p>欧洲五大联赛俱乐部深度介绍，历史、阵容、传奇球星一网打尽</p>
-      </a>
-      <a class="card" href="players.html">
-        <div class="card-icon">⭐</div>
-        <h2>球星图鉴</h2>
-        <p>五大联赛球星档案，身价变化、转会历程、经典时刻全覆盖</p>
-      </a>
+
+<!-- ==================== TOP NAV ==================== -->
+<nav class="top-nav">
+  <span class="nav-brand">⚽ 鱼宝足球站</span>
+  <a href="index.html"><span class="nav-icon">🏠</span>首页</a>
+  <a href="dashboard.html"><span class="nav-icon">📊</span>赛事预测</a>
+  <a href="clubs.html" class="active"><span class="nav-icon">🏟️</span>俱乐部图鉴</a>
+  <a href="players.html"><span class="nav-icon">⭐</span>球星图鉴</a>
+</nav>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active">
+  <header class="home-header">
+    <h1 class="home-title">⚽ 五大联赛足球俱乐部图鉴</h1>
+    <p class="home-subtitle">每日更新，带你深入了解欧洲足球</p>
+  </header>
+  <main>
+    <div class="league-grid" id="league-grid"></div>
+  </main>
+  <footer class="page-footer">
+    五大联赛足球俱乐部图鉴 · 数据每日更新 · 共收录 <span id="total-clubs">0</span> 支俱乐部
+  </footer>
+</div>
+
+<!-- ==================== LEAGUE DETAIL PAGE ==================== -->
+<div id="page-league" class="page">
+  <header class="league-detail-header">
+    <button class="league-back-btn" onclick="navigateTo('home')">← 首页</button>
+    <h1 id="league-title" class="league-detail-title"></h1>
+    <p id="league-sub" class="league-detail-sub"></p>
+  </header>
+  <main>
+    <div class="club-grid" id="club-grid"></div>
+    <div class="more-coming">✨ 更多俱乐部即将到来...</div>
+  </main>
+</div>
+
+<!-- ==================== CLUB DETAIL PAGE ==================== -->
+<div id="page-club" class="page">
+  <header class="club-detail-header">
+    <button class="club-detail-back" onclick="goBackToLeague()">← 返回联赛</button>
+    <div id="club-badge" class="club-detail-badge"></div>
+    <h1 id="club-title" class="club-detail-name"></h1>
+    <p id="club-meta" class="club-detail-meta"></p>
+  </header>
+  <main>
+    <div class="club-content">
+      <div id="club-players" class="player-section"></div>
+      <div id="club-body" class="md"></div>
     </div>
-    <div class="footer">Powered by 鱼宝2.0 · Data from 中国体彩官网</div>
-  </div>
+  </main>
+  <footer class="page-footer">
+    <button class="league-back-btn" onclick="goBackToLeague()" style="position:static;margin:0 auto;display:inline-flex;">← 返回联赛</button>
+  </footer>
+</div>
+
+<script>
+// ====================================================================
+// DATA SOURCE - 更新数据只需修改此对象
+// ====================================================================
+const DATA = {
+  leagues: {
+    epl: {
+      id: 'epl',
+      name: '英超',
+      fullName: '英格兰足球超级联赛',
+      color: '#e90052',
+      bgColor: '#3d195b',
+      logoText: 'EPL',
+      clubs: ['manutd','arsenal','liverpool','chelsea','tottenham','mancity','newcastle','astonvilla','everton','leicester','leeds','nottmforest','crystalpalace']
+    },
+    laliga: {
+      id: 'laliga',
+      name: '西甲',
+      fullName: '西班牙足球甲级联赛',
+      color: '#ff6b00',
+      bgColor: '#ee8707',
+      logoText: 'LIGA',
+      clubs: ['realmadrid','barcelona','atletico','valencia','sevilla','athleticbilbao','realsociedad','villarreal','deportivo','celtavigo']
+    },
+    seriea: {
+      id: 'seriea',
+      name: '意甲',
+      fullName: '意大利足球甲级联赛',
+      color: '#009246',
+      bgColor: '#024494',
+      logoText: 'SA',
+      clubs: ['acmilan','juventus','intermilan','napoli','roma','lazio','fiorentina','atalanta','torino','sampdoria']
+    },
+    bundesliga: {
+      id: 'bundesliga',
+      name: '德甲',
+      fullName: '德国足球甲级联赛',
+      color: '#d20515',
+      bgColor: '#8b0000',
+      logoText: 'BULI',
+      clubs: ['bayern','dortmund','leverkusen','schalke','hamburg','frankfurt','werderbremen','monchengladbach','stuttgart','hoffenheim']
+    },
+    ligue1: {
+      id: 'ligue1',
+      name: '法甲',
+      fullName: '法国足球甲级联赛',
+      color: '#1a5fbc',
+      bgColor: '#091c3e',
+      logoText: 'L1',
+      clubs: ['psg','marseille','lyon','monaco','saintetienne','lille','bordeaux','nice','lens','rennes','montpellier']
+    }
+  },
+  clubs: {
+    manutd: {
+      id: 'manutd',
+      name: '曼联',
+      fullName: '曼彻斯特联足球俱乐部',
+      englishName: 'Manchester United',
+      nickname: '红魔 (The Red Devils)',
+      founded: 1878,
+      league: 'epl',
+      colors: ['#da291c','#ffe500'],
+      crestLetter: 'M',
+      crestSub: 'U',
+      crestType: 'solid',
+      crestBg: '#da291c',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f58a1dd2fa0a220f470c5f_manchester-united-footballlogos-org.png',
+      players: [
+        {name:'大卫·贝克汉姆',pos:'右中场',years:'1992-2003',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'394场 85球 152助攻'},
+        {name:'瑞恩·吉格斯',pos:'左边锋',years:'1990-2014',emoji:'🏴󠁧󠁢󠁷󠁬󠁳󠁿',stat:'963场 168球'},
+        {name:'罗伊·基恩',pos:'后腰/队长',years:'1993-2005',emoji:'🇮🇪',stat:'480场 51球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×3（1968、1999、2008）
+- **英超冠军** ×13
+- **足总杯冠军** ×13
+- **三冠王**：1998-99赛季（英超+足总杯+欧冠）
+
+## 🔥 巅峰时刻：92班与三冠王（1998-99）
+
+1992年，曼联青年队夺得足总杯青年赛冠军。那群十几岁的孩子不会想到，他们将改变英格兰足球的历史——贝克汉姆、吉格斯、斯科尔斯、加里·内维尔、菲尔·内维尔、尼基·巴特，后来他们被称为"92班"（Class of '92）。
+
+**三冠王赛季主力阵容（1998-99）：**
+
+> 门将：舒梅切尔（丹麦传奇，咆哮的维京人）
+> 右后卫：加里·内维尔 | 中后卫：斯塔姆搭档约翰森 | 左后卫：丹尼斯·欧文
+> 右前卫：大卫·贝克汉姆（圆月弯刀） | 中场：尼基·巴特搭档布鲁姆奎斯特 | 左前卫：瑞恩·吉格斯（追风少年）
+> 前锋：安迪·科尔搭档德怀特·约克（黑风双煞）
+
+替补席上坐着谢林汉姆和索尔斯克亚——记住这两个名字，后面他们会改写历史。
+
+## 📉 低谷时刻：弗格森退休后的深渊（2013-至今）
+
+2013年5月，弗格森退休，曼联从此坠入深渊。莫耶斯、范加尔、穆里尼奥、索尔斯克亚、滕哈格……换了一个又一个主帅，始终找不到方向。曾经的英超霸主，变成了利物浦和曼城的背景板。
+
+92班的精神似乎已经随风而逝。不过2024-25赛季，阿莫林上任后似乎看到了些许曙光——但红魔的复兴之路，依然漫长。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1999欧冠决赛：曼联 2-1 拜仁慕尼黑（诺坎普奇迹）**
+
+1999年5月26日，巴塞罗那诺坎普球场。拜仁第6分钟巴斯勒任意球破门，此后88分钟里曼联始终落后。
+
+**伤停补时3分钟，曼联改写历史**：
+- 90+1' 贝克汉姆角球→混战→**谢林汉姆**转身破门扳平！
+- 90+3' 贝克汉姆角球→谢林汉姆头球摆渡→**索尔斯克亚**脚尖垫射绝杀！
+
+欧足联主席约翰森已经起身准备给拜仁颁奖——结果他走出看台时看到的是"输球的在跳舞，赢球的在痛哭"。
+
+弗格森赛后只说了一句话：**"Football, bloody hell!"**
+
+**2. 1999足总杯半决赛重赛：曼联 2-1 阿森纳**
+
+吉格斯加时赛连过四人打入制胜球，脱掉球衣狂奔庆祝的画面成为英超经典。`
+    },
+    arsenal: {
+      id: 'arsenal',
+      name: '阿森纳',
+      fullName: '阿森纳足球俱乐部',
+      englishName: 'Arsenal FC',
+      nickname: '枪手 (The Gunners)、兵工厂',
+      founded: 1886,
+      league: 'epl',
+      colors: ['#ef0107','#fff'],
+      crestLetter: 'A',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#ef0107',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f587d4b29d49b3350c891b_arsenal-footballlogos-org.png',
+      players: [
+        {name:'蒂埃里·亨利',pos:'中锋/左边锋',years:'1999-2007',emoji:'🇫🇷',stat:'377场 228球'},
+        {name:'丹尼斯·博格坎普',pos:'前锋/影锋',years:'1995-2006',emoji:'🇳🇱',stat:'423场 112球'},
+        {name:'帕特里克·维埃拉',pos:'防守型中场',years:'1996-2005',emoji:'🇫🇷',stat:'406场 50球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英超冠军**：13座（历史第二，仅次于曼联）
+- **足总杯冠军**：14座（**历史第一！**）
+- **欧冠最佳成绩**：亚军（2006年）
+- **欧洲优胜者杯冠军**：1座（1994年）
+
+## 🔥 巅峰时刻：无敌之师（2003-2004）
+
+这是英格兰顶级联赛131年历史上，唯一一支以不败战绩夺冠的球队！温格打造的华丽之师，将技术流足球演绎到了极致。他们的49场不败纪录，至今仍是英格兰顶级联赛的历史之最。
+
+**无敌之师阵容（4-4-2）：**
+
+> 门将：莱曼
+> 后卫：劳伦、坎贝尔、图雷、阿什利·科尔
+> 中场：永贝里、吉尔伯托、维埃拉(C)、皮雷
+> 前锋：博格坎普、亨利
+
+## 📉 低谷时刻
+
+2006年搬离海布里，为新球场背负巨额债务，开始了"卖队长还债"的艰难岁月。从2005年到2024年，阿森纳在联赛中一冠难求，13年无冠。
+
+**2025-26赛季**，阿尔特塔终于带领枪手重返英超之巅！22年的等待，终于画上句号。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2004年5月15日 | 阿森纳2-1莱斯特城**
+
+亨利打进赛季第30球，2-1逆转取胜！整个英格兰顶级联赛131年历史上，只有阿森纳完成了38场不败夺冠的神迹！
+
+**2. 2026年5月 | 阿森纳夺得英超冠军 🏆**
+
+22年的等待！从2004年的"无敌之师"到2026年的新冠军，阿森纳终于重返巅峰！`
+    },
+    liverpool: {
+      id: 'liverpool',
+      name: '利物浦',
+      fullName: '利物浦足球俱乐部',
+      englishName: 'Liverpool FC',
+      nickname: '红军 (The Reds)',
+      founded: 1892,
+      league: 'epl',
+      colors: ['#c8102e','#00b2a9'],
+      crestLetter: 'L',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#c8102e',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5896aeac0eecdd6a3e7de_liverpool-fc-footballlogos-org.png',
+      players: [
+        {name:'穆罕默德·萨拉赫',pos:'右边锋',years:'2017至今',emoji:'🇪🇬',stat:'443场 257球 123助攻'},
+        {name:'史蒂文·杰拉德',pos:'中场',years:'1998-2015',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'710场 186球'},
+        {name:'范迪克',pos:'中后卫',years:'2018至今',emoji:'🇳🇱',stat:'防线核心'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英格兰顶级联赛冠军** ×20（追平曼联并列英格兰第一！）
+- **欧冠冠军** ×6（1977、1978、1981、1984、2005、2019）——全英第一！
+- **足总杯** ×8
+- **联赛杯** ×10
+
+> 🔥 1983-84赛季同时拿下联赛+联赛杯+欧冠三冠王！2000-01赛季拿下"五冠王"！
+
+## 🔥 巅峰时刻：克洛普时代（2015-2024）
+
+当2015年10月那个留着胡茬的德国人走进安菲尔德时，利物浦已经25年没有拿过联赛冠军了。没人能想到，这个被球迷叫做"渣叔"的男人，会把红军带上一个连香克利和佩斯利都会竖起大拇指的巅峰。
+
+**2018-19赛季欧冠冠军 & 2019-20赛季英超冠军（99分夺冠，30年联赛首冠）**
+
+## 📉 低谷时刻：2013-14赛季滑倒噩梦
+
+2013-14赛季，杰拉德、苏亚雷斯、斯特林、斯图里奇组成的进攻线大杀四方。4月27日——主场对阵切尔西，杰拉德在中圈附近接球时脚底打滑，登巴巴断球单刀破门。利物浦0-2落败，争冠主动权拱手让出。那个赛季，利物浦最终以2分之差屈居亚军，杰拉德一生与英超冠军无缘。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2005年欧冠决赛：伊斯坦布尔奇迹 ⭐⭐⭐⭐⭐**
+
+上半场0-3落后！马尔蒂尼52秒闪击，克雷斯波梅开二度。下半场6分钟内杰拉德头球、斯米切尔远射、阿隆索补射点球——3-3！点球大战中杜德克用"面条腿"干扰米兰球员，扑出皮尔洛和舍甫琴科的点球，红军完成了足球史上最不可思议的逆转！
+
+**2. 2019年欧冠半决赛：安菲尔德奇迹 ⭐⭐⭐⭐⭐**
+
+首回合0-3惨败，次回合萨拉赫和菲尔米诺双双缺阵——全世界都认为巴萨稳了。但奥里吉开场7分钟破门，替补维纳尔杜姆54分钟和56分钟连进两球！第79分钟，阿诺德那个"天才角球"——他假装走开又突然快开，奥里吉无人盯防推射入网——4-0！
+
+**3. 2020年英超提前7轮夺冠：30年等待终结**
+
+从1990年到2020年，整整30年！99分的赛季积分、提前7轮夺冠——"You'll Never Walk Alone"终于有了最完美的注脚。`
+    },
+    realmadrid: {
+      id: 'realmadrid',
+      name: '皇家马德里',
+      fullName: '皇家马德里足球俱乐部',
+      englishName: 'Real Madrid',
+      nickname: '白衣军团、银河战舰、Los Blancos',
+      founded: 1902,
+      league: 'laliga',
+      colors: ['#fff','#febe10'],
+      crestLetter: 'R',
+      crestSub: 'M',
+      crestType: 'crown',
+      crestBg: '#fff',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f556587d8c261145a647f7_real-madrid-footballlogos-org.png',
+      players: [
+        {name:'齐达内',pos:'前腰',years:'2001-2006',emoji:'🇫🇷',stat:'227场 49球'},
+        {name:'菲戈',pos:'右边锋',years:'2000-2005',emoji:'🇵🇹',stat:'245场 56球'},
+        {name:'罗伯特·卡洛斯',pos:'左后卫',years:'1996-2007',emoji:'🇧🇷',stat:'527场 69球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×15（1956-1960五连冠、1966、1998、2000、2002、2014、2016-2018三连冠、2022、2024）
+- **西甲冠军** ×36
+- **国王杯冠军** ×20
+- **世俱杯冠军** ×8
+
+## 🔥 巅峰时刻：银河战舰一期（2000-2003）
+
+2000年夏天，弗洛伦蒂诺竞选皇马主席时承诺"把菲戈带到伯纳乌"，没人相信。但他赢了，菲戈真的来了。从此，一个疯狂的时代拉开了序幕——每年签一位巨星，皇马用金钱和野心打造了足球史上最豪华的阵容。
+
+**主力阵容（2001-02赛季欧冠夺冠）：**
+
+> 门将：卡西利亚斯（20岁的少年天才）
+> 后卫：萨尔加多 | 耶罗(队长) 搭档卡兰卡 | 罗伯特·卡洛斯
+> 后腰：埃尔格拉 + 马克莱莱
+> 中场：菲戈 | 齐达内 | 劳尔（伯纳乌的王子）
+> 前锋：莫伦特斯
+
+**2002年欧冠决赛，那记天外飞仙：** 卡洛斯左路传中，球速极快且有些飘，齐达内站在禁区弧顶，左脚凌空一抽，皮球像子弹一样钻入死角。**这可能是欧冠决赛历史上最伟大的一粒进球。**
+
+## 📉 低谷时刻：银河战舰的崩塌（2003-2006）
+
+2003年夏天，弗洛伦蒂诺做出了两个灾难性决定：**不续约功勋主帅博斯克和老队长耶罗**。铁腰马克莱莱因为加薪被拒，被卖到了切尔西。弗洛伦蒂诺说："我们不会想念他，他不会头球，传球不超过三米。"
+
+马克莱莱走后，皇马的攻防体系彻底失衡。2003-04赛季到2005-06赛季，皇马连续三年颗粒无收。2006年2月，弗洛伦蒂诺辞职，银河战舰一期正式谢幕。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2002欧冠决赛：皇马 2-1 勒沃库森**
+
+齐达内的天外飞仙。20岁的卡西利亚斯替补登场做出神扑，赛后他哭着说"我以为我的赛季已经结束了"。
+
+**2. 2002欧冠半决赛：皇马 vs 巴萨**
+
+首回合诺坎普2-0，次回合伯纳乌1-1，银河战舰在诺坎普赢球，让整个加泰罗尼亚沉默。`
+    },
+    barcelona: {
+      id: 'barcelona',
+      name: '巴塞罗那',
+      fullName: '巴塞罗那足球俱乐部',
+      englishName: 'FC Barcelona',
+      nickname: '巴萨、红蓝军团 (Barça)',
+      founded: 1899,
+      league: 'laliga',
+      colors: ['#a50044','#004d98'],
+      crestLetter: 'F',
+      crestSub: 'C',
+      crestType: 'stripes',
+      crestBg: '#a50044',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/6a2778f4e987d98a27cb54d3_fc-barcelona-footylogos.png',
+      stripes: ['#a50044','#004d98'],
+      players: [
+        {name:'莱昂内尔·梅西',pos:'右边锋/前腰',years:'2004-2021',emoji:'🇦🇷',stat:'778场 672球 269助攻'},
+        {name:'路易斯·苏亚雷斯',pos:'中锋',years:'2014-2020',emoji:'🇺🇾',stat:'283场 198球 82助攻'},
+        {name:'内马尔',pos:'左边锋',years:'2013-2017',emoji:'🇧🇷',stat:'186场 105球 80助攻'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×5（1992、2006、2009、2011、2015）
+- **西甲冠军** ×28
+- **国王杯冠军** ×31（历史第一）
+- **六冠王**：2009年（史上唯一）
+
+## 🔥 巅峰时刻：梦三王朝与MSN时代
+
+**瓜迪奥拉时代（2008-2012）：传控足球的巅峰**
+
+2008年，38岁的瓜迪奥拉成为巴萨主教练。2008-09赛季成为西班牙足球史上第一支"三冠王"球队，2009年完成"六冠王"伟业——史上唯一。
+
+**梦三队核心：** 梅西、哈维、伊涅斯塔、布斯克茨、皮克、普约尔
+
+**MSN时代（2014-2017）：史上最强三叉戟？**
+
+梅西+内马尔+苏亚雷斯，2014-15赛季再次完成"三冠王"。2015-16赛季三人总计打进131球，史上最强火力。
+
+## 📉 低谷时刻
+
+**1. 慕尼黑之夜（2020年8月14日）：2-8不敌拜仁**
+
+上半场就1-4落后，全场2-8。这是巴萨连续第三年在欧冠淘汰赛中遭遇惨案。
+
+**2. 财务危机：从"不差钱"到"卖血求生"**
+
+2021年梅西自由身离队，薪资空间严重超标，被迫出售未来25%的电视转播权。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 诺坎普奇迹（2017年3月8日）：6-1巴黎圣日耳曼**
+
+首回合0-4，最后7分钟连进3球，第95分钟罗伯托完成绝杀！内马尔独造4球。
+
+**2. 伯纳乌6-2大屠杀（2009年5月2日）**
+
+巴萨在皇马主场踢出了最完美的传控足球，普约尔举起6根手指的画面成为国家德比史上永恒经典。`
+    },
+    acmilan: {
+      id: 'acmilan',
+      name: 'AC米兰',
+      fullName: 'AC米兰足球俱乐部',
+      englishName: 'AC Milan',
+      nickname: '红黑军团 (Rossoneri)',
+      founded: 1899,
+      league: 'seriea',
+      colors: ['#fb090b','#000'],
+      crestLetter: 'A',
+      crestSub: 'C',
+      crestType: 'stripes',
+      crestBg: '#fb090b',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f59173c54aab3bb289682d_ac-milan-footballlogos-org.png',
+      stripes: ['#fb090b','#000'],
+      players: [
+        {name:'范巴斯滕',pos:'中锋',years:'1987-1995',emoji:'🇳🇱',stat:'201场 125球 49助攻'},
+        {name:'古利特',pos:'攻击中场',years:'1987-1993',emoji:'🇳🇱',stat:'171场 56球 40助攻'},
+        {name:'里杰卡尔德',pos:'后腰',years:'1988-1993',emoji:'🇳🇱',stat:'201场 26球 25助攻'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×7（1963、1969、1989、1990、1994、2003、2007）
+- **意甲冠军** ×19
+- **意大利杯冠军** ×5
+- **丰田杯/世俱杯冠军** ×4
+
+## 🔥 巅峰时刻：荷兰三剑客时代（1987-1993）
+
+1986年2月，大富豪贝卢斯科尼买下了负债累累的AC米兰。1987年7月的一个早晨，伴随着瓦格纳的《女武神的骑行》，三架直升机从天而降——范巴斯滕、古利特、里杰卡尔德，三剑客齐聚，新时代拉开了帷幕。
+
+**三剑客齐聚阵容（1988-89赛季欧冠夺冠）：**
+
+> 门将：加利
+> 后卫：塔索蒂 | 科斯塔库塔 搭档 巴雷西 | 马尔蒂尼
+> 中场：安切洛蒂 + 多纳多尼 + 里杰卡尔德（黑天鹅）
+> 前锋：范巴斯滕（乌德勒支天鹅）搭档古利特（辫帅）
+
+## 📉 低谷时刻：2012年后的漫长沉沦
+
+2012年之后，随着核心球员离去、贝卢斯科尼投资收缩，AC米兰从意甲霸主沦落为中游球队。2021-22赛季，皮奥利率队时隔11年重夺意甲冠军，但复兴之路依然曲折。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1989欧冠半决赛：AC米兰 5-0 皇家马德里**
+
+三剑客各进一球，5-0横扫欧洲霸主！三名荷兰人完美配合，这是"荷兰三剑客"这个称号真正被全世界铭记的一刻。
+
+**2. 1989欧冠决赛：AC米兰 4-0 布加勒斯特星**
+
+古利特和范巴斯滕双双梅开二度。98000名观众中80000是米兰球迷！
+
+**3. 58场联赛不败（1991-1993）**
+
+从1991年5月到1993年3月，米兰在意甲连续58场不败！巅峰巴斯滕31场25球。`
+    },
+    juventus: {
+      id: 'juventus',
+      name: '尤文图斯',
+      fullName: '尤文图斯足球俱乐部',
+      englishName: 'Juventus FC',
+      nickname: '老妇人、斑马军团 (La Vecchia Signora)',
+      founded: 1897,
+      league: 'seriea',
+      colors: ['#fff','#000'],
+      crestLetter: 'J',
+      crestSub: '',
+      crestType: 'stripes',
+      crestBg: '#fff',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f591085f8ea61de0a1cc6a_juventus-footballlogos-org.png',
+      stripes: ['#fff','#000'],
+      crestTextDark: true,
+      players: [
+        {name:'布冯',pos:'门将',years:'2001-2018,2019-2021',emoji:'🇮🇹',stat:'656场 300+零封'},
+        {name:'C罗',pos:'左边锋/中锋',years:'2018-2021',emoji:'🇵🇹',stat:'134场 101球 22助攻'},
+        {name:'皮尔洛',pos:'组织后腰',years:'2012-2017',emoji:'🇮🇹',stat:'227场 14球 35助攻'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲冠军** ×36（夺得意甲冠军次数最多的球队）
+- **欧冠冠军** ×2（1984-85、1995-96）
+- **欧洲联盟杯冠军** ×3
+- **历史上第一支完成欧洲三大杯"大满贯"的俱乐部**
+- **2011-12至2019-20赛季完成意甲九连冠**
+
+## 🔥 巅峰时刻：意甲九连冠时代
+
+2006年电话门事件后，尤文图斯被强制降入意乙。从废墟中崛起，2011-2020年完成意甲九连冠，创造了亚平宁足球史无前例的纪录。
+
+**九连冠核心：** 布冯、基耶利尼、博努奇、巴尔扎利（BBC防线）+ 皮尔洛 + 比达尔 + 博格巴 + 迪巴拉 + C罗
+
+## 📉 低谷时刻：电话门事件
+
+2006年，尤文图斯被强制降入意乙联赛，2004-05和2005-06赛季冠军被取消。布冯选择留守，放弃皇马、曼联等豪门的邀请。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1997年欧冠决赛：多特蒙德3-1尤文图斯**
+
+20岁的里肯刚替补上场16秒就用一记绝妙吊射攻破佩鲁齐的大门，锁定胜局。
+
+**2. 2018年欧冠1/4决赛：皇马1-3尤文（总比分4-3皇马晋级）**
+
+曼朱基奇开场76秒破门，上半场头球梅开二度。补时最后时刻C罗点球绝杀，布冯因激烈抗议被红牌罚下！`
+    },
+    intermilan: {
+      id: 'intermilan',
+      name: '国际米兰',
+      fullName: '国际米兰足球俱乐部',
+      englishName: 'FC Internazionale Milano',
+      nickname: '蓝黑军团 (Nerazzurri)、大国际',
+      founded: 1908,
+      league: 'seriea',
+      colors: ['#0068a8','#000'],
+      crestLetter: 'I',
+      crestSub: 'M',
+      crestType: 'stripes',
+      crestBg: '#0068a8',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f590dc82d343819638a796_inter-milan-footballlogos-org.png',
+      stripes: ['#0068a8','#000'],
+      players: [
+        {name:'迭戈·米利托',pos:'前锋',years:'2009-2014',emoji:'🇦🇷',stat:'52场 30球 8助攻（三冠王赛季）'},
+        {name:'韦斯利·斯内德',pos:'前腰',years:'2009-2013',emoji:'🇳🇱',stat:'欧冠淘汰赛7场5球2助攻'},
+        {name:'哈维尔·萨内蒂',pos:'右后卫/中场',years:'1995-2014',emoji:'🇦🇷',stat:'858场 队史出场王'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲冠军** ×21（2024年获得第20座，胸前绣上第二颗星！）
+- **欧冠冠军** ×3（1964、1965、2010）
+- **意大利杯** ×10
+- **意大利唯一的三冠王**（2009-10赛季）！
+- **唯一从未降级的意甲球队**！
+
+## 🔥 巅峰时刻：穆里尼奥三冠王（2009-10赛季）
+
+这是国际米兰45年来最辉煌的时刻，也是意大利足球史上最伟大的赛季！
+
+**2010年欧冠决赛阵容：** 塞萨尔、麦孔、卢西奥、萨穆埃尔、齐沃、萨内蒂、坎比亚索、斯内德、埃托奥、潘德夫、米利托
+
+**"四球定三冠"：** 米利托在意大利杯决赛制胜球、意甲收官战夺冠进球、欧冠决赛梅开二度！
+
+## 📉 低谷时刻：90年代的"黑洞"时期
+
+拥有罗纳尔多、博格坎普、克林斯曼等巨星，两次打破世界转会费纪录——却整整十年拿不到一座意甲冠军！十年间换了11位主教练，6.7亿欧元打了水漂。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2010年欧冠半决赛：国米3-1宇宙巴萨**
+
+面对当时被称为"宇宙队"的巴萨，穆里尼奥的防守反击被演绎到了极致。斯内德任意球扳平，麦孔反超，米利托1射2传！梅西被彻底冻结。
+
+**2. 2010年欧冠决赛：2-0拜仁，三冠王封神**
+
+米利托梅开二度，国米成为意大利史上第一支三冠王。赛后穆里尼奥走向范加尔握手——狂人也有温情的一面。`
+    },
+    bayern: {
+      id: 'bayern',
+      name: '拜仁慕尼黑',
+      fullName: '拜仁慕尼黑足球俱乐部',
+      englishName: 'FC Bayern München',
+      nickname: '南部之星 (Die Bayern)、FC Hollywood',
+      founded: 1900,
+      league: 'bundesliga',
+      colors: ['#dc052d','#fff'],
+      crestLetter: 'B',
+      crestSub: 'M',
+      crestType: 'solid',
+      crestBg: '#dc052d',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5938f22e0827f30d2bdbb_bayern-munich-footballlogos-org.png',
+      players: [
+        {name:'阿尔扬·罗本',pos:'边锋',years:'2009-2019',emoji:'🇳🇱',stat:'309场 144球'},
+        {name:'罗伯特·莱万多夫斯基',pos:'中锋',years:'2014-2022',emoji:'🇵🇱',stat:'375场 344球'},
+        {name:'曼努埃尔·诺伊尔',pos:'门将',years:'2011至今',emoji:'🇩🇪',stat:'598场 门卫开创者'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲冠军** ×33（断档式历史第一）
+- **德甲连冠纪录**：11连冠（2013-2023）
+- **欧冠冠军** ×6（1974-1976三连冠、2001、2013、2020）
+- **2012-2013三冠王**
+- **2019-2020赛季六冠王**
+
+## 🔥 巅峰时刻
+
+**2012-2013赛季：三冠王的荣耀**
+
+2012年欧冠决赛主场丢冠后，海因克斯带队卷土重来。2013年温布利决赛，第89分钟，里贝里脚后跟妙传，**罗本绝杀！** 拜仁2-1多特蒙德！
+
+**2019-2020赛季：赛季全胜，征服欧洲！**
+
+弗里克带领下，拜仁欧冠11战全胜，轰入43球，场均近4球！第59分钟，基米希精妙挑传，科曼后点头球破门弑旧主！
+
+## 📉 低谷时刻
+
+**1979-1980赛季：破产边缘**
+
+背负700万德国马克债务，联赛排名第12。37岁的赫内斯被任命为经理，出售球员还债。贝肯鲍尔回归后带队夺得德甲三连冠，重新崛起。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2013年5月25日 | 欧冠决赛 | 拜仁2-1多特蒙德**
+
+罗本第89分钟绝杀！一传一射，十年救赎。
+
+**2. 2020年8月23日 | 欧冠决赛 | 拜仁1-0巴黎**
+
+赛季11战全胜！科曼弑旧主，诺伊尔神扑内马尔。
+
+**3. 莱万9分钟5球**
+
+对阵沃尔夫斯堡，替补出场9分钟内打进5球，这一神迹至今无人能破。`
+    },
+    dortmund: {
+      id: 'dortmund',
+      name: '多特蒙德',
+      fullName: '多特蒙德足球俱乐部',
+      englishName: 'Borussia Dortmund',
+      nickname: '大黄蜂、黄黑军团 (BVB)',
+      founded: 1909,
+      league: 'bundesliga',
+      colors: ['#fde100','#000'],
+      crestLetter: 'B',
+      crestSub: 'VB',
+      crestType: 'solid',
+      crestBg: '#fde100',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f592d7b5c9d747c139b5bc_borussia-dortmund-footballlogos-org.png',
+      crestTextDark: true,
+      players: [
+        {name:'罗伯特·莱万多夫斯基',pos:'中锋',years:'2010-2014',emoji:'🇵🇱',stat:'187场 103球 42助攻'},
+        {name:'马尔科·罗伊斯',pos:'边锋/前腰',years:'2012-2024',emoji:'🇩🇪',stat:'429场 170球 131助攻'},
+        {name:'马里奥·格策',pos:'前腰',years:'2009-2013,2019-2020',emoji:'🇩🇪',stat:'118场 31球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲冠军** ×8
+- **欧冠冠军** ×1（1996-97）
+- **欧洲优胜者杯冠军** ×1（1965-66）
+- **南看台"黄墙"**：世界最大的站立看台，可容纳约25,000人
+
+## 🔥 巅峰时刻：克洛普的青春风暴
+
+2005年，多特蒙德一度濒临破产，债务高达1.18亿欧元。2008年，克洛普成为主教练，用"重金属摇滚"风格改变了德国足球。
+
+**2011-12赛季**：创造德甲历史最高积分纪录（81分），队史首个"双冠王"。
+
+**2012-13赛季**：杀入欧冠决赛，莱万多夫斯基半决赛对皇马上演**大四喜**！
+
+## 📉 低谷时刻
+
+2005年债务高达1.18亿欧元险些破产。1972年首次降入德乙，1978年再次降级。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2013年欧冠半决赛：莱万的大四喜**
+
+多特蒙德4-1皇家马德里！莱万多夫斯基四脚射门四个进球，成为历史上首位在欧冠半决赛完成大四喜的球员。克洛普赛后跪地庆祝。
+
+**2. 2012年德国杯决赛：多特5-2拜仁**
+
+莱万多夫斯基上演帽子戏法，香川真司1球2助攻，正式宣告多特蒙德成为能与拜仁抗衡的德国豪门。`
+    },
+    psg: {
+      id: 'psg',
+      name: '巴黎圣日耳曼',
+      fullName: '巴黎圣日耳曼足球俱乐部',
+      englishName: 'Paris Saint-Germain',
+      nickname: 'PSG、大巴黎',
+      founded: 1970,
+      league: 'ligue1',
+      colors: ['#004170','#e30613'],
+      crestLetter: 'P',
+      crestSub: 'SG',
+      crestType: 'solid',
+      crestBg: '#004170',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f600e53341fbadf50e6015_paris-saint-germain-footballlogos-org.png',
+      players: [
+        {name:'基利安·姆巴佩',pos:'前锋',years:'2018-2024',emoji:'🇫🇷',stat:'306场 255球 队史射手王'},
+        {name:'内马尔',pos:'左边锋',years:'2017-2023',emoji:'🇧🇷',stat:'173场 118球'},
+        {name:'兹拉坦·伊布拉希莫维奇',pos:'中锋',years:'2012-2016',emoji:'🇸🇪',stat:'180场 156球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×12+
+- **法国杯冠军** ×14+
+- **欧冠冠军** ×2（2025年5-0击败国际米兰、2026年点球4-3击败阿森纳卫冕成功！）
+- **欧联杯冠军** ×1（1996年）
+
+## 🔥 巅峰时刻
+
+**"四亿妄为"时代（2017-2024）**
+
+2017年夏天，巴黎以2.22亿欧元签下内马尔，又以1.8亿欧元签下姆巴佩，"四亿妄为"震惊世界足坛。
+
+**2025-2026年：体系足球的胜利**
+
+经历了"四亿妄为"的失败后，巴黎开始打造体系足球。恩里克上任后，巴黎连夺两座欧冠冠军！姆巴佩2024年自由身离队加盟皇马后，巴黎反而用体系足球连夺两座欧冠。
+
+## 📉 低谷时刻
+
+**2019年3月6日：欧冠惨遭曼联大逆转**
+
+首回合客场2-0击败曼联，次回合主场1-3惨遭逆转。补时第94分钟，拉什福德点球绝杀！
+
+**2016-17赛季：诺坎普惨案**
+
+首回合4-0大胜巴萨，次回合被6-1逆转！
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2026年欧冠决赛：巴黎1-1阿森纳（点球4-3）🏆**
+
+巴黎卫冕成功！克瓦拉茨赫利亚造点球，登贝莱点球扳平。点球大战阿森纳加布里埃尔罚丢最后一球。
+
+**2. 2017年3月8日：巴塞罗那6-1巴黎**
+
+首回合4-0大胜巴萨，次回合被史诗级逆转。内马尔第88分钟任意球+91分钟点球+95分钟助攻绝杀——讽刺的是，他后来成了巴黎的球员。`
+    },
+    marseille: {
+      id: 'marseille',
+      name: '马赛',
+      fullName: '马赛奥林匹克',
+      englishName: 'Olympique de Marseille',
+      nickname: 'OM、蓝白军团 (Les Phocéens)',
+      founded: 1899,
+      league: 'ligue1',
+      colors: ['#2faee0','#fff'],
+      crestLetter: 'O',
+      crestSub: 'M',
+      crestType: 'solid',
+      crestBg: '#2faee0',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/69f3f418117ceba672d60345_marseille-footylogos.png',
+      players: [
+        {name:'让-皮埃尔·帕潘',pos:'前锋',years:'1986-1992',emoji:'🇫🇷',stat:'181球 队史最佳射手'},
+        {name:'迪迪埃·德罗巴',pos:'前锋',years:'2003-2004',emoji:'🇨🇮',stat:'29球（单赛季）'},
+        {name:'德尚',pos:'中场',years:'90年代',emoji:'🇫🇷',stat:'中场统帅'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×9
+- **欧冠冠军** ×1（1993）——**唯一赢得欧冠的法国球队！**
+- **法国杯** ×10
+- **格言**：Droit au but（直奔球门）
+
+> "À jamais les premiers"（永远是第一）——1993年5月26日，法国足球站在了欧洲之巅，至今无人能复制这一壮举！
+
+## 🔥 巅峰时刻：1992-93赛季——从欧洲之巅到深渊
+
+1993年5月26日，慕尼黑奥林匹克球场，马赛1-0击败拥有马尔蒂尼、范巴斯滕、里杰卡尔德的AC米兰！中卫巴西尔·博利角球头球攻入全场唯一进球——法国足球最伟大的夜晚！
+
+**帕潘时代（1986-1992）：** 连续5年法甲金靴，1991年金球奖——唯一在法国俱乐部效力期间获此殊荣的球员。他的凌空抽射被称为"Papinades"。
+
+## 📉 低谷时刻：VA-OM假球丑闻与降级
+
+欧冠决赛前一周，马赛总经理向瓦朗西安球员行贿。丑闻曝光后：
+- 马赛被剥夺1992-93赛季法甲冠军
+- 强制降入法乙
+- 主席塔皮被判入狱8个月
+
+从欧洲之巅到降入乙级，只用了几个月。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1993年欧冠决赛：1-0 AC米兰——法国的永恒之夜**
+
+博利44分钟头球破门！巴特兹的神勇扑救，德尚的中场绞杀，让AC米兰全场无力回天。
+
+**2. 2004年联盟杯：德罗巴的欧洲巡演**
+
+德罗巴让利物浦和纽卡斯尔吃尽苦头，凭借一己之力带队杀入决赛。仅一年就从330万镑身价飙升至2450万镑——穆里尼奥说："先生，掏钱，别说话。"`
+    },
+    chelsea: {
+      id: 'chelsea',
+      name: '切尔西',
+      fullName: '切尔西足球俱乐部',
+      englishName: 'Chelsea FC',
+      nickname: '蓝军 (The Blues)',
+      founded: 1905,
+      league: 'epl',
+      colors: ['#034694','#ffffff'],
+      crestLetter: 'C',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#034694',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f588e4cced4a41f8dfd248_chelsea-footballlogos-org.png',
+      players: [
+        {name:'弗兰克·兰帕德',pos:'中前卫',years:'2001-2014',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'648场 211球 队史射手王'},
+        {name:'迪迪埃·德罗巴',pos:'中锋',years:'2004-2012/2014-2015',emoji:'🇨🇮',stat:'381场 164球 两次英超金靴'},
+        {name:'约翰·特里',pos:'中后卫/队长',years:'1998-2017',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'717场 铁血队长'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×2（2012、2021）
+- **欧联杯** ×2（2013、2019）
+- **欧协联** ×1（2025）
+- **欧洲优胜者杯** ×2（1971、1998）
+- **欧洲超级杯** ×2（1998、2021）
+- **世俱杯** ×2（2021、2025）
+- **英超冠军** ×6（1955、2005、2006、2010、2015、2017）
+- **足总杯** ×8 | **联赛杯** ×5
+
+🏆 **欧战全满贯**：切尔西是全欧唯一包揽欧冠、欧联、欧协联、欧洲超级杯、欧洲优胜者杯五大欧战冠军的俱乐部！
+
+## 🔥 巅峰时刻
+
+### 穆里尼奥一期的铁血蓝军（2004-2007）
+2004年，"特别的一个"驾临斯坦福桥。穆氏切尔西2004-05赛季仅丢15球（英超纪录），提前夺冠。
+
+**主力阵容**：门将切赫，后防线费雷拉、特里、卡瓦略、加拉，双后腰马克莱莱搭档兰帕德，两翼达夫和罗本，前锋德罗巴——精密的战争机器。
+
+### 2021年欧冠冠军——图赫尔的蓝色奇迹
+图赫尔接手仅4个月就征服欧洲！3-4-2-1阵型让切尔西变成欧洲最坚固的堡垒。坎特淘汰赛场场MVP，哈弗茨决赛制胜球1-0曼城。
+
+## 📉 低谷时刻：2015-16赛季 卫冕冠军的坠落
+穆里尼奥与队医伊娃的冲突引爆更衣室，前16轮仅15分接近降级区。卫冕冠军最终排名第10——英超历史最惨滑坡之一。孔蒂次年上任改打3-4-3，豪取13连胜重夺冠军完成涅槃。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2012欧冠决赛：切尔西 1-1（点球4-3）拜仁慕尼黑**
+在拜仁主场安联球场被压制88分钟，德罗巴第88分钟头球绝平！加时赛切赫扑出罗本点球，点球大战德罗巴致胜——从2008年决赛染红的罪人到2012年的一锤定音，最完美的救赎。
+
+**2. 2021欧冠决赛：切尔西 1-0 曼城**
+芒特直塞，哈弗茨过掉埃德森推射空门——个人欧冠处子球价值连城。坎特全场MVP，瓜迪奥拉无腰阵被瓦解。
+
+**3. 2012欧冠半决赛次回合：切尔西 2-3 巴萨（总比分3-2晋级）**
+10人应战0-2落后，拉米雷斯吊射扳回一城，补时托雷斯单刀锁定晋级——5000万先生在最关键时刻站了出来！`
+    },
+    atletico: {
+      id: 'atletico',
+      name: '马德里竞技',
+      fullName: '马德里竞技俱乐部',
+      englishName: 'Atlético de Madrid',
+      nickname: '床单军团 (Los Colchoneros)',
+      founded: 1903,
+      league: 'laliga',
+      colors: ['#cb3524','#fff','#1a4b8c'],
+      crestLetter: 'A',
+      crestSub: 'M',
+      crestType: 'stripes',
+      stripes: ['#cb3524','#fff'],
+      crestBg: '#cb3524',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f57ae622e0827f30d03d63_atletico-madrid-footballlogos-org.png',
+      crestTextDark: true,
+      players: [
+        {name:'安托万·格列兹曼',pos:'前锋/二前锋',years:'2014-2019/2021至今',emoji:'🇫🇷',stat:'300+场 144球 队史第四射手'},
+        {name:'迭戈·科斯塔',pos:'中锋',years:'2010-2014/2018-2020',emoji:'🇪🇸',stat:'2013-14赛季36球 人形坦克'},
+        {name:'迭戈·戈丁',pos:'中后卫',years:'2010-2019',emoji:'🇺🇾',stat:'铁血防线核心'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **西甲联赛** ×11（最近：2020/21）
+- **国王杯** ×10
+- **欧联杯** ×3（2010、2012、2018）
+- **欧洲优胜者杯** ×1（1962）
+- **欧洲超级杯** ×3
+
+🏆 西班牙足坛第三极，11次西甲排名第三。西蒙尼时代两次杀入欧冠决赛、两夺欧联杯。
+
+## 🔥 巅峰时刻
+
+### 2013-14赛季——铁血军团加冕西甲
+预算仅为皇马巴萨零头，铜墙铁壁的防守+摧枯拉朽的反击！最后一轮做客诺坎普，戈丁头球扳平巴萨1-1，时隔18年重夺西甲！
+
+**主力阵容**：门将库尔图瓦，后防胡安弗兰、戈丁、米兰达、费利佩，中场加比（队长）、蒂亚戈、科克、劳尔·加西亚，前锋迭戈·科斯塔搭档比利亚——加比和蒂亚戈像两头饥饿的狼撕咬对手，戈丁是不可逾越的高墙。
+
+### 欧联杯三冠王（2010、2012、2018）
+三次参加欧联杯三次夺冠，决赛全胜！"欧联杯之王"！
+
+## 📉 低谷时刻：2000年 降级的深渊
+1999-2000赛季西甲排名倒数第三惨遭降级！11次西甲冠军的豪门沦落到踢西乙，还陷入财务危机濒临破产。在乙级挣扎两赛季，2002年才重返西甲。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2014欧冠决赛：马竞 1-4（加时）皇马**
+戈丁36分钟破门领先到93分钟！拉莫斯92分48秒头球绝平——天堂坠入地狱。迭戈·科斯塔开场9分钟伤退，加时赛体能崩盘。最残酷的决赛之一。
+
+**2. 2016欧冠决赛：马竞 1-1（点球3-5）皇马**
+格列兹曼点球击中横梁！如果进了历史可能改写。连续两次欧冠决赛输给同城死敌。
+
+**3. 2014西甲末轮：巴萨 1-1 马竞**
+做客诺坎普，戈丁角球头球扳平！这粒进球打破巴萨皇马9年垄断，西蒙尼被球员抛向天空——马竞永恒的经典画面。`
+    },
+    leverkusen: {
+      id: 'leverkusen',
+      name: '勒沃库森',
+      fullName: '拜耳04勒沃库森',
+      englishName: 'Bayer 04 Leverkusen',
+      nickname: '药厂 (Die Werkself)',
+      founded: 1904,
+      league: 'bundesliga',
+      colors: ['#e32221','#000000'],
+      crestLetter: 'B',
+      crestSub: '04',
+      crestType: 'solid',
+      crestBg: '#e32221',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f59363f8048e80334715fe_bayer-leverkusen-footballlogos-org.png',
+      players: [
+        {name:'弗洛里安·维尔茨',pos:'攻击型中场',years:'2020-2025',emoji:'🇩🇪',stat:'2023-24赛季 18球20助攻'},
+        {name:'格拉尼特·扎卡',pos:'防守型中场',years:'2023-2025',emoji:'🇨🇭',stat:'从红牌机器到中场大师'},
+        {name:'亚历杭德罗·格里马尔多',pos:'左翼卫',years:'2023至今',emoji:'🇪🇸',stat:'2023-24赛季 10球13助攻'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲联赛** ×1（2023/24）——历史首个不败赛季！
+- **德国杯** ×2（1993、2024）
+- **德国超级杯** ×1（2024）
+- **欧洲联盟杯** ×1（1988）
+
+🏆 2023-24赛季：28胜6平不败夺冠，90分创队史纪录，各项赛事51场不败创欧洲纪录！120年终圆梦！
+
+## 🔥 巅峰时刻：2023-24赛季——120年等待，不败封王
+
+阿隆索接手时球队排在德甲第17名！一年半后创造人类足球史上最不可思议的赛季——28胜6平不败夺冠，51场不败欧洲纪录。28球在80分钟后打进，18球在90分钟后——真正的"绝杀之王"。
+
+**主力阵容（3-4-2-1）**：门将赫拉德茨基，三中卫塔普索巴、塔、因卡皮耶，翼卫弗林蓬和格里马尔多，双后腰扎卡搭档安德里希，前场维尔茨和霍夫曼，中锋博尼费斯——精密的瑞士钟表。
+
+## 📉 低谷时刻：2001-02赛季 "Neverkusen" 三亚王
+三条战线全部杀入决赛，全部输掉！德甲末轮丢冠、德国杯2-4沙尔克、欧冠1-2皇马。齐达内"天外飞仙"的背景板就是勒沃库森。巴拉克一年四个亚军，足坛最悲情的男人。"Neverkusen"（永不赢的库森）的外号贴了22年，直到阿隆索出现。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2024年4月14日 德甲：勒沃库森 5-0 不莱梅**
+120年等待的终点！维尔茨替补15分钟帽子戏法，第三球打进后球迷冲入球场。5-0提前5轮登顶、赛季不败——德甲最浪漫的夺冠夜。
+
+**2. 2002欧冠决赛：勒沃库森 1-2 皇马**
+"天外飞仙"诞生之夜！卡洛斯传中，齐达内不停球左脚凌空抽射钻入死角——足球史上最经典进球，将勒沃库森钉在三亚王十字架上。
+
+**3. 2024德国杯决赛：勒沃库森 1-0 凯泽斯劳滕**
+扎卡远射制胜！从阿森纳"红牌机器"到勒沃库森双冠王功臣——最精彩的蜕变。队史首次双冠王！`
+    },
+    valencia: {
+      id: 'valencia',
+      name: '瓦伦西亚',
+      fullName: '瓦伦西亚足球俱乐部',
+      englishName: 'Valencia CF',
+      nickname: '蝙蝠军团 (Los Che)',
+      founded: 1919,
+      league: 'laliga',
+      colors: ['#cb3524','#ffd700'],
+      crestLetter: 'V',
+      crestSub: 'CF',
+      crestType: 'stripes',
+      crestBg: '#cb3524',
+      stripes: ['#cb3524','#ffd700'],
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f57dd9ef436c4d8079a6c3_valencia-cf-footballlogos-org-p-800.png',
+      players: [
+        {name:'盖兹卡·门迭塔',pos:'中场',years:'1993-2001',emoji:'🇪🇸',stat:'268场 44球 两入欧冠决赛'},
+        {name:'罗伯托·阿亚拉',pos:'中后卫',years:'2000-2007',emoji:'🇦🇷',stat:'300+场 铁血防线灵魂'},
+        {name:'鲁本·巴拉哈',pos:'后腰',years:'2000-2010',emoji:'🇪🇸',stat:'300+场 40余球 双冠功臣'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **西甲联赛** ×6（1942、1944、1947、1971、2002、2004）
+- **国王杯** ×8（1941、1949、1954、1967、1979、1999、2008、2019）
+- **欧洲联盟杯** ×1（2004）
+- **欧洲优胜者杯** ×1（1980）
+- **欧洲超级杯** ×2（1980、2004）
+- **博览会杯** ×2（1962、1963）
+
+🏆 2004年被IFFHS评为"世界最佳俱乐部"！
+
+## 🔥 巅峰时刻：1999-2004 蝙蝠军团的黄金年代
+
+六年间拿下2座西甲、1座国王杯、1座联盟杯、1座欧洲超级杯，外加两座欧冠亚军——蝙蝠军团几乎遮蔽了整个欧洲。
+
+**2000/01欧冠决赛阵容：** 门将卡尼萨雷斯，后卫安格洛马、阿亚拉、佩莱格里诺、卡博尼，中场门迭塔(队长)、巴拉哈、基利·冈萨雷斯，前腰艾马尔，前锋卡鲁、胡安·桑切斯。
+
+**2003/04双冠王阵容（贝尼特斯执教）：** 门将卡尼萨雷斯，后卫库罗·托雷斯、阿亚拉、马切纳、卡博尼，中场鲁菲特、巴拉哈、阿尔贝尔达、维森特，前锋米斯塔、安古洛。
+
+1999年国王杯决赛，门迭塔用胸部、大腿、脚面连续四触球完成惊世进球——先胸部停球、大腿一颠、脚面挑球过人、左脚凌空抽射！3-0大胜马竞捧杯。
+
+## 📉 低谷时刻：1985/86赛季——唯一一次降级
+
+财政危机导致球员工资发不出来，仅8胜9平17负进38球失62球，以25分排名联赛第16降入乙级。但球迷没有抛弃球队，降级后梅斯塔利亚依然场场爆满！1986/87赛季以乙级第二名直接杀回甲级，仅用一年重返顶级联赛。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2001欧冠半决赛：瓦伦西亚 3-0 利兹联**
+胡安·桑切斯16分钟47分钟梅开二度，门迭塔52分钟再下一城，蝙蝠军团杀入连续第二年欧冠决赛！
+
+**2. 2004联盟杯决赛：瓦伦西亚 2-0 马赛**
+米斯塔梅开二度，贝尼特斯的球队拿下欧洲冠军，与西甲冠军构成辉煌双冠王赛季。
+
+**3. 2004欧洲超级杯：瓦伦西亚 2-1 波尔图**
+击败欧冠冠军波尔图，2004年底被IFFHS评为世界最佳俱乐部！`
+    },
+    napoli: {
+      id: 'napoli',
+      name: '那不勒斯',
+      fullName: '那不勒斯足球俱乐部',
+      englishName: 'SSC Napoli',
+      nickname: '帕特诺佩人 (Partenopei)',
+      founded: 1926,
+      league: 'seriea',
+      colors: ['#0055A5','#FFFFFF'],
+      crestLetter: 'N',
+      crestSub: '',
+      crestType: 'solid',
+      crestBg: '#0055A5',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/69fb26f9f2009903393e5eff_napoli-footylogos.png',
+      players: [
+        {name:'迭戈·马拉多纳',pos:'前腰/10号',years:'1984-1991',emoji:'🇦🇷',stat:'259场 115球 81助攻'},
+        {name:'卡雷卡',pos:'中锋',years:'1987-1993',emoji:'🇧🇷',stat:'163场 73球 Ma-Gi-Ca三叉戟'},
+        {name:'阿莱芒',pos:'后腰',years:'1988-1992',emoji:'🇧🇷',stat:'150+场 马拉多纳的保镖'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲联赛** ×4（1987、1990、2023、2025）
+- **意大利杯** ×6（1962、1976、1987、2012、2014、2020）
+- **意大利超级杯** ×3（1990、2014、2025）
+- **欧洲联盟杯** ×1（1989）
+
+🏆 1987年首冠：意大利历史上第一支夺得联赛冠军的南方球队！打破北方豪门数十年垄断。
+
+## 🔥 巅峰时刻：1984-1991 马拉多纳时代
+
+马拉多纳以750万美元世界纪录转会费从巴萨加盟，改变了整座城市的命运。
+
+**1987首冠阵容：** 门将加雷拉，后卫费拉拉、费拉里奥、雷尼卡、弗兰奇尼，中场罗马诺、巴尼、德纳波利、马拉多纳(队长)，前锋乔尔达诺、卡尔内瓦莱。
+
+**1990第二冠阵容：** 门将吉乌里亚尼，后卫科拉迪尼、费拉拉、雷尼卡、弗兰奇尼，中场克里帕、德纳波利、弗西、阿莱芒，前腰马拉多纳(队长)，前锋卡雷卡、卡尔内瓦莱。
+
+Ma-Gi-Ca三叉戟（马拉多纳-乔尔达诺-卡雷卡）是意甲最恐怖的攻击组合。1989年联盟杯，马拉多纳率队逆转尤文、淘汰拜仁，决赛总比分5-4击败斯图加特夺冠。
+
+## 📉 低谷时刻：1997/98赛季——从天堂到地狱
+
+马拉多纳1991年因药检阳性被禁赛离队，财务崩盘开始卖家当。到1997/98赛季，全队仅2胜8平24负积14分惨遭降级——距离上次联赛冠军仅8年！2004年因破产被强制重组，德劳伦蒂斯接手后从丙级起步，用三年时间带回意甲。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1989联盟杯决赛：那不勒斯 5-4 斯图加特（总比分）**
+首回合马拉多纳点球破门+卡雷卡绝杀2-1，次回合3-3进球大战，阿莱芒、费拉拉、卡雷卡分别建功。队史唯一欧洲冠军！
+
+**2. 1987年5月10日：那不勒斯 1-1 佛罗伦萨——首冠加冕**
+南方足球第一个意甲冠军诞生！整座那不勒斯城陷入持续数日的狂欢。
+
+**3. 2023年5月4日：乌迪内斯 1-1 那不勒斯——33年等待终结**
+奥西门头球破门，1分足以锁定冠军！33年等待画上句号，奥西门跪地掩面而泣。`
+    },
+    lyon: {
+      id: 'lyon',
+      name: '里昂',
+      fullName: '奥林匹克里昂足球俱乐部',
+      englishName: 'Olympique Lyonnais',
+      nickname: '孩子们 (Les Gones)',
+      founded: 1950,
+      league: 'ligue1',
+      colors: ['#1A3C7D','#E2001A'],
+      crestLetter: 'O',
+      crestSub: 'L',
+      crestType: 'solid',
+      crestBg: '#1A3C7D',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f601eb4b0a78c4658ff4e5_olympique-lyonnais-footballlogos-org.png',
+      players: [
+        {name:'儒尼尼奥',pos:'中场/任意球大师',years:'2001-2009',emoji:'🇧🇷',stat:'350场 100球 44个任意球'},
+        {name:'卡里姆·本泽马',pos:'前锋',years:'2004-2009',emoji:'🇫🇷',stat:'148场 66球 20岁法甲金靴'},
+        {name:'迈克尔·埃辛',pos:'中场',years:'2003-2005',emoji:'🇬🇭',stat:'96场 13球 法甲最强B2B'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲联赛** ×7（2002、2003、2004、2005、2006、2007、2008）——连续七冠！法国历史纪录！
+- **法国杯** ×5（1964、1967、1973、2008、2012）
+- **法国联赛杯** ×1（2001）
+- **法国超级杯** ×8
+
+🏆 七连冠：欧洲五大联赛历史上首支联赛七连冠队伍！四个不同主教练，每个夏天卖掉核心，却依然赢下去。
+
+## 🔥 巅峰时刻：2001-2008 七冠王朝
+
+儒尼尼奥2001年自由转会加盟（因合同纠纷零身价），第三场就罚入S形弧线任意球——那球至今仍是足球史上最经典任意球之一。他8个赛季7夺法甲，是唯一参与全部7冠的球员。
+
+**2003/04最鼎盛阵容：** 门将库佩，后卫雷维耶、克里斯、卡卡帕、阿比达尔，后腰迪亚拉、埃辛，中场马卢达、儒尼尼奥、戈武，前锋卢因杜拉。
+
+**2007/08双冠王阵容：** 门将库佩，后卫雷维耶、克里斯、斯奎拉奇、格罗索，中场图拉兰、卡尔斯特伦、儒尼尼奥，前锋本阿尔法、本泽马、戈武。
+
+2005年欧冠10-2血洗不莱梅震惊欧洲！王朝末期20岁本泽马横空出世，联赛20球夺金靴。
+
+## 📉 低谷时刻：2024-2025 被美国老板掏空
+
+美国老板特克斯特入主后疯狂烧钱（总负债5.051亿欧元！），2025年6月被DNCG裁定强制降入法乙！7月上诉成功留在法甲，但七冠王尊严已被严重伤害。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2002年5月4日：里昂 3-1 朗斯——首冠之夜**
+赛前落后1分必须赢球。北看台Tifo："敌人越多，胜利越甜"。3-1逆转夺冠，75年第一座联赛冠军诞生！这是七连冠的序章。
+
+**2. 2005年欧冠1/8决赛：里昂 10-2 不莱梅（两回合）**
+首回合7-2血洗！埃辛、迪亚拉中场予取予求，向全欧洲宣告法甲霸主的实力。
+
+**3. 2010年欧冠1/4决赛：里昂 3-2 波尔多——首次杀入四强**
+淘汰C罗的皇马后，再胜波尔多杀入半决赛！七冠王朝后在欧冠走出最远一步。`
+    },
+    tottenham: {
+      id: 'tottenham',
+      name: '托特纳姆热刺',
+      fullName: '托特纳姆热刺足球俱乐部',
+      englishName: 'Tottenham Hotspur',
+      nickname: '白百合、Spurs',
+      founded: 1882,
+      league: 'epl',
+      colors: ['#132257','#fff'],
+      crestLetter: 'T',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#132257',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f58ad6ad88bd62cc1e7dfa_tottenham-hotspur-footballlogos-org-p-500.png',
+      players: [
+        {name:'孙兴慜',pos:'左边锋/中锋',years:'2015-2025',emoji:'🇰🇷',stat:'454场 173球 101助攻'},
+        {name:'加雷斯·贝尔',pos:'边锋',years:'2007-2013',emoji:'🏴󠁧󠁢󠁷󠁬󠁳󠁿',stat:'237场 72球 队史传奇'},
+        {name:'哈里·凯恩',pos:'中锋',years:'2004-2023',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'435场 280球 队史射手王'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英格兰顶级联赛冠军** ×2（1951、1961）
+- **足总杯冠军** ×8
+- **联赛杯冠军** ×4
+- **欧洲优胜者杯冠军** ×1（1963）——第一支赢得欧洲赛事的英国球队！
+- **联盟杯/欧联杯冠军** ×3（1972、1984、2025）
+- **1960-61双冠王**——20世纪第一支！
+
+## 🔥 巅峰时刻：1961双冠王 & 2025欧联杯夺冠
+
+1960-61赛季，比尔·尼科尔森带队以11连胜开局，赛季轰入115球，成为20世纪首支双冠王球队！1963年优胜者杯决赛5-1横扫马竞，英国球队首次征服欧洲！
+
+2025年5月21日，毕尔巴鄂，欧联杯决赛1-0曼联！布伦南·约翰逊制胜球，波斯特科格鲁兑现"第二年夺冠"承诺，孙兴慜以队长身份举起奖杯——17年冠军荒终结！
+
+## 📉 低谷时刻：2008-2025年冠军荒
+
+2008年联赛杯后17年无冠。凯恩时代两次联赛争冠功亏一篑，一次欧冠决赛0-2不敌利物浦。2024-25赛季联赛跌至第17名，但欧联杯冠军让一切阴霾烟消云散。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1963优胜者杯决赛：热刺 5-1 马德里竞技**
+
+英国球队第一次征服欧洲！格里夫斯和戴森双双梅开二度。
+
+**2. 2019欧冠半决赛：阿贾克斯 2-3 热刺**
+
+总比分0-3落后到3-3！卢卡斯·莫拉帽子戏法+第96分钟绝杀！队史首场欧冠决赛！
+
+**3. 2025欧联杯决赛：热刺 1-0 曼联**
+
+布伦南·约翰逊终结17年冠军荒！孙兴慜队长举杯！`
+    },
+    schalke: {
+      id: 'schalke',
+      name: '沙尔克04',
+      fullName: '沙尔克04足球俱乐部',
+      englishName: 'FC Schalke 04',
+      nickname: '矿工（Die Knappen）、皇家蓝',
+      founded: 1904,
+      league: 'bundesliga',
+      colors: ['#004d9d','#fff'],
+      crestLetter: 'S',
+      crestSub: '04',
+      crestType: 'solid',
+      crestBg: '#004d9d',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68fad2f6b9220bef0d546e99_schalke-04-footballlogos-org.png',
+      players: [
+        {name:'劳尔·冈萨雷斯',pos:'前锋',years:'2010-2012',emoji:'🇪🇸',stat:'66场 28球 皇马传奇'},
+        {name:'曼努埃尔·诺伊尔',pos:'门将',years:'2001-2011',emoji:'🇩🇪',stat:'青训出身 后转会拜仁'},
+        {name:'克劳斯·菲舍尔',pos:'前锋',years:'1970-1981',emoji:'🇩🇪',stat:'295场 182球 倒勾先生'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德国冠军** ×7（1934-1958）
+- **德国杯冠军** ×5（1937、1972、2001、2002、2011）
+- **欧洲联盟杯冠军** ×1（1997）
+- **德国足球史上首个双冠王**（1937）
+
+## 🔥 巅峰时刻：1997联盟杯冠军 & 2011欧冠四强
+
+1997年联盟杯决赛，莱曼点球大战扑出两球，沙尔克4-1点杀国米！矿工在米兰加冕欧洲之王！2010-11赛季劳尔加盟，德国杯夺冠+欧冠杀入四强，1/4决赛5-2横扫国米！
+
+## 📉 低谷时刻：2020-21赛季——30场不胜的深渊
+
+0-8惨败拜仁开局，30场联赛不胜持续358天！单赛季5位主帅创德甲纪录。3胜7平24负仅16分提前4轮降级——30年来首次跌入乙级。此后又于2022-23赛季再次降级，直到2025-26赛季才重返德甲。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1997联盟杯决赛：点球4-1国米**
+
+莱曼在圣西罗扑出萨莫拉诺和温特的点球！矿工征服欧洲！
+
+**2. 2011欧冠1/4决赛：国米 2-5 沙尔克**
+
+圣西罗奇迹！劳尔和队友们在卫冕冠军主场打出5-2！沙尔克队史最伟大欧战之夜。
+
+**3. 2001德甲末轮："4分钟冠军"**
+
+沙尔克以为已经夺冠，球迷冲入球场庆祝——但拜仁补时扳平汉堡，沙尔克的冠军在4分钟内化为泪水。`
+    },
+    monaco: {
+      id: 'monaco',
+      name: '摩纳哥',
+      fullName: '摩纳哥体育协会足球俱乐部',
+      englishName: 'AS Monaco FC',
+      nickname: '红白军团（Les Rouge et Blanc）',
+      founded: 1924,
+      league: 'ligue1',
+      colors: ['#E51B22','#fff'],
+      crestLetter: 'A',
+      crestSub: 'SM',
+      crestType: 'stripes',
+      stripes: ['#E51B22','#fff'],
+      crestBg: '#E51B22',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/6a178ec0e900a98e33a054a4_68f601b3f38c9f257f01cf23_as-monaco-footballlogos-org.png',
+      players: [
+        {name:'基利安·姆巴佩',pos:'前锋',years:'2013-2017',emoji:'🇫🇷',stat:'44场 26球 18岁横空出世'},
+        {name:'蒂埃里·亨利',pos:'前锋/边锋',years:'1994-1999',emoji:'🇫🇷',stat:'青训出身 后成阿森纳传奇'},
+        {name:'费尔南多·莫里恩特斯',pos:'中锋',years:'2003-2004',emoji:'🇪🇸',stat:'42场 22球 欧冠9球金靴'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲联赛冠军** ×8（1961、1963、1978、1982、1988、1997、2000、2017）
+- **法国杯冠军** ×5
+- **欧冠亚军** ×1（2004）
+- **来自2平方公里公国的足球豪门！**
+
+## 🔥 巅峰时刻：2004欧冠亚军 & 2017法甲夺冠
+
+2003-04赛季，莫里恩特斯被皇马租借到摩纳哥，欧冠9球夺得金靴！1/4决赛亲手淘汰皇马——足球史上最完美的复仇！半决赛再淘汰切尔西，杀入欧冠决赛！虽0-3不敌波尔图，但公国的童话永远铭刻欧冠史册。
+
+2016-17赛季，18岁的姆巴佩横空出世，雅尔迪姆的球队以华丽进攻终结巴黎四连冠！
+
+## 📉 低谷时刻：人才流失与"欧洲超市"
+
+2017年后沦为"欧洲超市"：姆巴佩1.8亿、贝尔纳多5000万、法比尼奥4500万、勒马尔7200万……仅2017-18赛季转会收入超3.5亿欧元！卖空核心后2018-19赛季险些降级（法甲第17名）。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2004欧冠1/4决赛：摩纳哥 3-1 皇马**
+
+莫里恩特斯的复仇！吉利的脚后跟+莫里恩特斯头球，总比分5-5凭客场进球淘汰银河战舰！
+
+**2. 2017欧冠1/8决赛：摩纳哥 3-1 曼城**
+
+18岁姆巴佩开场8分钟破门！巴卡约科77分钟头球绝杀！总比分6-6凭客场进球淘汰曼城！
+
+**3. 2003欧冠小组赛：摩纳哥 8-3 拉科鲁尼亚**
+
+8-3！欧冠史上最高比分之一！德尚的球队打出欧冠史上最疯狂的进攻表演。`
+    },
+    mancity: {
+      id: 'mancity',
+      name: '曼城',
+      fullName: '曼彻斯特城足球俱乐部',
+      englishName: 'Manchester City',
+      nickname: '蓝月亮（The Sky Blues）',
+      founded: 1880,
+      league: 'epl',
+      colors: ['#6CABDD','#1C2C5B'],
+      crestLetter: 'M',
+      crestSub: 'C',
+      crestType: 'solid',
+      crestBg: '#6CABDD',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/6a178f1d8d373abfdd66b82c_68f589f820f16768d7c38be2_manchester-city-footballlogos-org.png',
+      players: [
+        {name:'凯文·德布劳内',pos:'中场/核心',years:'2015至今',emoji:'🇧🇪',stat:'380场 100球 167助攻 7600万欧'},
+        {name:'埃尔林·哈兰德',pos:'中锋',years:'2022至今',emoji:'🇳🇴',stat:'150场 140球 6000万欧超值'},
+        {name:'罗德里',pos:'后腰',years:'2019至今',emoji:'🇪🇸',stat:'2024金球奖 欧冠决赛制胜球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军** ×1（2023）
+- **英超冠军** ×6（2012、2014、2018、2019、2021、2023）
+- **足总杯冠军** ×7
+- **联赛杯冠军** ×8
+- **三冠王**：2022-23赛季（英超+足总杯+欧冠）
+- **欧洲优胜者杯** ×1（1970）
+
+## 🔥 巅峰时刻：2022-23赛季三冠王
+
+一个赛季，三座奖杯，蓝月亮终于站在了欧洲之巅！2022-23赛季，瓜迪奥拉打造出了他执教生涯最完美的球队——英超夺冠、足总杯夺冠、欧冠加冕，英格兰足球历史上第二支三冠王球队！
+
+**三冠王核心阵容（3-2-4-1）：** 门将埃德森，后卫阿坎吉、鲁本·迪亚斯、阿克，中场斯通斯（内收后腰）搭档罗德里，前卫贝尔纳多·席尔瓦、德布劳内、京多安、格拉利什，前锋哈兰德。
+
+**关键转会：** 德布劳内7600万欧（2015沃尔夫斯堡→曼城）、哈兰德6000万欧（2022多特蒙德→曼城）、格拉利什1.175亿欧（2021阿斯顿维拉→曼城）、罗德里7000万欧（2019马竞→曼城）、鲁本·迪亚斯7160万欧（2020本菲卡→曼城）。6000万欧元买下哈兰德，堪称足坛史上最超值交易之一！
+
+## 📉 低谷时刻：从三冠王到崩塌（2024-25赛季）
+
+2023年登顶后，曼城急剧滑落。罗德里2024年9月重伤赛季报销，球队像被抽走了灵魂——联赛一度连续9场不胜，创下瓜迪奥拉执教生涯最差纪录。2025年1月，瓜迪奥拉宣布赛季末离任，一个时代画上句号。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2023欧冠决赛：曼城 1-0 国际米兰**
+伊斯坦布尔之夜！德布劳内第35分钟伤退，但罗德里第68分钟推射破门！1-0！蓝月亮队史首座欧冠！三冠王加冕！
+
+**2. 2011曼市德比：曼联 1-6 曼城**
+老特拉福德屠杀！巴洛特利"Why Always Me?"、哲科和席尔瓦最后4分钟连入3球——6-1！曼联自1930年以来主场最惨痛失利！
+
+**3. 2012英超末轮：曼城 3-2 QPR**
+94:48，阿圭罗爆射绝杀！44年第一座英超冠军！AGUEROOOOOO！`
+    },
+    roma: {
+      id: 'roma',
+      name: '罗马',
+      fullName: '罗马体育协会足球俱乐部',
+      englishName: 'AS Roma',
+      nickname: '红狼（Giallorossi）',
+      founded: 1927,
+      league: 'seriea',
+      colors: ['#8E1F2F','#FFCD00'],
+      crestLetter: 'R',
+      crestSub: '',
+      crestType: 'solid',
+      crestBg: '#8E1F2F',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/69f685fdf9803881d891451c_roma-footylogos-p-500.png',
+      players: [
+        {name:'弗朗切斯科·托蒂',pos:'前腰/10号',years:'1992-2017',emoji:'🇮🇹',stat:'786场 307球 一生一队'},
+        {name:'加布里埃尔·巴蒂斯图塔',pos:'中锋',years:'2000-2003',emoji:'🇦🇷',stat:'87场 33球 战神'},
+        {name:'达尼埃莱·德罗西',pos:'后腰',years:'2001-2019',emoji:'🇮🇹',stat:'616场 托蒂后的队魂'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲联赛冠军** ×3（1942、1983、2001）
+- **意大利杯冠军** ×9
+- **欧协联冠军** ×1（2022）——首届欧协联冠军！
+- **国际城市博览会杯** ×1（1961）
+
+## 🔥 巅峰时刻：2000-01赛季意甲夺冠
+
+18年的等待，终于画上句号！2001年6月17日，罗马主场3-1击败帕尔马，卡佩罗的红狼军团以75分力压尤文2分，捧起队史第三座意甲冠军！罗马城彻夜狂欢。
+
+**2001冠军阵容（3-4-1-2）：** 门将安东尼奥利，后卫泽比纳、萨穆埃尔、扎戈，翼卫卡福、坎德拉，中场托马西、埃莫森，前腰托蒂（队长），前锋巴蒂斯图塔、蒙特拉。
+
+巴蒂斯图塔31岁以3610万欧元加盟，首赛季28场20球——每一球都重若千钧。打进老东家佛罗伦萨的进球后，战神拒绝庆祝，赛后泪流满面。
+
+## 📉 低谷时刻：2001年后的漫长冠军荒
+
+自2001年后，罗马再未触碰联赛奖杯，已超25年。托蒂用整个职业生涯守护红狼，786场比赛307个进球，却再没能带来第二座意甲冠军。2017年托蒂含泪退役，整个罗马城都在哭泣。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2001年6月17日：罗马 3-1 帕尔马——18年后再夺意甲**
+托蒂点球、蒙特拉破门、巴蒂锁定胜局！终场哨响，数万球迷冲入球场。巴蒂跪地痛哭——11年，终于拿到第一座联赛冠军！
+
+**2. 2022欧协联决赛：罗马 1-0 费耶诺德——队史首座欧战奖杯**
+扎尼奥洛第32分钟挑射破门！穆里尼奥赛后泪流满面——第一位集齐欧冠、欧联、欧协联三大欧战冠军的教练！罗马14年来第一座冠军奖杯！
+
+**3. 2001罗马德比：罗马 3-1 拉齐奥**
+巴蒂扫射扳平、蒙特拉和德尔维奇奥逆转取胜！这场德比胜利基本锁定冠军归属。`
+    },
+    sevilla: {
+      id: 'sevilla',
+      name: '塞维利亚',
+      fullName: '塞维利亚足球俱乐部',
+      englishName: 'Sevilla FC',
+      nickname: '欧联之王（Los Nervionenses）',
+      founded: 1890,
+      league: 'laliga',
+      colors: ['#D4021D','#FFFFFF'],
+      crestLetter: 'S',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#D4021D',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f57d44342cf2fd4bb4234f_sevilla-fc-footballlogos-org.png',
+      players: [
+        {name:'赫苏斯·纳瓦斯',pos:'右后卫/边锋',years:'2003-2024',emoji:'🇪🇸',stat:'跨越17年4夺欧联杯 活化石'},
+        {name:'伊万·拉基蒂奇',pos:'中场',years:'2013-2014/2019-2024',emoji:'🇭🇷',stat:'两度效力 欧联功臣'},
+        {name:'安东尼奥·普埃尔塔',pos:'左后卫',years:'2004-2007',emoji:'🇪🇸',stat:'23岁英年早逝 改变命运的进球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧联杯/联盟杯冠军** ×7（2006、2007、2014、2015、2016、2020、2023）——**史上最多！欧联杯=塞维利亚杯！**
+- **欧洲超级杯冠军** ×1（2006）
+- **西甲冠军** ×1（1946）
+- **国王杯冠军** ×5
+- **7座欧联杯，前无古人！**
+
+## 🔥 巅峰时刻：七冠欧联王朝
+
+18年内7次夺得欧联杯，塞维利亚创造了欧洲足球史上独一无二纪录！每当欧联杯进入淘汰赛，安达卢西亚人就像被施了魔法。
+
+**七次夺冠：** 2006年4-0米德尔斯堡、2007年2-2西班牙人（点球3-1）、2014年0-0本菲卡（点球4-2）、2015年3-2第聂伯罗、2016年3-1利物浦（三连冠！）、2020年3-2国际米兰、2023年1-1罗马（点球4-1）。
+
+2007年帕洛普堪称欧联史上最伟大门将：1/8决赛第121分钟冲入对方禁区头球破门扳平！又在点球大战扑出3个点球！赫苏斯·纳瓦斯从2006到2023年，跨越17年4次在欧联杯决赛中捧杯——他比大部分参赛球员都年长！
+
+## 📉 低谷时刻：西甲的平庸与欧联杯的奇迹
+
+1946年唯一的西甲冠军距今已80年。多次赛季中途换帅、联赛排名中游甚至保级边缘，但只要一进欧联杯，就像被施了魔法。有些球队，就是为欧洲赛场而生的。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2016欧联杯决赛：塞维利亚 3-1 利物浦——三连冠封神**
+上半场0-1落后，下半场加梅罗扳平、科克2分钟梅开二度！3-1！欧联杯史上第一支三连冠球队！
+
+**2. 2023欧联杯决赛：塞维利亚 1-1 罗马（点球4-1）——布努封神**
+迪巴拉破门，曼奇尼乌龙扳平。点球大战布努扑出2球！穆里尼奥第一次在欧战决赛输球，塞维利亚第七次在欧联决赛赢球。欧联杯，就是塞维利亚的后花园。
+
+**3. 2006欧联半决赛：普埃尔塔加时绝杀——改变命运的进球**
+次回合第103分钟，23岁的普埃尔塔左脚绝杀！几个月后，他在联赛中突发心脏骤停离世。每夺一座欧联杯，都是对普埃尔塔的致敬。`
+    },
+    newcastle: {
+      id: 'newcastle',
+      name: '纽卡斯尔联',
+      fullName: '纽卡斯尔联足球俱乐部',
+      englishName: 'Newcastle United FC',
+      nickname: '喜鹊（The Magpies）',
+      founded: 1892,
+      league: 'epl',
+      colors: ['#000000','#FFFFFF'],
+      crestLetter: 'N',
+      crestSub: 'U',
+      crestType: 'striped',
+      crestBg: '#000000',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f58a3f5c91d9f5a918ce5a_england_newcastle_1500x1500.png',
+      players: [
+        {name:'阿兰·希勒',pos:'前锋',years:'1996-2006',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'404场 206球 队史射手王'},
+        {name:'大卫·吉诺拉',pos:'左边锋',years:'1995-1997',emoji:'🇫🇷',stat:'优雅的法国魔术师'},
+        {name:'亚历山大·伊萨克',pos:'前锋',years:'2022至今',emoji:'🇸🇪',stat:'2025联赛杯决赛进球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英格兰顶级联赛冠军** ×4（1905、1907、1909、1927）
+- **足总杯冠军** ×6（1910、1924、1932、1951、1952、1955）
+- **联赛杯冠军** ×1（2025）
+- **国际城市博览会杯冠军** ×1（1969）
+
+## 🔥 巅峰时刻：基冈的"娱乐足球"与70年后的救赎
+
+1992年，亿万富翁约翰·霍尔接管纽卡斯尔，请回本地英雄凯文·基冈担任主教练。基冈的足球哲学就是——比你多进一个！1995-96赛季，纽卡斯尔在联赛初期连战连捷，可惜最终被曼联反超。赛季结束后，基冈那声呐喊回荡至今：**"I would love it if we beat them! Love it!"**
+
+1996年7月，纽卡斯尔以1500万英镑从布莱克本签下阿兰·希勒——打破世界转会费纪录！希勒为纽卡出战404场打入206球，成为队史最佳射手。据Valuball计算，那1500万英镑放到今天相当于2.25亿英镑！
+
+2021年10月沙特PIF收购后，纽卡稳健经营。2025年3月16日温布利，联赛杯决赛2-1击败利物浦——**70年来的第一座正式赛事冠军！** 丹·伯恩和伊萨克先后破门，97岁老球迷终于等到了。
+
+## 📉 低谷时刻：阿什利时代的黑暗岁月
+
+2007年零售大亨阿什利入主，解雇基冈、频繁换帅、把俱乐部当提款机。2009年惨遭降级，2016年再次降级，球迷举着"Ashley Out"的标语抗议。14年的黑暗，直到沙特收购才迎来曙光。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1996年10月20日：纽卡斯尔 5-0 曼联**
+皮科克头球、吉诺拉远射、费迪南德推射、希勒点球——最经典的是比利时后卫阿尔贝特中圈吊射，皮球划出完美弧线越过舒梅切尔坠入网窝！
+
+**2. 2025年3月16日：纽卡斯尔 2-1 利物浦（联赛杯决赛）**
+温布利之夜，70年的等待终于结束。伯恩头球破门时5万纽卡球迷泪流满面，伊萨克劲射再下一城。终场哨响，整座城市沸腾。`
+    },
+    lazio: {
+      id: 'lazio',
+      name: '拉齐奥',
+      fullName: '拉齐奥足球俱乐部',
+      englishName: 'S.S. Lazio',
+      nickname: '蓝鹰（Biancocelesti / Le Aquile）',
+      founded: 1900,
+      league: 'seriea',
+      colors: ['#87CEEB','#FFFFFF'],
+      crestLetter: 'L',
+      crestSub: '',
+      crestType: 'solid',
+      crestBg: '#87CEEB',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f591295ba37a0850ada7ff_lazio-footballlogos-org.png',
+      players: [
+        {name:'帕维尔·内德维德',pos:'中场',years:'1996-2001',emoji:'🇨🇿',stat:'钢铁战士 蓝鹰7冠功臣'},
+        {name:'亚历山德罗·内斯塔',pos:'中后卫/队长',years:'1993-2002',emoji:'🇮🇹',stat:'蓝鹰之魂 后防定海神针'},
+        {name:'西尼萨·米哈伊洛维奇',pos:'中后卫',years:'1998-2004',emoji:'🇷🇸',stat:'任意球之神 意甲任意球纪录'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲冠军** ×2（1974、2000）
+- **意大利杯冠军** ×7
+- **意大利超级杯冠军** ×3（1998、2000、2009）
+- **欧洲优胜者杯冠军** ×1（1999）——最后一届！
+- **欧洲超级杯冠军** ×1（1999）
+
+## 🔥 巅峰时刻：克拉格诺蒂的金元帝国（1997-2000）
+
+90年代的拉齐奥是意甲最疯狂的银河战舰。1992年食品大亨克拉格诺蒂入主，在埃里克森执教期间砸下超2.74亿英镑转会费！维埃里1999年以4650万欧元转会国米成为世界首位突破4000万欧的球员（"900亿先生"），克雷斯波2000年以5680万欧元加盟再破世界纪录！
+
+1999年优胜者杯决赛，内德维德打入反超进球2-1击败马略卡——**成为欧洲优胜者杯最后的王者，永久保留奖杯！** 同年欧洲超级杯1-0击败欧冠冠军曼联。
+
+2000年5月14日意甲最后一轮，拉齐奥3-0大胜雷吉纳，而尤文在佩鲁贾的大雨中0-1落败——**拉齐奥以72分反超1分夺冠，时隔26年再夺意甲！** 同赛季还拿下意大利杯和超级杯，成就国内三冠王。多年后，那场大雨的主裁判科利纳承认："我是拉齐奥球迷。"
+
+## 📉 低谷时刻：假球丑闻与乙级地狱
+
+1980年卷入Totonero假球丑闻被强制降级，1986年又因球员涉赌被扣9分再次降级。若非附加赛击败丙级队塔兰托，甚至可能跌入第三级别。直到1992年克拉格诺蒂到来才走出漫漫长夜。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1999年优胜者杯决赛：拉齐奥 2-1 马略卡**
+内德维德第81分钟反超进球！蓝鹰成为这项赛事最后的冠军，永久保留奖杯。
+
+**2. 2000年5月14日：佩鲁贾大雨——拉齐奥奇迹夺冠**
+最后一轮落后尤文2分，3-0胜雷吉纳；尤文在瓢泼大雨中0-1败给佩鲁贾。科利纳在水塘里扔球测试场地的画面，成为意甲经典瞬间。
+
+**3. 2009年意大利超级杯：拉齐奥 2-1 国际米兰（北京鸟巢）**
+首次在海外举行的意大利超级杯，蓝鹰在北京击败穆里尼奥的三冠王国米！`
+    },
+    hamburg: {
+      id: 'hamburg',
+      name: '汉堡',
+      fullName: '汉堡体育俱乐部',
+      englishName: 'Hamburger SV',
+      nickname: '恐龙（Der Dino）、红裤子（Die Rothosen）',
+      founded: 1887,
+      league: 'bundesliga',
+      colors: ['#003399','#FFFFFF','#000000'],
+      crestLetter: 'H',
+      crestSub: 'SV',
+      crestType: 'diamond',
+      crestBg: '#003399',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68fad519b9cffbf61d265c12_hamburger-sv-footballlogos-org.png',
+      players: [
+        {name:'乌韦·席勒',pos:'前锋',years:'1954-1972',emoji:'🇩🇪',stat:'700+场 551球 终身忠诚'},
+        {name:'凯文·基冈',pos:'前锋/中场',years:'1977-1980',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'连续两年金球奖得主'},
+        {name:'菲利克斯·马加特',pos:'中场',years:'1976-1986',emoji:'🇩🇪',stat:'1983欧冠决赛制胜球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德国顶级联赛冠军** ×6（1923、1928、1960、1979、1982、1983）
+- **德国杯冠军** ×3（1963、1976、1987）
+- **欧洲冠军杯冠军** ×1（1983）
+- **欧洲优胜者杯冠军** ×1（1977）
+
+## 🔥 巅峰时刻：从基冈到马加特——黄金十年的欧陆之巅
+
+1977年6月，凯文·基冈以230万马克从利物浦加盟汉堡——当时德甲最高引援纪录！第一个赛季水土不服，但内策尔劝他留下。1978-79赛季基冈打进17球，**带领汉堡夺得德甲冠军，连续两年获得金球奖！** 他甚至以流行歌手身份打入了德国音乐排行榜。
+
+1982-83赛季，奥地利名帅哈佩尔带队卫冕德甲。**1983年5月25日雅典欧冠决赛，马加特第8分钟在左路禁区角起脚，一记势大力沉的远射直挂远角！1-0击败拥有普拉蒂尼和罗西的尤文图斯，汉堡登顶欧洲！** 终结了英格兰对欧冠6年的垄断。
+
+## 📉 低谷时刻：时钟停摆的下午
+
+2018年5月12日，那座著名的"德甲时钟"在19,985天、1,866场德甲比赛后终于停了。汉堡首次降级，愤怒的球迷投掷烟火引发骚乱。此后7年成"德乙钉子户"，六次升级附加赛全部折戟——最荒诞的是2022年被名宿马加特执教的赫塔逆转。2025年5月11日，6-1大胜乌尔姆，时隔7年重返德甲！"7年前热泪盈眶地唱起《我爱汉堡》，7年后又是泪水——只不过这次是喜悦的泪水。"
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1983年5月25日：汉堡 1-0 尤文图斯（欧冠决赛）**
+马加特第8分钟世界波！哈佩尔的球队用82分钟铁血防守守住了1-0，汉堡登顶欧洲。
+
+**2. 1977年优胜者杯决赛：汉堡 2-0 安德莱赫特**
+基冈加盟前汉堡已先拿欧洲奖杯，这场胜利让克罗恩有了底气签下金球奖得主。
+
+**3. 2025年5月11日：汉堡 6-1 乌尔姆（重返德甲）**
+7年等待终结！5万7千名球迷涌入球场，恐龙终于回到德甲。`
+    },
+    athleticbilbao: {
+      id: 'athleticbilbao',
+      name: '毕尔巴鄂竞技',
+      fullName: '毕尔巴鄂竞技俱乐部',
+      englishName: 'Athletic Club Bilbao',
+      nickname: '雄狮（Los Leones）',
+      founded: 1898,
+      league: 'laliga',
+      colors: ['#EE2523','#FFFFFF'],
+      crestLetter: 'A',
+      crestSub: 'C',
+      crestType: 'solid',
+      crestBg: '#EE2523',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f575de11002aa249f5bbee_athletic-club-bilbao-footballlogos-org-p-800.png',
+      players: [
+        {name:'特尔莫·萨拉',pos:'前锋',years:'1940-1955',emoji:'🇪🇸',stat:'352场 251球 西甲传奇射手'},
+        {name:'伊尼亚基·威廉斯',pos:'前锋',years:'2014至今',emoji:'🇪🇸',stat:'西甲连续出场纪录 保持者'},
+        {name:'尼科·威廉斯',pos:'边锋',years:'2021至今',emoji:'🇪🇸',stat:'2024欧洲杯夺冠功臣'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **西甲冠军** ×8（1930、1931、1934、1936、1943、1956、1983、1984）
+- **西班牙国王杯冠军** ×25（仅次于巴萨！）
+- **西班牙超级杯冠军** ×3（1984、2015、2021）
+- **从未降级！** 与皇马、巴萨并列西甲仅有的三支从未降级球队
+
+## 🔥 巅峰时刻：巴斯克雄狮的倔强荣光
+
+**1983-84双冠王赛季：** 毕尔巴鄂竞技拿下西甲+国王杯双冠，这是他们至今最后的联赛冠军。那支球队充满巴斯克铁血气质——硬朗、不屈、宁折不弯。
+
+**2012贝尔萨革命：** "疯子"贝尔萨执教的那个赛季，毕尔巴鄂在欧联杯踢出了队史最具观赏性的足球。1/8决赛3-2在老特拉福德掀翻曼联！弗格森赛后感叹："这是我见过最疯狂的比赛之一。"
+
+**2024国王杯——40年磨一冠：** 2024年4月7日，国王杯决赛对阵马略卡。120分钟1-1，点球5-3取胜！全巴斯克阵容，在金元足球时代用纯粹的方式夺冠——76%的球迷宁愿降级也不放弃巴斯克原则。
+
+**核心球员转会记录：**
+
+| 球员 | 时间 | 转出至 | 转会费 |
+|------|------|--------|--------|
+| 凯帕 | 2018年 | 切尔西 | 8000万欧（当时世界最贵门将） |
+| 拉波尔特 | 2018年 | 曼城 | 6500万欧 |
+| 哈维·马丁内斯 | 2012年 | 拜仁慕尼黑 | 4000万欧（当时德甲纪录） |
+| 埃雷拉 | 2014年 | 曼联 | 3600万欧 |
+
+## 📉 低谷时刻：40年的等待（1984-2024）
+
+1984年双冠王后，国王杯决赛6次闯入6次失利！2020-2022三年转会支出为零——不是没钱，而是巴斯克血统的球员就那么几个。俱乐部账上躺着9000万欧转会基金和2.28亿欧储备金，但原则不可动摇。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2024年4月7日：毕尔巴鄂 5-3 马略卡（点球）——40年后再夺国王杯**
+乌奈·西蒙点球大战两度扑出点球！4万巴斯克球迷在塞维利亚疯狂庆祝。
+
+**2. 2012年3月15日：毕尔巴鄂 3-2 曼联（欧联杯）**
+贝尔萨的雄狮在老特拉福德上演高压足球教科书！德马科斯第90分钟绝杀！
+
+**3. 2015年8月14日：毕尔巴鄂 4-0 巴塞罗那（西班牙超级杯）**
+阿杜里斯帽子戏法！4-0横扫MSN领衔的巴萨！
+
+> 俱乐部办公室铜牌：**"Con cantera y afición, no hace falta importación"**——"有青训有球迷，不需要进口。"
+
+> 1910年红白球衣的来历：派人去英格兰买蓝白球衣，找不到就买了南安普顿的红白条纹衫——正好是毕尔巴鄂市旗的颜色！毕尔巴鄂的马德里分支后来独立成为——**马德里竞技**！`
+    },
+    frankfurt: {
+      id: 'frankfurt',
+      name: '法兰克福',
+      fullName: '法兰克福和谐体育俱乐部',
+      englishName: 'Eintracht Frankfurt',
+      nickname: '雄鹰（Die Adler）',
+      founded: 1899,
+      league: 'bundesliga',
+      colors: ['#E1000F','#000000','#FFFFFF'],
+      crestLetter: 'S',
+      crestSub: 'GE',
+      crestType: 'solid',
+      crestBg: '#E1000F',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f593f09634c1188f0d6e82_eintracht-frankfurt-footballlogos-org.png',
+      players: [
+        {name:'尤尔根·格拉博夫斯基',pos:'边锋',years:'1966-1980',emoji:'🇩🇪',stat:'1974世界杯冠军成员 队史传奇'},
+        {name:'卡尔-海因茨·克尔贝尔',pos:'后卫',years:'1971-1991',emoji:'🇩🇪',stat:'602场 德甲单人单队出场纪录'},
+        {name:'凯文·特拉普',pos:'门将',years:'2012-2015/2019-2025',emoji:'🇩🇪',stat:'383场 2022欧联杯英雄'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲冠军** ×1（1959）
+- **德国杯冠军** ×5（1974、1975、1981、1988、2018）
+- **欧联杯/联盟杯冠军** ×2（1980、2022）
+- **欧冠最佳成绩**：亚军（1960——7-3输给皇马的传奇决赛）
+
+## 🔥 巅峰时刻：从1960欧冠决赛到2022欧联封王
+
+**1960年欧冠决赛 皇马 7-3 法兰克福：** 史上最伟大的欧冠决赛！12万7千观众目睹普斯卡什大四喜和迪斯蒂法诺帽子戏法。法兰克福也打进3球，一度追至3-1。
+
+**1980年联盟杯冠军：** 全德国内战！首回合2-3输门兴，次回合1-0取胜，沙乌布第81分钟绝杀！客场进球优势夺冠。
+
+**2022年欧联杯——不败封王：** 7胜6平不败夺冠！1/4决赛3-2在诺坎普击败巴萨（10万法兰克福球迷"占领"诺坎普！），决赛点球5-4击败流浪者。特拉普加时赛第118分钟神扑+点球大战扑出拉姆塞射门！
+
+**核心球员转会记录：**
+
+| 球员 | 时间 | 转出至 | 转会费 |
+|------|------|--------|--------|
+| 科洛·穆阿尼 | 2023年9月 | 巴黎圣日耳曼 | 9500万欧 |
+| 马尔穆什 | 2025年1月 | 曼城 | 7500万欧 |
+| 卢卡·约维奇 | 2019年6月 | 皇家马德里 | 6300万欧 |
+| 阿莱 | 2019年7月 | 西汉姆联 | 5000万欧 |
+
+> 法兰克福堪称"黑店"——免签或低价买入，高价卖出，6年转会净赚超3亿欧元。
+
+## 📉 低谷时刻：1996年的深渊
+
+1996年惨遭降级，全靠耶博亚和奥科查个人闪光勉强保级多年终究撑不住。2011年再次降级，直到2018年德国杯3-1击败拜仁（科瓦奇执教！）才重新回到大众视野。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2022年5月18日：法兰克福 1-1 流浪者（点球5-4）——欧联封王**
+博雷扳平！特拉普加时赛神扑+点球大战扑出拉姆塞！42年后再夺欧战冠军。
+
+**2. 2018年5月19日：法兰克福 3-1 拜仁慕尼黑（德国杯决赛）**
+雷比奇梅开二度！科瓦奇带队击败拜仁，赛后转投拜仁成著名段子。
+
+**3. 2022年4月6日：巴萨 2-3 法兰克福（欧联杯）**
+诺坎普被"占领"！3万法兰克福球迷搞到门票，科斯蒂奇梅开二度淘汰巴萨。
+
+> 克尔贝尔602场德甲为法兰克福出战——德甲单人单队出场纪录至今无人打破。法兰克福还有一只活体吉祥物：名叫"阿提拉"的活鹰！`
+    },
+    saintetienne: {
+      id: 'saintetienne',
+      name: '圣埃蒂安',
+      fullName: '圣埃蒂安体育协会',
+      englishName: 'AS Saint-Étienne',
+      nickname: '绿军（Les Verts）',
+      founded: 1919,
+      league: 'ligue1',
+      colors: ['#009E60','#FFFFFF'],
+      crestLetter: 'AS',
+      crestSub: 'SE',
+      crestType: 'solid',
+      crestBg: '#009E60',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68fab0aca60ff7bf564a059f_as-saint-etienne-footballlogos-org.png',
+      players: [
+        {name:'米歇尔·普拉蒂尼',pos:'前腰/10号',years:'1979-1982',emoji:'🇫🇷',stat:'三届金球奖得主 从绿军走向伟大'},
+        {name:'多米尼克·罗谢托',pos:'边锋',years:'1971-1980',emoji:'🇫🇷',stat:'"绿色天使" 1976欧冠决赛英雄'},
+        {name:'埃尔韦·雷韦利',pos:'前锋',years:'1966-1978',emoji:'🇫🇷',stat:'绿军王朝射手 欧冠逆转功臣'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×10（1957、1964、1967、1968、1969、1970、1974、1975、1976、1981）——**法国最多！**
+- **法国杯冠军** ×6（1962、1968、1970、1974、1975、1977）
+- **法国联赛杯冠军** ×1（2013）
+- **法国超级杯冠军** ×5
+- **欧冠最佳成绩**：亚军（1976）
+
+> 10座法甲冠军——法国足球史上最多！即使大巴黎烧了无数欧元，至今仍未追平。
+
+## 🔥 巅峰时刻：绿军的黄金年代（1964-1981）
+
+17年间9次法甲冠军、5次法国杯、1次欧冠决赛——法国足球史上最伟大的王朝。传奇主帅巴特带来攻势足球，赫宾接过教鞭后踢出华丽全攻全守式足球。
+
+**1976年欧冠决赛——"方形门柱"的永恒之痛：**
+
+格拉斯哥汉普顿公园。绿军对阵贝肯鲍尔的拜仁。第34分钟巴特奈25米重炮——击中横梁！第39分钟桑蒂尼头球——再次击中横梁！两次被横梁拒绝，而门柱是方形的……
+
+第57分钟罗特任意球破门，1-0。贝肯鲍尔后来承认："在拜仁三座欧冠中，赢圣埃蒂安是最艰难的一场。"两根方形门柱2013年以2万欧元被买回，**至今陈列在圣埃蒂安博物馆**——触摸它们是每个绿军球迷的朝圣仪式。
+
+**1976决赛阵容：** 丘尔科维奇/让维翁、皮亚扎、洛佩斯、雷佩利尼/巴特奈、拉尔凯(队长)、桑蒂尼/P·雷韦利、H·雷韦利、萨拉马尼亚（罗谢托83分钟替补）
+
+**普拉蒂尼时代：** 1979年加盟，1981年率队夺得第10座法甲。1982年以约120万英镑转投尤文——阿涅利称："我们花了一块面包的价钱买到了鹅肝酱！"
+
+## 📉 低谷时刻：从凯旋到坠落（1982-至今）
+
+1982年"黑箱丑闻"爆发，主席罗谢尔入狱。40多年再未触碰法甲冠军。多次降级，2022年附加赛点球输球降级球迷骚乱。2024年重返法甲但2025年再降——10冠王在法乙挣扎。
+
+> 即便在法乙，场均上座仍超3万——法国最忠诚的球迷群体，没有之一。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1976年3月17日：圣埃蒂安 3-0 基辅迪纳摩（欧冠1/4决赛）**
+首回合0-2落后，"大锅"之夜逆转！布洛欣炫技被断球，14秒后雷韦利破门！罗谢托加时赛锁定胜局。
+
+**2. 1976年5月12日：拜仁 1-0 圣埃蒂安（欧冠决赛）——方形门柱**
+两次击中横梁！罗特第57分钟任意球破门。尽管落败，回法国后数万人在香榭丽舍大街迎接——像冠军一样。
+
+**3. 1977年3月16日：圣埃蒂安 3-1 利物浦（欧冠1/4决赛）**
+首回合0-1落后，次回合3-1逆转！但总比分3-2仍被淘汰。利物浦主帅佩斯利说："这是我在安菲尔德遇到过的最强对手。"
+
+> 圣埃蒂安的绿色球衣来自创始人卡西诺超市的品牌色。英国流行乐队Saint Etienne正是以这支球队命名——被绿军的浪漫悲剧所吸引。1975-76赛季淘汰基辅迪纳摩时，布洛欣过人后想"玩花活"再过一人被断球——14秒后圣埃蒂安就进球了，足球史上最昂贵的炫技失败！`
+    },
+    astonvilla: {
+      id: 'astonvilla',
+      name: '阿斯顿维拉',
+      fullName: '阿斯顿维拉足球俱乐部',
+      englishName: 'Aston Villa FC',
+      nickname: '维拉人 (The Villans)',
+      founded: 1874,
+      league: 'epl',
+      colors: ['#670e36','#95bfe5'],
+      crestLetter: 'AV',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#670e36',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5870bb11023b0e669497b_aston-villa-footballlogos-org.png',
+      players: [
+        {name:'杰克·格拉利什',pos:'前腰/左边锋',years:'2013-2021',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'6岁入青训 1亿镑转曼城 英国转会纪录'},
+        {name:'彼得·威西',pos:'前锋',years:'1980-1985',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'1982欧冠决赛绝杀拜仁 鹿特丹之夜永恒英雄'},
+        {name:'达米安·马丁内斯',pos:'门将',years:'2020-至今',emoji:'🇦🇷',stat:'2022世界杯冠军门将 维拉复兴基石'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧洲冠军杯** ×1（1981-82）——英格兰仅6支欧冠冠军之一！
+- **欧联杯** ×1（2025-26）
+- **欧洲超级杯** ×1（1982-83）
+- **英格兰顶级联赛冠军** ×7（1894、1896、1897、1899、1900、1910、1981）
+- **足总杯冠军** ×7（1887、1895、1897、1905、1913、1920、1957）
+- **联赛杯冠军** ×5（1961、1975、1977、1994、1996）
+
+> 英格兰仅5支集齐联赛+足总杯+联赛杯+欧冠"全满贯"的俱乐部——维拉是其中之一！
+
+## 🔥 巅峰时刻：1982年鹿特丹之夜
+
+欧冠决赛，维拉对阵拥有鲁梅尼格的拜仁慕尼黑。开场仅9分钟，主力门将里默因伤下场——替补斯宾克此前仅出场1次！但他硬是拒绝了拜仁一次次轰炸。第67分钟，莫利左路突破横传，威西小禁区将球推入——1比0！这个球打在威西小腿上弹进，他后来说"如果我踢正了，门将可能就扑出来了！"
+
+维拉死守到底，爆冷击败拜仁捧起欧洲冠军杯——英格兰第四支欧冠冠军队！解说员的进球描述词至今挂在维拉公园北看台。
+
+**决赛阵容：** 里默(斯宾克9')/斯温、麦克诺特、埃文斯、威廉姆斯/布雷姆纳、莫蒂默(队长)、考恩斯、莫利/威西、肖
+
+## 📉 低谷时刻：从欧冠冠军到英冠沉沦
+
+2015-16赛季仅3胜17分惨遭降级。中国商人夏建统7600万英镑收购后连续升级失败，2018年连400万英镑税单都付不起濒临破产。美国资本NSWE接手后，2019年通过附加赛重返英超。2022年埃梅里接手，从接近降级区一路冲到英超第四——时隔41年重返欧冠！
+
+## ⚡ 经典比赛
+
+**1. 1982年5月26日：维拉 1-0 拜仁（欧冠决赛）**
+门将9分钟伤退，替补门神斯宾克全场超神，威西第67分钟绝杀——鹿特丹永恒传奇。
+
+**2. 2003年4月13日：维拉 3-3 切尔西（英超）**
+进球大战，沃特金斯两射一传——锁定英超前四重返欧冠之夜。
+
+**3. 2021年8月15日：维拉 3-2 埃弗顿（英超）**
+卖掉格拉利什后的首场主场比赛，维拉用胜利证明球队不会因一人而倒。
+
+> 格拉利什6岁入维拉青训，为母队出战213场打进32球，2021年以1亿英镑转投曼城——打破英国转会费纪录。他走时给球迷写信："我是一个维拉球迷，一辈子都是。" 维拉成立于1874年，创始人们是板球爱好者在路灯下决定改踢足球——他们是英格兰足球联赛的创始成员之一！`
+    },
+    realsociedad: {
+      id: 'realsociedad',
+      name: '皇家社会',
+      fullName: '皇家社会足球俱乐部',
+      englishName: 'Real Sociedad de Fútbol, S.A.D.',
+      nickname: '蓝白军团 (Txuri-urdin)',
+      founded: 1909,
+      league: 'laliga',
+      colors: ['#0067B1','#FFFFFF'],
+      crestLetter: 'RS',
+      crestSub: 'SS',
+      crestType: 'solid',
+      crestBg: '#0067B1',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f57ccfe3385206395a2940_real-sociedad-footballlogos-org.png',
+      players: [
+        {name:'哈维·阿隆索',pos:'后腰/4号',years:'1999-2004',emoji:'🇪🇸',stat:'2003西班牙最佳球员 父亲是两连冠功勋'},
+        {name:'尼哈特·卡赫维奇',pos:'前锋',years:'2002-2006',emoji:'🇹🇷',stat:'02-03赛季西甲最佳外援 与科瓦切维奇合砍近50球'},
+        {name:'米克尔·奥亚萨瓦尔',pos:'左边锋/队长',years:'2016-至今',emoji:'🇪🇸',stat:'阿诺埃塔射手王69球 2020国王杯决赛点球绝杀'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **西甲冠军** ×2（1980-81、1981-82）——连续两赛季蝉联！全巴斯克班底！
+- **国王杯冠军** ×4（1909、1987、2020、2026）
+- **西班牙超级杯** ×1（1982）——首届赛事冠军！
+- **欧冠最佳成绩：** 四强（1982-83赛季）
+
+## 🔥 巅峰时刻：巴斯克人的两连冠（1980-1982）
+
+主帅奥尔马特谢亚带领全巴斯克阵容打破皇马巴萨垄断——连续两夺西甲冠军！
+
+1981年4月26日，希洪，末轮只需平局即夺冠。科塔巴里亚7分钟点球破门1-0，希洪连入两球反超。皇马那边也在赢球……但第90分钟，萨莫拉在禁区捡到弹球——2比2！皇家社会首次加冕西甲冠军！
+
+1982年4月25日，主场迎战毕尔巴鄂竞技。又是萨莫拉第55分钟先拔头筹，洛佩斯·乌法尔特第68分钟锁定胜局——2比1蝉联冠军！全巴斯克班底击败所有外援云集的豪门。
+
+**阵容：** 阿科纳达(门将)/塞拉耶塔、戈里斯、科塔巴里亚、奥莱索拉/迭戈、阿隆索/萨莫拉、洛佩斯·乌法尔特/萨特鲁斯特吉、乌拉尔德
+
+## 📉 低谷时刻：从冠军到降级
+
+2002-03赛季，法国教练德努埃斯带领拥有阿隆索、尼哈特、科瓦切维奇的皇家社会一度长期霸占西甲榜首，主场4-2击败皇马！但最后两轮崩盘被皇马逆转。赛季后阿隆索转投利物浦。2006-07赛季惨遭降级，直到2009-10赛季才以西乙冠军重返西甲。
+
+## ⚡ 经典比赛
+
+**1. 1981年4月26日：希洪 2-2 皇家社会（西甲末轮）**
+萨莫拉第90分钟绝平！皇家社会以净胜球优势力压皇马，首次夺得西甲冠军。
+
+**2. 2003年4月13日：皇家社会 4-2 皇马（西甲第29轮）**
+科瓦切维奇梅开二度！争冠关键时刻主场击败齐达内+罗纳尔多的皇马。
+
+**3. 2021年4月3日：皇家社会 1-0 毕尔巴鄂竞技（2020国王杯决赛）**
+推迟一年的巴斯克德比，奥亚萨瓦尔第63分钟点球命中。空场比赛无人喝彩但荣耀依旧——时隔34年再夺国王杯！主帅阿尔瓜希尔脱下西装换上球衣嘶吼："皇家社会加油！"
+
+> 哈维·阿隆索的父亲佩里科·阿隆索正是1981、1982年两夺西甲冠军的主力中场。子承父业，阿隆索在皇社青训成长，2002-03赛季以主力身份帮助球队获西甲亚军，荣膺西班牙最佳球员——然后远赴利物浦，在伊斯坦布尔奇迹中补射扳平3-3，随队捧起欧冠。`
+    },
+    fiorentina: {
+      id: 'fiorentina',
+      name: '佛罗伦萨',
+      fullName: '佛罗伦萨足球俱乐部',
+      englishName: 'ACF Fiorentina',
+      nickname: '紫百合 (La Viola)',
+      founded: 1926,
+      league: 'seriea',
+      colors: ['#592C82','#FFFFFF'],
+      crestLetter: 'F',
+      crestSub: 'ACF',
+      crestType: 'solid',
+      crestBg: '#592C82',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f58f8cf8b72e10fcca7f4e_fiorentina-footballlogos-org.png',
+      players: [
+        {name:'加布里埃尔·巴蒂斯图塔',pos:'中锋/9号',years:'1991-2000',emoji:'🇦🇷',stat:'331场203球队史射手王 9年忠诚终转会罗马'},
+        {name:'罗伯特·巴乔',pos:'前腰/10号',years:'1985-1990',emoji:'🇮🇹',stat:'1990世界纪录转会尤文 1993金球奖得主'},
+        {name:'曼努埃尔·鲁伊·科斯塔',pos:'前腰/10号',years:'1994-2001',emoji:'🇵🇹',stat:'紫色艺术家 4132万欧元转AC米兰'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲冠军** ×2（1955-56、1968-69）
+- **欧洲优胜者杯** ×1（1960-61）——意大利首支欧战冠军球队之一！
+- **意大利杯** ×6（1940、1958、1961、1966、1996、2001）
+- **意大利超级杯** ×1（1996）
+- **米特罗帕杯** ×1（1965-66）
+
+## 🔥 巅峰时刻：战神巴蒂斯图塔时代（1991-2000）
+
+1991年巴蒂斯图塔加盟紫百合。9年331场203球——至今仍是队史射手王！1993年随队降入意乙，他拒绝离队，1994年率队重返意甲。1994-95赛季26球夺意甲金靴。皇马曼联多次报价被他拒绝："我热爱佛罗伦萨，我不能离开。"
+
+球迷在球场外为他树立铜像。2000年夏天，31岁的巴蒂终于以约3600万欧元转会罗马，那个赛季打进20球帮助罗马夺得意甲冠军。但面对老东家进球后他没有庆祝——低下头，眼中含泪。
+
+## 📉 低谷时刻：破产与"三级跳"奇迹
+
+2002年因财政危机正式破产——紫百合从意大利足球版图消失！鞋业商人德拉瓦莱组建新球队Florentia Viola，从第四级别联赛重新开始。2002-03赛季不败战绩夺冠，2003-04赛季通过附加赛完成从丙二到意甲的"三级跳"——意大利足球史上最不可思议的重生。
+
+## ⚡ 经典比赛
+
+**1. 1961年5月27日：佛罗伦萨 2-1 格拉斯哥流浪者（欧洲优胜者杯决赛）**
+两回合总比分4-1，佛罗伦萨夺欧洲优胜者杯——意大利球队首座欧战奖杯！
+
+**2. 1990年5月：巴乔转会引发的佛罗伦萨骚乱**
+尤文以破世界纪录800万英镑签下巴乔，球迷走上街头 rioting 50人受伤。巴乔本人不想走，但老板为了钱擅自签了合同。多年后巴乔回到弗兰基球场，全场起立鼓掌——紫百合球迷给"叛徒"最复杂的拥抱。
+
+**3. 1999-2000赛季欧冠：佛罗伦萨击败阿森纳**
+巴蒂斯图塔在欧冠攻破阿森纳球门，战神欧洲赛场经典之战。
+
+> 巴乔转会不仅创下世界纪录，还在佛罗伦萨引发骚乱。巴乔后来在自传中写道："我永远无法原谅佛罗伦萨把我卖掉的那一刻。"佛罗伦萨的紫色球衣并非一开始就有——最初穿红白球衣，1929年才改穿紫色，灵感来自乌迪内斯的球衣。"紫百合"之名从此响彻足坛。`
+    },
+    lille: {
+      id: 'lille',
+      name: '里尔',
+      fullName: '里尔奥林匹克体育俱乐部',
+      englishName: 'LOSC Lille',
+      nickname: '斗犬 (Les Dogues)',
+      founded: 1944,
+      league: 'ligue1',
+      colors: ['#E01E13','#FFFFFF','#003B7A'],
+      crestLetter: 'L',
+      crestSub: 'OS',
+      crestType: 'solid',
+      crestBg: '#E01E13',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f6021fd7150da5cce2f3b8_losc-lille-footballlogos-org-p-500.png',
+      players: [
+        {name:'埃登·阿扎尔',pos:'前腰/10号',years:'2005-2012',emoji:'🇧🇪',stat:'147场36球 2012年约4000万欧元转会切尔西'},
+        {name:'迈克·迈尼昂',pos:'门将/16号',years:'2015-2021',emoji:'🇫🇷',stat:'21场零封 2021年1500万欧元转会AC米兰'},
+        {name:'乔纳森·戴维',pos:'前锋/9号',years:'2020至今',emoji:'🇨🇦',stat:'夺冠功臣 2020年3000万欧元从根特加盟'},
+        {name:'布拉克·伊尔马兹',pos:'前锋',years:'2020-2021',emoji:'🇹🇷',stat:'16球5助攻 35岁免费加盟的法甲最佳引援'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×4（1946、1954、2011、2021）
+- **法国杯冠军** ×6（1946、1947、1948、1953、1955、2011）
+- **法国超级杯** ×1（2021）
+- **欧洲国际托托杯** ×1（2004）
+
+## 🔥 巅峰时刻：2021年——终结大巴黎的平民冠军
+
+2021年5月23日，法甲最后一轮。里尔客场2-1击败昂热，以1分优势力压坐拥姆巴佩和内马尔的PSG，时隔十年再夺法甲冠军！这是法甲九年来第一支非PSG冠军。
+
+整个赛季38场24胜11平3负，仅失23球，门将迈尼昂贡献21场零封——五大联赛之最！主帅加尔蒂耶用4-4-2防守反击体系，以远逊于PSG的预算硬生生从豪门手中抢走冠军。
+
+第9分钟，雷纳托·桑切斯直塞，加拿大前锋乔纳森·戴维单刀破门。第44分钟，35岁土耳其老将伊尔马兹点球命中。夺冠功臣伊尔马兹整个赛季零转会费加盟，16球5助攻堪称法甲历史最佳性价比引援。
+
+## 📉 低谷时刻：财政危机与核心出走
+
+2021年夺冠后，俱乐部因疫情和转播商Mediapro破产陷入财政困境。主帅加尔蒂耶夺冠三天后辞职，迈尼昂1500万欧元被卖到AC米兰，核心球员纷纷出走。卫冕赛季仅排名联赛第10。
+
+## ⚡ 经典比赛
+
+**1. 2021年5月23日：昂热 1-2 里尔（法甲末轮，夺冠之战）**
+戴维开场破门，伊尔马兹点球扩大比分——里尔以1分优势力压PSG夺冠！
+
+**2. 2021年4月3日：巴黎圣日耳曼 0-1 里尔（法甲第31轮）**
+戴维在王子公园打入全场唯一进球，击败纳瓦斯大门，确立争冠主动权。
+
+**3. 2020年11月5日：AC米兰 0-3 里尔（欧联杯小组赛）**
+伊尔马兹、亚兹奇和戴维各入一球，圣西罗的完美客胜。
+
+> 里尔的母队之一奥林匹克里洛瓦赢得了1932-33赛季首届法国职业联赛冠军。阿扎尔在里尔5个赛季联赛147场36球，2012年最后一轮帽子戏法后宣布加盟切尔西。2024-25赛季欧冠，里尔6-1大胜费耶诺德，创队史欧冠最大比分胜利。`
+    },
+    werderbremen: {
+      id: 'werderbremen',
+      name: '云达不莱梅',
+      fullName: '云达不莱梅体育俱乐部',
+      englishName: 'SV Werder Bremen',
+      nickname: '绿白军团 (Die Grün-Weißen)',
+      founded: 1899,
+      league: 'bundesliga',
+      colors: ['#1D9053','#FFFFFF'],
+      crestLetter: 'W',
+      crestSub: 'B',
+      crestType: 'solid',
+      crestBg: '#1D9053',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5944f31f228ee9a411e09_werder-bremen-footballlogos-org-p-500.png',
+      players: [
+        {name:'梅苏特·厄齐尔',pos:'前腰/10号',years:'2008-2010',emoji:'🇩🇪',stat:'28场3球15助攻 2010年约1500万欧元转会皇马'},
+        {name:'迭戈·里巴斯',pos:'前腰/10号',years:'2006-2009',emoji:'🇧🇷',stat:'不莱梅核心 2009年2700万欧元转会尤文'},
+        {name:'米洛斯拉夫·克洛泽',pos:'前锋/9号',years:'2004-2007',emoji:'🇩🇪',stat:'2004年500万欧元加盟 2007年约1500万转会拜仁'},
+        {name:'克劳迪奥·皮萨罗',pos:'前锋',years:'四度效力',emoji:'🇵🇪',stat:'队史射手王109球 德甲外援进球纪录'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲冠军** ×4（1965、1988、1993、2004）
+- **德国杯冠军** ×6（1961、1991、1994、1999、2004、2009）
+- **欧洲优胜者杯** ×1（1992）
+- **欧洲联盟杯亚军** ×1（2009）
+- **德国超级杯** ×4（1988、1993、1994、2009）
+
+## 🔥 巅峰时刻：2003-04赛季双冠王
+
+2004年5月，托马斯·沙夫率领的不莱梅在拜仁慕尼黑主场3-1击败对手，提前一轮锁定德甲冠军！巴西前锋埃尔顿以28球加冕德甲金靴。一周后德国杯决赛3-2险胜亚琛，完成联赛+杯赛双冠王——德甲历史仅第三支实现此举的球队。
+
+另一个巅峰是1991-92赛季，"国王奥托"雷哈格尔率队夺取欧洲优胜者杯——决赛2-0击败摩纳哥，至今俱乐部唯一一座欧战奖杯。
+
+## 📉 低谷时刻：从德甲元老到降级深渊
+
+不莱梅是德甲创始成员之一，与拜仁并列德甲参赛赛季最多。然而2020-21赛季，这支百年豪门以第17名降级——34场仅7胜。多年来高价出售核心球员（迭戈、厄齐尔等）后未能找到替代者，财政日渐窘迫。好在2021-22赛季以德乙第二名重返德甲。
+
+## ⚡ 经典比赛
+
+**1. 2009年5月7日：汉堡 2-3 云达不莱梅（联盟杯半决赛次回合）**
+首回合0-1落后，次回合先丢球0-2！但迭戈扳平，皮萨罗远射反超，队长鲍曼角球锁定——总比分3-3凭客场进球晋级决赛。
+
+**2. 2004年5月1日：云达不莱梅 6-0 汉堡（德甲第32轮）**
+夺冠庆典！6-0血洗北方死敌，42000名球迷在威悉球场狂欢。
+
+**3. 2009年5月20日：顿涅茨克矿工 2-1 云达不莱梅（联盟杯决赛）**
+迭戈因半决赛黄牌停赛缺席，不莱梅遗憾落败。但淘汰AC米兰、汉堡的传奇征程永载史册。
+
+> "Werder"在德语中意为河中的小岛——球场所在的Peterswerder正是威悉河中的小岛。皮萨罗四度效力不莱梅，以109球保持队史射手王纪录，也是德甲进球最多的外援。2008-09赛季，20岁的厄齐尔28场联赛3球15助攻，德国杯决赛打入唯一进球——一赛季后以1500万欧元加盟皇马。迭戈到尤文图斯的2700万欧元转会费至今仍是俱乐部出售球员最高纪录。`
+    },
+    villarreal: {
+      id: 'villarreal',
+      name: '比利亚雷亚尔',
+      fullName: '比利亚雷亚尔足球俱乐部',
+      englishName: 'Villarreal CF',
+      nickname: '黄色潜水艇 (El Submarino Amarillo)',
+      founded: 1923,
+      league: 'laliga',
+      colors: ['#FFE667','#00529F','#D4002A'],
+      crestLetter: 'V',
+      crestSub: 'CF',
+      crestType: 'solid',
+      crestBg: '#FFE667',
+      logo: 'https://pub-3bd35431294c47068cbf31a95d572166.r2.dev/logos/villarreal-cf/villarreal-cf-logo-footylogos.png',
+      players: [
+        {name:'胡安·罗曼·里克尔梅',pos:'古典前腰/10号',years:'2003-2007',emoji:'🇦🇷',stat:'欧冠四强核心 88分钟点球被扑的永恒遗憾'},
+        {name:'迭戈·弗兰',pos:'前锋',years:'2004-2007',emoji:'🇺🇾',stat:'25球西甲金靴 从曼联水货到欧洲最佳射手'},
+        {name:'杰拉德·莫雷诺',pos:'前锋/7号',years:'2018至今',emoji:'🇪🇸',stat:'队史射手王 欧联杯决赛进球'},
+        {name:'桑蒂·卡索拉',pos:'中场/19号',years:'青训→2011+2018-2020',emoji:'🇪🇸',stat:'10次手术后回归 668天后重返球场'},
+        {name:'保·托雷斯',pos:'中后卫',years:'青训→2023',emoji:'🇪🇸',stat:'欧联冠军成员 2023年3750万欧元转会维拉'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧联杯冠军** ×1（2020-21）——建队98年来的首座冠军！
+- **欧洲国际托托杯** ×2（2003、2004）
+
+## 🔥 巅峰时刻一：2021年格但斯克奇迹
+
+2021年5月26日，波兰格但斯克。欧联杯决赛对阵曼联——5万人口小镇俱乐部的首场决赛。
+
+第29分钟，帕雷霍任意球传中，杰拉德·莫雷诺抢点破门，1-0！第55分钟卡瓦尼扳平。加时赛互无建树。
+
+点球大战——11轮马拉松！双方全部球员罚中！第11轮，门将鲁利亲自罚进，然后扑出曼联门将德赫亚的点球！11-10，比利亚雷亚尔夺冠——建队98年首座冠军！主帅埃梅里收获个人第四座欧联杯冠军，成为欧联历史第一人。
+
+## 🔥 巅峰时刻二：2005-06赛季欧冠半决赛
+
+首次参加欧冠就杀入四强——欧冠历史来自最小城市的半决赛球队！核心是阿根廷古典前腰里克尔梅和乌拉圭射手弗兰，主帅佩莱格里尼。
+
+半决赛对阵阿森纳，首回合0-1告负。次回合全场压着阿森纳猛攻，第88分钟获得点球！里克尔梅站上罚球点——莱曼飞身扑出！欧冠纪录第10场连续零封。0-0，总比分0-1被淘汰，里克尔梅跪倒在地。
+
+## 📉 低谷时刻：降级与重建
+
+2011-12赛季因长期出售核心后未及时补充，以西甲第18名降级——自1998年升入西甲以来首次降级。但仅一个赛季后以西乙第二名重返西甲。
+
+## ⚡ 经典比赛
+
+**1. 2021年5月26日：比利亚雷亚尔 1-1 曼联（11-10点球，欧联杯决赛）**
+莫雷诺破门，卡瓦尼扳平，11轮点球鲁利罚进+扑出德赫亚——98年首冠！
+
+**2. 2006年4月25日：比利亚雷亚尔 0-0 阿森纳（欧冠半决赛次回合）**
+里克尔梅88分钟点球被莱曼扑出，欧冠梦碎——距离决赛只差一个点球。
+
+**3. 2006年4月4日：比利亚雷亚尔 1-0 国际米兰（欧冠四分之一决赛次回合）**
+里克尔梅任意球传中，阿鲁阿巴雷纳头球破门！总比分2-2凭客场进球淘汰国米。
+
+> "黄色潜水艇"绰号源自披头士同名歌曲，1967年球迷在比赛中合唱此歌得名。弗兰在比利亚雷亚尔以25球夺西甲金靴，从曼联"水货"变身欧洲最佳射手，后来在马竞再夺金靴并成为2010世界杯金球奖得主。卡索拉在阿森纳经历10次手术、跟腱被切除8厘米，医生劝他退役，2018年免费回归比利亚雷亚尔——回归首秀距上次出场已668天。埃梅里拿到欧联杯后，又在2021-22赛季率队杀入欧冠半决赛——从欧联冠军到欧冠四强，小城球队两年梦幻之旅。`
+    },
+    everton: {
+      id: 'everton',
+      name: '埃弗顿',
+      fullName: '埃弗顿足球俱乐部',
+      englishName: 'Everton FC',
+      nickname: '太妃糖 (The Toffees)',
+      founded: 1878,
+      league: 'epl',
+      colors: ['#003399','#FFFFFF'],
+      crestLetter: 'E',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#003399',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/6a178ef72d8f5c730d574704_68f5890d41b4461e46a27fed_everton-footballlogos-org.png',
+      players: [
+        {name:'迪克西·迪恩',pos:'中锋/9号',years:'1925-1937',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'433场383球 单赛季60球历史纪录'},
+        {name:'韦恩·鲁尼',pos:'前锋/10号',years:'2002-2004+2017-2018',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'2004年约2700万镑转会曼联 2017年回归'},
+        {name:'罗梅卢·卢卡库',pos:'中锋/9号',years:'2014-2017',emoji:'🇧🇪',stat:'2014年2800万镑从切尔西加盟 2017年7500万镑转曼联'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英格兰顶级联赛冠军** ×9（1891、1915、1928、1932、1939、1963、1970、1985、1987）
+- **足总杯冠军** ×5（1906、1933、1966、1984、1995）
+- **欧洲优胜者杯冠军** ×1（1985）
+- **慈善盾** ×9
+
+## 🔥 巅峰时刻：80年代中期的太妃糖帝国（1984-1987）
+
+1984-85赛季，霍华德·肯德尔率领的埃弗顿联赛84分夺冠，领先利物浦13分！足总杯亚军+欧洲优胜者杯冠军——如果不是海瑟尔惨案导致英格兰球队被禁赛欧战，他们本可卫冕甚至冲击欧冠！
+
+**核心阵容：** 门将索撒尔 | 后卫拉特克利夫(C) | 中场里德、布鲁斯 | 前锋格雷搭档夏普。安迪·格雷在1984年足总杯决赛从沃特福德门将双手间头球破门——至今最具争议的温布利进球之一。
+
+## 📉 低谷时刻：漫长无冠与保级挣扎
+
+1995年足总杯后开始近30年无冠。2023-24赛季因违反财务规则被扣6分，连续两年惊险保级。2025年5月告别使用超过130年的古迪逊公园，迁入新球场Hill Dickinson Stadium。
+
+## ⚡ 经典比赛
+
+**1. 1966年足总杯决赛：埃弗顿 3-2 谢菲尔德星期三**
+0-2落后逆转夺冠！特雷比尔科克两分钟两球扳平，坦普尔制胜——足总杯决赛唯一从0-2落后逆转且无需加时。
+
+**2. 1991年足总杯第五轮重赛：埃弗顿 4-4 利物浦**
+最疯狂的默西塞德德比！利物浦四次领先四次被扳平，达格利什赛后辞职。
+
+**3. 1985年欧洲优胜者杯决赛：埃弗顿 1-0 维也纳快速**
+太妃糖唯一欧洲冠军！希迪头球破门，索撒尔零封。
+
+> 迪克西·迪恩1927-28赛季39场联赛60球——至今无人能破。赛季最后一轮需帽子戏法才达60球，结果第5分钟头球、第7分钟点球、第82分钟头球——60球！香克利说："他属于最伟大的行列……如同贝多芬、莎士比亚和伦勃朗。"鲁尼16岁终结阿森纳30场不败，18岁约2700万镑转会曼联，2017年回归太妃糖。`
+    },
+    atalanta: {
+      id: 'atalanta',
+      name: '亚特兰大',
+      fullName: '亚特兰大贝加马斯卡足球俱乐部',
+      englishName: 'Atalanta BC',
+      nickname: '女神 (La Dea)、真蓝黑',
+      founded: 1907,
+      league: 'seriea',
+      colors: ['#1E71B8','#000000'],
+      crestLetter: 'A',
+      crestSub: 'BC',
+      crestType: 'solid',
+      crestBg: '#1E71B8',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f590595c91d9f5a91983ca_atalanta-footballlogos-org-p-500.png',
+      players: [
+        {name:'阿德莫拉·卢克曼',pos:'前锋/11号',years:'2022-2026',emoji:'🇳🇬',stat:'137场55球 欧联决赛帽子戏法 2026年约4000万欧转马竞'},
+        {name:'帕普·戈麦斯',pos:'前腰/10号',years:'2014-2021',emoji:'🇦🇷',stat:'加帅时代真核 2021年约800万欧转塞维利亚'},
+        {name:'约西普·伊利契奇',pos:'前腰',years:'2017-2022',emoji:'🇸🇮',stat:'欧冠空场大四喜 心理问题后黯然离队'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧联杯冠军** ×1（2023-24）——建队117年首座欧战冠军！
+- **意大利杯冠军** ×1（1963）
+- **意甲最佳成绩**：季军（2019、2020、2021、2024）
+
+## 🔥 巅峰时刻：都柏林之夜——卢克曼帽子戏法终结勒沃库森不败（2024）
+
+2024年5月22日，12万人口小城的球队在欧联杯决赛3-0横扫赛季51场不败的勒沃库森！卢克曼第12分钟推射、第26分钟穿裆扎卡弧线球、第75分钟内切爆射——欧联决赛史上第一个帽子戏法！加斯佩里尼67岁捧起人生首冠，阿隆索的不败神话碎在都柏林。
+
+## 📉 低谷时刻：从意丙到欧冠的漫长等待
+
+亚特兰大曾是典型升降机，1981年甚至降入意丙。2016年加帅接手时开局5轮仅1胜差点被解雇——但俱乐部选择信任，从此改写历史。
+
+## ⚡ 经典比赛
+
+**1. 2024年5月22日：亚特兰大 3-0 勒沃库森（欧联决赛）**
+卢克曼帽子戏法！勒沃库森赛季首败，贝加莫彻夜狂欢。
+
+**2. 2020年3月10日：瓦伦西亚 3-4 亚特兰大（欧冠1/8决赛）**
+伊利契奇独中四元！空场梅斯塔利亚的魔幻之夜，总比分8-4晋级八强。
+
+**3. 2020年8月12日：亚特兰大 1-2 巴黎圣日耳曼（欧冠1/4决赛）**
+领先到第90分钟！姆巴佩第90分钟助攻扳平，第93分钟舒波-莫廷绝杀——距半决赛只差3分钟。
+
+> 瓜迪奥拉说："面对亚特兰大就像去看牙医。"2020年意甲98球创60年纪录。戈麦斯2014年约300万欧加盟，加帅改造后成为前场自由人。伊利契奇2017年约570万欧从佛罗伦萨加盟，欧冠大四喜后被淋巴腺炎和心理问题困扰。卢克曼2022年约1500万欧从莱比锡加盟，137场55球后2026年约3500万+500万欧转马竞——俱乐部"意甲对手加价15%-25%"的转会铁律由此出名。`
+    },
+    monchengladbach: {
+      id: 'monchengladbach',
+      name: '门兴格拉德巴赫',
+      fullName: '门兴格拉德巴赫普鲁士体育俱乐部',
+      englishName: 'Borussia Mönchengladbach',
+      nickname: '小马驹 (Die Fohlen)',
+      founded: 1900,
+      league: 'bundesliga',
+      colors: ['#000000','#FFFFFF','#1D9053'],
+      crestLetter: 'B',
+      crestSub: 'MG',
+      crestType: 'solid',
+      crestBg: '#000000',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f59336c8cb89dc144d4b1f_borussia-monchengladbach-footballlogos-org-p-500.png',
+      players: [
+        {name:'冈特·内策尔',pos:'前腰/10号',years:'1963-1973',emoji:'🇩🇪',stat:'1973年转皇马 德国杯决赛替补上场绝杀告别'},
+        {name:'尤普·海因克斯',pos:'前锋',years:'1965-1978',emoji:'🇩🇪',stat:'队史射手王 德甲218球 1974+75德甲金靴'},
+        {name:'马科·罗伊斯',pos:'前腰/边锋',years:'2009-2012',emoji:'🇩🇪',stat:'109场41球 2012年1750万欧解约金转多特'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲冠军** ×5（1970、1971、1975、1976、1977）
+- **德国杯冠军** ×3（1960、1973、1995）
+- **联盟杯冠军** ×2（1975、1979）
+- **欧洲冠军杯亚军** ×1（1977）
+
+## 🔥 巅峰时刻：70年代——与拜仁争霸的黄金十年
+
+1970-1977年，门兴五夺德甲（拜仁同期三冠），两次捧起联盟杯，8年5进欧洲决赛！核心包括：右后卫"猎犬"福格茨(C)、创意大师内策尔、射手王海因克斯、1977年金球奖得主西蒙森。1975年联盟杯决赛海因克斯帽子戏法，5-1横扫特温特——至今联盟杯/欧联决赛最大比分！
+
+## 📉 低谷时刻：球场太小，黄金褪去
+
+博克尔堡球场仅3.4万人，不到拜仁主场一半。门票差距让球队留不住人：1973年内策尔转皇马，1984年马特乌斯投拜仁。1986年联盟杯首回合5-1胜皇马，次回合伯纳乌0-4崩盘——5-1到0-4的惨案永载史册。1999年和2007年两次降入德乙。
+
+## ⚡ 经典比赛
+
+**1. 1973年德国杯决赛：门兴 2-1 科隆（加时）——内策尔的告别**
+内策尔已告知主帅转会皇马，被放在替补席。加时赛队友受伤，他自作主张上场——三分钟后左脚怒射上角破门！2-1！最完美的告别。
+
+**2. 1977年欧冠决赛：利物浦 3-1 门兴**
+罗马之夜。邦霍夫开场击中横梁——如果进了历史可能改写。西蒙森扳平但史密斯和尼尔连入两球。福格茨赛后说："这将是我们很长时间内最后的机会。"——他说对了。
+
+**3. 1978年德甲末轮：门兴 12-0 多特蒙德**
+德甲史上最大比分！但科隆同时5-0胜圣保利，门兴因3个净胜球之差屈居亚军。12-0赢了比赛，却输了冠军。
+
+> "Borussia"是拉丁语"普鲁士"。1960年代球队平均年龄21.5岁，记者称他们"像小马驹一样踢球"——绰号由此诞生。1971年球门柱被撞断，促成木质改铝制门柱。内策尔1973年转皇马成为队史首位德国球员。门兴与利物浦球迷有特殊友谊：1991年希尔斯堡惨案后门兴球迷捐款约8000镑，此后双方球迷每年互访延续至今。2011年门兴德甲垫底差7分，法夫尔接手后神奇保级，次年罗伊斯率队杀入欧冠——2012年以1750万欧解约金加盟多特蒙德。`
+    },
+    leicester: {
+      id: 'leicester',
+      name: '莱斯特城',
+      fullName: '莱斯特城足球俱乐部',
+      englishName: 'Leicester City FC',
+      nickname: '蓝狐 (The Foxes)',
+      founded: 1884,
+      league: 'epl',
+      colors: ['#003090','#f5e6c8'],
+      crestLetter: 'L',
+      crestSub: 'C',
+      crestType: 'solid',
+      crestBg: '#003090',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68fd4e696a330717f3119d84_leicester-footballlogos-org-p-500.png',
+      players: [
+        {name:'杰米·瓦尔迪',pos:'前锋',years:'2012-2025',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'500场 200+球'},
+        {name:'恩戈洛·坎特',pos:'后腰',years:'2015-2016',emoji:'🇫🇷',stat:'175次抢断 157次拦截'},
+        {name:'里亚德·马赫雷斯',pos:'右边锋',years:'2014-2018',emoji:'🇩🇿',stat:'17球11助攻(夺冠赛季)'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英超冠军** ×1（2015-16）—— 5000赔1的奇迹！
+- **足总杯冠军** ×1（2021）
+- **联赛杯冠军** ×3（1964、1997、2000）
+- **社区盾冠军** ×2（1971、2021）
+
+## 🔥 巅峰时刻：蓝狐奇迹（2015-16赛季）
+
+赛季前夺冠赔率1赔5000——和"发现猫王还活着"同赔率！然而拉涅利率领一群被豪门忽视的"边角料"：从非联赛踢上来的瓦尔迪（24球，连续11轮破门破范尼纪录）、50万欧元淘来的马赫雷斯（17球11助攻，PFA最佳）、900万欧元的坎特（175次抢断+157次拦截，英超扫荡王），硬生生以23胜12平3负积81分，提前2轮捧起队史首座英超冠军！全队首发11人总转会费仅3215万欧元，而曼城同期是5.97亿——18.5倍的差距！
+
+## 📉 低谷时刻
+
+2022-23赛季降级（38轮仅6胜），2025-26赛季再降入英甲——夺冠10周年之际两连降，瓦尔迪2025年离队，蓝狐奇迹彻底落幕。2018年老板维猜直升机坠毁遇难，更是命运的重大转折。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2016年5月2日 | 切尔西2-2热刺**
+不是莱斯特城的比赛，却是蓝狐最伟大的夜晚！热刺被逼平，莱斯特城提前2轮锁定英超冠军。瓦尔迪家中电视机被砸碎，啤酒满天飞——5000赔1的奇迹成真！
+
+**2. 2019年10月 | 南安普顿0-9莱斯特城**
+瓦尔迪和佩雷斯双双戴帽！9-0追平英超最大分差纪录，创造英格兰顶级联赛131年客场最大分差。舒梅切尔父子分别在曼联和莱斯特城经历过9-0——虎父无犬子！
+
+**3. 2021年5月 | 莱斯特城1-0切尔西（足总杯决赛）**
+蒂勒曼斯世界波一剑封喉！小舒梅切尔终场前两度神扑，VAR取消切尔西绝平进球。52年等待，蓝狐首夺足总杯！
+
+> 瓦尔迪从非联赛弗利特伍德加盟仅100万镑，是史上最便宜的英超MVP+金靴。马赫雷斯签约前在Google搜了"Leicester City"才知道这家俱乐部。坎特靠合同里的3000万镑解约金条款去了切尔西，而马赫雷斯拒绝了同样的条款，后来追悔莫及。`
+    },
+    torino: {
+      id: 'torino',
+      name: '都灵',
+      fullName: '都灵足球俱乐部',
+      englishName: 'Torino FC',
+      nickname: '公牛 (Il Toro)、绛红 (I Granata)',
+      founded: 1906,
+      league: 'seriea',
+      colors: ['#8b0000','#fff'],
+      crestLetter: 'T',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#8b0000',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5926167bb453c3fe7cec0_torino-footballlogos-org-p-500.png',
+      players: [
+        {name:'瓦伦蒂诺·马佐拉',pos:'前腰/队长',years:'1939-1949',emoji:'🇮🇹',stat:'意甲五连冠核心 1947金靴29球'},
+        {name:'保罗·普利奇',pos:'前锋',years:'1967-1982',emoji:'🇮🇹',stat:'3次意甲金靴 1976冠军功臣'},
+        {name:'弗朗切斯科·格拉齐亚尼',pos:'前锋',years:'1973-1981',emoji:'🇮🇹',stat:'"进球双子星" 1982世界杯冠军'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲冠军** ×7（1928, 1943, 1946-49五连冠, 1976）
+- **意大利杯** ×5（1936, 1943, 1968, 1971, 1993）
+- **米特罗帕杯** ×1（1991）
+
+## 🔥 巅峰时刻：大都灵时代（Il Grande Torino, 1942-1949）
+
+足球史上最具统治力的球队之一！意甲五连冠，1947-48赛季狂轰125球（第二多的AC米兰才76球），领先第二名16分。意大利国家队首发11人中有10人来自都灵——唯一的"外人"是门将，因为都灵的门将还太年轻。队长马佐拉是全队灵魂，进攻核心兼国家队队长。
+
+## 😢 苏佩加空难（1949年5月4日）
+
+从里斯本告别赛返程途中，飞机在浓雾中撞上苏佩加山。17:05，一声巨响。31人遇难——18名球员、2位教练、3位记者。功勋教头波佐逐一辨认孩子们的遗体。50万都灵市民涌上街头送行，尤文图斯球员穿着球衣走在送葬队伍最前面。记者蒙塔内利写道："英雄在相信他们的人眼中，永远是不朽的。"
+
+## 🌟 27年后再夺冠（1975-76赛季）
+
+普利奇（21球金靴）和格拉齐亚尼（15球银靴）——"进球双子星"率队重登王座。收官战普利奇俯身头球破门，尤文同时输球，都灵以45分力压43分夺冠。赛后球员和球迷登上苏佩加山向英灵致敬——两代英雄，跨越时空的交接。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1947-48 | 都灵10-0亚历山德里亚**
+马佐拉和加贝托联袂制造意甲史上最血腥屠杀之一。
+
+**2. 1976年5月16日 | 都灵1-1切塞纳——27年等待的冠军**
+普利奇俯身头球破门！虽然被乌龙扳平，但佩鲁贾1-0击败尤文，都灵时隔27年重夺意甲。6万5千名球迷疯狂庆祝，随后涌向苏佩加山。
+
+**3. 1991-92 | 都灵闯入联盟杯决赛**
+苏佩加空难后最接近欧洲荣耀的时刻，可惜决赛不敌阿贾克斯。
+
+> 空难后意大利5届世界杯4次小组出局1次未进正赛，直到1968年才复兴。普利奇每次德比前都用尤文旗帜擦拭鞋钉。"进球双子星"格拉齐亚尼说："我们甚至不需要说话，他一个眼神我就知道跑哪个柱子。"马佐拉的儿子桑德罗后来成为国际米兰传奇，赢得4次意甲+2次欧冠。`
+    },
+    bordeaux: {
+      id: 'bordeaux',
+      name: '波尔多',
+      fullName: '波尔多足球俱乐部',
+      englishName: 'FC Girondins de Bordeaux',
+      nickname: '吉伦特人 (Les Girondins)、海军蓝白 (Marine et Blanc)',
+      founded: 1881,
+      league: 'ligue1',
+      colors: ['#1a2b5f','#fff'],
+      crestLetter: 'B',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#1a2b5f',
+      logo: 'https://logodetimes.com/times/fc-girondins-de-bordeaux/fc-girondins-de-bordeaux-1024.png',
+      players: [
+        {name:'齐内丁·齐达内',pos:'前腰',years:'1992-1996',emoji:'🇫🇷',stat:'106场22球 1996法甲最佳'},
+        {name:'阿兰·吉雷瑟',pos:'中场',years:'1970-1986',emoji:'🇫🇷',stat:'592场179球 队史双王'},
+        {name:'约安·古尔库夫',pos:'前腰',years:'2008-2010',emoji:'🇫🇷',stat:'2009法甲最佳 终结里昂垄断'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×6（1950, 1984, 1985, 1987, 1999, 2009）
+- **法国杯** ×4（1941, 1986, 1987, 2013）
+- **法国联赛杯** ×3（2002, 2007, 2009）
+- **欧洲联盟杯亚军** ×1（1996）
+
+## 🔥 巅峰时刻一：80年代黄金时代（1984-1987）
+
+主席贝兹不惜血本打造霸主——三年三夺法甲（1984、1985、1987），两夺法国杯（1986、1987），1987年包揽双冠王！中场大师吉雷瑟（队史592场179球双纪录）和蒂加纳是法国1984年欧锦赛冠军核心。主帅雅凯后来率法国夺得1998世界杯。1984-85欧冠闯入半决赛，可惜倒在尤文脚下。
+
+## 🔥 巅峰时刻二：齐达内与欧联杯奇迹（1995-96）
+
+1992年，20岁的齐达内从戛纳加盟波尔多（约100万欧）。1995-96赛季，波尔多从托托杯一路杀入联盟杯决赛——1/4决赛对阵AC米兰，首回合0-2落后，次回合齐达内梅开二度，3-0翻盘！虽然决赛不敌拜仁，但"齐祖"从此踏上巨星之路。1996年以350万欧转会尤文图斯。
+
+## 🔥 巅峰时刻三：终结里昂垄断（2008-09）
+
+古尔库夫赛季封神，11连胜创纪录冲刺，波尔多包揽法甲+联赛杯+超级杯三冠王，终结里昂七连冠！2009年5月30日，1-0小胜卡昂锁定第六个法甲冠军。
+
+## 📉 低谷时刻
+
+1991年因财务问题行政降入法乙。2022年财政危机险些降入法丙。2024年7月，芬威集团放弃收购，波尔多接受降级处罚，跌入法国第四级别联赛——六次法甲冠军的荣光，如今只能在业余联赛中挣扎。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1996年3月 | 波尔多3-0 AC米兰（联盟杯1/4决赛次回合）**
+首回合0-2败走圣西罗，回到主场齐达内梅开二度3-0翻盘！22岁少年在世界舞台的宣告。
+
+**2. 1999年5月 | 巴黎2-3波尔多**
+法甲末轮，19岁小将费因杜诺第89分钟绝杀！波尔多险胜同时马赛输球，第五个法甲冠军在最后一分钟到手。
+
+**3. 2009年5月 | 卡昂0-1波尔多**
+11连胜终结里昂王朝！古尔库夫赛季封神，波尔多第六次加冕法甲，也是最辉煌的三冠王赛季。
+
+> 波尔多主场对马赛保持44年不败（1978-2022）。吉雷瑟是法国足球的"短腿天才"，身高仅1米63却拥有最敏锐的足球大脑。齐达内加盟时说"我不是进攻型中场"，结果首赛季就打入10球——天才的谦虚。波尔多的倒V形球衣设计是法甲最具辨识度的队服之一。`
+    },
+    leeds: {
+      id: 'leeds',
+      name: '利兹联',
+      fullName: '利兹联足球俱乐部',
+      englishName: 'Leeds United FC',
+      nickname: '白玫瑰 (The Whites)、孔雀军团',
+      founded: 1919,
+      league: 'epl',
+      colors: ['#1D428A','#FFCD00'],
+      crestLetter: 'L',
+      crestSub: 'U',
+      crestType: 'solid',
+      crestBg: '#1D428A',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f589cc025fb2e82c913a2c_leeds-united-footballlogos-org-p-500.png',
+      players: [
+        {name:'比利·布莱姆纳',pos:'中场/队长',years:'1959-1976',emoji:'🏴󠁧󠁢󠁳󠁣󠁴󠁿',stat:'772场 115球 利兹史上最伟大球员'},
+        {name:'约翰尼·吉尔斯',pos:'中场',years:'1963-1975',emoji:'🇮🇪',stat:'里维称签下他是"最棒的签约"'},
+        {name:'马塞洛·贝尔萨',pos:'主教练',years:'2018-2022',emoji:'🇦🇷',stat:'率队重返英超 16年等待终结'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **英格兰顶级联赛冠军** ×3（1969、1974、1992）
+- **足总杯冠军** ×1（1972）
+- **联赛杯冠军** ×1（1968）
+- **社区盾冠军** ×2（1969、1992）
+- **欧洲博览会杯冠军** ×2（1968、1971）
+- **英冠冠军** ×2（2020、2025）
+
+## 🔥 巅峰时刻：唐·里维的光荣时代（1961-1974）
+
+1961年，34岁的唐·里维以球员兼教练身份接手濒临破产的利兹。他改穿全白球衣致敬皇马，签下博比·科林斯和约翰尼·吉尔斯（约3.5万镑从曼联加盟），17岁的苏格兰少年布莱姆纳被提拔一线队。1964年升入甲级，此后连续10年从未跌出前四！
+
+1969年首次加冕甲级冠军，仅输2场。1970年冲击三冠王——联赛、足总杯、欧冠三线全部失手，媒体称之为"光荣的失败"。1972年克拉克一剑封喉1-0击败阿森纳捧起足总杯，1974年开局29场不败再夺联赛冠军。里维随即挂帅英格兰队，光荣时代落幕。
+
+## 🔥 巅峰时刻二：最后一届英甲冠军（1991-92）
+
+威尔金森率队夺冠——英超成立前的最后一届英甲！法国前锋坎通纳是关键先生，但他仅效力一个半赛季就以120万镑转投曼联，亲手为对手送上帝国基石。
+
+## 🔥 巅峰时刻三：贝尔萨的疯狂（2018-2020）
+
+阿根廷疯子贝尔萨降临埃兰路，颠覆一切：每天称体重、"杀人球"对抗、训练场装跑道。2020年以10分优势夺英冠冠军，时隔16年重返英超！升级首赛季英超第9——20年来升级球队最高积分！
+
+## 📉 低谷时刻
+
+1975年欧冠决赛被裁判"抢劫"——洛里姆进球被吹、两粒点球不判、贝肯鲍尔手球无视——0-2败给拜仁。2000-01赛季杀入欧冠四强后因财务危机疯狂卖人，2004年从英超降级，2007年甚至跌入英甲（扣15分起步），第三级别蛰伏三年。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1975欧冠决赛：拜仁 2-0 利兹（被偷走的决赛）**
+洛里姆进球被吹越位、贝肯鲍尔禁区内手球无视、两粒点球不判——法国裁判基塔布吉安的判罚堪称欧冠史上最黑暗。主帅阿姆菲尔德说："我们不是输给了更强的球队，是输给了糟糕的裁判。"
+
+**2. 2001欧冠半决赛：瓦伦西亚 3-0 利兹**
+首回合0-0，次回合0-3惨败——但击败拉齐奥和AC米兰的欧冠征途已载入史册。
+
+**3. 2020年7月 | 利兹确认升级英超**
+贝尔萨的疯狂有了回报！16年等待结束，埃兰路外球迷涌上街头。
+
+> 里维让球员上芭蕾课练平衡，表现差的穿黄背心"示众"——60年代的管理方法前卫得离谱。利兹绰号"脏利兹"（Dirty Leeds），但里维说："踢得漂亮但输了，那才是真的脏。"贝尔萨每天步行45分钟去训练场，从不接受搭车——两代改革者，连走路的方式都一样执拗。`
+    },
+    deportivo: {
+      id: 'deportivo',
+      name: '拉科鲁尼亚',
+      fullName: '皇家拉科鲁尼亚体育俱乐部',
+      englishName: 'RC Deportivo La Coruña',
+      nickname: '蓝白军团 (Blanquiazules)、超级拉科',
+      founded: 1906,
+      league: 'laliga',
+      colors: ['#0055A5','#FFFFFF'],
+      crestLetter: 'D',
+      crestSub: 'LC',
+      crestType: 'solid',
+      crestBg: '#0055A5',
+      logo: 'https://pub-3bd35431294c47068cbf31a95d572166.r2.dev/logos/deportivo-la-coruna/deportivo-la-coruna-logo-footylogos.png',
+      players: [
+        {name:'胡安·卡洛斯·贝莱隆',pos:'前腰',years:'2000-2013',emoji:'🇪🇸',stat:'13年不离不弃 "西班牙的齐达内"'},
+        {name:'毛罗·席尔瓦',pos:'后腰',years:'1992-2005',emoji:'🇧🇷',stat:'458场 13年 铁腰活化石'},
+        {name:'罗伊·马凯',pos:'前锋',years:'1999-2003',emoji:'🇳🇱',stat:'西甲冠军头号射手 2003年约1875万欧转拜仁'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **西甲冠军** ×1（2000）——24万人口大西洋港口城市的奇迹！
+- **国王杯冠军** ×2（1995、2002）
+- **西班牙超级杯冠军** ×3（2000、2002、约）
+- **欧冠最佳成绩**：半决赛（2004）
+
+## 🔥 巅峰时刻：超级拉科（1999-2004）
+
+1998年名帅伊鲁埃塔上任，打造4231革命。1999-2000赛季，拉科以69分加冕西甲——终结了皇马巴萨的垄断！联赛收官战2-0击败西班牙人，多纳托和马凯进球——6年前罚丢点球的同一轮次，这次没有遗憾。
+
+此后五年连续征战欧冠：2000-01小组赛双阶段均列第一、淘汰尤文和AC米兰；2001-02双杀曼联；2003-04逆转AC米兰闯入半决赛！
+
+**关键转会**：里瓦尔多1996年约700万欧加盟，1997年约2600万欧转巴萨；马凯1999年约800万欧加盟，2003年约1875万欧转拜仁（创拜仁队史纪录）；贝莱隆2000年约1100万欧加盟；特里斯坦1999年约1200万欧加盟。
+
+## 🔥 里亚索之夜（2004年4月7日）
+
+欧冠1/4决赛，首回合1-4惨败AC米兰——所有人都以为悬念已死。但里亚索之夜，足球史上最伟大的逆转之一：
+
+- 潘迪亚尼第5分钟破门！
+- 弗兰第44分钟远射！总比分3-4，希望重燃！
+- 卢克第58分钟弧线球！3-0！总比分4-4，客场进球优势！
+- 塞尔吉奥第76分钟头球锁定！4-0！总比分5-4！
+
+欧冠史上第一支首回合落后3球逆转的球队！可惜半决赛0-1不敌穆里尼奥的波尔果。
+
+## 📉 低谷时刻
+
+2002年"威望号"邮轮沉没重创当地经济，俱乐部债务高达1.6亿欧元。2004年后核心出走，2010、2013、2019年三次降级——从欧冠半决赛到西乙，坠落令人心碎。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2004年4月7日 | 拉科 4-0 AC米兰（里亚索之夜）**
+首回合1-4，4-0逆转卫冕冠军！总比分5-4！欧冠史上最伟大逆转之一。
+
+**2. 2002国王杯决赛 | 拉科 2-1 皇马**
+"百年庆"决赛——皇马在伯纳乌庆祝百年华诞，却被拉科搅局！特里斯坦和塞尔吉奥进球，蓝白军团毁了皇马的派对。
+
+**3. 1994年5月 | 拉科 0-0 瓦伦西亚（久基奇罚丢点球）**
+最后一轮仍领先巴萨1分，0-0战平——久基奇最后时刻罚丢制胜点球！巴萨同分以净胜球优势夺冠。这个点球成为一代拉科球迷永远的痛。
+
+> 贝莱隆被哈维·阿隆索称为"我见过最有天赋的西班牙球员"。他在拉科13年不离不弃，降级也不走，40岁才退役。斯卡洛尼从超级拉科右后卫成为2022世界杯冠军教头——谁能想到？德贾明哈天赋异禀但脾气火爆，据说伊鲁埃塔让他坐板凳别抱怨，他就真的安静地坐了。`
+    },
+    stuttgart: {
+      id: 'stuttgart',
+      name: '斯图加特',
+      fullName: '斯图加特体育俱乐部',
+      englishName: 'VfB Stuttgart 1893',
+      nickname: '红白军团 (Die Roten)、施瓦本人 (Die Schwaben)',
+      founded: 1893,
+      league: 'bundesliga',
+      colors: ['#E32219','#FFFFFF'],
+      crestLetter: 'V',
+      crestSub: 'fB',
+      crestType: 'solid',
+      crestBg: '#E32219',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f593bc83f453d8fa1cb870_vfb-stuttgart-footballlogos-org-p-500.png',
+      players: [
+        {name:'萨米·赫迪拉',pos:'中场',years:'2005-2010',emoji:'🇩🇪',stat:'青训出品 2010年约1200万欧转皇马'},
+        {name:'马里奥·戈麦斯',pos:'前锋',years:'2003-2009',emoji:'🇩🇪',stat:'青训出品 2009年约3000万欧转拜仁'},
+        {name:'蒂莫·维尔纳',pos:'前锋',years:'2013-2016',emoji:'🇩🇪',stat:'17岁首秀队史最年轻 2016年约1000万欧转莱比锡'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **德甲冠军** ×5（1950、1952、1984、1992、2007）
+- **德国杯冠军** ×3（1954、1958、1997）
+- **德国超级杯冠军** ×1（1992）
+- **欧洲优胜者杯亚军** ×1（1998）
+
+## 🔥 巅峰时刻一：魔法三角（1996-1998）
+
+埃贝尔+博比奇+巴拉科夫——"魔法三角"（Magisches Dreieck），三人联手打进49球，占全队78球的63%！率队夺得1997年德国杯。1997-98赛季勒夫执教首秀，率队杀入优胜者杯决赛，0-1惜败切尔西。
+
+## 🔥 巅峰时刻二：青年近卫军的童话（2006-07）
+
+上季仅列第九，揭幕战0-3惨败——没人看好这群平均年龄不到24岁的"野小子"（Jungen Wilden）。但最后8轮全胜冲刺！第33轮客场3-2逆转波鸿登顶；末轮2-1逆转科特布斯——希策尔斯佩格凌空世界波扳平，19岁赫迪拉头球绝杀！15年等待的冠军，25万人狂欢！
+
+主力阵容：希尔德布兰/马格宁、梅拉(C)、德尔皮埃尔、奥索里奥/希策尔斯佩格、达席尔瓦、帕尔多、希尔伯特/戈麦斯、卡考
+
+## 🔥 低谷后的重生：2023-24
+
+两次降级（2016、2019）的苦涩后，赫内斯率队以73分创队史纪录夺得德甲亚军，重返欧冠！
+
+## 📉 低谷时刻
+
+1975年降入德乙，2016年和2019年两次降级——五冠王两度跌入德乙。但青训永不枯竭：赫迪拉2010年约1200万欧转皇马、戈麦斯2009年约3000万欧转拜仁、维尔纳2016年约1000万欧转莱比锡——他们离开后成为国脚，但"施瓦本人"的基因永远在。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2007年5月19日 | 斯图加特 2-1 科特布斯（德甲末轮）**
+科特布斯先入球，希策尔斯佩格左脚凌空世界波扳平！赫迪拉头球绝杀！2-1！25万人的狂欢——德甲史上最戏剧性争冠结局之一。
+
+**2. 1998年5月 | 切尔西 1-0 斯图加特（优胜者杯决赛）**
+勒夫执教首赛季杀入欧洲决赛，佐拉绝杀——0-1饮恨斯德哥尔摩，但魔法三角的征途足够传奇。
+
+**3. 2003年10月 | 斯图加特 2-1 曼联（欧冠小组赛）**
+小虎队——拉姆、赫莱布、库兰伊——在欧冠击败曼联！青春风暴，6年后冠军童话的序曲。
+
+> 白底红环（Brustring）球衣是德甲最有辨识度的——1925年一个青年队球员的提议，至今沿用。VfB全称"运动游戏俱乐部"，听起来像体育课代号。希尔德布兰884分钟不失球德甲纪录至今无人打破。勒夫在这里开启执教生涯，后来成为德国队史上最成功的主帅——一切从斯图加特开始。`
+    },
+    nottmforest: {
+      id: 'nottmforest',
+      name: '诺丁汉森林',
+      fullName: '诺丁汉森林足球俱乐部',
+      englishName: 'Nottingham Forest FC',
+      nickname: '红军 (The Reds)、树精 (Tricky Trees)',
+      founded: 1865,
+      league: 'epl',
+      colors: ['#DD0000','#FFFFFF'],
+      crestLetter: 'N',
+      crestSub: 'FF',
+      crestType: 'solid',
+      crestBg: '#DD0000',
+      logo: 'https://pub-3bd35431294c47068cbf31a95d572166.r2.dev/logos/nottingham-forest/nottingham-forest-logo-footylogos.png',
+      players: [
+        {name:'布莱恩·克拉夫',pos:'主教练',years:'1975-1993',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'18年 2座欧冠 史上最伟大的奇迹'},
+        {name:'彼得·希尔顿',pos:'门将',years:'1977-1982',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'约32.5万镑加盟 2座欧冠功臣'},
+        {name:'特雷弗·弗朗西斯',pos:'前锋',years:'1979-1981',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'英国首位百万镑球员 79欧冠决赛制胜球'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠冠军（欧洲冠军杯）** ×2（1979、1980）——连冠！
+- **英格兰顶级联赛冠军** ×1（1978）
+- **足总杯冠军** ×2（1898、1959）
+- **联赛杯冠军** ×4（1978、1979、1989、1990）
+- **欧洲超级杯冠军** ×1（1979）
+
+## 🔥 巅峰时刻：克拉夫的森林奇迹（1975-1980）
+
+1975年1月，布莱恩·克拉夫走进城市球场时，诺丁汉森林排在英乙第13名。五年后，这支球队站在了欧洲之巅——两次！
+
+- 1976-77：彼得·泰勒回归担任助教，森林以英乙第三名升级
+- 1977-78：**升班马夺冠！** 领先利物浦7分加冕甲级冠军！联赛杯1-0击败利物浦，赛季42场不败
+- 1978-79：联赛杯卫冕，**欧洲冠军杯1-0击败马尔默夺冠！** 弗朗西斯头球制胜
+- 1979-80：**欧洲冠军杯卫冕！** 1-0击败汉堡，罗伯特森进球，希尔顿封神
+
+**关键转会**：弗朗西斯1979年2月约100万镑从伯明翰加盟——英国足球史上第一个百万英镑球员！克拉夫对外宣称只花了99.9万镑。希尔顿1977年约32.5万镑从斯托克城加盟——当时英甲最贵门将。
+
+## 🔥 重返英超：23年的等待（2022）
+
+1999年降级后流浪23年。2021年9月库珀接手时森林英冠垫底，但一路逆袭——附加赛半决赛点球淘汰谢菲尔德联，决赛1-0击败哈德斯菲尔德，时隔23年重返英超！
+
+## 📉 低谷时刻
+
+1993年英超元年降级，克拉夫酗酒退休。2005年跌入英甲，直到2022年才重返英超。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1979年5月30日 | 诺丁汉森林 1-0 马尔默（欧冠决赛）**
+弗朗西斯后点冲顶破门！百万先生在加盟后第一场欧冠就打进制胜球。
+
+**2. 1980年5月28日 | 诺丁汉森林 1-0 汉堡（欧冠决赛）**
+罗伯特森低射破门，希尔顿神级扑救封出基冈——森林卫冕成功！
+
+**3. 2022年5月29日 | 诺丁汉森林 1-0 哈德斯菲尔德（英冠附加赛决赛）**
+科尔威尔乌龙，1-0！23年的等待终结，从欧冠冠军到英冠再回英超。
+
+> 克拉夫选球员看眼神。伯恩斯从酒鬼改造成中后卫获评1978年足球先生。劳埃德的签字费是一台洗衣机。伯特尔斯是2000镑签来的地毯工——后来当选欧洲年度最佳年轻球员。这群流浪汉，征服了整个欧洲。`
+    },
+    sampdoria: {
+      id: 'sampdoria',
+      name: '桑普多利亚',
+      fullName: '乌尼奥内·卡尔乔·桑普多利亚',
+      englishName: 'UC Sampdoria',
+      nickname: '蓝环军团 (Blucerchiati)、水手 (Doriani)',
+      founded: 1946,
+      league: 'seriea',
+      colors: ['#1B5497','#C21718'],
+      crestLetter: 'S',
+      crestSub: 'AMP',
+      crestType: 'solid',
+      crestBg: '#1B5497',
+      logo: 'https://pub-3bd35431294c47068cbf31a95d572166.r2.dev/logos/uc-sampdoria/uc-sampdoria-logo-footylogos.png',
+      players: [
+        {name:'詹卢卡·维亚利',pos:'前锋',years:'1984-1992',emoji:'🇮🇹',stat:'223场85球 91金靴 2023年逝世'},
+        {name:'罗伯托·曼奇尼',pos:'前锋/影锋',years:'1982-1997',emoji:'🇮🇹',stat:'424场132球 "进球双子星"'},
+        {name:'武亚丁·博斯科夫',pos:'主教练',years:'1986-1992',emoji:'🇷🇸',stat:'打造冠军之师 "教练须是朋友、老师、警察"'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **意甲冠军** ×1（1991）——唯一联赛冠军！
+- **意大利杯冠军** ×4（1985、1988、1989、1994）
+- **欧洲优胜者杯冠军** ×1（1990）
+- **意大利超级杯冠军** ×1（1991）
+- **欧冠最佳成绩**：亚军（1992）
+
+## 🔥 巅峰时刻：进球双子星与唯一的意甲冠军（1990-91）
+
+1990年夏，意甲群雄并起——尤文有巴乔，米兰有荷兰三剑客，国米有马特乌斯。但最终站上顶峰的，是热那亚海边的蓝环军团。
+
+主席曼托瓦尼1979年接手时桑普还在意乙，他说："我不买冠军，我培养冠军。"1986年博斯科夫上任，将曼奇尼和维亚利固定为锋线搭档——"进球双子星"就此诞生。
+
+维亚利以19球夺得意甲金靴，曼奇尼12球。1991年5月19日，桑普3-0横扫莱切锁定冠军。维亚利和塞雷佐把头发染成金色兑现赌约——据说塞雷佐的妻子直到发色恢复都不跟他说话。
+
+## 🔥 欧冠亚军（1991-92）
+
+桑普唯一一次征战欧冠，一路杀入温布利决赛。90分钟0-0，加时赛科曼任意球破门——1-0，倒在最后一刻。维亚利赛后以创世界纪录约1250万英镑转会尤文。梦幻时代落幕。
+
+## 📉 低谷时刻
+
+曼托瓦尼1993年去世。2021年老板费雷罗因欺诈破产罪被捕，2023年欠债超2亿欧元从意甲降级。2025年队史77年首次降入意丙——从欧冠决赛到第三级别，33年。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1991年5月5日 | 国米 0-2 桑普（意甲争冠关键战）**
+帕柳卡扑出马特乌斯点球！多塞纳和维亚利进球——甩开国米，一只手摸到冠军。
+
+**2. 1992年5月20日 | 巴塞罗那 1-0 桑普（欧冠决赛）**
+科曼加时任意球绝杀。距离欧洲之巅只差12分钟——最伟大也最心碎的夜晚。
+
+**3. 1990年5月9日 | 桑普 2-0 安德莱赫特（优胜者杯决赛）**
+曼奇尼和维亚利率队捧起优胜者杯——桑普第一座也是唯一一座欧洲奖杯！
+
+> 维亚利和曼奇尼的友谊是意大利足球最动人的故事。2021年曼奇尼执教意大利夺欧锦赛冠军时，患癌的维亚利是助手。2023年维亚利去世，曼奇尼说："他不仅是伟大的球员，他是美丽的人。"进球双子星，在生命最后时刻依然并肩。蓝白红黑四色条纹衫——1946年合并时蓝色白色来自安德烈亚·多利亚，红色黑色来自桑皮尔达雷内塞，一件球衣缝合了两支球队的灵魂。`
+    },
+    nice: {
+      id: 'nice',
+      name: '尼斯',
+      fullName: '尼斯奥林匹克体操俱乐部',
+      englishName: 'OGC Nice',
+      nickname: '幼鹰 (Les Aiglons)、健身房 (Le Gym)',
+      founded: 1904,
+      league: 'ligue1',
+      colors: ['#ED1C24','#000000'],
+      crestLetter: 'N',
+      crestSub: 'ICE',
+      crestType: 'solid',
+      crestBg: '#ED1C24',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f6014884d6dbe70494ae23_ofc-nice-footballlogos-org-p-500.png',
+      players: [
+        {name:'华金·瓦莱',pos:'前锋',years:'1940s-1950s',emoji:'🇫🇷',stat:'194球 队史射手王 俱乐部最伟大球员'},
+        {name:'朱斯特·方丹',pos:'前锋',years:'1953-1956',emoji:'🇫🇷',stat:'83场51球 1958世界杯单届13球纪录'},
+        {name:'马里奥·巴洛特利',pos:'前锋',years:'2016-2018',emoji:'🇮🇹',stat:'首秀梅开二度 两年重生之旅'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×4（1951、1952、1956、1959）
+- **法国杯冠军** ×3（1952、1954、1997）
+- **法国超级杯冠军** ×1（1970）
+- **法乙冠军** ×4（1948、1965、1970、1994）
+
+## 🔥 巅峰时刻：辉煌的五十年代（1950-1959）
+
+尼斯是法甲最早引入外籍球星的先驱。阿根廷后卫潘乔·冈萨雷斯1951年加盟效力10年，卢森堡前锋纽伦贝格1951-1960年效力。
+
+- **1950-51**：开局6轮垫底，末轮4-0击败法兰西体育场，以净胜球优势力压里尔夺冠！同分四支球队！
+- **1951-52**：**法甲历史第一支卫冕成功的球队！** 同时夺法国杯，成就双冠王
+- **1953-54**：年轻的方丹随队夺法国杯，曾单场5球（6-1朗斯），60年后才被追平
+- **1958-59**：2/3球员来自青训，主场19场赢18场！第四个法甲冠军
+
+**关键转会**：方丹1953年从摩洛哥加盟，3赛季51球，1956年转投兰斯，1958年世界杯创下单届13球不破纪录。瓦莱为尼斯打进194球，队史射手王。
+
+## 🔥 巴洛特利重生（2016-2017）
+
+2016年尼斯免费签下巴洛特利，首秀对阵马赛梅开二度！首赛季28场17球获法甲第3名（队史最高），次赛季38场26球，红牌从3张降到1张。法夫尔的4-2-3-1让塞里调度、丹特镇守，一度冲击联赛冠军。
+
+## 📉 低谷时刻
+
+1964年降入法乙，此后反复升降：1982年降级、1991年财政强制降级、1997年夺法国杯后几天就降入法乙。2025-26赛季仅列法甲第16名，靠附加赛4-1击败圣埃蒂安保级。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1952年 | 尼斯 5-3 波尔多（法国杯决赛）**
+双冠王加冕！尼斯成为法甲历史第一支卫冕成功的球队，5-3大胜波尔多成就首个双冠王。
+
+**2. 1997年 | 尼斯 4-3 甘冈（法国杯决赛，点球大战）**
+近40年等待！点球4-3击败甘冈捧杯——讽刺的是，几天后就以法甲垫底降级。
+
+**3. 2017年4月 | 尼斯 3-1 巴黎圣日耳曼**
+法夫尔的球队主场击败霸主大巴黎！巴洛特利进球，行云流水的反击——那个赛季尼斯只输3场。
+
+> 队徽展翅金鹰来自尼斯市纹章，"幼鹰"绰号由此而来。2019年INEOS（拉特克利夫）收购尼斯——同一人后来又买了曼联25%股份。方丹虽然只为尼斯效力3个赛季，但在这里完成了起飞——2023年3月1日去世，享年89岁，他的13球世界杯纪录至今无人打破。`
+    },
+    lens: {
+      id: 'lens',
+      name: '朗斯',
+      fullName: '朗斯竞赛足球俱乐部',
+      englishName: 'RC Lens',
+      nickname: '血金军团 (Les Sang et Or)、矿工',
+      founded: 1906,
+      league: 'ligue1',
+      colors: ['#d20515','#f9b800'],
+      crestLetter: 'R',
+      crestSub: 'CL',
+      crestType: 'solid',
+      crestBg: '#d20515',
+      logo: 'https://pub-3bd35431294c47068cbf31a95d572166.r2.dev/logos/rc-lens/rc-lens-logo-footylogos.png',
+      players: [
+        {name:'托尼·瓦雷莱斯',pos:'前锋',years:'1996-2003',emoji:'🇫🇷',stat:'约1200万法郎加盟 队史进球纪录保持者'},
+        {name:'西里尔·马克莱莱',pos:'后腰',years:'1999-2000',emoji:'🇫🇷',stat:'租借期间表现出色 后成切尔西皇马主力'},
+        {name:'弗拉基米尔·斯米切赫',pos:'中场',years:'2000-2004',emoji:'🇨🇿',stat:'自由转会加盟 后随利物浦夺欧冠'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×1：1997-98赛季
+- **法国杯冠军** ×1：2025-26赛季（🏆 百年首冠！）
+- **法国联赛杯冠军** ×1：1998-99赛季
+- **法乙冠军** ×4：1936-37、1948-49、1972-73、2008-09赛季
+
+## 🔥 巅峰时刻一：血金奇迹（1997-98赛季）
+
+1998年5月9日，法国足球史上最不可思议的故事在朗斯上演。这支来自煤矿城市的平民球队，力压群雄夺得法甲冠军！
+
+达科特·勒克莱尔（主教练）打造的阵容中，防守是夺冠根基。中场有马塞尔·塞拉伊和埃里克·阿萨莫阿的稳健组合，锋线上托尼·瓦雷莱斯负责攻城拔寨。
+
+**关键转会记录：**
+- **托尼·瓦雷莱斯**：1998年约1200万法郎从欧塞尔加盟，为朗斯出场超过200场
+- **弗拉基米尔·斯米切赫**：2000年自由转会加盟，2004年约500万欧元转投洛里昂，后成为04-05欧冠冠军（利物浦）成员
+
+## 🔥 巅峰时刻二：欧冠八强（1999-2000赛季）
+
+夺冠后的朗斯在欧冠赛场上演好戏。小组赛阶段，他们成为**首支在温布利击败阿森纳的法国球队**！一路过关斩将杀入八强，最终惜败给后来夺冠的国际米兰。
+
+## 🔥 巅峰时刻三：百年圆梦（2025-26赛季）
+
+2026年5月23日，法兰西大球场见证历史！朗斯3-1击败尼斯，**队史首次夺得法国杯冠军**！2月15日主场5-0血洗巴黎FC，超越大巴黎登顶积分榜，成就"联赛亚军+杯赛冠军"的双冠辉煌！
+
+## 📉 低谷时刻
+
+2014-15降级后，朗斯一度面临财政危机，不得不依靠卖球员度日。但球迷从未放弃——即使在法乙时期，博拉尔特球场上座率依然是全法乙最高。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 1999年11月 | 朗斯 1-0 阿森纳（欧冠）**
+在伦敦的雨夜，朗斯成为首支在温布利击败阿森纳的法国球队。
+
+**2. 2026年5月23日 | 朗斯 3-1 尼斯（法国杯决赛）**
+法兰西大球场的烟花绽放，朗斯终于捧起队史第一座法国杯！百年等待，一朝圆梦。
+
+> 朗斯是法国唯一队徽上包含矿灯元素的俱乐部。红色代表矿工热血，金黄色代表地下煤炭光芒。博拉尔特球场由180名矿工徒手建造，1933年完工至今。`
+    },
+    rennes: {
+      id: 'rennes',
+      name: '雷恩',
+      fullName: '雷恩足球俱乐部',
+      englishName: 'Stade Rennais FC',
+      nickname: '红黑军团 (Les Rouge et Noirs)、布列塔尼人',
+      founded: 1901,
+      league: 'ligue1',
+      colors: ['#E13327','#000000'],
+      crestLetter: 'S',
+      crestSub: 'R',
+      crestType: 'solid',
+      crestBg: '#E13327',
+      logo: 'https://pub-3bd35431294c47068cbf31a95d572166.r2.dev/logos/stade-rennais/stade-rennais-logo-footylogos.png',
+      players: [
+        {name:'奥斯曼·登贝莱',pos:'前锋',years:'2010-2015',emoji:'🇫🇷',stat:'青训出品 2019法国杯决赛绝平进球'},
+        {name:'爱德华多·卡马文加',pos:'中场',years:'2019-2021',emoji:'🇫🇷',stat:'青训出品 16岁首秀 3100万欧加盟皇马'},
+        {name:'阿卜杜拉耶·杜库雷',pos:'中场',years:'2014-2017',emoji:'🇫🇷',stat:'青训出品 4000万欧转投沃特福德'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法国杯冠军** ×3：2018-19、1970-71、1964-65赛季
+- **法国超级杯冠军** ×2：1971、2019年
+- **法乙冠军** ×2：1955-56、1982-83赛季
+
+## 🔥 巅峰时刻一：王子公园的逆袭（2018-19赛季）
+
+2019年4月27日，法兰西大球场。雷恩2-2逼平巴黎后点球6-5击败对手，**夺得队史第三座法国杯**！第92分钟登贝莱绝平拖入加时！点球大战，库贝克扑出帕雷德斯的点球。
+
+**关键转会（这一批球员的后续）：**
+- **奥斯曼·登贝莱**：13岁加入雷恩青训，2015年自由转会多特蒙德，后约5000万欧转投巴黎
+- **卡马文加**：2021年约3100万欧元加盟皇马，2025年约1亿欧元转投巴黎
+
+## 🔥 巅峰时刻二：欧冠之旅（2020-21赛季）
+
+凭借2019-20赛季法甲第三名的成绩，雷恩历史首次获得欧冠正赛资格！2020年10月21日，塞古·拉米·弗法纳打入了球队欧冠正赛首球！
+
+## 📉 低谷时刻
+
+虽然成立于1901年，但雷恩直到1965年才首次夺得法国杯——一座奖杯等了64年。2026年2月遭遇4连败，主教练下课。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2019年4月27日 | 雷恩 2-2 巴黎圣日耳曼（点球6-5）**
+法国杯决赛！第92分钟登贝莱绝平！点球大战，历史性夺冠！
+
+**2. 2026年2月13日 | 雷恩 3-1 巴黎圣日耳曼**
+在主帅下课、伤兵满营的困境下，雷恩3-1爆冷击败七连胜的大巴黎！
+
+> 雷恩队徽上的两只白鼬是布列塔尼大区区徽动物。过去10年，雷恩通过出售青训球员赚了超过3亿欧元！`
+    },
+    montpellier: {
+      id: 'montpellier',
+      name: '蒙彼利埃',
+      fullName: '蒙彼利埃埃罗体育足球俱乐部',
+      englishName: 'Montpellier HSC',
+      nickname: '拉派亚德 (La Paillade)、小村庄',
+      founded: 1919,
+      league: 'ligue1',
+      colors: ['#0063A6','#EB7600'],
+      crestLetter: 'M',
+      crestSub: 'HSC',
+      crestType: 'solid',
+      crestBg: '#0063A6',
+      logo: 'https://pub-3bd35431294c47068cbf31a95d572166.r2.dev/logos/montpellier/montpellier-logo-footylogos.png',
+      players: [
+        {name:'奥利维耶·吉鲁',pos:'中锋',years:'2010-2012',emoji:'🇫🇷',stat:'200万加盟 1212万转阿森纳 法甲金靴'},
+        {name:'尤尼斯·贝尔汉达',pos:'前腰',years:'2011-2013',emoji:'🇲🇦',stat:'自由转会 1010万转基辅迪纳摩'},
+        {name:'约翰·乌塔卡',pos:'前锋',years:'2010-2013',emoji:'🇳🇬',stat:'末轮梅开二度锁定2012冠军！'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **法甲冠军** ×1：2011-12赛季（🏆 队史唯一！最伟大的童话！）
+- **法国杯冠军** ×1：1929年
+
+## 🔥 巅峰时刻：蓝色奇迹（2011-12赛季）
+
+2011年夏天，卡塔尔体育投资收购巴黎圣日耳曼，帕斯托雷、西索科、马图伊迪等强援纷至。谁也没想到，一支小球队即将改写历史。
+
+**2011-12法甲冠军阵容核心：**
+
+> 门将：约埃尔·加隆
+> 中后卫：维托里诺·希尔顿（巴西）+ 姆巴耶·尼昂
+> 左后卫：亨利·贝迪莫（喀麦隆）
+> 前腰：尤尼斯·贝尔汉达（摩洛哥）
+> 中锋：奥利维耶·吉鲁 ← **金靴得主！21球**
+
+**关键转会（完美运作）：**
+- **吉鲁**：2010年约200万欧元从索肖加盟，2012年约1200万欧元转投阿森纳。在阿森纳6赛季253场105球！
+- **贝尔汉达**：2011年自由转会，2013年约1000万欧元加盟基辅迪纳摩
+
+## 📉 低谷时刻
+
+夺冠之后，吉鲁、贝尔汉达等核心球员纷纷离队。2025年4月，法甲第33轮，蒙彼利埃1-4不敌巴黎，提前5轮降级——从2012年冠军到2025年降级，13年一个轮回。
+
+## ⚡ 不可错过的经典比赛
+
+**1. 2012年5月20日 | 欧塞尔 1-2 蒙彼利埃（法甲末轮）**
+夺冠！约翰·乌塔卡梅开二度2-1逆转！赛后球迷往场内扔鸡蛋导致比赛中断近20分钟……
+
+**2. 2019年6月25日 | 蒙彼利埃 0-2 意大利（中国球迷的记忆）**
+莫松球场承办2019年女足世界杯，中国玫瑰在这里0-2不敌意大利，结束了当届世界杯的征程。
+
+> 蒙彼利埃是法国最著名的大学城之一，1181年建立的医学院是西欧最早的医学院。2012年的蒙彼利埃被称为"法甲版莱斯特城"——小球队击败金元足球的童话。`
+    }
+,
+    crystalpalace: {
+      id: 'crystalpalace',
+      name: '水晶宫',
+      fullName: '水晶宫足球俱乐部',
+      englishName: 'Crystal Palace FC',
+      nickname: '老鹰 (The Eagles)',
+      founded: 1905,
+      league: 'epl',
+      colors: ['#1B2A4A','#c70134'],
+      crestLetter: 'CP',
+      crestSub: 'FC',
+      crestType: 'solid',
+      crestBg: '#1B2A4A',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f589a4dfbd72754cd0bf10_crystal-palace-footballlogos-org-p-500.png',
+      players: [
+        {name:'让-菲利普·马特塔',pos:'中锋',years:'2023-2026',emoji:'🇫🇷',stat:'2026欧协联决赛制胜球 法国国脚'},
+        {name:'亚当·沃顿',pos:'中场',years:'2024-2026',emoji:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',stat:'22岁中场核心 英格兰国脚'},
+        {name:'丹尼尔·穆尼奥斯',pos:'边翼卫',years:'2023-2026',emoji:'🇨🇴',stat:'英超冲刺王 卡拉格称最强边翼卫'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧协联冠军**：2025-26赛季
+- **英格兰足总杯冠军**：2024-25赛季
+- **英格兰社区盾杯冠军**：2025年
+- **英格兰次级联赛冠军**：1978-79、1993-94赛季
+
+## 🔥 巅峰时刻：从保级队到三冠王
+
+**格拉斯纳的战术革命（2024-2026）**
+
+2024年2月，奥利弗·格拉斯纳接手水晶宫时，没人看好这位奥地利教头。彼时的水晶宫连续卖掉奥利塞（5300万欧→拜仁）、埃泽（6930万欧→阿森纳）、格伊（2300万欧→曼城），三大核心被豪门瓜分，净赚1.453亿欧元。
+
+所有人都以为水晶宫会崩盘。但格拉斯纳构建了一套"去核心化"的3-4-2-1体系，强调团队协作而非个人英雄主义。
+
+**2024-25赛季**：足总杯决赛，1-0力克曼城，121年首冠！
+
+**2025年8月**：社区盾杯，点球大战击败利物浦
+
+**2025-26赛季**：英超第15名的水晶宫，以欧协联夺冠大热门身份一路过关斩将，半决赛5-2横扫顿涅茨克矿工，决赛1-0击败巴列卡诺——队史121年首次站上欧洲之巅！
+
+决赛进球：第51分钟，沃顿远射被扑，马特塔补射命中。莱比锡红牛竞技场，梦想照进现实。
+
+## 📉 低谷时刻
+
+水晶宫队史的大部分时间，都在为保级而战。1990年和2016年两次足总杯亚军，那座温布利的奖杯似乎永远可望而不可即。
+
+## ⚡ 经典比赛
+
+**1. 2025年5月 足总杯决赛 1-0曼城**
+121年首冠！马特塔头球破门，温布利大球场见证历史。
+
+**2. 2026年5月 欧协联决赛 1-0巴列卡诺**
+莱比锡红牛竞技场，马特塔致命一击。水晶宫首次参加欧战即夺冠。
+`
+    },
+    celtavigo: {
+      id: 'celtavigo',
+      name: '塞尔塔',
+      fullName: '皇家塞尔塔维戈俱乐部',
+      englishName: 'RC Celta de Vigo',
+      nickname: '天蓝军 (Os Celestes)',
+      founded: 1923,
+      league: 'laliga',
+      colors: ['#8AC8EE','#DC143C'],
+      crestLetter: 'CV',
+      crestSub: 'CELTA',
+      crestType: 'solid',
+      crestBg: '#8AC8EE',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f573c734dc0a249b2a0f2d_celta-vigo-footballlogos-org-p-500.png',
+      players: [
+        {name:'伊亚戈·阿斯帕斯',pos:'前锋/队长',years:'2012-2026',emoji:'🇪🇸',stat:'队魂 本土英雄 连续多年最佳射手'},
+        {name:'博尔哈·伊格莱西亚斯',pos:'中锋',years:'2025-2026',emoji:'🇪🇸',stat:'连续两个赛季队内最佳射手'},
+        {name:'威尔iot·斯韦德贝里',pos:'前锋',years:'2024-2026',emoji:'🇸🇪',stat:'欧联杯最佳射手 18岁瑞典新星'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **国际托托杯冠军**：2000-01赛季
+- **国王杯亚军**：3次（1948、1994、2001年）
+- **西班牙乙级联赛冠军**：3次
+
+## 🔥 巅峰时刻：天蓝军团的欧战狂飙
+
+**2003-04赛季：闯入欧冠！**
+
+塞尔塔以令人难以置信的方式取得西甲第四名的成绩，力压拉科鲁尼亚、比利亚雷亚尔等强敌。附加赛击败布拉格斯拉维亚，历史首次杀入欧冠正赛！
+
+**2016-17赛季：欧联杯半决赛+国王杯半决赛双线狂飙**
+
+在主帅库德特的率领下，塞尔塔踢出了西班牙最赏心悦目的攻势足球。欧联杯1/4决赛，总比分4-3淘汰亨克；半决赛对阵穆里尼奥的曼联，首回合1-0领先——虽然最终以1-2的总比分出局，但那场比赛让整个欧洲记住了这支来自维戈的天蓝军团。
+
+**2025-26赛季：欧联杯八强！**
+
+本土教练吉拉德斯的青春风暴席卷维戈。18岁的斯韦德贝里（瑞典新星，欧联杯最佳射手）单赛季打入10球；博尔哈·伊格莱西亚斯连续两个赛季成为队内最佳射手。
+
+## 📉 低谷时刻
+
+2007年降入西乙，这支曾在德甲榜首位置的球队，在接下来的四年里一直在次级联赛挣扎。
+
+## ⚡ 经典比赛
+
+**1. 2025年10月 欧联杯 3-1萨格勒布迪纳摩**
+开场阿斯帕斯远射首开记录，全队踢出教科书式上半场。
+
+**2. 2025年11月 欧联杯 塞尔塔3-2里昂**
+斯韦德贝里绝杀球，塞尔塔总比分晋级欧联杯八强。
+`
+    },
+    hoffenheim: {
+      id: 'hoffenheim',
+      name: '霍芬海姆',
+      fullName: '霍芬海姆1899足球俱乐部',
+      englishName: 'TSG 1899 Hoffenheim',
+      nickname: '霍村 (Hoffe)',
+      founded: 1899,
+      league: 'bundesliga',
+      colors: ['#0060A9','#FFFFFF'],
+      crestLetter: 'TSG',
+      crestSub: '1899',
+      crestType: 'solid',
+      crestBg: '#0060A9',
+      logo: 'https://cdn.prod.website-files.com/68f550992570ca0322737dc2/68f5949c237af0cc71c1a36d_tsg-hoffenheim-footballlogos-org-p-500.png',
+      players: [
+        {name:'安德雷·克拉马里奇',pos:'前锋',years:'2016-2026',emoji:'🇭🇷',stat:'克罗地亚国脚 队史传奇射手'},
+        {name:'朱利安·纳格尔斯曼',pos:'主教练',years:'2016-2021',emoji:'🇩🇪',stat:'29岁成为德甲最年轻主教练 带队杀入欧冠'},
+        {name:'奥利弗·鲍曼',pos:'门将',years:'2014-2026',emoji:'🇩🇪',stat:'35岁门神 本赛季德甲扑救王'}
+      ],
+      content: `## 🏆 荣誉殿堂
+
+- **欧冠联赛参赛**：2018-19赛季
+- **欧联杯参赛**：3次（2017、2020、2024-25赛季）
+- **德甲最佳成绩**：第3名（2008-09赛季）
+- **德国U19联赛冠军**：2014、2024年
+
+## 🔥 巅峰时刻：霍村奇迹
+
+**1989-2008：从乡村到德甲的火箭升空**
+
+故事要从SAP联合创始人迪特马尔·霍普说起。他从1989年开始投资自己的家乡俱乐部，此后20年里，霍芬海姆从村级联赛一路杀入德甲：
+
+- 1990-1996：从C级联赛升入地区联赛
+- 1999-2001：两年内从地区联赛升入德丙
+- 2006-2007：从德丙升入德乙
+- 2007-2008：从德乙直接杀入德甲！
+
+**2008-09赛季：升班马领跑德甲！**
+
+朗尼克打造的青春风暴，阵中有卡洛斯·爱德华多、登巴巴、伊比舍维奇...赛季过半，霍芬海姆竟然排名德甲第一！
+
+**2016-17赛季：纳格尔斯曼的青春风暴**
+
+年仅28岁的纳格尔斯曼成为德甲史上最年轻主教练，带队获得德甲第四，历史首次杀入欧冠正赛！
+
+**2025-26赛季：伊尔泽的逆袭**
+
+夏窗22人离队、10人加盟，几乎重建整支球队。但伊尔泽的4-2-2-2阵型大获成功，最终排名德甲第五！
+
+## 📉 低谷时刻
+
+2012年的双重悲剧——纳米比亚训练营车祸、中场武卡诺维奇撞卡车昏迷被迫退役。那个赛季，霍芬海姆一度排名倒数第二，靠击败多特蒙德的"多特蒙德奇迹"才惊险保级。
+
+## ⚡ 经典比赛
+
+**1. 2019年 德甲 客场2-1拜仁慕尼黑**
+霍芬海姆首次在安联球场击败拜仁！克拉马里奇独中两元，赛后拜仁球迷罕见鼓掌致敬。
+
+**2. 2025年10月 德甲 3-0圣保利**
+19岁新星图雷打进德甲首球，伊尔泽麾下的霍芬海姆踢出赛季最佳表现。
+`
+    }
+
+  }
+};
+
+// ====================================================================
+// NAVIGATION
+// ====================================================================
+let currentLeague = null;
+let currentClub = null;
+
+function navigateTo(page, data) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('visible');
+    setTimeout(() => p.classList.remove('active'), 350);
+  });
+
+  setTimeout(() => {
+    const target = document.getElementById('page-' + page);
+    target.classList.add('active');
+
+    if (page === 'home') renderHome();
+    else if (page === 'league') renderLeague(data);
+    else if (page === 'club') renderClub(data);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        target.classList.add('visible');
+      });
+    });
+    window.scrollTo(0, 0);
+  }, 360);
+}
+
+function goBackToLeague() {
+  if (currentLeague) navigateTo('league', currentLeague);
+}
+
+// ====================================================================
+// RENDER HOME
+// ====================================================================
+function renderHome() {
+  const grid = document.getElementById('league-grid');
+  grid.innerHTML = '';
+  let totalClubs = 0;
+
+  const leagueOrder = ['epl','laliga','seriea','bundesliga','ligue1'];
+  leagueOrder.forEach((lid, idx) => {
+    const league = DATA.leagues[lid];
+    totalClubs += league.clubs.length;
+
+    const card = document.createElement('div');
+    card.className = `league-card animate-in delay-${idx + 1}`;
+    card.onclick = () => {
+      currentLeague = lid;
+      navigateTo('league', lid);
+    };
+    card.innerHTML = `
+      <div class="league-card-accent" style="background:linear-gradient(90deg,${league.color},${league.bgColor})"></div>
+      <div class="league-card-body">
+        <div class="league-card-header">
+          <div class="league-logo" style="background:linear-gradient(135deg,${league.color},${league.bgColor})">${league.logoText}</div>
+          <div>
+            <div class="league-card-title">${league.name}</div>
+            <div class="league-card-subtitle">${league.fullName}</div>
+          </div>
+        </div>
+        <div class="league-card-count">⚽ 已介绍 ${league.clubs.length} 支球队</div>
+      </div>
+      <div class="league-card-arrow">→</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('total-clubs').textContent = totalClubs;
+}
+
+// ====================================================================
+// RENDER LEAGUE DETAIL
+// ====================================================================
+function renderLeague(leagueId) {
+  const league = DATA.leagues[leagueId];
+  document.getElementById('league-title').textContent = league.fullName;
+  document.getElementById('league-title').style.color = league.color;
+  document.getElementById('league-sub').textContent = `已介绍 ${league.clubs.length} 支俱乐部`;
+
+  const grid = document.getElementById('club-grid');
+  grid.innerHTML = '';
+
+  league.clubs.forEach((cid, idx) => {
+    const club = DATA.clubs[cid];
+    const card = document.createElement('div');
+    card.className = `club-card animate-in delay-${idx + 1}`;
+    card.style.cssText = `--club-color:${club.colors[0]}`;
+    card.querySelector?.('.club-card::before')?.style;
+    card.onclick = () => {
+      currentClub = cid;
+      navigateTo('club', cid);
+    };
+    card.innerHTML = `
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${club.colors[0]};opacity:0;transition:opacity 0.3s;" class="club-top-bar"></div>
+      <div class="club-card-top">
+        <div class="club-badge">${buildCrestHTML(club, false)}</div>
+        <div>
+          <div class="club-card-name">${club.name}</div>
+          <div class="club-card-nickname">${club.nickname}</div>
+        </div>
+      </div>
+      <div class="club-card-year">成立于 ${club.founded} 年</div>
+    `;
+    card.addEventListener('mouseenter', () => {
+      card.querySelector('.club-top-bar').style.opacity = '1';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.querySelector('.club-top-bar').style.opacity = '0';
+    });
+    grid.appendChild(card);
+  });
+}
+
+// ====================================================================
+// BUILD CSS CREST HTML
+// ====================================================================
+function buildCrestHTML(club, large) {
+  const sizeClass = large ? 'crest-large' : '';
+  const letterColor = club.crestTextDark ? '#000' : '#fff';
+  const subColor = club.crestTextDark ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.8)';
+
+  // 如果有真实图片logo，使用圆形容器
+  if (club.logo) {
+    return `<div class="crest ${sizeClass}" style="width:auto;height:auto;">
+      <div class="crest-logo-circle">
+        <img src="${club.logo}" alt="${club.name}" class="crest-logo-img" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'crest-letter\\'>${club.crestLetter}</span>'">
+      </div>
+    </div>`;
+  }
+
+  if (club.crestType === 'stripes' && club.stripes) {
+    let bars = '';
+    for (let i = 0; i < 7; i++) {
+      const color = i % 2 === 0 ? club.stripes[0] : club.stripes[1];
+      bars += `<div class="crest-stripes-bar" style="left:${i*14.28}%;background:${color}"></div>`;
+    }
+    return `<div class="crest ${sizeClass}">
+      <div class="crest-inner" style="background:${club.stripes[0]}">
+        <div class="crest-stripes">${bars}</div>
+        <span class="crest-letter" style="color:${letterColor};position:relative;z-index:2">${club.crestLetter}</span>
+        ${club.crestSub ? `<span class="crest-sub" style="color:${subColor};position:relative;z-index:2">${club.crestSub}</span>` : ''}
+      </div>
+    </div>`;
+  }
+
+  if (club.crestType === 'crown') {
+    return `<div class="crest ${sizeClass}">
+      <div class="crest-inner" style="background:linear-gradient(180deg,#FFD700 0%,#FFD700 22%,${club.crestBg} 22%)">
+        <span style="position:relative;z-index:2;font-size:${large?'18':'12'}px;color:#FFD700;">♛</span>
+        <span class="crest-letter" style="color:${letterColor};position:relative;z-index:2;margin-top:-2px">${club.crestLetter}</span>
+        ${club.crestSub ? `<span class="crest-sub" style="color:${subColor};position:relative;z-index:2">${club.crestSub}</span>` : ''}
+      </div>
+    </div>`;
+  }
+
+  // Solid
+  return `<div class="crest ${sizeClass}">
+    <div class="crest-inner" style="background:${club.crestBg}">
+      <span class="crest-letter" style="color:${letterColor}">${club.crestLetter}</span>
+      ${club.crestSub ? `<span class="crest-sub" style="color:${subColor}">${club.crestSub}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+// ====================================================================
+// RENDER CLUB DETAIL
+// ====================================================================
+function renderClub(clubId) {
+  const club = DATA.clubs[clubId];
+  const league = DATA.leagues[club.league];
+
+  document.getElementById('club-badge').innerHTML = buildCrestHTML(club, true);
+  document.getElementById('club-title').textContent = club.fullName;
+  document.getElementById('club-title').style.color = club.colors[0];
+  document.getElementById('club-meta').textContent = `${league.name} · ${club.nickname} · 成立于 ${club.founded} 年`;
+
+  // Render players
+  const playersDiv = document.getElementById('club-players');
+  playersDiv.innerHTML = `
+    <div class="player-section-title">⭐ 历史性球员</div>
+    <div class="player-grid">
+      ${club.players.map(p => `
+        <div class="player-card">
+          <div class="player-avatar" style="background:linear-gradient(135deg,${club.colors[0]},${club.colors[1] || club.colors[0]})">${p.emoji}</div>
+          <div class="player-name">${p.name}</div>
+          <div class="player-pos">${p.pos}</div>
+          <div class="player-years">${p.years}</div>
+          <div class="player-stat">${p.stat}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  // Render markdown content
+  document.getElementById('club-body').innerHTML = parseMD(club.content);
+}
+
+// ====================================================================
+// SIMPLE MARKDOWN PARSER
+// ====================================================================
+function parseMD(text) {
+  let html = text;
+
+  // Code blocks (pre)
+  html = html.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${escHTML(code.trim())}</code></pre>`);
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Headers
+  html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+
+  // Horizontal rules
+  html = html.replace(/^---+$/gm, '<hr>');
+
+  // Bold & Italic
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Blockquotes
+  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  // Merge consecutive blockquotes
+  html = html.replace(/<\/blockquote>\n<blockquote>/g, '<br>');
+
+  // Tables
+  html = html.replace(/(\|.+\|)\n(\|[-| :]+\|)\n((?:\|.+\|\n?)*)/g, (_, header, sep, body) => {
+    const headers = header.split('|').filter(c => c.trim()).map(c => `<th>${c.trim()}</th>`).join('');
+    const rows = body.trim().split('\n').map(row => {
+      const cells = row.split('|').filter(c => c.trim()).map(c => `<td>${c.trim()}</td>`).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    return `<table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table>`;
+  });
+
+  // Unordered lists
+  html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+  // Paragraphs: wrap lines that aren't already wrapped
+  html = html.split('\n\n').map(block => {
+    block = block.trim();
+    if (!block) return '';
+    if (block.startsWith('<')) return block;
+    return `<p>${block}</p>`;
+  }).join('\n');
+
+  // Fix line breaks within paragraphs
+  html = html.replace(/\n(?!<)/g, '<br>');
+
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+  return html;
+}
+
+function escHTML(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ====================================================================
+// INIT
+// ====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const homePage = document.getElementById('page-home');
+  homePage.classList.add('active');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      homePage.classList.add('visible');
+    });
+  });
+  renderHome();
+});
+</script>
 </body>
 </html>
