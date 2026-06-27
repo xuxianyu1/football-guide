@@ -204,8 +204,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (Object.keys(parsed).length > 0) {
         ALL_DATA = parsed;
         dateKeys = Object.keys(ALL_DATA).sort();
-        // Only mark dates with actual data as loaded
-        dateKeys.forEach(k => _loadedDates.add(k));
+        // Don't mark dates as loaded - always re-fetch from GitHub for fresh data
+        // localStorage is only used for instant initial display
         currentDateKey = dateKeys.filter(k => ALL_DATA[k]).pop() || dateKeys[dateKeys.length - 1];
         render();
         // Still load index for complete date list; merge without re-rendering current date
