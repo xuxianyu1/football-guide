@@ -254,7 +254,7 @@ function renderEditorForm() {
   container.innerHTML = matches.map((m, idx) => {
     const normalCorrect = (m.correct || '—/—').split('/')[0] || '—';
     const hcCorrect = (m.correct || '—/—').split('/')[1] || '—';
-    const hr = (m.handicap_result || '— / —');
+    const hr = normalizeHR(m.handicap_result) || '— / —';
     const hrParts = hr.includes(' / ') ? hr.split(' / ') : hr.split('/');
     const normalResult = hrParts[0] || '—';
     const hcResult = hrParts[1] || '—';

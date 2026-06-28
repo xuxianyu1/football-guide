@@ -240,7 +240,7 @@ function renderReview(m, ci) {
       </div>
       <div class="review-item">
         <div class="review-label">盘口结果</div>
-        <div class="review-value">${m.handicap_result||'—'}</div>
+        <div class="review-value">${normalizeHR(m.handicap_result)||'—'}</div>
       </div>
       <div class="review-item">
         <div class="review-label">普通盘</div>

@@ -91,6 +91,18 @@ function parseRisk(s) { const m0=s.match(/冷门压力测试:.*=(-?\d+)分/); if
 function riskLvl(s) { return s>=9?'danger':s>=6?'caution':'safe'; }
 function decCls(d) { if(d.includes('弃盘')) return 'disc'; return 'default'; }
 function hasResult(m) { return !!(m.actual_score || m.correct); }
+// Normalize handicap_result for display - tolerate any input format
+function normalizeHR(hr) {
+  if (!hr) return '';
+  return hr
+    .replace(/平局/g, '平')          // 平局→平
+    .replace(/未开售/g, '——')         // 未开售→——
+    .replace(/\s*\/\s*/g, ' / ')     // 统一分隔符格式
+    .replace(/-\s*\/\s*/g, '—— / ')  // 半角-开头→——
+    .replace(/\s\/\s*-/g, ' / ——')   // 半角-结尾→——
+    .replace(/\s{2,}/g, ' ')         // 多余空格
+    .trim();
+}
 function parseCorrect(c) {
   if(!c) return {normal:null, handicap:null};
   let nv=null, hv=null;
