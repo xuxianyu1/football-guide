@@ -16190,10 +16190,10 @@ window.FOOTCAST_DATA = {
         "risk_signal": "",
         "decision": "",
         "score_predict": "",
-        "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
-        "attribution": ""
+        "actual_score": "1-2",
+        "handicap_result": "客胜 / 让平",
+        "correct": "对/错",
+        "attribution": "普通盘✅方向正确，挪威实力+客场优势判断准确。让球盘❌：让+1时科特迪瓦进1球后让球比分2-2=让平，非让负。低估了科特迪瓦进攻能力(阿玛德74分钟破门)。哈兰德85分钟绝杀属压哨变量。"
       },
       {
         "seq": 2,
@@ -16243,10 +16243,10 @@ window.FOOTCAST_DATA = {
         "risk_signal": "",
         "decision": "",
         "score_predict": "",
-        "actual_score": "",
-        "handicap_result": "",
-        "correct": "",
-        "attribution": ""
+        "actual_score": "3-0",
+        "handicap_result": "主胜 / 让胜",
+        "correct": "对/错",
+        "attribution": "普通盘✅法国大胜方向正确。让球盘❌：C3a低赔陷阱判断正确指出穿盘难，但实际法国3-0大胜穿盘。姆巴佩梅开二度+巴尔科拉建功，攻击火力超预期。瑞典全场仅3次射正，防守崩盘程度超出预期。"
       },
       {
         "seq": 3,
@@ -16296,6 +16296,86 @@ window.FOOTCAST_DATA = {
         "risk_signal": "",
         "decision": "",
         "score_predict": "",
+        "actual_score": "2-0",
+        "handicap_result": "主胜 / 让胜",
+        "correct": "错/错",
+        "attribution": "普通盘❌方向错误。过度参考厄瓜多尔防守数据(26场每场最多丢1球)，低估东道主墨西哥主场优势。比赛因雷暴推迟1小时未纳入分析。基尼奥内斯半场奔袭破门+希门尼斯31分钟锁定，墨西哥上半场2球效率超出预期。厄瓜多尔全场仅1次射正，进攻端完全哑火。"
+      }
+    ]
+  },
+    "20260702": {
+    "date": "2026-07-02",
+    "matches": [
+      {
+        "seq": 1,
+        "date": "07-02",
+        "league": "世界杯1/16",
+        "home": "英格兰",
+        "away": "刚果金",
+        "time": "00:00",
+        "analysis": {
+          "handicap": "⚠️世界杯降权|英格兰让-1，让胜1.65低赔陷阱区。普通盘1.16超低赔+74%大热边缘。盘口合理，机构定价坚定。⚠️世界杯降权30%",
+          "bifad": "⚠️世界杯降权|让胜64%偏高，普通盘胜74%接近大热门槛。无明显大热倒灶风险但需警惕。⚠️支持率≠资金量",
+          "injury": "普通:🚨刚果金C1++核心缺阵（主力门将法尤鲁伤缺）！英格兰2后卫轮换缺阵（詹姆斯+昆萨），影响较小。热门方核心完整度100%",
+          "tactical": "英格兰433进攻vs刚果金4231防守反击。凯恩3球领跑，贝林厄姆2球1助攻。刚果金门将缺阵影响防线稳定性。70分钟体能转折点",
+          "form": "⭐首选|英格兰近5场7胜2平1负(70%)进20失4，L组头名。刚果金近5场3胜5平2负(30%)进11失6，客场0胜1平1负。英格兰战意极强",
+          "uncertain": "①双方首次A级赛事交锋。②淘汰赛单场决胜压力。③刚果金门将缺阵影响程度未知"
+        },
+        "normal": {"type": "普通盘", "win_pct": 74, "draw_pct": 15, "lose_pct": 11, "win_odds": 1.16, "draw_odds": 6.5, "lose_odds": 12, "ev_win": -0.1424, "ev_draw": -0.025, "ev_lose": -0.32, "kelly_win": -1.0, "kelly_draw": -0.0333, "kelly_lose": -0.05},
+        "handicap": {"type": "让球盘-1", "win_pct": 64, "draw_pct": 21, "lose_pct": 15, "win_odds": 1.65, "draw_odds": 3.8, "lose_odds": 3.5, "ev_win": 0.056, "ev_draw": -0.202, "ev_lose": -0.475, "kelly_win": -0.3333, "kelly_draw": -0.3, "kelly_lose": -0.5},
+        "risk_signal": "英格兰筹码过热(74%)|让胜1.65低赔陷阱",
+        "decision": "主胜 / 让胜",
+        "score_predict": "2-0/3-0/3-1",
+        "actual_score": "",
+        "handicap_result": "",
+        "correct": "",
+        "attribution": ""
+      },
+      {
+        "seq": 2,
+        "date": "07-02",
+        "league": "世界杯1/16",
+        "home": "比利时",
+        "away": "塞内加尔",
+        "time": "04:00",
+        "analysis": {
+          "handicap": "⚠️世界杯降权|⚠️让胜4.15高赔陷阱(>3.00让胜率仅23.5%)。让负1.64偏低=塞内加尔受让占优。普通盘1.99隐含50%。⚠️世界杯降权30%",
+          "bifad": "⚠️世界杯降权|让球盘分散(26%/39%/35%)无热门。普通盘胜49%略低于隐含51%。市场理性，无明显大热信号。⚠️支持率≠资金量",
+          "injury": "普通:🚨塞内加尔C1++核心缺阵（主力门将门迪伤缺）！比利时阵容齐整无伤停。热门方核心完整度100%",
+          "tactical": "比利时343攻坚vs塞内加尔4231防反。卢卡库+特罗萨德vs萨尔反击。比利时小组赛2连平暴露攻坚效率低。70分钟塞内加尔体能转折",
+          "form": "⭐首选|比利时近5场6胜4平0负(60%)进31失8，小组赛2连平但整体不败。塞内加尔近5场5胜2平3负(50%)进17失10，末轮1-3负法国。比利时黄金一代战意极强",
+          "uncertain": "①双方首次A级赛事交锋。②比利时攻坚效率存疑(小组赛2连平)。③塞内加尔门将缺阵实际影响未知"
+        },
+        "normal": {"type": "普通盘", "win_pct": 49, "draw_pct": 25, "lose_pct": 26, "win_odds": 1.99, "draw_odds": 3.4, "lose_odds": 3.1, "ev_win": 0.0251, "ev_draw": -0.15, "ev_lose": -0.194, "kelly_win": -0.1818, "kelly_draw": -0.25, "kelly_lose": -0.3333},
+        "handicap": {"type": "让球盘-1", "win_pct": 26, "draw_pct": 39, "lose_pct": 35, "win_odds": 4.15, "draw_odds": 3.6, "lose_odds": 1.64, "ev_win": 0.079, "ev_draw": 0.404, "ev_lose": -0.426, "kelly_win": -0.1111, "kelly_draw": 0.0, "kelly_lose": -0.6667},
+        "risk_signal": "让胜4.15高赔陷阱|普通盘49%适中",
+        "decision": "平局 / 让负",
+        "score_predict": "1-1/2-1/1-0",
+        "actual_score": "",
+        "handicap_result": "",
+        "correct": "",
+        "attribution": ""
+      },
+      {
+        "seq": 3,
+        "date": "07-02",
+        "league": "世界杯1/16",
+        "home": "美国",
+        "away": "波黑",
+        "time": "08:00",
+        "analysis": {
+          "handicap": "⚠️世界杯降权|⚠️让胜1.90低赔陷阱区(1.44-2.00翻车率25-30%)。普通盘1.26超低赔+78%大热⚠️。⚠️世界杯降权30%",
+          "bifad": "⚠️世界杯降权|⚠️⚠️大热倒灶！普通盘78%>75%门槛。让胜59%偏高。东道主优势吸引散户。⚠️C3a触发风险。⚠️支持率≠资金量",
+          "injury": "双方均无重大伤停。美国普利西奇伤愈可出战。波黑哲科领衔。双方核心完整度100%。无C1++信号",
+          "tactical": "美国433主场进攻vs波黑4231防反。普利西奇领衔+东道主球迷加持。波黑高空球能力(哲科头球)。70分钟波黑体能转折",
+          "form": "⭐首选|美国小组赛2连胜零失球，D组头名，东道主优势明显。波黑近5场2胜7平1负(20%)进15失13，以成绩最佳第3晋级。美国战意极强",
+          "uncertain": "①⚠️⚠️普通盘78%大热+让胜1.90低赔陷阱双重反向信号！②美国连续2场对手乌龙(运气成分)。③东道主淘汰赛压力"
+        },
+        "normal": {"type": "普通盘", "win_pct": 78, "draw_pct": 14, "lose_pct": 8, "win_odds": 1.26, "draw_odds": 5.0, "lose_odds": 8.5, "ev_win": -0.0168, "ev_draw": -0.3, "ev_lose": -0.32, "kelly_win": -1.0, "kelly_draw": -0.05, "kelly_lose": -0.1},
+        "handicap": {"type": "让球盘-1", "win_pct": 59, "draw_pct": 26, "lose_pct": 15, "win_odds": 1.9, "draw_odds": 3.5, "lose_odds": 3.2, "ev_win": 0.121, "ev_draw": -0.09, "ev_lose": -0.52, "kelly_win": -0.5, "kelly_draw": -0.3333, "kelly_lose": -0.6},
+        "risk_signal": "⚠️⚠️大热倒灶风险！普通盘78%大热+让胜1.90低赔陷阱双重反向信号",
+        "decision": "主胜 / 让胜",
+        "score_predict": "2-0/3-0/2-1",
         "actual_score": "",
         "handicap_result": "",
         "correct": "",
