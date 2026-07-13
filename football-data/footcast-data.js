@@ -1,9 +1,46 @@
 // ===== FOOTCAST: DATA LOADING + STATE + UTILS =====
-// ===== DATA (loaded dynamically per-date) =====
+// ===== DATA (loaded dynamically per-date with localStorage caching) =====
 let ALL_DATA = {};
 let _loadedDates = new Set();
 let _loadingDate = null;
 window.FOOTCAST_DATA = window.FOOTCAST_DATA || {};
+
+// Session-level cache version (changes per page load, not per request)
+const _CACHE_VER = new Date().toISOString().slice(0, 10); // daily granularity
+
+// ===== LOCALSTORAGE CACHE =====
+const LS_KEY = 'footcast_data';
+const LS_VER_KEY = 'footcast_cache_ver';
+let _lsSaveTimer = null;
+
+function _saveToLocalStorage() {
+  // Debounce: wait 1s after last load before saving
+  clearTimeout(_lsSaveTimer);
+  _lsSaveTimer = setTimeout(function() {
+    try {
+      const data = {};
+      Object.keys(ALL_DATA).forEach(k => { if (ALL_DATA[k]) data[k] = ALL_DATA[k]; });
+      localStorage.setItem(LS_KEY, JSON.stringify(data));
+      localStorage.setItem(LS_VER_KEY, _CACHE_VER);
+    } catch(e) {
+      // localStorage full or unavailable - clear old data and retry
+      try { localStorage.removeItem(LS_KEY); } catch(e2) {}
+    }
+  }, 1000);
+}
+
+function _loadFromLocalStorage() {
+  try {
+    const saved = localStorage.getItem(LS_KEY);
+    if (!saved) return null;
+    const parsed = JSON.parse(saved);
+    // Remove null entries
+    Object.keys(parsed).forEach(k => { if (!parsed[k]) delete parsed[k]; });
+    return Object.keys(parsed).length > 0 ? parsed : null;
+  } catch(e) {
+    return null;
+  }
+}
 
 // ===== FORMAT NORMALIZER =====
 // Converts V2/V3 data formats to V1 format so render engine works uniformly.
@@ -22,9 +59,9 @@ function normalizeMatch(m) {
   if (!m.normal && m.odds_w != null) {
     normal = {
       type: m.type || '普通盘',
-      win_pct: m.win_pct != null ? m.win_pct * 100 : null,
-      draw_pct: m.draw_pct != null ? m.draw_pct * 100 : null,
-      lose_pct: m.lose_pct != null ? m.lose_pct * 100 : null,
+      win_pct: m.win_pct != null ? (m.win_pct <= 1 ? m.win_pct * 100 : m.win_pct) : null,
+      draw_pct: m.draw_pct != null ? (m.draw_pct <= 1 ? m.draw_pct * 100 : m.draw_pct) : null,
+      lose_pct: m.lose_pct != null ? (m.lose_pct <= 1 ? m.lose_pct * 100 : m.lose_pct) : null,
       win_odds: m.odds_w,
       draw_odds: m.odds_d,
       lose_odds: m.odds_l,
@@ -46,9 +83,9 @@ function normalizeMatch(m) {
     if (m.handicap) {
       handicap = {
         type: m.handicap.type || '让球盘',
-        win_pct: m.handicap.win_pct != null ? m.handicap.win_pct * 100 : null,
-        draw_pct: m.handicap.draw_pct != null ? m.handicap.draw_pct * 100 : null,
-        lose_pct: m.handicap.lose_pct != null ? m.handicap.lose_pct * 100 : null,
+        win_pct: m.handicap.win_pct != null ? (m.handicap.win_pct <= 1 ? m.handicap.win_pct * 100 : m.handicap.win_pct) : null,
+        draw_pct: m.handicap.draw_pct != null ? (m.handicap.draw_pct <= 1 ? m.handicap.draw_pct * 100 : m.handicap.draw_pct) : null,
+        lose_pct: m.handicap.lose_pct != null ? (m.handicap.lose_pct <= 1 ? m.handicap.lose_pct * 100 : m.handicap.lose_pct) : null,
         win_odds: m.handicap.odds_w,
         draw_odds: m.handicap.odds_d,
         lose_odds: m.handicap.odds_l,
@@ -158,6 +195,7 @@ function normalizeDayData(dayData, dateKey) {
   };
 }
 
+// Load all data (fallback only)
 function loadDataAndRender(dataUrl) {
   const script = document.createElement('script');
   script.onload = function() {
@@ -169,6 +207,7 @@ function loadDataAndRender(dataUrl) {
       dateKeys = Object.keys(ALL_DATA).sort();
       currentDateKey = dateKeys[dateKeys.length - 1];
       dateKeys.forEach(k => _loadedDates.add(k));
+      _saveToLocalStorage();
       render();
     }
   };
@@ -179,8 +218,9 @@ function loadDataAndRender(dataUrl) {
   document.head.appendChild(script);
 }
 
-// Load a single date file, then render
+// Load a single date file on demand, then render
 function loadDateData(dateKey) {
+  // Already loaded in this session → instant switch
   if (_loadedDates.has(dateKey) || _loadingDate === dateKey) {
     currentDateKey = dateKey;
     render();
@@ -195,6 +235,7 @@ function loadDateData(dateKey) {
     _loadedDates.add(dateKey);
     _loadingDate = null;
     currentDateKey = dateKey;
+    _saveToLocalStorage(); // persist newly loaded date
     render();
   };
   script.onerror = function() {
@@ -202,7 +243,8 @@ function loadDateData(dateKey) {
     currentDateKey = dateKey;
     render();
   };
-  script.src = 'football-data/data_' + dateKey + '.js?v=' + Date.now();
+  // Use daily cache version instead of Date.now() to allow same-day caching
+  script.src = 'football-data/data_' + dateKey + '.js?v=' + _CACHE_VER;
   document.head.appendChild(script);
 }
 
@@ -222,9 +264,10 @@ function loadIndexAndDate(targetKey) {
     }
   };
   script.onerror = function() {
-    loadDataAndRender('football-data/football_data.js?v=' + Date.now());
+    // Fallback: load full data file
+    loadDataAndRender('football-data/football_data.js?v=' + _CACHE_VER);
   };
-  script.src = 'football-data/data_index.js?v=' + Date.now();
+  script.src = 'football-data/data_index.js?v=' + _CACHE_VER;
   document.head.appendChild(script);
 }
 
