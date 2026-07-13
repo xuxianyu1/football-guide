@@ -136,16 +136,25 @@ function normalizeMatch(m) {
   };
 }
 
-function normalizeDayData(dayData) {
+function normalizeDayData(dayData, dateKey) {
   if (!dayData || !dayData.matches) return dayData;
   // Fix day-level date format: "20260711" → "2026-07-11"
   let dayDate = dayData.date || '';
   if (/^\d{8}$/.test(dayDate)) {
     dayDate = dayDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
   }
+  // Extract year for match date fix
+  const year = (dateKey || dayDate || '').substring(0, 4) || '2026';
   return {
     date: dayDate,
-    matches: dayData.matches.map(normalizeMatch)
+    matches: dayData.matches.map(m => {
+      const nm = normalizeMatch(m);
+      // Fix match date: "07-03" → "2026-07-03"
+      if (nm && nm.date && /^\d{2}-\d{2}$/.test(nm.date)) {
+        nm.date = year + '-' + nm.date;
+      }
+      return nm;
+    })
   };
 }
 
@@ -154,7 +163,7 @@ function loadDataAndRender(dataUrl) {
   script.onload = function() {
     if (window.FOOTCAST_DATA) {
       Object.keys(window.FOOTCAST_DATA).forEach(k => {
-        window.FOOTCAST_DATA[k] = normalizeDayData(window.FOOTCAST_DATA[k]);
+        window.FOOTCAST_DATA[k] = normalizeDayData(window.FOOTCAST_DATA[k], k);
       });
       ALL_DATA = window.FOOTCAST_DATA;
       dateKeys = Object.keys(ALL_DATA).sort();
@@ -181,7 +190,7 @@ function loadDateData(dateKey) {
   const script = document.createElement('script');
   script.onload = function() {
     if (window.FOOTCAST_DATA && window.FOOTCAST_DATA[dateKey]) {
-      ALL_DATA[dateKey] = normalizeDayData(window.FOOTCAST_DATA[dateKey]);
+      ALL_DATA[dateKey] = normalizeDayData(window.FOOTCAST_DATA[dateKey], dateKey);
     }
     _loadedDates.add(dateKey);
     _loadingDate = null;
